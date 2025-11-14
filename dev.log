@@ -1,0 +1,20 @@
+
+> dev
+> concurrently "npm:dev:web" "npm:dev:api"
+
+[dev:web]
+[dev:web] > dev:web
+[dev:web] > npm run dev --workspace=apps/web
+[dev:web]
+[dev:api]
+[dev:api] > dev:api
+[dev:api] > npm run dev --workspace=apps/api
+[dev:api]
+[dev:web]
+[dev:web] > web@0.1.0 dev
+[dev:web] > next dev
+[dev:web]
+[dev:api]
+[dev:api] > api@1.0.0 dev
+[dev:api] > ./gradlew run
+[dev:api]
