@@ -99,3 +99,9 @@ class BookingController(private val bookingService: com.example.domain.BookingSe
         return bookingService.createBooking(booking).toBookingResponse()
     }
 }
+
+class TrackingController(private val trackingService: com.example.domain.TrackingService) {
+    suspend fun getStats(): com.example.application.TrackingStatsResponse {
+        return trackingService.getStats()
+    }
+}
