@@ -1,0 +1,4 @@
+ALTER TABLE user_tracking
+ADD COLUMN os VARCHAR(255),
+ADD COLUMN os_version VARCHAR(255),
+ADD COLUMN ip_address VARCHAR(255);
