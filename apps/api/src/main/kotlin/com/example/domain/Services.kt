@@ -50,10 +50,13 @@ class AuthService(
 }
 
 class UserService(private val userRepository: UserRepository) {
+    suspend fun getUsers(query: String?, page: Int, pageSize: Int): List<User> = userRepository.getUsers(query, page, pageSize)
     suspend fun getUser(id: Long): User? = userRepository.findById(id)
+    suspend fun createUser(user: User): User = userRepository.createUser(user)
     suspend fun updateUser(id: Long, name: String?, avatarUrl: String?, phone: String?): User? {
         return userRepository.updateUser(id, name, avatarUrl, phone)
     }
+    suspend fun deleteUser(id: Long) = userRepository.deleteUser(id)
 }
 
 class DestinationService(

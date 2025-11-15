@@ -12,6 +12,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import { useRouter, useSearchParams } from "next/navigation"
 
 import {
   Table,
@@ -29,10 +30,12 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
 }
 
-export function DataTable<TData, TValue>({
+export function DataTableClient<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -53,15 +56,25 @@ export function DataTable<TData, TValue>({
     },
   })
 
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const params = new URLSearchParams(searchParams)
+    params.set("q", event.target.value)
+    router.replace(`/dashboard/users?${params.toString()}`)
+  }
+
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams)
+    params.set("page", page.toString())
+    router.replace(`/dashboard/users?${params.toString()}`)
+  }
+
   return (
     <div>
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter by name, email, or phone..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
-          }
+          value={searchParams.get("q") ?? ""}
+          onChange={handleSearch}
           className="max-w-sm"
         />
       </div>
@@ -113,7 +126,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.previousPage()}
+          onClick={() => handlePageChange(table.getState().pagination.pageIndex - 1)}
           disabled={!table.getCanPreviousPage()}
         >
           Previous
@@ -121,7 +134,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.nextPage()}
+          onClick={() => handlePageChange(table.getState().pagination.pageIndex + 1)}
           disabled={!table.getCanNextPage()}
         >
           Next
