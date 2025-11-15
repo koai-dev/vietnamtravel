@@ -50,6 +50,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
 
     // Database
+    implementation("com.h2database:h2:2.2.224")
     implementation("mysql:mysql-connector-java:$mysql_connector_version")
     implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("org.flywaydb:flyway-core:$flyway_version")
