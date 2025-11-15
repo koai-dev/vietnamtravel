@@ -11,7 +11,7 @@ import io.ktor.server.auth.jwt.*
 fun Application.configureSecurity() {
     authentication {
         jwt {
-            realm = Config.dotenv["JWT_REALM"] ?: "ktor sample app"
+            realm = Config.env["JWT_REALM"] ?: "ktor sample app"
             verifier(TokenService.verifier)
             validate { credential ->
                 if (credential.payload.getClaim("userId").asLong() != null) {

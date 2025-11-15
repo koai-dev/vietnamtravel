@@ -7,7 +7,6 @@ import io.ktor.server.application.*
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.slf4j.LoggerFactory
-import java.sql.Connection
 
 fun Application.configureDatabase() {
     val logger = LoggerFactory.getLogger("Database")
@@ -37,11 +36,9 @@ fun Application.configureDatabase() {
         }
     }
 
-
-    val dataSource = HikariDataSource(hikariConfig)
-    Database.connect(dataSource)
-
     if (!isDevelopment) {
+        val dataSource = HikariDataSource(hikariConfig)
+        Database.connect(dataSource)
         // Run Flyway migrations
         val flyway = Flyway.configure().dataSource(dataSource).load()
         try {
