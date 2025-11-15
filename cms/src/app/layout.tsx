@@ -7,7 +7,7 @@ import { AppLayout } from "@/layouts/app-layout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CMS - Vietnam Travel",
+  title: "Admin CMS",
   description: "Content Management System for Vietnam Travel",
 };
 

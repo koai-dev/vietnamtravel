@@ -1,20 +1,16 @@
 import axios from "axios";
+import axiosRetry from "axios-retry";
 
 const api = axios.create({
   baseURL: "/api", // This will be the Next.js API route
 });
 
-// Request interceptor to add token to headers
-api.interceptors.request.use(
-  (config) => {
-    // In a real application, you would get the token from a secure place
-    // For now, we'll assume it's handled by the BFF
-    return config;
+axiosRetry(api, {
+  retries: 1,
+  retryCondition: (error) => {
+    return error.response?.status === 503;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+});
 
 // Response interceptor to handle token refresh
 api.interceptors.response.use(
@@ -25,10 +21,15 @@ api.interceptors.response.use(
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      // In a real application, you would call the refresh token endpoint
-      // and then retry the original request
-      // For now, we'll just reject the promise
-      return Promise.reject(error);
+      try {
+        await axios.post("/api/auth/refresh");
+        return api(originalRequest);
+      } catch (refreshError) {
+        // Handle refresh token failure (e.g., redirect to login)
+        console.error("Token refresh failed:", refreshError);
+        window.location.href = "/auth/login";
+        return Promise.reject(refreshError);
+      }
     }
     return Promise.reject(error);
   }

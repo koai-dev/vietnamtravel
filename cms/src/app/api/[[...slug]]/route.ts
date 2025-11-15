@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -8,7 +9,7 @@ async function handler(req: NextRequest) {
   const url = `${BACKEND_URL}${path}${search}`;
 
   const headers = new Headers(req.headers);
-  const accessToken = req.cookies.get("accessToken")?.value;
+  const accessToken = cookies().get("accessToken")?.value;
 
   if (accessToken) {
     headers.set("Authorization", `Bearer ${accessToken}`);
