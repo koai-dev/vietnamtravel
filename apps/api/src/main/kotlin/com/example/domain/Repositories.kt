@@ -9,8 +9,11 @@ interface AuthRepository {
 }
 
 interface UserRepository {
+    suspend fun getUsers(query: String?, page: Int, pageSize: Int): List<User>
     suspend fun findById(id: Long): User?
+    suspend fun createUser(user: User): User
     suspend fun updateUser(id: Long, name: String?, avatarUrl: String?, phone: String?): User?
+    suspend fun deleteUser(id: Long)
 }
 
 interface DestinationRepository {

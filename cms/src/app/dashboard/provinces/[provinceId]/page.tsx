@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { api } from "@/lib/api"
-import { Province } from "./columns"
+import { Province } from "../columns"
 
 const formSchema = z.object({
   name_en: z.string().min(2, {

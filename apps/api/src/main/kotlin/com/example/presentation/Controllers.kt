@@ -40,14 +40,30 @@ class AuthController(
 class UserController(
     private val userService: UserService
 ) {
+    suspend fun getUsers(query: String?, page: Int, pageSize: Int): List<UserResponse> {
+        return userService.getUsers(query, page, pageSize).map { it.toUserResponse() }
+    }
     suspend fun getMe(principal: JWTPrincipal): UserResponse? {
         val userId = principal.payload.getClaim("userId").asLong()
         return userService.getUser(userId)?.toUserResponse()
     }
-
+    suspend fun createUser(request: CreateUserRequest): UserResponse {
+        val user = User(
+            email = request.email,
+            passwordHash = "password_placeholder", // Will be properly hashed in the service
+            name = request.name,
+            avatarUrl = null,
+            phone = request.phone,
+            role = request.role
+        )
+        return userService.createUser(user).toUserResponse()
+    }
     suspend fun updateMe(principal: JWTPrincipal, request: UpdateUserRequest): UserResponse? {
         val userId = principal.payload.getClaim("userId").asLong()
         return userService.updateUser(userId, request.name, request.avatarUrl, request.phone)?.toUserResponse()
+    }
+    suspend fun deleteUser(id: Long) {
+        userService.deleteUser(id)
     }
 }
 
@@ -101,7 +117,7 @@ class BookingController(private val bookingService: com.example.domain.BookingSe
 }
 
 class TrackingController(private val trackingService: com.example.domain.TrackingService) {
-    suspend fun getStats(period: String?, startDate: String?, endDate: String?): com.example.application.TrackingStatsResponse {
-        return trackingService.getStats(period, startDate, endDate)
+    suspend fun getStats(): com.example.application.TrackingStatsResponse {
+        return trackingService.getStats()
     }
 }

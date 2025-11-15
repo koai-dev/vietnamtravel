@@ -10,10 +10,7 @@ fun Route.trackingRoutes() {
 
     route("/tracking") {
         get("/stats") {
-            val period = call.request.queryParameters["period"]
-            val startDate = call.request.queryParameters["startDate"]
-            val endDate = call.request.queryParameters["endDate"]
-            val stats = trackingController.getStats(period, startDate, endDate)
+            val stats = trackingController.getStats()
             call.respond(stats)
         }
     }

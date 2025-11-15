@@ -13,35 +13,32 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import Image from "next/image"
-import { deleteProvince } from "./actions"
+import { deleteUser } from "./actions"
 
-// This type is temporary. I'll replace it with the actual type from the backend.
-export type Province = {
+export type User = {
   id: string
-  name: {
-    en: string
-    vi: string
-  }
-  image: string
+  email: string
+  name: string
+  phone: string
+  role: "user" | "host" | "admin"
 }
 
-export const columns: ColumnDef<Province>[] = [
-  {
-    accessorKey: "image",
-    header: "Image",
-    cell: ({ row }) => {
-      const imageUrl = row.getValue("image") as string;
-      return <Image src={imageUrl} alt={row.original.name.en} width={64} height={64} className="rounded-md" />
-    }
-  },
+export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    cell: ({ row }) => {
-      const name = row.getValue("name") as { en: string, vi: string };
-      return <div>{name.en} / {name.vi}</div>
-    }
+  },
+  {
+    accessorKey: "email",
+    header: "Email",
+  },
+  {
+    accessorKey: "phone",
+    header: "Phone",
+  },
+  {
+    accessorKey: "role",
+    header: "Role",
   },
   {
     id: "actions",
@@ -50,7 +47,7 @@ export const columns: ColumnDef<Province>[] = [
 ]
 
 function ActionsCell({ row }: { row: any }) {
-  const province = row.original
+  const user = row.original
   const router = useRouter()
 
   return (
@@ -64,15 +61,16 @@ function ActionsCell({ row }: { row: any }) {
       <DropdownMenuContent align="end">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuItem
-          onClick={() => navigator.clipboard.writeText(province.id)}
+          onClick={() => navigator.clipboard.writeText(user.id)}
         >
-          Copy province ID
+          Copy user ID
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => router.push(`/dashboard/provinces/${province.id}`)}>Edit</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push(`/dashboard/users/${user.id}`)}>View details</DropdownMenuItem>
+        <DropdownMenuItem>View search history</DropdownMenuItem>
         <DropdownMenuItem onClick={() => {
-          if (confirm("Are you sure you want to delete this province?")) {
-            deleteProvince(province.id)
+          if (confirm("Are you sure you want to delete this user?")) {
+            deleteUser(user.id)
           }
         }}>Delete</DropdownMenuItem>
       </DropdownMenuContent>

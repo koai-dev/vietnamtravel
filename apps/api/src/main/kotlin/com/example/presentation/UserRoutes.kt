@@ -1,5 +1,6 @@
 package com.example.presentation
 
+import com.example.application.CreateUserRequest
 import com.example.application.UpdateUserRequest
 import com.example.core.RateLimiter
 import com.example.domain.RedisRepository
@@ -17,6 +18,29 @@ fun Route.userRoutes() {
     val rateLimiter = RateLimiter(redisRepository)
 
     authenticate {
+        route("/users") {
+            get {
+                val query = call.request.queryParameters["q"]
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val pageSize = call.request.queryParameters["pageSize"]?.toIntOrNull() ?: 10
+                val users = userController.getUsers(query, page, pageSize)
+                call.respond(users)
+            }
+            post {
+                val request = call.receive<CreateUserRequest>()
+                val user = userController.createUser(request)
+                call.respond(user)
+            }
+            delete("/{id}") {
+                val id = call.parameters["id"]?.toLongOrNull()
+                if (id != null) {
+                    userController.deleteUser(id)
+                    call.respond(io.ktor.http.HttpStatusCode.NoContent)
+                } else {
+                    call.respond(io.ktor.http.HttpStatusCode.BadRequest)
+                }
+            }
+        }
         route("/users/me") {
             install(rateLimiter.limit("/users/me", 100, 60))
             get {
