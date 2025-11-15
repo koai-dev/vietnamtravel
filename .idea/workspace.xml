@@ -4,12 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="caee4c1f-c5e6-43e6-848c-09e967c410a2" name="Changes" comment="" />
+    <list default="true" id="caee4c1f-c5e6-43e6-848c-09e967c410a2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/domain/TrackingServiceImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com.example.domain/TrackingService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/domain/TrackingService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/presentation/Controllers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/presentation/Controllers.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/presentation/TrackingRoutes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/presentation/TrackingRoutes.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "#4 on feat/user-management"
+  }
+}]]></component>
   <component name="TaskManager">
     <servers />
   </component>
