@@ -2,6 +2,8 @@ package com.example.domain
 
 import com.example.application.TrackingStatsResponse
 import com.example.data.UserTracking
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.greaterEq
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.lessEq
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.Instant
@@ -35,7 +37,7 @@ class TrackingServiceImpl : TrackingService {
             }
 
             val totalRequests = trackingData.size.toLong()
-            val requestsByPlatform = trackingData.groupingBy { it.first }.eachCount().mapValues { it.value.toLong() }
+            val requestsByPlatform = trackingData.groupingBy { it.first.orEmpty() }.eachCount().mapValues { it.value.toLong() }
             val requestsByEndpoint = trackingData.groupingBy { it.second }.eachCount().mapValues { it.value.toLong() }
 
             TrackingStatsResponse(
