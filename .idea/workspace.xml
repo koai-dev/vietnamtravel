@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="caee4c1f-c5e6-43e6-848c-09e967c410a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/domain/TrackingServiceImpl.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com.example.domain/TrackingService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/domain/TrackingService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/presentation/Controllers.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/presentation/Controllers.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/presentation/TrackingRoutes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/example/presentation/TrackingRoutes.kt" afterDir="false" />
+    <list default="true" id="caee4c1f-c5e6-43e6-848c-09e967c410a2" name="Changes" comment="feat(api): Add date filtering to tracking stats endpoint&#10;&#10;- Modifies the `GET /tracking/stats` endpoint to accept `period`, `startDate`, and `endDate` query parameters.&#10;- Implements the logic in `TrackingServiceImpl` to filter tracking data by a predefined period (day, week, month, year) or a custom date range.&#10;- Updates the `TrackingService` interface and `TrackingController` to handle the new filtering parameters.">
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/src/components/sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/cms/src/components/sidebar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +34,24 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "git-widget-placeholder": "#4 on feat/user-management"
   }
 }]]></component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="feat(api): Add date filtering to tracking stats endpoint&#10;&#10;- Modifies the `GET /tracking/stats` endpoint to accept `period`, `startDate`, and `endDate` query parameters.&#10;- Implements the logic in `TrackingServiceImpl` to filter tracking data by a predefined period (day, week, month, year) or a custom date range.&#10;- Updates the `TrackingService` interface and `TrackingController` to handle the new filtering parameters.">
+      <option name="closed" value="true" />
+      <created>1763223329863</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763223329863</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat(api): Add date filtering to tracking stats endpoint&#10;&#10;- Modifies the `GET /tracking/stats` endpoint to accept `period`, `startDate`, and `endDate` query parameters.&#10;- Implements the logic in `TrackingServiceImpl` to filter tracking data by a predefined period (day, week, month, year) or a custom date range.&#10;- Updates the `TrackingService` interface and `TrackingController` to handle the new filtering parameters." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(api): Add date filtering to tracking stats endpoint&#10;&#10;- Modifies the `GET /tracking/stats` endpoint to accept `period`, `startDate`, and `endDate` query parameters.&#10;- Implements the logic in `TrackingServiceImpl` to filter tracking data by a predefined period (day, week, month, year) or a custom date range.&#10;- Updates the `TrackingService` interface and `TrackingController` to handle the new filtering parameters." />
   </component>
 </project>
