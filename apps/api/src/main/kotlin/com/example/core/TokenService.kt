@@ -10,8 +10,8 @@ data class TokenPair(val accessToken: String, val refreshToken: String)
 
 object TokenService {
     private val secret = Config.jwtSecret
-    private val issuer = Config.dotenv["JWT_ISSUER"] ?: "com.example"
-    private val audience = Config.dotenv["JWT_AUDIENCE"] ?: "users"
+    private val issuer = Config.env["JWT_ISSUER"] ?: "com.example"
+    private val audience = Config.env["JWT_AUDIENCE"] ?: "users"
     private val algorithm = Algorithm.HMAC256(secret)
 
     val verifier = JWT.require(algorithm)
