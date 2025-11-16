@@ -12,4 +12,12 @@ class DestinationController(private val destinationService: DestinationService) 
     suspend fun getById(id: Long, lang: String): DestinationResponse? {
         return destinationService.getById(id)?.toDestinationResponse(lang)
     }
+
+    suspend fun getTree(id: Long, lang: String): DestinationResponse? {
+        return destinationService.getTree(id)?.toDestinationResponse(lang)
+    }
+
+    suspend fun getRootDestinations(lang: String): List<DestinationResponse> {
+        return destinationService.getRootDestinations().map { it.toDestinationResponse(lang) }
+    }
 }

@@ -12,6 +12,7 @@ object Destinations : Table("destinations") {
     val longitude = double("longitude").nullable()
     val type = enumerationByName("type", 20, DestinationType::class).nullable()
     val images = text("images").nullable() // Storing JSON as TEXT
+    val parentId = long("parent_id").references(id).nullable()
 
     override val primaryKey = PrimaryKey(id)
 }

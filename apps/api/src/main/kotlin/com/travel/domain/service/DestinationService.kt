@@ -15,4 +15,12 @@ class DestinationService(
         }
     }
     suspend fun getById(id: Long): Destination? = destinationRepository.findById(id)
+
+    suspend fun getTree(id: Long): Destination? {
+        return destinationRepository.findTree(id)
+    }
+
+    suspend fun getRootDestinations(): List<Destination> {
+        return destinationRepository.listRoot()
+    }
 }

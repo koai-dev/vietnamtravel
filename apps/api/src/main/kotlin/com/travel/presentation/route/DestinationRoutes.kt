@@ -23,6 +23,27 @@ fun Route.destinationRoutes() {
             call.respond(destinations)
         }
 
+        get("/roots") {
+            val lang = call.lang()
+            val destinations = destinationController.getRootDestinations(lang)
+            call.respond(destinations)
+        }
+
+        get("/tree/{id}") {
+            val id = call.parameters["id"]?.toLongOrNull()
+            if (id != null) {
+                val lang = call.lang()
+                val destination = destinationController.getTree(id, lang)
+                if (destination != null) {
+                    call.respond(destination)
+                } else {
+                    call.respondText("Destination not found", status = HttpStatusCode.NotFound)
+                }
+            } else {
+                call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
+            }
+        }
+
         get("/{id}") {
             val id = call.parameters["id"]?.toLongOrNull()
             if (id != null) {
