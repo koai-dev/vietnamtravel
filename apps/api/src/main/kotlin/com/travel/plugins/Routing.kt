@@ -1,13 +1,6 @@
 package com.travel.plugins
 
-import com.travel.presentation.route.authRoutes
-import com.travel.presentation.route.destinationRoutes
-import com.travel.presentation.route.hotelRoutes
-import com.travel.presentation.route.bookingRoutes
-import com.travel.presentation.route.tourRoutes
-import com.travel.presentation.route.dashboardRoutes
-import com.travel.presentation.route.trackingRoutes
-import com.travel.presentation.route.userRoutes
+import com.travel.presentation.route.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -25,5 +18,6 @@ fun Application.configureRouting() {
         bookingRoutes()
         trackingRoutes()
         dashboardRoutes()
+        localFoodRoutes()
     }
 }

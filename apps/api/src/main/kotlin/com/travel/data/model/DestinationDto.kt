@@ -1,5 +1,6 @@
 package com.travel.data.model
 
+import com.travel.data.model.LocalFoodResponse
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -12,5 +13,6 @@ data class DestinationResponse(
     val type: String?,
     val images: List<String>,
     val parentId: Long?,
-    val children: List<DestinationResponse> = emptyList()
+    val children: List<DestinationResponse> = emptyList(),
+    val foods: List<LocalFoodResponse> = emptyList()
 )
