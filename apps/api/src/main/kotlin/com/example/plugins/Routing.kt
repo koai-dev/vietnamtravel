@@ -5,6 +5,7 @@ import com.example.presentation.destinationRoutes
 import com.example.presentation.hotelRoutes
 import com.example.presentation.bookingRoutes
 import com.example.presentation.tourRoutes
+import com.example.presentation.dashboardRoutes
 import com.example.presentation.trackingRoutes
 import com.example.presentation.userRoutes
 import io.ktor.server.application.*
@@ -23,5 +24,6 @@ fun Application.configureRouting() {
         hotelRoutes()
         bookingRoutes()
         trackingRoutes()
+        dashboardRoutes()
     }
 }

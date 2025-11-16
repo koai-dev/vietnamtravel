@@ -26,5 +26,9 @@
     "apps/*",
     "packages/eslint-config",
     "packages/typescript-config"
-  ]
+  ],
+  "dependencies": {
+    "@tanstack/react-query": "^5.90.9",
+    "recharts": "^3.4.1"
+  }
 }

@@ -14,6 +14,8 @@ interface UserRepository {
     suspend fun createUser(user: User): User
     suspend fun updateUser(id: Long, name: String?, avatarUrl: String?, phone: String?): User?
     suspend fun deleteUser(id: Long)
+    suspend fun getNewUsers(limit: Int, offset: Int): List<User>
+    suspend fun countNewUsers(): Int
 }
 
 interface DestinationRepository {
@@ -30,6 +32,10 @@ interface TourRepository {
 interface HotelRepository {
     suspend fun getAll(city: String?, sort: String?, page: Int): List<Hotel>
     suspend fun findById(id: Long): Hotel?
+}
+
+interface UserTrackingRepository {
+    suspend fun getSummaryByRange(range: String, date: String?): List<com.example.application.TrackingDataPoint>
 }
 
 data class User(

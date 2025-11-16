@@ -65,6 +65,10 @@ class UserController(
     suspend fun deleteUser(id: Long) {
         userService.deleteUser(id)
     }
+
+    suspend fun getNewUsers(limit: Int, offset: Int): com.example.application.NewUsersResponse {
+        return userService.getNewUsers(limit, offset)
+    }
 }
 
 class DestinationController(private val destinationService: com.example.domain.DestinationService) {
@@ -119,5 +123,9 @@ class BookingController(private val bookingService: com.example.domain.BookingSe
 class TrackingController(private val trackingService: com.example.domain.TrackingService) {
     suspend fun getStats(period: String?, startDate: String?, endDate: String?): com.example.application.TrackingStatsResponse {
         return trackingService.getStats(period, startDate, endDate)
+    }
+
+    suspend fun getTrackingSummary(range: String, date: String?): com.example.application.TrackingSummaryResponse {
+        return trackingService.getTrackingSummary(range, date)
     }
 }

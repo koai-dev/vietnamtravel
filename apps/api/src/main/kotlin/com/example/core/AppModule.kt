@@ -18,6 +18,7 @@ val appModule = module {
     single<HotelRepository> { HotelRepositoryImpl() }
     single<BookingRepository> { BookingRepositoryImpl() }
     single<RoomRepository> { RoomRepositoryImpl() }
+    single<UserTrackingRepository> { UserTrackingRepositoryImpl() }
 
     single { AuthService(get(), get()) }
     single { UserService(get()) }
@@ -25,6 +26,7 @@ val appModule = module {
     single { TourService(get(), get()) }
     single { HotelService(get(), get()) }
     single { BookingService(get(), get(), get()) }
+    single<TrackingService> { TrackingServiceImpl(get()) }
 
     single { AuthController(get()) }
     single { UserController(get()) }
@@ -32,4 +34,5 @@ val appModule = module {
     single { TourController(get()) }
     single { HotelController(get()) }
     single { BookingController(get()) }
+    single { TrackingController(get()) }
 }
