@@ -7,6 +7,7 @@ import com.travel.domain.model.Destination
 fun Destination.toDestinationResponse(lang: String): DestinationResponse {
     val children = children.map { it.toDestinationResponse(lang) }
     val foods = foods.map { it.toLocalFoodResponse(lang) }
+    val restaurants = restaurants.map { it.toRestaurantResponse() }
     return DestinationResponse(
         id = id,
         name = pickLang(lang, nameVi, nameEn),
@@ -17,6 +18,7 @@ fun Destination.toDestinationResponse(lang: String): DestinationResponse {
         images = images,
         parentId = parentId,
         children = children,
-        foods = foods
+        foods = foods,
+        restaurants = restaurants
     )
 }
