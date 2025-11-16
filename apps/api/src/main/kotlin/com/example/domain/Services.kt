@@ -1,5 +1,7 @@
 package com.example.domain
 
+import com.example.application.NewUsersResponse
+import com.example.application.toUserResponse
 import com.example.core.TokenPair
 import com.example.core.TokenService
 import com.example.data.UserRole
@@ -57,6 +59,16 @@ class UserService(private val userRepository: UserRepository) {
         return userRepository.updateUser(id, name, avatarUrl, phone)
     }
     suspend fun deleteUser(id: Long) = userRepository.deleteUser(id)
+    suspend fun getNewUsers(limit: Int, offset: Int): NewUsersResponse {
+        val users = userRepository.getNewUsers(limit, offset)
+        val total = userRepository.countNewUsers()
+        return NewUsersResponse(
+            total = total,
+            limit = limit,
+            offset = offset,
+            items = users.map { it.toUserResponse() }
+        )
+    }
 }
 
 class DestinationService(

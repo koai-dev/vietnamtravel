@@ -1,6 +1,7 @@
 package com.example.domain
 
-import com.example.application.TrackingStatsResponse
+import com.example.application.TrackingDataPoint
+import com.example.application.TrackingSummaryResponse
 import com.example.data.UserTracking
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.greaterEq
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.lessEq
@@ -9,7 +10,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 
-class TrackingServiceImpl : TrackingService {
+class TrackingServiceImpl(private val userTrackingRepository: UserTrackingRepository) : TrackingService {
     override suspend fun getStats(period: String?, startDate: String?, endDate: String?): TrackingStatsResponse {
         return transaction {
             val query = UserTracking.selectAll()
@@ -46,5 +47,10 @@ class TrackingServiceImpl : TrackingService {
                 requestsByEndpoint = requestsByEndpoint
             )
         }
+    }
+
+    override suspend fun getTrackingSummary(range: String, date: String?): TrackingSummaryResponse {
+        val data = userTrackingRepository.getSummaryByRange(range, date)
+        return TrackingSummaryResponse(range, data)
     }
 }

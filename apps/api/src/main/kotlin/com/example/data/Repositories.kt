@@ -76,6 +76,17 @@ class UserRepositoryImpl : UserRepository {
             Users.deleteWhere { Users.id.eq(id) }
         }
     }
+
+    override suspend fun getNewUsers(limit: Int, offset: Int): List<User> = newSuspendedTransaction {
+        Users.selectAll()
+            .orderBy(Users.createdAt, SortOrder.DESC)
+            .limit(limit, offset.toLong())
+            .map { it.toUser() }
+    }
+
+    override suspend fun countNewUsers(): Int = newSuspendedTransaction {
+        Users.selectAll().count().toInt()
+    }
 }
 
 private fun ResultRow.toUser(): User = User(
