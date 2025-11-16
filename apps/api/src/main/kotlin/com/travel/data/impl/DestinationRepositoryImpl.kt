@@ -8,9 +8,6 @@ import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
-
-import org.jetbrains.exposed.sql.select
-
 class DestinationRepositoryImpl : DestinationRepository {
     override suspend fun getAll(): List<Destination> = newSuspendedTransaction {
         Destinations.selectAll().map { it.toDestination() }
@@ -21,7 +18,7 @@ class DestinationRepositoryImpl : DestinationRepository {
     }
 
     override suspend fun findChildren(id: Long): List<Destination> = newSuspendedTransaction {
-        Destinations.select { Destinations.parentId eq id }.map { it.toDestination() }
+        Destinations.selectAll().where { Destinations.parentId eq id }.map { it.toDestination() }
     }
 
     override suspend fun findTree(id: Long): Destination? {
@@ -29,7 +26,7 @@ class DestinationRepositoryImpl : DestinationRepository {
     }
 
     override suspend fun listRoot(): List<Destination> = newSuspendedTransaction {
-        Destinations.select { Destinations.parentId.isNull() }.map { it.toDestination() }
+        Destinations.selectAll().where { Destinations.parentId.isNull<Long?>() }.map { it.toDestination() }
     }
 
     private suspend fun buildTree(node: Destination): Destination {

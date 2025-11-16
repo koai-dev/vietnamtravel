@@ -14,11 +14,11 @@ class RestaurantService(
 ) {
 
     suspend fun createRestaurant(restaurantRequest: RestaurantRequest): RestaurantResponse {
-        destinationRepository.getDestinationById(restaurantRequest.destinationId)
+        destinationRepository.findById(restaurantRequest.destinationId)
             ?: throw Exception("Destination with id ${restaurantRequest.destinationId} not found")
 
         restaurantRequest.localFoodIds.forEach {
-            localFoodRepository.getLocalFoodById(it) ?: throw Exception("LocalFood with id $it not found")
+            localFoodRepository.getById(it) ?: throw Exception("LocalFood with id $it not found")
         }
 
         val restaurant = restaurantRepository.createRestaurant(restaurantRequest)
@@ -37,11 +37,11 @@ class RestaurantService(
         restaurantRepository.getRestaurantById(id)
             ?: throw Exception("Restaurant with id $id not found")
 
-        destinationRepository.getDestinationById(restaurantRequest.destinationId)
+        destinationRepository.findById(restaurantRequest.destinationId)
             ?: throw Exception("Destination with id ${restaurantRequest.destinationId} not found")
 
         restaurantRequest.localFoodIds.forEach {
-            localFoodRepository.getLocalFoodById(it) ?: throw Exception("LocalFood with id $it not found")
+            localFoodRepository.getById(it) ?: throw Exception("LocalFood with id $it not found")
         }
 
         restaurantRepository.updateRestaurant(id, restaurantRequest)

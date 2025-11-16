@@ -11,7 +11,7 @@ import org.koin.ktor.ext.inject
 
 fun Application.configureRateLimiting() {
     val redisRepository by inject<RedisRepository>()
-    val rateLimiter = RateLimiter(redisRepository)
+    RateLimiter(redisRepository)
 
     install(StatusPages) {
         exception<RateLimitException> { call, cause ->

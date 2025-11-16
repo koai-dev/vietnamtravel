@@ -1,6 +1,5 @@
 package com.travel.data.model
 
-import com.travel.data.model.LocalFoodResponse
 import kotlinx.serialization.Serializable
 
 @Serializable

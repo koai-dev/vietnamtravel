@@ -1,5 +1,8 @@
 package com.travel.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class LocalFood(
     val id: Long,
     val destinationId: Long,
