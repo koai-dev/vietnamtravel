@@ -14,5 +14,6 @@ data class DestinationResponse(
     val images: List<String>,
     val parentId: Long?,
     val children: List<DestinationResponse> = emptyList(),
-    val foods: List<LocalFoodResponse> = emptyList()
+    val foods: List<LocalFoodResponse> = emptyList(),
+    val restaurants: List<RestaurantResponse> = emptyList()
 )

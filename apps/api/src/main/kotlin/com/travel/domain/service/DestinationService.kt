@@ -5,10 +5,13 @@ import com.travel.domain.repository.DestinationRepository
 import com.travel.domain.repository.LocalFoodRepository
 import com.travel.domain.repository.RedisRepository
 
+import com.travel.domain.repository.RestaurantRepository
+
 class DestinationService(
     private val destinationRepository: DestinationRepository,
     private val redisRepository: RedisRepository,
-    private val localFoodRepository: LocalFoodRepository
+    private val localFoodRepository: LocalFoodRepository,
+    private val restaurantRepository: RestaurantRepository
 ) {
     suspend fun getAll(lang: String): List<Destination> {
         val key = "destinations:all:$lang"
@@ -17,7 +20,8 @@ class DestinationService(
         }
         return destinations.map { destination ->
             val foods = localFoodRepository.listByDestinationId(destination.id)
-            destination.copy(foods = foods)
+            val restaurants = restaurantRepository.getRestaurantsByDestinationId(destination.id)
+            destination.copy(foods = foods, restaurants = restaurants)
         }
     }
 
@@ -25,7 +29,8 @@ class DestinationService(
         val destination = destinationRepository.findById(id)
         return destination?.let {
             val foods = localFoodRepository.listByDestinationId(it.id)
-            it.copy(foods = foods)
+            val restaurants = restaurantRepository.getRestaurantsByDestinationId(it.id)
+            it.copy(foods = foods, restaurants = restaurants)
         }
     }
 
@@ -33,7 +38,8 @@ class DestinationService(
         val destination = destinationRepository.findTree(id)
         return destination?.let {
             val foods = localFoodRepository.listByDestinationId(it.id)
-            it.copy(foods = foods)
+            val restaurants = restaurantRepository.getRestaurantsByDestinationId(it.id)
+            it.copy(foods = foods, restaurants = restaurants)
         }
     }
 
@@ -41,7 +47,8 @@ class DestinationService(
         val destinations = destinationRepository.listRoot()
         return destinations.map { destination ->
             val foods = localFoodRepository.listByDestinationId(destination.id)
-            destination.copy(foods = foods)
+            val restaurants = restaurantRepository.getRestaurantsByDestinationId(destination.id)
+            destination.copy(foods = foods, restaurants = restaurants)
         }
     }
 }

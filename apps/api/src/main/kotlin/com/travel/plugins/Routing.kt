@@ -19,5 +19,6 @@ fun Application.configureRouting() {
         trackingRoutes()
         dashboardRoutes()
         localFoodRoutes()
+        restaurantRoutes()
     }
 }
