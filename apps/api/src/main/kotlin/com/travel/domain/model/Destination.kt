@@ -13,5 +13,6 @@ data class Destination(
     val type: DestinationType?,
     val images: List<String>,
     val parentId: Long?,
-    val children: List<Destination> = emptyList()
+    val children: List<Destination> = emptyList(),
+    val foods: List<LocalFood> = emptyList()
 )
