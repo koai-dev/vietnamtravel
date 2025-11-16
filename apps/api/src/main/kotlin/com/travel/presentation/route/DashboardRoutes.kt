@@ -11,7 +11,7 @@ fun Route.dashboardRoutes() {
     val trackingController by inject<TrackingController>()
     val userController by inject<UserController>()
 
-    route("/dashboard") {
+    route("/api/dashboard") {
         get("/tracking/summary") {
             val range = call.request.queryParameters["range"] ?: "day"
             val date = call.request.queryParameters["date"]

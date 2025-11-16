@@ -20,7 +20,7 @@ fun Route.hotelRoutes() {
     val userTrackingRepository by inject<UserTrackingRepository>()
     val rateLimiter = RateLimiter(redisRepository)
 
-    route("/hotels") {
+    route("/api/hotels") {
         install(rateLimiter.limit("/hotels", 100, 60))
         get {
             val city = call.request.queryParameters["city"]

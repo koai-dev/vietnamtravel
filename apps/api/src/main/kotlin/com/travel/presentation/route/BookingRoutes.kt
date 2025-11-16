@@ -17,7 +17,7 @@ fun Route.bookingRoutes() {
     val redisRepository by inject<RedisRepository>()
 
     authenticate {
-        route("/bookings") {
+        route("/api/bookings") {
             post {
                 val principal = call.principal<JWTPrincipal>()
                 if (principal != null) {

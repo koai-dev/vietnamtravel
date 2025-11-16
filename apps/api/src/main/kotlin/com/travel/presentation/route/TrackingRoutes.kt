@@ -9,7 +9,7 @@ import org.koin.ktor.ext.inject
 fun Route.trackingRoutes() {
     val trackingController by inject<TrackingController>()
 
-    route("/tracking") {
+    route("/api/tracking") {
         get("/stats") {
             val period = call.request.queryParameters["period"]
             val startDate = call.request.queryParameters["startDate"]

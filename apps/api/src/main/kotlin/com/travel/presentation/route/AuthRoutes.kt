@@ -19,7 +19,7 @@ fun Route.authRoutes() {
     val redisRepository by inject<RedisRepository>()
     val rateLimiter = RateLimiter(redisRepository)
 
-    route("/auth") {
+    route("/api/auth") {
         install(rateLimiter.limit("/auth", 100, 60))
         post("/register") {
             val request = call.receive<RegisterRequest>()

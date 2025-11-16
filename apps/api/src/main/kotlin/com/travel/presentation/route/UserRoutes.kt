@@ -20,7 +20,7 @@ fun Route.userRoutes() {
     val rateLimiter = RateLimiter(redisRepository)
 
     authenticate {
-        route("/users") {
+        route("/api/users") {
             get {
                 val query = call.request.queryParameters["q"]
                 val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
@@ -43,7 +43,7 @@ fun Route.userRoutes() {
                 }
             }
         }
-        route("/users/me") {
+        route("/api/users/me") {
             install(rateLimiter.limit("/users/me", 100, 60))
             get {
                 val principal = call.principal<JWTPrincipal>()

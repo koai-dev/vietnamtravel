@@ -15,7 +15,7 @@ fun Route.tourRoutes() {
     val redisRepository by inject<RedisRepository>()
     val rateLimiter = RateLimiter(redisRepository)
 
-    route("/tours") {
+    route("/api/tours") {
         install(rateLimiter.limit("/tours", 100, 60))
         get {
             val lang = call.lang()
