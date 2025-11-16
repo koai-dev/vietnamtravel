@@ -11,5 +11,7 @@ data class Destination(
     val latitude: Double?,
     val longitude: Double?,
     val type: DestinationType?,
-    val images: List<String>
+    val images: List<String>,
+    val parentId: Long?,
+    val children: List<Destination> = emptyList()
 )
