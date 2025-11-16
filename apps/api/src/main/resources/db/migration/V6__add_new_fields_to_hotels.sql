@@ -1,0 +1,17 @@
+ALTER TABLE hotels
+ADD COLUMN slug VARCHAR(255) UNIQUE,
+ADD COLUMN tags TEXT,
+ADD COLUMN address_link VARCHAR(1024),
+ADD COLUMN contact TEXT,
+ADD COLUMN images TEXT,
+ADD COLUMN min_price DECIMAL(10,2),
+ADD COLUMN max_price DECIMAL(10,2),
+ADD COLUMN amenities TEXT,
+ADD COLUMN check_in_time VARCHAR(50),
+ADD COLUMN check_out_time VARCHAR(50),
+ADD COLUMN cancellation_policy TEXT,
+ADD COLUMN child_policy TEXT,
+ADD COLUMN pet_policy TEXT,
+ADD COLUMN external_booking_links TEXT,
+ADD COLUMN views_count BIGINT DEFAULT 0,
+ADD COLUMN favorites_count INT DEFAULT 0;
