@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import {api} from "@/lib/api";
 
 // Types
 export interface TrackingDataPoint {
@@ -29,7 +30,7 @@ export interface NewUsersResponse {
 
 // API Hooks
 const fetchTrackingSummary = async (range: string): Promise<TrackingSummary> => {
-  const { data } = await axios.get(`/api/dashboard/tracking/summary?range=${range}`);
+  const { data } = await api.get(`/api/dashboard/tracking/summary?range=${range}`);
   return data;
 };
 
@@ -41,7 +42,7 @@ export const useTrackingSummary = (range: string) => {
 };
 
 const fetchNewUsers = async (limit: number, offset: number): Promise<NewUsersResponse> => {
-    const { data } = await axios.get(`/api/dashboard/users/new?limit=${limit}&offset=${offset}`);
+    const { data } = await api.get(`/api/dashboard/users/new?limit=${limit}&offset=${offset}`);
     return data;
 };
 
