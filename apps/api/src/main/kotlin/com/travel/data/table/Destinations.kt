@@ -19,5 +19,5 @@ object Destinations : Table("destinations") {
 }
 
 enum class DestinationType {
-    city, region, attraction
+    region, city, attraction, spot
 }
