@@ -3,4 +3,4 @@
 ALTER TABLE destinations
 ADD COLUMN parent_id BIGINT,
 ADD CONSTRAINT fk_parent_id
-FOREIGN KEY (parent_id) REFERENCES destinations(id) ON DELETE SET NULL;
+FOREIGN KEY (parent_id) REFERENCES destinations(id) ON DELETE CASCADE;
