@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="caee4c1f-c5e6-43e6-848c-09e967c410a2" name="Changes" comment="feat(cms): Refactor user creation form and add new UI components&#10;&#10;- Adds new reusable `Card` and `Select` components from `shadcn/ui`.&#10;- Refactors the `/dashboard/users/new` page to use the new `Card` and `Select` components, improving the form's layout and user experience.&#10;- Replaces the native `&lt;select&gt;` element with the new custom `Select` component for role selection.&#10;- Updates dependencies to include `@radix-ui/react-select`.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/src/app/dashboard/users/new/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/cms/src/app/dashboard/users/new/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/src/hooks/useDashboard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cms/src/hooks/useDashboard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/src/lib/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cms/src/lib/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/src/services/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/cms/src/services/api.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +99,7 @@
       <workItem from="1763261802870" duration="103000" />
       <workItem from="1763290536907" duration="2822000" />
       <workItem from="1763302307202" duration="598000" />
+      <workItem from="1763314309314" duration="979000" />
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />

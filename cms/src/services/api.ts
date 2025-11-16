@@ -1,9 +1,5 @@
-import axios from "axios";
 import axiosRetry from "axios-retry";
-
-const api = axios.create({
-  baseURL: "/api", // This will be the Next.js API route
-});
+import {api} from "@/lib/api";
 
 axiosRetry(api, {
   retries: 1,
@@ -22,7 +18,7 @@ api.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        await axios.post("/api/auth/refresh");
+        await api.post("/auth/refresh");
         return api(originalRequest);
       } catch (refreshError) {
         // Handle refresh token failure (e.g., redirect to login)
