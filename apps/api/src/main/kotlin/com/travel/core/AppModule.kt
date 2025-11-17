@@ -2,8 +2,10 @@ package com.travel.core
 
 import com.travel.data.impl.*
 import com.travel.domain.repository.*
+import com.travel.data.impl.*
+import com.travel.domain.repository.*
 import com.travel.domain.service.*
-import com.travel.domain.service.UserTrackingRepository
+import com.travel.domain.service.impl.NotificationServiceImpl
 import com.travel.presentation.controller.*
 import org.koin.dsl.module
 
@@ -19,9 +21,11 @@ val appModule = module {
     single<UserTrackingRepository> { UserTrackingRepositoryImpl() }
     single<LocalFoodRepository> { LocalFoodRepositoryImpl() }
     single<RestaurantRepository> { RestaurantRepositoryImpl() }
+    single<NotificationRepository> { NotificationRepositoryImpl() }
 
     single { AuthService(get(), get()) }
     single { UserService(get()) }
+    single<NotificationService> { NotificationServiceImpl(get(), get()) }
     single { DestinationService(get(), get(), get(), get()) }
     single { TourService(get(), get()) }
     single { HotelService(get(), get()) }
@@ -39,4 +43,6 @@ val appModule = module {
     single { TrackingController(get()) }
     single { LocalFoodController(get()) }
     single { RestaurantController(get()) }
+    single { NotificationController(get()) }
+    single { com.travel.seeder.DevSeeder(get()) }
 }
