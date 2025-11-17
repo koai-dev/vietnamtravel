@@ -3,8 +3,8 @@ package com.travel.data.impl
 import com.travel.data.model.TrackingStatsResponse
 import com.travel.data.model.TrackingSummaryResponse
 import com.travel.data.table.UserTracking
+import com.travel.domain.repository.UserTrackingRepository
 import com.travel.domain.service.TrackingService
-import com.travel.domain.service.UserTrackingRepository
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.greaterEq
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.lessEq
 import org.jetbrains.exposed.sql.selectAll

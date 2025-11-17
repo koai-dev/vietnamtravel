@@ -2,8 +2,10 @@ package com.travel.core
 
 import com.travel.data.impl.*
 import com.travel.domain.repository.*
+import com.travel.data.impl.*
+import com.travel.domain.repository.*
 import com.travel.domain.service.*
-import com.travel.domain.service.UserTrackingRepository
+import com.travel.domain.service.HotelServiceImpl
 import com.travel.presentation.controller.*
 import org.koin.dsl.module
 
@@ -24,7 +26,7 @@ val appModule = module {
     single { UserService(get()) }
     single { DestinationService(get(), get(), get(), get()) }
     single { TourService(get(), get()) }
-    single { HotelService(get(), get()) }
+    single<HotelService> { HotelServiceImpl(get()) }
     single { BookingService(get(), get(), get()) }
     single<TrackingService> { TrackingServiceImpl(get()) }
     single { LocalFoodService(get(), get()) }
