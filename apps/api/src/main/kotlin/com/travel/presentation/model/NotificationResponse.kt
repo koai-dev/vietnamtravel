@@ -13,5 +13,5 @@ data class NotificationResponse(
     val type: NotificationType,
     val isRead: Boolean,
     val createdAt: String,
-    val metadata: Map<String, String>? = null
+    val metadata: Map<String, String>? = null,
 )

@@ -8,10 +8,12 @@ import com.travel.presentation.model.CreateNotificationRequest
 
 class NotificationServiceImpl(
     private val notificationRepository: NotificationRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
 ) : NotificationService {
-
-    override suspend fun create(userId: Long, request: CreateNotificationRequest): Notification {
+    override suspend fun create(
+        userId: Long,
+        request: CreateNotificationRequest,
+    ): Notification {
         // Validate userId exists
         userRepository.findById(userId) ?: throw Exception("User with id $userId not found")
         return notificationRepository.create(userId, request)

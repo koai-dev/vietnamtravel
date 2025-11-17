@@ -9,5 +9,5 @@ data class CreateNotificationRequest(
     val content: String,
     val image: String? = null,
     val type: NotificationType,
-    val metadata: Map<String, String>? = null
+    val metadata: Map<String, String>? = null,
 )

@@ -11,5 +11,5 @@ data class Notification(
     val type: NotificationType,
     val isRead: Boolean,
     val createdAt: LocalDateTime,
-    val metadata: Map<String, String>? = null
+    val metadata: Map<String, String>? = null,
 )

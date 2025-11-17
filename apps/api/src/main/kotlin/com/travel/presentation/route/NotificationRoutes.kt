@@ -11,7 +11,6 @@ import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 
 fun Route.notificationRoutes() {
-
     val notificationController by inject<NotificationController>()
 
     authenticate {

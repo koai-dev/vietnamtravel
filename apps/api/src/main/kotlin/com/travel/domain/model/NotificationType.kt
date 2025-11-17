@@ -5,5 +5,5 @@ enum class NotificationType {
     PROMOTION,
     BOOKING,
     WARNING,
-    UPDATE
+    UPDATE,
 }

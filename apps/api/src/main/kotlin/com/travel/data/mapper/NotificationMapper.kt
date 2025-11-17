@@ -8,9 +8,10 @@ import org.jetbrains.exposed.sql.ResultRow
 
 fun ResultRow.toNotification(): Notification {
     val metadataJson = this[Notifications.metadata]
-    val metadata = metadataJson?.let {
-        Json.decodeFromString<Map<String, String>>(it)
-    }
+    val metadata =
+        metadataJson?.let {
+            Json.decodeFromString<Map<String, String>>(it)
+        }
     return Notification(
         id = this[Notifications.id],
         userId = this[Notifications.userId],
@@ -20,7 +21,7 @@ fun ResultRow.toNotification(): Notification {
         type = this[Notifications.type],
         isRead = this[Notifications.isRead],
         createdAt = this[Notifications.createdAt],
-        metadata = metadata
+        metadata = metadata,
     )
 }
 

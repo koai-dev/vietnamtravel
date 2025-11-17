@@ -2,8 +2,6 @@ package com.travel.core
 
 import com.travel.data.impl.*
 import com.travel.domain.repository.*
-import com.travel.data.impl.*
-import com.travel.domain.repository.*
 import com.travel.domain.service.*
 import com.travel.domain.service.HotelServiceImpl
 import com.travel.domain.service.impl.NotificationServiceImpl

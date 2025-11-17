@@ -6,8 +6,10 @@ import com.travel.presentation.model.NotificationResponse
 import java.time.format.DateTimeFormatter
 
 class NotificationController(private val notificationService: NotificationService) {
-
-    suspend fun createNotification(userId: Long, request: CreateNotificationRequest): NotificationResponse {
+    suspend fun createNotification(
+        userId: Long,
+        request: CreateNotificationRequest,
+    ): NotificationResponse {
         val notification = notificationService.create(userId, request)
         return notification.toNotificationResponse()
     }
@@ -34,7 +36,7 @@ class NotificationController(private val notificationService: NotificationServic
             type = this.type,
             isRead = this.isRead,
             createdAt = this.createdAt.format(DateTimeFormatter.ISO_DATE_TIME),
-            metadata = this.metadata
+            metadata = this.metadata,
         )
     }
 }
