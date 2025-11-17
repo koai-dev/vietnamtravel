@@ -5,13 +5,17 @@ import com.travel.data.model.CreateUserRequest
 import com.travel.data.model.UpdateUserRequest
 import com.travel.domain.repository.RedisRepository
 import com.travel.presentation.controller.UserController
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.auth.jwt.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.server.application.call
+import io.ktor.server.auth.authenticate
+import io.ktor.server.auth.jwt.JWTPrincipal
+import io.ktor.server.auth.principal
+import io.ktor.server.request.receive
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.delete
+import io.ktor.server.routing.get
+import io.ktor.server.routing.post
+import io.ktor.server.routing.put
+import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
 
 fun Route.userRoutes() {
@@ -25,22 +29,15 @@ fun Route.userRoutes() {
                 val query = call.request.queryParameters["q"]
                 val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
                 val pageSize = call.request.queryParameters["pageSize"]?.toIntOrNull() ?: 10
-                val users = userController.getUsers(query, page, pageSize)
-                call.respond(users)
+                userController.getUsers(call, query, page, pageSize)
             }
             post {
                 val request = call.receive<CreateUserRequest>()
-                val user = userController.createUser(request)
-                call.respond(user)
+                userController.createUser(call, request)
             }
             delete("/{id}") {
-                val id = call.parameters["id"]?.toLongOrNull()
-                if (id != null) {
-                    userController.deleteUser(id)
-                    call.respond(HttpStatusCode.NoContent)
-                } else {
-                    call.respond(HttpStatusCode.BadRequest)
-                }
+                val id = call.parameters["id"]?.toLongOrNull() ?: throw IllegalArgumentException("Invalid ID")
+                userController.deleteUser(call, id)
             }
         }
         route("/api/users/me") {
@@ -48,24 +45,14 @@ fun Route.userRoutes() {
             get {
                 val principal = call.principal<JWTPrincipal>()
                 if (principal != null) {
-                    val user = userController.getMe(principal)
-                    if (user != null) {
-                        call.respond(user)
-                    } else {
-                        call.respondText("User not found", status = HttpStatusCode.NotFound)
-                    }
+                    userController.getMe(call, principal)
                 }
             }
             put {
                 val principal = call.principal<JWTPrincipal>()
                 if (principal != null) {
                     val request = call.receive<UpdateUserRequest>()
-                    val user = userController.updateMe(principal, request)
-                    if (user != null) {
-                        call.respond(user)
-                    } else {
-                        call.respondText("User not found", status = HttpStatusCode.NotFound)
-                    }
+                    userController.updateMe(call, principal, request)
                 }
             }
         }

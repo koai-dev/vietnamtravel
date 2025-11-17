@@ -19,26 +19,19 @@ fun Route.destinationRoutes() {
         install(rateLimiter.limit("/destinations", 100, 60))
         get {
             val lang = call.lang()
-            val destinations = destinationController.getAll(lang)
-            call.respond(destinations)
+            destinationController.getAll(call, lang)
         }
 
         get("/roots") {
             val lang = call.lang()
-            val destinations = destinationController.getRootDestinations(lang)
-            call.respond(destinations)
+            destinationController.getRootDestinations(call, lang)
         }
 
         get("/tree/{id}") {
             val id = call.parameters["id"]?.toLongOrNull()
             if (id != null) {
                 val lang = call.lang()
-                val destination = destinationController.getTree(id, lang)
-                if (destination != null) {
-                    call.respond(destination)
-                } else {
-                    call.respondText("Destination not found", status = HttpStatusCode.NotFound)
-                }
+                destinationController.getTree(call, id, lang)
             } else {
                 call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
             }
@@ -48,12 +41,7 @@ fun Route.destinationRoutes() {
             val id = call.parameters["id"]?.toLongOrNull()
             if (id != null) {
                 val lang = call.lang()
-                val destination = destinationController.getById(id, lang)
-                if (destination != null) {
-                    call.respond(destination)
-                } else {
-                    call.respondText("Destination not found", status = HttpStatusCode.NotFound)
-                }
+                destinationController.getById(call, id, lang)
             } else {
                 call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
             }
@@ -63,12 +51,7 @@ fun Route.destinationRoutes() {
             val id = call.parameters["id"]?.toLongOrNull()
             if (id != null) {
                 val lang = call.lang()
-                val destination = destinationController.getByIdDetail(id, lang)
-                if (destination != null) {
-                    call.respond(destination)
-                } else {
-                    call.respondText("Destination not found", status = HttpStatusCode.NotFound)
-                }
+                destinationController.getByIdDetail(call, id, lang)
             } else {
                 call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
             }

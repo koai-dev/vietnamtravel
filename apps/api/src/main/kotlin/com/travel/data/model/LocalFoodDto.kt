@@ -1,5 +1,6 @@
 package com.travel.data.model
 
+import io.ktor.server.plugins.requestvalidation.ValidationResult
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -11,6 +12,14 @@ data class LocalFoodRequest(
     val descriptionEn: String?,
     val images: List<String>,
 )
+
+fun LocalFoodRequest.validate(): ValidationResult {
+    val errors = mutableListOf<String>()
+    if (nameVi.isBlank()) {
+        errors.add("Vietnamese name cannot be blank.")
+    }
+    return if (errors.isEmpty()) ValidationResult.Valid else ValidationResult.Invalid(errors)
+}
 
 @Serializable
 data class LocalFoodResponse(

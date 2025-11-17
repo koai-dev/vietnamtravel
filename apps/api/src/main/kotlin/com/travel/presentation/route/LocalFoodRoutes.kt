@@ -4,11 +4,14 @@ import com.travel.core.RateLimiter
 import com.travel.data.model.LocalFoodRequest
 import com.travel.domain.repository.RedisRepository
 import com.travel.presentation.controller.LocalFoodController
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.server.application.call
+import io.ktor.server.request.receive
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.delete
+import io.ktor.server.routing.get
+import io.ktor.server.routing.post
+import io.ktor.server.routing.put
+import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
 
 fun Route.localFoodRoutes() {
@@ -21,57 +24,28 @@ fun Route.localFoodRoutes() {
 
         post {
             val request = call.receive<LocalFoodRequest>()
-            val localFood = localFoodController.create(request)
-            call.respond(HttpStatusCode.Created, localFood)
+            localFoodController.create(call, request)
         }
 
         put("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
-            if (id != null) {
-                val request = call.receive<LocalFoodRequest>()
-                val updatedLocalFood = localFoodController.update(id, request)
-                if (updatedLocalFood != null) {
-                    call.respond(updatedLocalFood)
-                } else {
-                    call.respondText("Local Food not found", status = HttpStatusCode.NotFound)
-                }
-            } else {
-                call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
-            }
+            val id = call.parameters["id"]?.toLongOrNull() ?: throw IllegalArgumentException("Invalid ID")
+            val request = call.receive<LocalFoodRequest>()
+            localFoodController.update(call, id, request)
         }
 
         delete("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
-            if (id != null) {
-                localFoodController.delete(id)
-                call.respond(HttpStatusCode.NoContent)
-            } else {
-                call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
-            }
+            val id = call.parameters["id"]?.toLongOrNull() ?: throw IllegalArgumentException("Invalid ID")
+            localFoodController.delete(call, id)
         }
 
         get("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
-            if (id != null) {
-                val localFood = localFoodController.getById(id)
-                if (localFood != null) {
-                    call.respond(localFood)
-                } else {
-                    call.respondText("Local Food not found", status = HttpStatusCode.NotFound)
-                }
-            } else {
-                call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
-            }
+            val id = call.parameters["id"]?.toLongOrNull() ?: throw IllegalArgumentException("Invalid ID")
+            localFoodController.getById(call, id)
         }
 
         get("/destination/{destinationId}") {
-            val destinationId = call.parameters["destinationId"]?.toLongOrNull()
-            if (destinationId != null) {
-                val localFoods = localFoodController.listByDestinationId(destinationId)
-                call.respond(localFoods)
-            } else {
-                call.respondText("Invalid Destination ID", status = HttpStatusCode.BadRequest)
-            }
+            val destinationId = call.parameters["destinationId"]?.toLongOrNull() ?: throw IllegalArgumentException("Invalid Destination ID")
+            localFoodController.listByDestinationId(call, destinationId)
         }
     }
 }

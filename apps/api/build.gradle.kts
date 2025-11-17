@@ -38,6 +38,7 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging-jvm")
     implementation("io.ktor:ktor-server-cors-jvm")
     implementation("io.ktor:ktor-server-status-pages-jvm")
+    implementation("io.ktor:ktor-server-request-validation-jvm")
 
     // Logging
     implementation("ch.qos.logback:logback-classic:$logbackVersion")

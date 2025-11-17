@@ -1,5 +1,6 @@
 package com.travel.data.model
 
+import io.ktor.server.plugins.requestvalidation.ValidationResult
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -29,6 +30,17 @@ data class HotelRequest(
     val hostId: Long?,
 )
 
+fun HotelRequest.validate(): ValidationResult {
+    val errors = mutableListOf<String>()
+    if (nameVi.isBlank()) {
+        errors.add("Vietnamese name cannot be blank.")
+    }
+    if (nameEn.isBlank()) {
+        errors.add("English name cannot be blank.")
+    }
+    return if (errors.isEmpty()) ValidationResult.Valid else ValidationResult.Invalid(errors)
+}
+
 @Serializable
 data class ContactInfoRequest(
     val phone: String?,
@@ -43,3 +55,11 @@ data class ContactInfoRequest(
 data class RatingUpdateRequest(
     val rating: Float,
 )
+
+fun RatingUpdateRequest.validate(): ValidationResult {
+    return if (rating in 0.0..5.0) {
+        ValidationResult.Valid
+    } else {
+        ValidationResult.Invalid("Rating must be between 0.0 and 5.0.")
+    }
+}

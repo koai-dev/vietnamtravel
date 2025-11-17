@@ -2,30 +2,37 @@ package com.travel.presentation.controller
 
 import com.travel.data.mapper.toUserResponse
 import com.travel.data.model.CreateUserRequest
-import com.travel.data.model.NewUsersResponse
 import com.travel.data.model.UpdateUserRequest
-import com.travel.data.model.UserResponse
 import com.travel.domain.model.User
 import com.travel.domain.service.UserService
-import io.ktor.server.auth.jwt.*
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.auth.jwt.JWTPrincipal
 
 class UserController(
     private val userService: UserService,
-) {
+) : BaseController() {
     suspend fun getUsers(
+        call: ApplicationCall,
         query: String?,
         page: Int,
         pageSize: Int,
-    ): List<UserResponse> {
-        return userService.getUsers(query, page, pageSize).map { it.toUserResponse() }
+    ) {
+        val users = userService.getUsers(query, page, pageSize).map { it.toUserResponse() }
+        respondWith(call, users)
     }
 
-    suspend fun getMe(principal: JWTPrincipal): UserResponse? {
+    suspend fun getMe(call: ApplicationCall, principal: JWTPrincipal) {
         val userId = principal.payload.getClaim("userId").asLong()
-        return userService.getUser(userId)?.toUserResponse()
+        val user = userService.getUser(userId)?.toUserResponse()
+        if (user != null) {
+            respondWith(call, user)
+        } else {
+            respondWithError(call, "User not found", HttpStatusCode.NotFound)
+        }
     }
 
-    suspend fun createUser(request: CreateUserRequest): UserResponse {
+    suspend fun createUser(call: ApplicationCall, request: CreateUserRequest) {
         val user =
             User(
                 email = request.email,
@@ -35,25 +42,35 @@ class UserController(
                 phone = request.phone,
                 role = request.role,
             )
-        return userService.createUser(user).toUserResponse()
+        val createdUser = userService.createUser(user).toUserResponse()
+        respondWith(call, createdUser)
     }
 
     suspend fun updateMe(
+        call: ApplicationCall,
         principal: JWTPrincipal,
         request: UpdateUserRequest,
-    ): UserResponse? {
+    ) {
         val userId = principal.payload.getClaim("userId").asLong()
-        return userService.updateUser(userId, request.name, request.avatarUrl, request.phone)?.toUserResponse()
+        val updatedUser = userService.updateUser(userId, request.name, request.avatarUrl, request.phone)?.toUserResponse()
+        if (updatedUser != null) {
+            respondWith(call, updatedUser)
+        } else {
+            respondWithError(call, "User not found", HttpStatusCode.NotFound)
+        }
     }
 
-    suspend fun deleteUser(id: Long) {
+    suspend fun deleteUser(call: ApplicationCall, id: Long) {
         userService.deleteUser(id)
+        respondWith(call, true, "User deleted successfully")
     }
 
     suspend fun getNewUsers(
+        call: ApplicationCall,
         limit: Int,
         offset: Int,
-    ): NewUsersResponse {
-        return userService.getNewUsers(limit, offset)
+    ) {
+        val newUsers = userService.getNewUsers(limit, offset)
+        respondWith(call, newUsers)
     }
 }
