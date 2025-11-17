@@ -32,5 +32,10 @@ fun Application.module() {
     configureMonitoring()
     configureSerialization()
     configureDatabase()
+    if (environment.developmentMode) {
+        kotlinx.coroutines.runBlocking {
+            com.travel.core.DevDataSeeder.seedHotelsIfEmpty()
+        }
+    }
     configureRouting()
 }

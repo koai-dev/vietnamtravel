@@ -34,9 +34,7 @@ fun Route.hotelRoutes() {
                 hotelController.deleteHotel(context)
             }
             // Add other protected routes, e.g., for rating
-            put("/{id}/rating") {
-                hotelController.updateRating(context)
-            }
+            // put("/{id}/rating") { hotelController.updateRating(context) }
         }
     }
 }
