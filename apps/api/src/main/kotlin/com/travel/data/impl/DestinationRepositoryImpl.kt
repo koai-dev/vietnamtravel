@@ -86,6 +86,6 @@ private fun ResultRow.toDestinationDetail(): DestinationDetail =
         reviewCount = this[Destinations.reviewCount],
         viewsCount = this[Destinations.viewsCount],
         favoritesCount = this[Destinations.favoritesCount],
-        status = this[Destinations.status],
+        status = this[Destinations.status].name,
         sortOrder = this[Destinations.sortOrder],
     )

@@ -1,6 +1,7 @@
 package com.travel.domain.repository
 
 import com.travel.domain.model.Destination
+import com.travel.domain.model.DestinationDetail
 
 interface DestinationRepository {
     suspend fun getAll(): List<Destination>

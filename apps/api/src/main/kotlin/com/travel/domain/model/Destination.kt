@@ -1,5 +1,6 @@
 package com.travel.domain.model
 
+import aws.smithy.kotlin.runtime.content.BigDecimal
 import com.travel.data.table.DestinationType
 
 data class Destination(
@@ -38,8 +39,8 @@ data class DestinationDetail(
     val tags: List<String>,
     val bestTimeToVisit: String?,
     val openingHours: String?,
-    val priceFrom: Double?,
-    val priceTo: Double?,
+    val priceFrom: BigDecimal?,
+    val priceTo: BigDecimal?,
     val externalLinks: List<String>,
     val addressLink: String?,
     val avgRating: Double,

@@ -1,5 +1,7 @@
 package com.travel.data.model
 
+import aws.smithy.kotlin.runtime.content.BigDecimal
+import com.travel.core.BigDecimalSerializer
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -63,8 +65,10 @@ data class DestinationResponseDetail(
     val tags: List<String>,
     val bestTimeToVisit: String?,
     val openingHours: String?,
-    val priceFrom: Double?,
-    val priceTo: Double?,
+    @Serializable(with = BigDecimalSerializer::class)
+    val priceFrom: BigDecimal?,
+    @Serializable(with = BigDecimalSerializer::class)
+    val priceTo: BigDecimal?,
     val externalLinks: List<String>,
     val addressLink: String?,
     val avgRating: Double,
