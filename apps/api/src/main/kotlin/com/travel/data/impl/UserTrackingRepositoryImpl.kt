@@ -3,7 +3,7 @@ package com.travel.data.impl
 import com.travel.data.model.TrackingDataPoint
 import com.travel.data.model.UserTrackingDTO
 import com.travel.data.table.UserTracking
-import com.travel.domain.service.UserTrackingRepository
+import com.travel.domain.repository.UserTrackingRepository
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.time.Instant

@@ -6,13 +6,11 @@ import com.travel.domain.repository.HotelRepository
 import com.travel.presentation.response.ContactInfoResponse
 import com.travel.presentation.response.HotelResponse
 import kotlinx.coroutines.Dispatchers
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
-import java.time.LocalDateTime
 
 class HotelRepositoryImpl : HotelRepository {
 
@@ -48,7 +46,7 @@ class HotelRepositoryImpl : HotelRepository {
         externalBookingLinks = row[Hotels.externalBookingLinks]?.let { Json.decodeFromString<List<String>>(it) } ?: emptyList(),
         hostId = row[Hotels.hostId],
         hostName = row.getOrNull(Users.name),
-        hostAvatar = row.getOrNull(Users.avatar)
+        hostAvatar = row.getOrNull(Users.avatarUrl)
     )
 
     private val selectQuery = Hotels.leftJoin(Users, { hostId }, { Users.id }).selectAll()
@@ -60,7 +58,7 @@ class HotelRepositoryImpl : HotelRepository {
         checkInTime: String?, checkOutTime: String?, cancellationPolicy: String?, childPolicy: String?,
         petPolicy: String?, tags: String?, externalBookingLinks: String?, hostId: Long?
     ): HotelResponse = newSuspendedTransaction(Dispatchers.IO) {
-        val id = Hotels.insertAndGetId {
+        val id = Hotels.insert {
             it[this.nameVi] = nameVi
             it[this.nameEn] = nameEn
             it[this.slug] = slug
@@ -86,8 +84,8 @@ class HotelRepositoryImpl : HotelRepository {
             it[this.hostId] = hostId
             it[this.createdAt] = CurrentDateTime
             it[this.updatedAt] = CurrentDateTime
-        }
-        getHotelById(id.value)!!
+        } get Users.id
+        getHotelById(id)!!
     }
 
     override suspend fun getAllHotels(): List<HotelResponse> = newSuspendedTransaction(Dispatchers.IO) {
@@ -190,7 +188,7 @@ class HotelRepositoryImpl : HotelRepository {
     }
 
     override suspend fun isSlugExist(slug: String, id: Long?): Boolean = newSuspendedTransaction(Dispatchers.IO) {
-        val query = Hotels.select { Hotels.slug eq slug }
+        val query = Hotels.selectAll().where { Hotels.slug eq slug }
         id?.let { query.andWhere { Hotels.id neq it } }
         query.count() > 0
     }
