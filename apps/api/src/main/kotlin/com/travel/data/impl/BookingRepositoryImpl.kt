@@ -9,16 +9,18 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 import java.math.BigDecimal
 
 class BookingRepositoryImpl : BookingRepository {
-    override suspend fun save(booking: Booking): Booking = newSuspendedTransaction {
-        val id = Bookings.insert {
-            it[userId] = booking.userId
-            it[hotelId] = booking.hotelId
-            it[roomId] = booking.roomId
-            it[checkIn] = booking.checkIn
-            it[checkOut] = booking.checkOut
-            it[totalPrice] = BigDecimal.valueOf(booking.totalPrice)
-            it[status] = BookingStatus.valueOf(booking.status)
-        } get Bookings.id
-        booking.copy(id = id)
-    }
+    override suspend fun save(booking: Booking): Booking =
+        newSuspendedTransaction {
+            val id =
+                Bookings.insert {
+                    it[userId] = booking.userId
+                    it[hotelId] = booking.hotelId
+                    it[roomId] = booking.roomId
+                    it[checkIn] = booking.checkIn
+                    it[checkOut] = booking.checkOut
+                    it[totalPrice] = BigDecimal.valueOf(booking.totalPrice)
+                    it[status] = BookingStatus.valueOf(booking.status)
+                } get Bookings.id
+            booking.copy(id = id)
+        }
 }

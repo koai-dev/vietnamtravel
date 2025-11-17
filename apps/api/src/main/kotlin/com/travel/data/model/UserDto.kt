@@ -10,7 +10,7 @@ data class UserResponse(
     val name: String?,
     val avatarUrl: String?,
     val phone: String?,
-    val role: UserRole
+    val role: UserRole,
 )
 
 @Serializable
@@ -18,12 +18,12 @@ data class CreateUserRequest(
     val email: String,
     val name: String,
     val phone: String?,
-    val role: UserRole
+    val role: UserRole,
 )
 
 @Serializable
 data class UpdateUserRequest(
     val name: String? = null,
     val avatarUrl: String? = null,
-    val phone: String? = null
+    val phone: String? = null,
 )

@@ -20,5 +20,8 @@ object Bookings : Table("bookings") {
 }
 
 enum class BookingStatus {
-    pending, confirmed, cancelled, completed
+    pending,
+    confirmed,
+    cancelled,
+    completed,
 }

@@ -10,5 +10,5 @@ data class Booking(
     val checkIn: LocalDate,
     val checkOut: LocalDate,
     val totalPrice: Double,
-    val status: String
+    val status: String,
 )

@@ -8,12 +8,15 @@ class TrackingController(private val trackingService: TrackingService) {
     suspend fun getStats(
         period: String?,
         startDate: String?,
-        endDate: String?
+        endDate: String?,
     ): TrackingStatsResponse {
         return trackingService.getStats(period, startDate, endDate)
     }
 
-    suspend fun getTrackingSummary(range: String, date: String?): TrackingSummaryResponse {
+    suspend fun getTrackingSummary(
+        range: String,
+        date: String?,
+    ): TrackingSummaryResponse {
         return trackingService.getTrackingSummary(range, date)
     }
 }

@@ -1,15 +1,15 @@
 package com.travel
 
 import com.travel.core.LanguagePlugin
-import com.travel.plugins.configureHTTP
-import com.travel.plugins.configureMonitoring
 import com.travel.plugins.configureAdministration
 import com.travel.plugins.configureDI
+import com.travel.plugins.configureDatabase
+import com.travel.plugins.configureHTTP
+import com.travel.plugins.configureMonitoring
+import com.travel.plugins.configureRateLimiting
 import com.travel.plugins.configureRouting
 import com.travel.plugins.configureSecurity
 import com.travel.plugins.configureSerialization
-import com.travel.plugins.configureDatabase
-import com.travel.plugins.configureRateLimiting
 import io.github.cdimascio.dotenv.dotenv
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -32,5 +32,10 @@ fun Application.module() {
     configureMonitoring()
     configureSerialization()
     configureDatabase()
+    if (environment.developmentMode) {
+        kotlinx.coroutines.runBlocking {
+            com.travel.core.DevDataSeeder.seedHotelsIfEmpty()
+        }
+    }
     configureRouting()
 }

@@ -1,7 +1,7 @@
 package com.travel.presentation.controller
 
-import com.travel.data.model.DestinationResponse
 import com.travel.data.mapper.toDestinationResponse
+import com.travel.data.model.DestinationResponse
 import com.travel.domain.service.DestinationService
 
 class DestinationController(private val destinationService: DestinationService) {
@@ -9,11 +9,17 @@ class DestinationController(private val destinationService: DestinationService) 
         return destinationService.getAll(lang).map { it.toDestinationResponse(lang) }
     }
 
-    suspend fun getById(id: Long, lang: String): DestinationResponse? {
+    suspend fun getById(
+        id: Long,
+        lang: String,
+    ): DestinationResponse? {
         return destinationService.getById(id)?.toDestinationResponse(lang)
     }
 
-    suspend fun getTree(id: Long, lang: String): DestinationResponse? {
+    suspend fun getTree(
+        id: Long,
+        lang: String,
+    ): DestinationResponse? {
         return destinationService.getTree(id)?.toDestinationResponse(lang)
     }
 

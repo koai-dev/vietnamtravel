@@ -12,7 +12,7 @@ data class RestaurantRequest(
     val latitude: Double,
     val longitude: Double,
     val destinationId: Long,
-    val localFoodIds: List<Long>
+    val localFoodIds: List<Long>,
 )
 
 @Serializable
@@ -25,5 +25,5 @@ data class RestaurantResponse(
     val latitude: Double,
     val longitude: Double,
     val destinationId: Long,
-    val localFoods: List<LocalFood>
+    val localFoods: List<LocalFood>,
 )

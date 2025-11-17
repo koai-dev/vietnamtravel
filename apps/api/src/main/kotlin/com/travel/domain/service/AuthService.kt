@@ -10,7 +10,7 @@ import java.util.UUID
 
 class AuthService(
     private val authRepository: AuthRepository,
-    private val redisRepository: RedisRepository
+    private val redisRepository: RedisRepository,
 ) {
     suspend fun register(user: User): User {
         // TODO: add validation
@@ -18,7 +18,10 @@ class AuthService(
         return authRepository.saveUser(user.copy(passwordHash = hashedPassword))
     }
 
-    suspend fun login(email: String, password: String):TokenPair? {
+    suspend fun login(
+        email: String,
+        password: String,
+    ): TokenPair? {
         val user = authRepository.findUserByEmail(email)
         if (user != null && BCrypt.verifyer().verify(password.toCharArray(), user.passwordHash).verified) {
             val jti = UUID.randomUUID().toString()

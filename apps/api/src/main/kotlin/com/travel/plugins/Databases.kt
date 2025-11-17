@@ -15,29 +15,30 @@ fun Application.configureDatabase() {
     val isDevelopment = Config.appEnv == "development"
     val devSeeder by inject<DevSeeder>()
 
-    val hikariConfig = if (isDevelopment) {
-        HikariConfig().apply {
-            driverClassName = "org.h2.Driver"
-            jdbcUrl = Config.dbH2Url
-            username = Config.dbH2User
-            password = Config.dbH2Password
-            maximumPoolSize = 10
-            isAutoCommit = false
-            transactionIsolation = "TRANSACTION_REPEATABLE_READ"
-            validate()
+    val hikariConfig =
+        if (isDevelopment) {
+            HikariConfig().apply {
+                driverClassName = "org.h2.Driver"
+                jdbcUrl = Config.dbH2Url
+                username = Config.dbH2User
+                password = Config.dbH2Password
+                maximumPoolSize = 10
+                isAutoCommit = false
+                transactionIsolation = "TRANSACTION_REPEATABLE_READ"
+                validate()
+            }
+        } else {
+            HikariConfig().apply {
+                driverClassName = "com.mysql.cj.jdbc.Driver"
+                jdbcUrl = Config.dbUrl
+                username = Config.dbUser
+                password = Config.dbPassword
+                maximumPoolSize = 10
+                isAutoCommit = false
+                transactionIsolation = "TRANSACTION_REPEATABLE_READ"
+                validate()
+            }
         }
-    } else {
-        HikariConfig().apply {
-            driverClassName = "com.mysql.cj.jdbc.Driver"
-            jdbcUrl = Config.dbUrl
-            username = Config.dbUser
-            password = Config.dbPassword
-            maximumPoolSize = 10
-            isAutoCommit = false
-            transactionIsolation = "TRANSACTION_REPEATABLE_READ"
-            validate()
-        }
-    }
 
     val dataSource = HikariDataSource(hikariConfig)
     Database.connect(dataSource)

@@ -10,5 +10,5 @@ data class UserTrackingDTO(
     val endpoint: String,
     val os: String?,
     val osVersion: String?,
-    val ipAddress: String?
+    val ipAddress: String?,
 )

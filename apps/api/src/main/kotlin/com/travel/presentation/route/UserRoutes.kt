@@ -1,8 +1,8 @@
 package com.travel.presentation.route
 
+import com.travel.core.RateLimiter
 import com.travel.data.model.CreateUserRequest
 import com.travel.data.model.UpdateUserRequest
-import com.travel.core.RateLimiter
 import com.travel.domain.repository.RedisRepository
 import com.travel.presentation.controller.UserController
 import io.ktor.http.HttpStatusCode

@@ -15,33 +15,38 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
 class RestaurantRepositoryImpl : RestaurantRepository {
+    override suspend fun createRestaurant(restaurantRequest: RestaurantRequest): Restaurant =
+        newSuspendedTransaction {
+            val insertedStatement =
+                Restaurants.insert {
+                    it[name] = restaurantRequest.name
+                    it[description] = restaurantRequest.description
+                    it[images] = Json.encodeToString(restaurantRequest.images)
+                    it[address] = restaurantRequest.address
+                    it[latitude] = restaurantRequest.latitude
+                    it[longitude] = restaurantRequest.longitude
+                    it[destinationId] = restaurantRequest.destinationId
+                }
 
-    override suspend fun createRestaurant(restaurantRequest: RestaurantRequest): Restaurant = newSuspendedTransaction {
-        val insertedStatement = Restaurants.insert {
-            it[name] = restaurantRequest.name
-            it[description] = restaurantRequest.description
-            it[images] = Json.encodeToString(restaurantRequest.images)
-            it[address] = restaurantRequest.address
-            it[latitude] = restaurantRequest.latitude
-            it[longitude] = restaurantRequest.longitude
-            it[destinationId] = restaurantRequest.destinationId
+            val restaurantId = insertedStatement[Restaurants.id]
+
+            RestaurantLocalFoods.batchInsert(restaurantRequest.localFoodIds) { localFoodId ->
+                this[RestaurantLocalFoods.restaurantId] = restaurantId
+                this[RestaurantLocalFoods.localFoodId] = localFoodId
+            }
+
+            insertedStatement.resultedValues?.single()?.toRestaurant() ?: throw Exception("Failed to create restaurant")
         }
 
-        val restaurantId = insertedStatement[Restaurants.id]
-
-        RestaurantLocalFoods.batchInsert(restaurantRequest.localFoodIds) { localFoodId ->
-            this[RestaurantLocalFoods.restaurantId] = restaurantId
-            this[RestaurantLocalFoods.localFoodId] = localFoodId
+    override suspend fun getRestaurantById(id: Long): Restaurant? =
+        newSuspendedTransaction {
+            Restaurants.selectAll().where { Restaurants.id eq id }.singleOrNull()?.toRestaurant()
         }
 
-        insertedStatement.resultedValues?.single()?.toRestaurant() ?: throw Exception("Failed to create restaurant")
-    }
-
-    override suspend fun getRestaurantById(id: Long): Restaurant? = newSuspendedTransaction {
-        Restaurants.selectAll().where { Restaurants.id eq id }.singleOrNull()?.toRestaurant()
-    }
-
-    override suspend fun updateRestaurant(id: Long, restaurantRequest: RestaurantRequest) {
+    override suspend fun updateRestaurant(
+        id: Long,
+        restaurantRequest: RestaurantRequest,
+    ) {
         newSuspendedTransaction {
             Restaurants.update({ Restaurants.id eq id }) {
                 it[name] = restaurantRequest.name
@@ -73,19 +78,21 @@ class RestaurantRepositoryImpl : RestaurantRepository {
             Restaurants.select { Restaurants.destinationId eq destinationId }.map { it.toRestaurant() }
         }
 
-    override suspend fun getLocalFoodsForRestaurant(restaurantId: Long): List<LocalFood> = newSuspendedTransaction {
-        (RestaurantLocalFoods innerJoin LocalFoods)
-            .select { RestaurantLocalFoods.restaurantId eq restaurantId }
-            .map { it.toLocalFood() }
-    }
+    override suspend fun getLocalFoodsForRestaurant(restaurantId: Long): List<LocalFood> =
+        newSuspendedTransaction {
+            (RestaurantLocalFoods innerJoin LocalFoods)
+                .select { RestaurantLocalFoods.restaurantId eq restaurantId }
+                .map { it.toLocalFood() }
+        }
 
-    private fun ResultRow.toLocalFood(): LocalFood = LocalFood(
-        id = this[LocalFoods.id],
-        destinationId = this[LocalFoods.destinationId],
-        nameVi = this[LocalFoods.nameVi],
-        nameEn = this[LocalFoods.nameEn],
-        descriptionVi = this[LocalFoods.descriptionVi],
-        descriptionEn = this[LocalFoods.descriptionEn],
-        images = this[LocalFoods.images]?.let { Json.decodeFromString<List<String>>(it) } ?: emptyList()
-    )
+    private fun ResultRow.toLocalFood(): LocalFood =
+        LocalFood(
+            id = this[LocalFoods.id],
+            destinationId = this[LocalFoods.destinationId],
+            nameVi = this[LocalFoods.nameVi],
+            nameEn = this[LocalFoods.nameEn],
+            descriptionVi = this[LocalFoods.descriptionVi],
+            descriptionEn = this[LocalFoods.descriptionEn],
+            images = this[LocalFoods.images]?.let { Json.decodeFromString<List<String>>(it) } ?: emptyList(),
+        )
 }

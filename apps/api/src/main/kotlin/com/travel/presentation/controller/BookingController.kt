@@ -10,17 +10,18 @@ import java.time.LocalDate
 class BookingController(private val bookingService: BookingService) {
     suspend fun createBooking(
         userId: Long,
-        request: CreateBookingRequest
+        request: CreateBookingRequest,
     ): BookingResponse {
-        val booking = Booking(
-            userId = userId,
-            hotelId = request.hotelId,
-            roomId = request.roomId,
-            checkIn = LocalDate.parse(request.checkIn),
-            checkOut = LocalDate.parse(request.checkOut),
-            totalPrice = request.totalPrice,
-            status = "pending"
-        )
+        val booking =
+            Booking(
+                userId = userId,
+                hotelId = request.hotelId,
+                roomId = request.roomId,
+                checkIn = LocalDate.parse(request.checkIn),
+                checkOut = LocalDate.parse(request.checkOut),
+                totalPrice = request.totalPrice,
+                status = "pending",
+            )
         return bookingService.createBooking(booking).toBookingResponse()
     }
 }

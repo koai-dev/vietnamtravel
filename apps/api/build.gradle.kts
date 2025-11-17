@@ -12,6 +12,7 @@ plugins {
     kotlin("jvm") version "1.9.23"
     id("io.ktor.plugin") version "2.3.10"
     kotlin("plugin.serialization") version "1.9.23"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
 group = "com.example"
@@ -42,7 +43,6 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("net.logstash.logback:logstash-logback-encoder:7.4")
 
-
     // Exposed ORM
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
@@ -56,15 +56,12 @@ dependencies {
     implementation("org.flywaydb:flyway-core:$flyway_version")
     implementation("org.flywaydb:flyway-mysql:$flyway_version")
 
-
     // DI
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
 
-
     // Security
     implementation("at.favre.lib:bcrypt:$bcrypt_version")
-
 
     // Redis
     implementation("redis.clients:jedis:$redis_version")
@@ -78,4 +75,15 @@ dependencies {
     // Testing
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+}
+ktlint {
+    version.set("1.2.1") // hoặc bất kỳ bản mới nhất
+    debug.set(false)
+    verbose.set(false)
+    android.set(false) // bạn đang làm Ktor server -> để false
+    ignoreFailures.set(false)
+}
+
+tasks.named("check") {
+    dependsOn("ktlintCheck")
 }

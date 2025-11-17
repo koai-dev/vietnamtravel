@@ -10,5 +10,5 @@ data class LocalFood(
     val nameEn: String?,
     val descriptionVi: String?,
     val descriptionEn: String?,
-    val images: List<String>
+    val images: List<String>,
 )

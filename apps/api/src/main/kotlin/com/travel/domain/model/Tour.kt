@@ -9,5 +9,5 @@ data class Tour(
     val price: Double,
     val durationHours: Int,
     val destinationId: Long,
-    val images: List<String>
+    val images: List<String>,
 )

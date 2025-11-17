@@ -9,5 +9,5 @@ data class Restaurant(
     val latitude: Double,
     val longitude: Double,
     val destinationId: Long,
-    val localFoods: List<LocalFood> = emptyList()
+    val localFoods: List<LocalFood> = emptyList(),
 )
