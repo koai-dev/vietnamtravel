@@ -1,16 +1,19 @@
 package com.travel.plugins
 
 import com.travel.core.Config
+import com.travel.seeder.DevSeeder
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.*
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
+import org.koin.ktor.ext.inject
 import org.slf4j.LoggerFactory
 
 fun Application.configureDatabase() {
     val logger = LoggerFactory.getLogger("Database")
     val isDevelopment = Config.appEnv == "development"
+    val devSeeder by inject<DevSeeder>()
 
     val hikariConfig =
         if (isDevelopment) {
@@ -37,9 +40,10 @@ fun Application.configureDatabase() {
             }
         }
 
+    val dataSource = HikariDataSource(hikariConfig)
+    Database.connect(dataSource)
+
     if (!isDevelopment) {
-        val dataSource = HikariDataSource(hikariConfig)
-        Database.connect(dataSource)
         // Run Flyway migrations
         val flyway = Flyway.configure().dataSource(dataSource).load()
         try {
@@ -50,6 +54,7 @@ fun Application.configureDatabase() {
             throw e
         }
     } else {
-        logger.info("Skipping Flyway migration for H2 database")
+        logger.info("Skipping Flyway migration for H2 database, seeding data.")
+        devSeeder.seedNotifications()
     }
 }
