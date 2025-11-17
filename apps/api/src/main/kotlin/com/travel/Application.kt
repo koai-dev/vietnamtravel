@@ -37,5 +37,6 @@ fun Application.module() {
             com.travel.core.DevDataSeeder.seedHotelsIfEmpty()
         }
     }
+    configureValidation()
     configureRouting()
 }

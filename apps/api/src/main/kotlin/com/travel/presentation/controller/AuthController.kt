@@ -7,11 +7,13 @@ import com.travel.data.model.TokenResponse
 import com.travel.data.table.UserRole
 import com.travel.domain.model.User
 import com.travel.domain.service.AuthService
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.ApplicationCall
 
 class AuthController(
     private val authService: AuthService,
-) {
-    suspend fun register(request: RegisterRequest) {
+) : BaseController() {
+    suspend fun register(call: ApplicationCall, request: RegisterRequest) {
         val user =
             User(
                 email = request.email,
@@ -22,19 +24,29 @@ class AuthController(
                 role = UserRole.user,
             )
         authService.register(user)
+        respondWith(call, "User registered successfully")
     }
 
-    suspend fun login(request: LoginRequest): TokenResponse? {
+    suspend fun login(call: ApplicationCall, request: LoginRequest) {
         val tokenPair = authService.login(request.email, request.password)
-        return tokenPair?.let { TokenResponse(it.accessToken, it.refreshToken) }
+        if (tokenPair != null) {
+            respondWith(call, TokenResponse(tokenPair.accessToken, tokenPair.refreshToken))
+        } else {
+            respondWithError(call, "Invalid credentials", HttpStatusCode.Unauthorized)
+        }
     }
 
-    suspend fun refreshToken(request: RefreshTokenRequest): TokenResponse? {
+    suspend fun refreshToken(call: ApplicationCall, request: RefreshTokenRequest) {
         val tokenPair = authService.refreshToken(request.refreshToken)
-        return tokenPair?.let { TokenResponse(it.accessToken, it.refreshToken) }
+        if (tokenPair != null) {
+            respondWith(call, TokenResponse(tokenPair.accessToken, tokenPair.refreshToken))
+        } else {
+            respondWithError(call, "Invalid refresh token", HttpStatusCode.Unauthorized)
+        }
     }
 
-    suspend fun logout(request: RefreshTokenRequest) {
+    suspend fun logout(call: ApplicationCall, request: RefreshTokenRequest) {
         authService.logout(request.refreshToken)
+        respondWith(call, "Logged out successfully")
     }
 }

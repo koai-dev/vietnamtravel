@@ -4,9 +4,11 @@ import com.travel.data.model.LocalFoodRequest
 import com.travel.data.model.LocalFoodResponse
 import com.travel.domain.model.LocalFood
 import com.travel.domain.service.LocalFoodService
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.ApplicationCall
 
-class LocalFoodController(private val localFoodService: LocalFoodService) {
-    suspend fun create(request: LocalFoodRequest): LocalFoodResponse {
+class LocalFoodController(private val localFoodService: LocalFoodService) : BaseController() {
+    suspend fun create(call: ApplicationCall, request: LocalFoodRequest) {
         val localFood =
             LocalFood(
                 id = 0,
@@ -17,13 +19,15 @@ class LocalFoodController(private val localFoodService: LocalFoodService) {
                 descriptionEn = request.descriptionEn,
                 images = request.images,
             )
-        return localFoodService.create(localFood).toResponse()
+        val createdLocalFood = localFoodService.create(localFood).toResponse()
+        respondWith(call, createdLocalFood)
     }
 
     suspend fun update(
+        call: ApplicationCall,
         id: Long,
         request: LocalFoodRequest,
-    ): LocalFoodResponse? {
+    ) {
         val localFood =
             LocalFood(
                 id = id,
@@ -34,19 +38,31 @@ class LocalFoodController(private val localFoodService: LocalFoodService) {
                 descriptionEn = request.descriptionEn,
                 images = request.images,
             )
-        return localFoodService.update(id, localFood)?.toResponse()
+        val updatedLocalFood = localFoodService.update(id, localFood)?.toResponse()
+        if (updatedLocalFood != null) {
+            respondWith(call, updatedLocalFood)
+        } else {
+            respondWithError(call, "Local Food not found", HttpStatusCode.NotFound)
+        }
     }
 
-    suspend fun delete(id: Long) {
+    suspend fun delete(call: ApplicationCall, id: Long) {
         localFoodService.delete(id)
+        respondWith(call, true, "Local Food deleted successfully")
     }
 
-    suspend fun getById(id: Long): LocalFoodResponse? {
-        return localFoodService.getById(id)?.toResponse()
+    suspend fun getById(call: ApplicationCall, id: Long) {
+        val localFood = localFoodService.getById(id)?.toResponse()
+        if (localFood != null) {
+            respondWith(call, localFood)
+        } else {
+            respondWithError(call, "Local Food not found", HttpStatusCode.NotFound)
+        }
     }
 
-    suspend fun listByDestinationId(destinationId: Long): List<LocalFoodResponse> {
-        return localFoodService.listByDestinationId(destinationId).map { it.toResponse() }
+    suspend fun listByDestinationId(call: ApplicationCall, destinationId: Long) {
+        val localFoods = localFoodService.listByDestinationId(destinationId).map { it.toResponse() }
+        respondWith(call, localFoods)
     }
 
     private fun LocalFood.toResponse(): LocalFoodResponse {

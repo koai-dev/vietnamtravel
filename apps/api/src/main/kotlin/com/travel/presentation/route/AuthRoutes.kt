@@ -7,11 +7,11 @@ import com.travel.data.model.RefreshTokenRequest
 import com.travel.data.model.RegisterRequest
 import com.travel.domain.repository.RedisRepository
 import com.travel.presentation.controller.AuthController
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.server.application.call
+import io.ktor.server.request.receive
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.post
+import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
 
 fun Route.authRoutes() {
@@ -23,8 +23,7 @@ fun Route.authRoutes() {
         install(rateLimiter.limit("/auth", 100, 60))
         post("/register") {
             val request = call.receive<RegisterRequest>()
-            authController.register(request)
-            call.respondText("User registered successfully")
+            authController.register(call, request)
         }
 
         post("/login") {
@@ -37,28 +36,17 @@ fun Route.authRoutes() {
             if (count > 10) {
                 throw RateLimitException()
             }
-            val tokenResponse = authController.login(request)
-            if (tokenResponse != null) {
-                call.respond(tokenResponse)
-            } else {
-                call.respondText("Invalid credentials", status = HttpStatusCode.Unauthorized)
-            }
+            authController.login(call, request)
         }
 
         post("/refresh") {
             val request = call.receive<RefreshTokenRequest>()
-            val tokenResponse = authController.refreshToken(request)
-            if (tokenResponse != null) {
-                call.respond(tokenResponse)
-            } else {
-                call.respondText("Invalid refresh token", status = HttpStatusCode.Unauthorized)
-            }
+            authController.refreshToken(call, request)
         }
 
         post("/logout") {
             val request = call.receive<RefreshTokenRequest>()
-            authController.logout(request)
-            call.respondText("Logged out successfully")
+            authController.logout(call, request)
         }
     }
 }
