@@ -58,5 +58,20 @@ fun Route.destinationRoutes() {
                 call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
             }
         }
+
+        get("/{id}/detail") {
+            val id = call.parameters["id"]?.toLongOrNull()
+            if (id != null) {
+                val lang = call.lang()
+                val destination = destinationController.getByIdDetail(id, lang)
+                if (destination != null) {
+                    call.respond(destination)
+                } else {
+                    call.respondText("Destination not found", status = HttpStatusCode.NotFound)
+                }
+            } else {
+                call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
+            }
+        }
     }
 }

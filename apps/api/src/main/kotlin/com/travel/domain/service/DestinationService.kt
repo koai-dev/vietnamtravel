@@ -1,6 +1,7 @@
 package com.travel.domain.service
 
 import com.travel.domain.model.Destination
+import com.travel.domain.model.DestinationDetail
 import com.travel.domain.repository.DestinationRepository
 import com.travel.domain.repository.LocalFoodRepository
 import com.travel.domain.repository.RedisRepository
@@ -27,6 +28,15 @@ class DestinationService(
 
     suspend fun getById(id: Long): Destination? {
         val destination = destinationRepository.findById(id)
+        return destination?.let {
+            val foods = localFoodRepository.listByDestinationId(it.id)
+            val restaurants = restaurantRepository.getRestaurantsByDestinationId(it.id)
+            it.copy(foods = foods, restaurants = restaurants)
+        }
+    }
+
+    suspend fun getByIdDetail(id: Long): DestinationDetail? {
+        val destination = destinationRepository.findByIdDetail(id)
         return destination?.let {
             val foods = localFoodRepository.listByDestinationId(it.id)
             val restaurants = restaurantRepository.getRestaurantsByDestinationId(it.id)
