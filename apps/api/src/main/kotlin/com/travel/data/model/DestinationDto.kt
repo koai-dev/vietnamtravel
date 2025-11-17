@@ -12,22 +12,6 @@ data class DestinationResponse(
     val type: String?,
     val images: List<String>,
     val parentId: Long?,
-    val slug: String?,
-    val address: String?,
-    val city: String?,
-    val tags: List<String>,
-    val bestTimeToVisit: String?,
-    val openingHours: String?,
-    val priceFrom: Double?,
-    val priceTo: Double?,
-    val externalLinks: List<String>,
-    val addressLink: String?,
-    val avgRating: Double,
-    val reviewCount: Int,
-    val viewsCount: Long,
-    val favoritesCount: Int,
-    val status: String?,
-    val sortOrder: Int,
     val children: List<DestinationResponse> = emptyList(),
     val foods: List<LocalFoodResponse> = emptyList(),
     val restaurants: List<RestaurantResponse> = emptyList()
@@ -61,4 +45,35 @@ data class DestinationRequest(
 @Serializable
 data class RatingRequest(
     val rating: Double
+)
+
+@Serializable
+data class DestinationResponseDetail(
+    val id: Long,
+    val name: String,
+    val description: String,
+    val latitude: Double?,
+    val longitude: Double?,
+    val type: String?,
+    val images: List<String>,
+    val parentId: Long?,
+    val slug: String?,
+    val address: String?,
+    val city: String?,
+    val tags: List<String>,
+    val bestTimeToVisit: String?,
+    val openingHours: String?,
+    val priceFrom: Double?,
+    val priceTo: Double?,
+    val externalLinks: List<String>,
+    val addressLink: String?,
+    val avgRating: Double,
+    val reviewCount: Int,
+    val viewsCount: Long,
+    val favoritesCount: Int,
+    val status: String?,
+    val sortOrder: Int,
+    val children: List<DestinationResponse> = emptyList(),
+    val foods: List<LocalFoodResponse> = emptyList(),
+    val restaurants: List<RestaurantResponse> = emptyList()
 )
