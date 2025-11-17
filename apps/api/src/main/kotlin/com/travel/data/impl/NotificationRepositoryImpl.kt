@@ -2,13 +2,17 @@ package com.travel.data.impl
 
 import com.travel.data.mapper.toJsonString
 import com.travel.data.mapper.toNotification
+import com.travel.data.model.CreateNotificationRequest
 import com.travel.data.table.Notifications
 import com.travel.domain.model.Notification
 import com.travel.domain.repository.NotificationRepository
-import com.travel.data.model.CreateNotificationRequest
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SortOrder
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.deleteWhere
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import org.jetbrains.exposed.sql.update
 import java.time.LocalDateTime
 
 class NotificationRepositoryImpl : NotificationRepository {

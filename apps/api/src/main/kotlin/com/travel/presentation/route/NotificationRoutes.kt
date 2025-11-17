@@ -1,13 +1,18 @@
 package com.travel.presentation.route
 
-import com.travel.presentation.controller.NotificationController
 import com.travel.data.model.CreateNotificationRequest
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import com.travel.presentation.controller.NotificationController
+import io.ktor.http.HttpStatusCode
+import io.ktor.server.application.call
+import io.ktor.server.auth.authenticate
+import io.ktor.server.request.receive
+import io.ktor.server.response.respond
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.delete
+import io.ktor.server.routing.get
+import io.ktor.server.routing.patch
+import io.ktor.server.routing.post
+import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
 
 fun Route.notificationRoutes() {

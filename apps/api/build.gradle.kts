@@ -1,12 +1,12 @@
-val ktor_version: String by project
-val kotlin_version: String by project
-val logback_version: String by project
-val exposed_version: String by project
-val koin_version: String by project
-val mysql_connector_version: String by project
-val flyway_version: String by project
-val bcrypt_version: String by project
-val redis_version: String by project
+val ktorVersion: String by project
+val kotlinVersion: String by project
+val logbackVersion: String by project
+val exposedVersion: String by project
+val koinVersion: String by project
+val mysqlConnectorVersion: String by project
+val flywayVersion: String by project
+val bcryptVersion: String by project
+val redisVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.9.23"
@@ -40,31 +40,31 @@ dependencies {
     implementation("io.ktor:ktor-server-status-pages-jvm")
 
     // Logging
-    implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("net.logstash.logback:logstash-logback-encoder:7.4")
 
     // Exposed ORM
-    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-java-time:$exposedVersion")
 
     // Database
     implementation("com.h2database:h2:2.2.224")
-    implementation("mysql:mysql-connector-java:$mysql_connector_version")
+    implementation("mysql:mysql-connector-java:$mysqlConnectorVersion")
     implementation("com.zaxxer:HikariCP:5.1.0")
-    implementation("org.flywaydb:flyway-core:$flyway_version")
-    implementation("org.flywaydb:flyway-mysql:$flyway_version")
+    implementation("org.flywaydb:flyway-core:$flywayVersion")
+    implementation("org.flywaydb:flyway-mysql:$flywayVersion")
 
     // DI
-    implementation("io.insert-koin:koin-ktor:$koin_version")
-    implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
+    implementation("io.insert-koin:koin-ktor:$koinVersion")
+    implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
     // Security
-    implementation("at.favre.lib:bcrypt:$bcrypt_version")
+    implementation("at.favre.lib:bcrypt:$bcryptVersion")
 
     // Redis
-    implementation("redis.clients:jedis:$redis_version")
+    implementation("redis.clients:jedis:$redisVersion")
 
     // Dotenv
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
@@ -74,7 +74,7 @@ dependencies {
 
     // Testing
     testImplementation("io.ktor:ktor-server-tests-jvm")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 }
 ktlint {
     version.set("1.2.1") // hoặc bất kỳ bản mới nhất

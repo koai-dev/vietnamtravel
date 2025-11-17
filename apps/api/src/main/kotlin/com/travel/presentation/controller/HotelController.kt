@@ -2,9 +2,9 @@ package com.travel.presentation.controller
 
 import com.travel.core.ApiResult
 import com.travel.core.lang
-import com.travel.domain.service.HotelService
 import com.travel.data.model.HotelRequest
 import com.travel.data.model.RatingUpdateRequest
+import com.travel.domain.service.HotelService
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*

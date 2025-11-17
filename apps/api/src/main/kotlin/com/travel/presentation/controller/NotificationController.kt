@@ -1,8 +1,8 @@
 package com.travel.presentation.controller
 
-import com.travel.domain.service.NotificationService
 import com.travel.data.model.CreateNotificationRequest
 import com.travel.data.model.NotificationResponse
+import com.travel.domain.service.NotificationService
 import java.time.format.DateTimeFormatter
 
 class NotificationController(private val notificationService: NotificationService) {

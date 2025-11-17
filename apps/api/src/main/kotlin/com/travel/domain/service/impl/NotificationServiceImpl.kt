@@ -1,10 +1,10 @@
 package com.travel.domain.service.impl
 
+import com.travel.data.model.CreateNotificationRequest
 import com.travel.domain.model.Notification
 import com.travel.domain.repository.NotificationRepository
 import com.travel.domain.repository.UserRepository
 import com.travel.domain.service.NotificationService
-import com.travel.data.model.CreateNotificationRequest
 
 class NotificationServiceImpl(
     private val notificationRepository: NotificationRepository,
