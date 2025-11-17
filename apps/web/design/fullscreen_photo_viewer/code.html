@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vietnam Travel Guide - Photo Viewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#308ce8",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111921",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<!-- This div simulates the underlying page content -->
+<div class="h-screen w-full blur-sm">
+<div class="p-8">
+<h1 class="text-4xl font-bold text-slate-900 dark:text-white">Discover Vietnam</h1>
+<p class="mt-2 text-slate-600 dark:text-slate-400">This is the content of the main app, which is now blurred out.</p>
+</div>
+</div>
+<!-- Fullscreen Photo Viewer -->
+<div class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/85 backdrop-blur-sm p-4 md:p-6 lg:p-8">
+<!-- Top Toolbar -->
+<div class="absolute top-0 left-0 right-0 flex h-16 w-full items-center justify-end px-4 md:px-6">
+<button aria-label="Close photo viewer" class="flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<!-- Main Content Area -->
+<div class="relative flex h-full w-full max-w-7xl flex-1 items-center justify-center">
+<!-- Previous Button -->
+<div class="absolute left-0 top-1/2 z-10 -translate-y-1/2 p-2">
+<button aria-label="Previous image" class="hidden h-12 w-12 items-center justify-center rounded-full bg-black/30 text-white/80 transition-all hover:bg-black/50 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 md:flex">
+<span class="material-symbols-outlined text-3xl">arrow_back_ios_new</span>
+</button>
+</div>
+<!-- Image Container -->
+<div class="flex h-full max-h-[85vh] w-full max-w-full flex-col items-center justify-center">
+<div class="flex h-full w-full items-center justify-center">
+<img class="block h-full max-h-full w-auto max-w-full rounded-lg object-contain" data-alt="A traditional Vietnamese boat sailing through the tranquil waters of Ha Long Bay, surrounded by limestone karsts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtLgcJAsyVeHp59Gpc10KGfrcJo9h5p1UhaNXp7c_9HBDawHf2FVUfQTJOOz7Jqd7kTncXXnRCgde1VEstZsOfEfaRcKZSee_tzoBv4a_MD5WVam2Yyu64eHEacmjSlRWPCzpFV61ZIqnjqh5ShGZa03T6Cn-6vaIIgtRTmwOnUpv5Ypzkt43tfqOb6CKCUV9wN0taZLnGF-pJAs3nZRzzYCtCSn8dsd1nvkIOh32nsIa1oK0O0wycZyrXiegglBY8INzx2kuPYh4"/>
+</div>
+</div>
+<!-- Next Button -->
+<div class="absolute right-0 top-1/2 z-10 -translate-y-1/2 p-2">
+<button aria-label="Next image" class="hidden h-12 w-12 items-center justify-center rounded-full bg-black/30 text-white/80 transition-all hover:bg-black/50 hover:text-white focus:outline-none focus:ring-2 focus:ring-white/50 md:flex">
+<span class="material-symbols-outlined text-3xl">arrow_forward_ios</span>
+</button>
+</div>
+<!-- Bottom Information Bar -->
+<div class="absolute bottom-0 left-0 right-0 flex h-16 w-full items-center justify-center px-4">
+<div class="flex items-center justify-center gap-4 rounded-full bg-black/40 px-4 py-2 text-sm text-white/90 backdrop-blur-sm">
+<span class="md:hidden">
+<span class="material-symbols-outlined text-lg">arrow_back_ios_new</span>
+</span>
+<span>5 / 12</span>
+<span class="md:hidden">
+<span class="material-symbols-outlined text-lg">arrow_forward_ios</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</body></html>

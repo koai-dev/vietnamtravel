@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vietnam Travel - Lodging</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#519eec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111921",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#343A40] dark:text-gray-200">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700 px-4 sm:px-6 py-3">
+<div class="flex items-center gap-4 text-[#343A40] dark:text-white">
+<div class="text-primary">
+<span class="material-symbols-outlined" style="font-size: 24px;">rocket_launch</span>
+</div>
+<h2 class="text-lg font-bold tracking-[-0.015em]">Vietnam Travel</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary" href="#">Destinations</a>
+<a class="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary" href="#">Activities</a>
+<a class="text-sm font-bold text-primary" href="#">Lodging</a>
+</nav>
+<div class="flex items-center justify-end">
+<button class="flex items-center justify-center rounded-full h-10 w-10 bg-gray-100 dark:bg-gray-800 text-[#343A40] dark:text-white">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</header>
+<main class="flex flex-col gap-6 mt-6">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between items-center gap-4 px-4 sm:px-6">
+<p class="text-4xl font-black tracking-[-0.033em] text-[#343A40] dark:text-white">Lodging in Ha Long Bay</p>
+</div>
+<!-- Search and Filters Section -->
+<div class="flex flex-col md:flex-row gap-4 px-4 sm:px-6">
+<!-- SearchBar -->
+<div class="flex-grow">
+<label class="flex flex-col w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-12 bg-gray-100 dark:bg-gray-800">
+<div class="text-gray-500 dark:text-gray-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-[#343A40] dark:text-white focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 pl-2 text-base font-normal" placeholder="Search destination (e.g., 'Ha Long Bay')" value=""/>
+</div>
+</label>
+</div>
+<!-- Chips for Filters -->
+<div class="flex items-center gap-3 overflow-x-auto pb-2">
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-100 dark:bg-gray-800 px-4">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">calendar_month</span>
+<p class="text-sm font-medium text-gray-700 dark:text-gray-200">Dates</p>
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">expand_more</span>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-100 dark:bg-gray-800 px-4">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">tune</span>
+<p class="text-sm font-medium text-gray-700 dark:text-gray-200">Filters</p>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-100 dark:bg-gray-800 px-4">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">swap_vert</span>
+<p class="text-sm font-medium text-gray-700 dark:text-gray-200">Sort by: Rating</p>
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-300">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Lodging Card Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-6">
+<!-- Card 1 -->
+<div class="flex flex-col group">
+<div class="overflow-hidden rounded-xl">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover transition-transform duration-300 group-hover:scale-105" data-alt="Ocean view from a modern villa balcony" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBN6bxmsYPJvAzKsS1ti-ACdvMdLsbrLmCRITweaI6MjD2hQUm4AadG_99vIwaW5j00XX-LyJzouLcuxJ0wIOYUAU_VRKUbHmGvdt4qUn7QPQChynZFTYw_HZf3LErnef0bW5zyXsH7PSy78ZlGbDgq1HMEL-O_kfdQH4TKtnvs1ReJMU3UR0XICeoAYO_G89ZBl7EIVkp2xoKLzL5u5Fx_d9XlNdfr4TY3lWktGyre5ImsLKfTQQUPs6E6cK-WnGNmX4yutSLdlrw");'></div>
+</div>
+<div class="flex w-full grow flex-col items-stretch justify-center gap-1 pt-4">
+<div class="flex items-start justify-between">
+<p class="text-lg font-bold text-[#343A40] dark:text-white">The Serene Villa</p>
+<div class="flex items-center gap-1 text-[#6C757D] dark:text-gray-400">
+<span class="material-symbols-outlined text-[#F4A261]" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium">4.8</span>
+</div>
+</div>
+<p class="text-[#6C757D] dark:text-gray-400 text-sm font-normal">2.5 km from city center</p>
+<p class="text-[#343A40] dark:text-white text-base font-semibold pt-1">$120 <span class="font-normal text-[#6C757D] dark:text-gray-400">/ night</span></p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="flex flex-col group">
+<div class="overflow-hidden rounded-xl">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover transition-transform duration-300 group-hover:scale-105" data-alt="Cozy hotel room with a view of the mountains" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAWY7vjJN0OjUd7I8j1ZQb9L0kq_vcPnt2eObG1CXVNPjhSPm01Sdkhx04siPMHf0jGO6kiPbRe6Mzqpng8-mGzd44qXtFe02oMRrUoD2GUlA7w3NI-Ojznyu5gjrrC8l4uDL0z3JRoiZYiq_h97b7RqZg5QQaY4S0bBiaBzrAK8nJoEwFaz2N8LcB7aEXxGNJ_sa3ucWHnhFrTtwoT2gGU5cXL3xmcj7H-oIMw1AudraPozJ2V4fy1CHagIPtuHEAfvPbp8JcOx9Y");'></div>
+</div>
+<div class="flex w-full grow flex-col items-stretch justify-center gap-1 pt-4">
+<div class="flex items-start justify-between">
+<p class="text-lg font-bold text-[#343A40] dark:text-white">Bayview Hotel &amp; Spa</p>
+<div class="flex items-center gap-1 text-[#6C757D] dark:text-gray-400">
+<span class="material-symbols-outlined text-[#F4A261]" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium">4.5</span>
+</div>
+</div>
+<p class="text-[#6C757D] dark:text-gray-400 text-sm font-normal">1.2 km from city center</p>
+<p class="text-[#343A40] dark:text-white text-base font-semibold pt-1">$85 <span class="font-normal text-[#6C757D] dark:text-gray-400">/ night</span></p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="flex flex-col group">
+<div class="overflow-hidden rounded-xl">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover transition-transform duration-300 group-hover:scale-105" data-alt="Traditional vietnamese bungalow amidst lush greenery" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBoyFYTmeFhpc6JlDDpKqChOH3mf4sHp6Ra7Z9OtovJOr2E37XhXjNzJxGmeN7hDT6xzIKu54MIymOIRyIYFpJarxS83r8utU3YtZqW-4ZPv2EH6-fV8fA8lLdvW7wZRmm4YvYC8Jqi49YgO21oZesBMuIkuxTZ0Ag-tZ20eCw8nwIuAkaWciGHN_x7liWzL-W0UFp1tDm2IIywSE_wKMkkNyk4PU3aVDbQAi3bUGGS4HrDbogMyiFnezWVqPB22bIR1AUPx2mxP7A");'></div>
+</div>
+<div class="flex w-full grow flex-col items-stretch justify-center gap-1 pt-4">
+<div class="flex items-start justify-between">
+<p class="text-lg font-bold text-[#343A40] dark:text-white">Green Garden Bungalow</p>
+<div class="flex items-center gap-1 text-[#6C757D] dark:text-gray-400">
+<span class="material-symbols-outlined text-[#F4A261]" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium">4.9</span>
+</div>
+</div>
+<p class="text-[#6C757D] dark:text-gray-400 text-sm font-normal">5.0 km from city center</p>
+<p class="text-[#343A40] dark:text-white text-base font-semibold pt-1">$95 <span class="font-normal text-[#6C757D] dark:text-gray-400">/ night</span></p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="flex flex-col group">
+<div class="overflow-hidden rounded-xl">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover transition-transform duration-300 group-hover:scale-105" data-alt="Luxury resort swimming pool at dusk" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAmROnjhWZsmuJJ2jbA7NEwBhnUz07nLuYt_VGR1787W81WQFSaCcZEs0tvSsJnuUtuYk0tZmrkvocl-nDzY5FwUqTQP7Rg1RfPdBZLwfzwSUsw2ZaM5WtmWtYpmQ0s90YyZwzCzCWsa5-P5dvpoAAxdv-My-8ig3LRFYNDAGmfcIMvszIx2jAJfsGD065WnEKmRmInOckO002XuLLrybwbywbpZofNXgi25jwdhCLwXGEEpkkkqS3EjDmsuzPvwX-2EJY1ZHmSz5c");'></div>
+</div>
+<div class="flex w-full grow flex-col items-stretch justify-center gap-1 pt-4">
+<div class="flex items-start justify-between">
+<p class="text-lg font-bold text-[#343A40] dark:text-white">Paradise Cruise Resort</p>
+<div class="flex items-center gap-1 text-[#6C757D] dark:text-gray-400">
+<span class="material-symbols-outlined text-[#F4A261]" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium">4.7</span>
+</div>
+</div>
+<p class="text-[#6C757D] dark:text-gray-400 text-sm font-normal">On the water</p>
+<p class="text-[#343A40] dark:text-white text-base font-semibold pt-1">$250 <span class="font-normal text-[#6C757D] dark:text-gray-400">/ night</span></p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="flex flex-col group">
+<div class="overflow-hidden rounded-xl">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover transition-transform duration-300 group-hover:scale-105" data-alt="Minimalist apartment interior with city view" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjaONVqE9s1sF7LO62PeZDEaBSaGH0oq6J3Bz3cOpsZ_rRBmFHVLLa5rCxbcWU17gM4XHbxiA-E6nm8vtWoNpsTeXrO7ohp5PhcSXFyjFaVTA2Sxxk_isODmt1GJeLbTdXaw7I0AtQwJoeW4_b7mg2hBOSpaIJvbdwuZrODkdtDMVrdVqUvza_e6Gos4hXsce4fB5vpYKyE_KZuZFtDpLJMbMbBWQ7A-5c_w-fg8Gcf7uwPwwSK1wAdYe9QU5hJB6Fo877P-6ih90");'></div>
+</div>
+<div class="flex w-full grow flex-col items-stretch justify-center gap-1 pt-4">
+<div class="flex items-start justify-between">
+<p class="text-lg font-bold text-[#343A40] dark:text-white">City Center Apartments</p>
+<div class="flex items-center gap-1 text-[#6C757D] dark:text-gray-400">
+<span class="material-symbols-outlined text-[#F4A261]" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium">4.3</span>
+</div>
+</div>
+<p class="text-[#6C757D] dark:text-gray-400 text-sm font-normal">0.5 km from city center</p>
+<p class="text-[#343A40] dark:text-white text-base font-semibold pt-1">$60 <span class="font-normal text-[#6C757D] dark:text-gray-400">/ night</span></p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="flex flex-col group">
+<div class="overflow-hidden rounded-xl">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover transition-transform duration-300 group-hover:scale-105" data-alt="Charming homestay with a garden" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAIdAkrXuful3V-6VqlZP4pdIxZocBZ451r73AvGwTDkhIqI8p5HMl3No1jUBvgUOk6P8UVzmBD1mEm4uwMeXChEmEopchewhA7foeGMzUxUKhx4VQuQMzLqSeRisXEKPB1Oj3xrwZ-zdE_UHBwmOCjb_eaOpUuCSNnpdTFfpfY5TccR080c4InSGENgdYp_v1sMcuCfEBSVdI74HWmxIaumbzIftmCfSZIS3iubMlJLQtUrSQR08RJqKbSiRqTijcBAkmQHwsPtMc");'></div>
+</div>
+<div class="flex w-full grow flex-col items-stretch justify-center gap-1 pt-4">
+<div class="flex items-start justify-between">
+<p class="text-lg font-bold text-[#343A40] dark:text-white">The Little Homestay</p>
+<div class="flex items-center gap-1 text-[#6C757D] dark:text-gray-400">
+<span class="material-symbols-outlined text-[#F4A261]" style="font-size: 16px; font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-sm font-medium">5.0</span>
+</div>
+</div>
+<p class="text-[#6C757D] dark:text-gray-400 text-sm font-normal">3.1 km from city center</p>
+<p class="text-[#343A40] dark:text-white text-base font-semibold pt-1">$45 <span class="font-normal text-[#6C757D] dark:text-gray-400">/ night</span></p>
+</div>
+</div>
+</div>
+<!-- Load More Button -->
+<div class="flex justify-center py-8">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary text-white text-sm font-medium hover:bg-primary/90">
+<span class="truncate">Load More</span>
+</button>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

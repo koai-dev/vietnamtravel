@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vietnam Travel Guide - Explore by Season</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#308ce8",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                        "summer-overlay": "rgba(255, 193, 7, 0.4)",
+                        "winter-overlay": "rgba(0, 121, 107, 0.4)",
+                        "festival-overlay": "rgba(216, 27, 96, 0.4)",
+                        "flower-overlay": "rgba(156, 39, 176, 0.4)",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex min-h-screen w-full flex-col">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 py-5">
+<div class="layout-content-container flex w-full max-w-7xl flex-1 flex-col">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-gray-200/50 dark:border-white/10 px-4 py-4 md:px-10 md:py-3">
+<div class="flex items-center gap-4 text-gray-800 dark:text-white">
+<div class="size-6 text-primary">
+<svg aria-hidden="true" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.5a.75.75 0 0 0 .5.707A9.735 9.735 0 0 0 6 21a9.707 9.707 0 0 0 5.25-1.533.75.75 0 0 0 0-1.321v-1.393a.75.75 0 0 0-.48-.703 11.203 11.203 0 0 1-2.27-.895 11.25 11.25 0 0 1-2.271 2.453.75.75 0 0 0-.895.701v.913a.75.75 0 0 0 .707.707 8.235 8.235 0 0 0 2.25-.316 8.235 8.235 0 0 0 2.25.316.75.75 0 0 0 .707-.707v-.913a.75.75 0 0 0-.895-.701 11.25 11.25 0 0 1-2.271-2.453 11.203 11.203 0 0 1 2.27.895.75.75 0 0 0 .48.703v1.393a.75.75 0 0 0 0 1.321A9.707 9.707 0 0 0 12 21.001a9.707 9.707 0 0 0 5.25-1.533.75.75 0 0 0 .5-.707V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 14.25 3a9.707 9.707 0 0 0-5.25 1.533.75.75 0 0 0 0 1.321v1.393a.75.75 0 0 0 .48.703 11.203 11.203 0 0 1 2.27.895c.852-.96 1.583-1.99 2.271-3.078.26-.407.796-.53 1.19-.27.4.26.53.796.27 1.19-.787 1.228-1.575 2.457-2.363 3.685.787 1.228 1.575 2.457 2.363 3.685.26.407.13.93-.27 1.19a.75.75 0 0 1-.595.14.75.75 0 0 1-.595-.41c-.688-1.087-1.419-2.118-2.271-3.078a11.203 11.203 0 0 1-2.27-.895.75.75 0 0 0-.48-.703V5.854a.75.75 0 0 0 0-1.321Z"></path>
+</svg>
+</div>
+<h2 class="text-gray-800 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Vietnam Travel</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Home</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Destinations</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">About</a>
+</div>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors">
+<span class="material-symbols-outlined text-xl">search</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAr1JDLamEOva0zYneHmm8HGm_uFHkmCS1HcLdnucCIqwHgkrudBch-8KXTG9_aIiGokPygU39npD4i1k0OZQwjS-LOuwyWi48M5UGrntYYNX03Dtp8kMTR6BBp_x0UCIzOI8nKlbDaEGT6Nbxrmk92Y-nSCyLpQmGgyXn6bdtVeSHaB1zlxyPCErB5A0DqnM0l_ud-LCIPdcPD9WQK95vFCTl_q_PZ3DBdHsvA87KVnKgDoIdgcFVOnLOmQum2r-XtS-IhmO_vUqE");'></div>
+</div>
+<div class="md:hidden">
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors">
+<span class="material-symbols-outlined text-xl">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1 py-8 md:py-16">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-3 p-4">
+<h1 class="text-gray-900 dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Explore by Season &amp; Event</h1>
+</div>
+<!-- ImageGrid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 p-4">
+<!-- Card 1: Summer -->
+<div class="group relative bg-cover bg-center flex flex-col justify-end p-6 rounded-xl aspect-[3/4] overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.03]" data-alt="A sunny Vietnamese beach with clear blue water and white sand" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0bADc5ihL-am9hAHqatrlNjme_j4dtBcF9mpdo4zeAcmR50fMVLJ_F8vSwrvwyps3fCz3u8aVd2tobkCvms72d1GzDKB2_IU9p5yc9VozkHL_mfCvi5xD8GIAn7nJDas_od1FY9a-DiQZjeUZKOOcalKQjxnMJ1aUZtuMnY1m32KuwT6EdXVo_HfWM_6VoeiXr0EmWFOCUXtQ09LCdQ2578NJsyUiijaHHsk1L00qABKJLmrbCAfTqR4OKnQCJAkyiFz74weE4TE");'>
+<div class="absolute inset-0 bg-summer-overlay group-hover:bg-opacity-50 transition-opacity duration-300"></div>
+<div class="relative z-10 text-white">
+<h3 class="text-2xl font-bold leading-tight">Mùa Hè</h3>
+<p class="text-sm mt-1 opacity-90">Vibrant beach life and island getaways.</p>
+<div class="flex items-center gap-2 mt-4 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span>Explore</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Winter -->
+<div class="group relative bg-cover bg-center flex flex-col justify-end p-6 rounded-xl aspect-[3/4] overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.03]" data-alt="Misty mountains in Ha Giang during winter with winding roads" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAZuXbucoxWOKbOzJMgdlMzu5fJ_-fT5_0mb1awHRoAAH9yQ6qh8QyAcS7bg2OEV43lubuf5VQ5SF3x24imxQC53F8rGxLffrShqV9cqm7rp2-FqgWj2HQ7uEYGVd3zwh77UUCRx3qSBBYZxNHl3h4jW_AH9IEilzOP3ni4KkxSZv8kOTdjoXRYlxPvYDeBcrDrxbxLFYh0MoILh6pDifr8IEJT8VeFl6PW_64cTBlS_bv1xM3SnW7ligKl43SBhiqTQTRR51JUlqg");'>
+<div class="absolute inset-0 bg-winter-overlay group-hover:bg-opacity-50 transition-opacity duration-300"></div>
+<div class="relative z-10 text-white">
+<h3 class="text-2xl font-bold leading-tight">Mùa Đông</h3>
+<p class="text-sm mt-1 opacity-90">Cool mountain treks and cozy city escapes.</p>
+<div class="flex items-center gap-2 mt-4 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span>Explore</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Festivals -->
+<div class="group relative bg-cover bg-center flex flex-col justify-end p-6 rounded-xl aspect-[3/4] overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.03]" data-alt="Colorful lanterns lighting up the ancient town of Hoi An at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAGggh55IroJXTczcYwMW7YFkyR4d7yrQZpyEgAjBqeWKWNakJsBATw9b7SHK3C0EUPn_K4XttAUk502Ni03OeieQ6-Sd9WHXuSFLvIiKL6A8oFpWQsEVXmZ3En5Fg_0Ep2Q3eJc3f-gUu72nFE2GCRSZ9HwDsiwXF8baUr9z3tblf_96wS00ZBHkMtNPQ2ShXJvxycCPZsYDeJpt-xey6BIhCSsSRTg2me57Z5KjPsmSVuBmXmt2RLXFWkKvxpMCTS_PrxJgOWH3A");'>
+<div class="absolute inset-0 bg-festival-overlay group-hover:bg-opacity-50 transition-opacity duration-300"></div>
+<div class="relative z-10 text-white">
+<h3 class="text-2xl font-bold leading-tight">Lễ hội</h3>
+<p class="text-sm mt-1 opacity-90">Experience vibrant cultural celebrations.</p>
+<div class="flex items-center gap-2 mt-4 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span>Explore</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Blooming Flowers -->
+<div class="group relative bg-cover bg-center flex flex-col justify-end p-6 rounded-xl aspect-[3/4] overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.03]" data-alt="Terraced rice fields in Vietnam during the blooming season with lush greenery" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAh-me1g1daIhJqJgsyi3vmqJZwE6dMDG_XZv2Ju13E9Y64mqBgFuK5rOY8kkLbRPbHAXPeYIHF36tLR2c9yhrH-pVAzhGuTRwEWfyQ016XKGNo0726mI1RC_0a-sdU7LN-TwGR47Pb6GEqJQAlIsda5hs_fr9cz2clAfpxTO_jZfBwW4L0knB1rT_7KbsLSJVMvgYK6A-f5gA0FdyQsfGncbXnELHuT1dE-QxykDQeenj50vaeWvg8UPZqdIpXt7eSpQ_2NHz0ano");'>
+<div class="absolute inset-0 bg-flower-overlay group-hover:bg-opacity-50 transition-opacity duration-300"></div>
+<div class="relative z-10 text-white">
+<h3 class="text-2xl font-bold leading-tight">Hoa Nở</h3>
+<p class="text-sm mt-1 opacity-90">Discover the seasons of blooming flowers.</p>
+<div class="flex items-center gap-2 mt-4 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span>Explore</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="flex flex-col gap-6 px-5 py-10 text-center border-t border-gray-200/50 dark:border-white/10 mt-16">
+<div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4">
+<a class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm font-normal leading-normal transition-colors" href="#">About</a>
+<a class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm font-normal leading-normal transition-colors" href="#">Contact</a>
+<a class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary text-sm font-normal leading-normal transition-colors" href="#">Privacy Policy</a>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a aria-label="Facebook" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+</a>
+<a aria-label="Instagram" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+</a>
+<a aria-label="Twitter" class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+</a>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">© 2024 Vietnam Travel Guide. All rights reserved.</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+</body></html>

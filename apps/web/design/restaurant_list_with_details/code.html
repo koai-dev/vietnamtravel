@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurants in Vietnam - A Travel Guide</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2E7D32", 
+              "secondary": "#D84315",
+              "background-light": "#F9F9F9",
+              "background-dark": "#111921",
+              "text-light-primary": "#333333",
+              "text-light-secondary": "#757575",
+              "text-dark-primary": "#E0E0E0",
+              "text-dark-secondary": "#BDBDBD",
+              "border-light": "#E0E0E0",
+              "border-dark": "#333333",
+              "surface-light": "#FFFFFF",
+              "surface-dark": "#1E293B",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light-primary dark:text-text-dark-primary antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[1280px] flex-1">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark px-2 md:px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="text-primary size-7">
+<span class="material-symbols-outlined !text-3xl">local_florist</span>
+</div>
+<h2 class="text-text-light-primary dark:text-text-dark-primary text-xl font-bold leading-tight tracking-[-0.015em]">Vietnam Travel</h2>
+</div>
+<div class="hidden lg:flex items-center gap-9">
+<a class="text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary text-sm font-medium leading-normal transition-colors" href="#">Destinations</a>
+<a class="text-primary dark:text-primary text-sm font-bold leading-normal" href="#">Restaurants</a>
+<a class="text-text-light-secondary dark:text-text-dark-secondary hover:text-text-light-primary dark:hover:text-text-dark-primary text-sm font-medium leading-normal transition-colors" href="#">Things to Do</a>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-gray-200 dark:bg-gray-700 text-text-light-secondary dark:text-text-dark-secondary hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+<span class="material-symbols-outlined">person</span>
+</button>
+<button class="lg:hidden flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-gray-200 dark:bg-gray-700 text-text-light-secondary dark:text-text-dark-secondary hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-2 md:px-6 py-8">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-4 pb-6">
+<div class="flex flex-col gap-2">
+<p class="text-text-light-primary dark:text-text-dark-primary text-4xl font-black leading-tight tracking-[-0.033em]">Find Your Next Meal</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-base font-normal leading-normal">Explore the best restaurants Vietnam has to offer.</p>
+</div>
+</div>
+<!-- Search and Filters -->
+<div class="sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm py-4">
+<div class="flex flex-col md:flex-row gap-4">
+<!-- SearchBar -->
+<div class="flex-grow">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark focus-within:ring-2 focus-within:ring-primary">
+<div class="text-text-light-secondary dark:text-text-dark-secondary flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light-primary dark:text-text-dark-primary focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-text-light-secondary dark:placeholder:text-text-dark-secondary px-4 pl-2 text-base font-normal leading-normal" placeholder="Search for phở, bánh mì, coffee..." value=""/>
+</div>
+</label>
+</div>
+<!-- Chips -->
+<div class="flex gap-3 overflow-x-auto pb-2">
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark pl-4 pr-3 hover:border-primary/50 transition-colors">
+<p class="text-text-light-primary dark:text-text-dark-primary text-sm font-medium leading-normal">Cuisine</p>
+<span class="material-symbols-outlined text-text-light-secondary dark:text-text-dark-secondary">expand_more</span>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark pl-4 pr-3 hover:border-primary/50 transition-colors">
+<p class="text-text-light-primary dark:text-text-dark-primary text-sm font-medium leading-normal">Price Level</p>
+<span class="material-symbols-outlined text-text-light-secondary dark:text-text-dark-secondary">expand_more</span>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark pl-4 pr-3 hover:border-primary/50 transition-colors">
+<p class="text-text-light-primary dark:text-text-dark-primary text-sm font-medium leading-normal">Location</p>
+<span class="material-symbols-outlined text-text-light-secondary dark:text-text-dark-secondary">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Toolbar -->
+<div class="flex justify-between items-center gap-2 py-6 border-b border-border-light dark:border-border-dark">
+<p class="text-sm text-text-light-secondary dark:text-text-dark-secondary">Showing 12 results</p>
+<div class="flex gap-1">
+<button class="p-2 rounded-lg text-text-light-primary dark:text-text-dark-primary bg-primary/20 dark:bg-primary/30">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-2 rounded-lg text-text-light-secondary dark:text-text-dark-secondary hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined">view_list</span>
+</button>
+</div>
+</div>
+<!-- Restaurant Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-8">
+<!-- Restaurant Card 1 -->
+<div class="group flex flex-col overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm hover:shadow-lg transition-shadow duration-300 border border-border-light dark:border-border-dark">
+<div class="overflow-hidden">
+<img class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A delicious bowl of Vietnamese pho soup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHrN0JmzCAAbjQR8_SuFnJe-R5HK6WTzCIiT_ns55qxzCYTFAZF7eVhR3Scsw39QL6LOXxsjroJEAmnpkaGdRSQoEtvgQJUMs9vwoIQexn6bUUr5pzFci3UBDzc8DpmKZOjGzDTIipayuPvhhgd0s5oa8hAY_3T-sgIANlCSmgKrfDgh6KW-PfXdNwY3kmYX5FHZ8BrJ8Y11URpiZuafLjMw5aw0QFLDt60sDFLHA0CPd1qAmQtaM1AN_nclJzinJ5oeLKW9AysNI"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">Phở Gia Truyền</h3>
+<div class="flex items-center gap-1 text-sm text-text-light-secondary dark:text-text-dark-secondary">
+<span>4.8</span>
+<span class="material-symbols-outlined !text-base text-amber-500">star</span>
+</div>
+</div>
+<p class="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-3 flex-grow">Authentic Hanoi-style Phở in the Old Quarter.</p>
+<div class="flex items-center justify-between mt-auto pt-3 border-t border-border-light dark:border-border-dark">
+<div class="flex gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Phở</span>
+<span class="text-xs font-medium bg-gray-200 dark:bg-gray-700 text-text-light-secondary dark:text-text-dark-secondary px-2 py-1 rounded-full">Vietnamese</span>
+</div>
+<p class="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary">$$</p>
+</div>
+</div>
+</div>
+<!-- Restaurant Card 2 -->
+<div class="group flex flex-col overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm hover:shadow-lg transition-shadow duration-300 border border-border-light dark:border-border-dark">
+<div class="overflow-hidden">
+<img class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A freshly made Banh Mi sandwich on a wooden board" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_QAqS_t2_XmuViw3ASbX-j4QMH9XOq8hIWyEyPwAjKnbL1Fd4cwIhgJvQFtsONRB_nsHLCyX6s8APnQXb9dBGoloHK2UQrBAFn1xkoAO_FVgaviWUVX7tTSfNQOB5Jk712YWc_Az2PUGqidqf955JZw4jqk1Z0hTmG_3c1ZFGSvrLQk7wX_svJy3LU_kgLq-v2q0I9-AV4jCKf4joJ1HYRKXK1pdo79zYyHjRBr4n8Hd9AMX4UdmeujVLo6F4XY8Oa8tOn1pEqC0"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">Bánh Mì Phượng</h3>
+<div class="flex items-center gap-1 text-sm text-text-light-secondary dark:text-text-dark-secondary">
+<span>4.7</span>
+<span class="material-symbols-outlined !text-base text-amber-500">star</span>
+</div>
+</div>
+<p class="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-3 flex-grow">Famous for its crispy baguettes in Hoi An.</p>
+<div class="flex items-center justify-between mt-auto pt-3 border-t border-border-light dark:border-border-dark">
+<div class="flex gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Bánh Mì</span>
+<span class="text-xs font-medium bg-gray-200 dark:bg-gray-700 text-text-light-secondary dark:text-text-dark-secondary px-2 py-1 rounded-full">Street Food</span>
+</div>
+<p class="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary">$</p>
+</div>
+</div>
+</div>
+<!-- Restaurant Card 3 -->
+<div class="group flex flex-col overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm hover:shadow-lg transition-shadow duration-300 border border-border-light dark:border-border-dark">
+<div class="overflow-hidden">
+<img class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="An assortment of fresh seafood on a platter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPRyf9o7cxj-9fWOgJPysDHEa7OWOVFuA-I1NdIHoFZSggikTvPf7hxELp1-YpG739oTlyE8Xpkm261YoRrlaaP4MBzeuh4Z2dQ3bjrJxuCN6BBqRr-L66ljrgzOGARa9pssRVXQIrKDK1TvXYclpYJRonkUyE_v-9CR2IZFiasg07IYcy3H4xvB61SFnTK2rxrJ05wB-P8EvAcBoeNZGIcyUD2j0X_balAcWJyMVCdQUAx2JxfPyVRhfBsvRVjIlM3igrxZfkWXU"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">Quán Ăn Ngon</h3>
+<div class="flex items-center gap-1 text-sm text-text-light-secondary dark:text-text-dark-secondary">
+<span>4.5</span>
+<span class="material-symbols-outlined !text-base text-amber-500">star</span>
+</div>
+</div>
+<p class="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-3 flex-grow">A wide variety of Vietnamese dishes in HCMC.</p>
+<div class="flex items-center justify-between mt-auto pt-3 border-t border-border-light dark:border-border-dark">
+<div class="flex gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Seafood</span>
+<span class="text-xs font-medium bg-gray-200 dark:bg-gray-700 text-text-light-secondary dark:text-text-dark-secondary px-2 py-1 rounded-full">Family Style</span>
+</div>
+<p class="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary">$$$</p>
+</div>
+</div>
+</div>
+<!-- Restaurant Card 4 -->
+<div class="group flex flex-col overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm hover:shadow-lg transition-shadow duration-300 border border-border-light dark:border-border-dark">
+<div class="overflow-hidden">
+<img class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A cup of traditional Vietnamese egg coffee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2yRgJtykEgEH-uCSw1HpBfPsV0Dcq7vwLjcft3lvXDkjBcGO6e-cpTtXsKb6KdfvTQnHaxPyH8Nc8rCJDw9MTorMbHi0psC-agQrPoB7GZB5QTtcw5e3RHhKW5QFuYAEGD6ol9PhdZodSC0mydilGfKgCnv1ZArHnfnFPWxm5qTaElA_NV6M6U5-SfpZ-Dze-6ZkX04xoODgX1w9JK4e1vUJwJ4abMKvU3tmR3ZsPC94VAGyKFXi50rKqmYx-6VDFwDWjxCudRFo"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">Cộng Cà Phê</h3>
+<div class="flex items-center gap-1 text-sm text-text-light-secondary dark:text-text-dark-secondary">
+<span>4.6</span>
+<span class="material-symbols-outlined !text-base text-amber-500">star</span>
+</div>
+</div>
+<p class="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-3 flex-grow">Vintage-themed cafe chain with unique coffee.</p>
+<div class="flex items-center justify-between mt-auto pt-3 border-t border-border-light dark:border-border-dark">
+<div class="flex gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Coffee</span>
+<span class="text-xs font-medium bg-gray-200 dark:bg-gray-700 text-text-light-secondary dark:text-text-dark-secondary px-2 py-1 rounded-full">Cafe</span>
+</div>
+<p class="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary">$$</p>
+</div>
+</div>
+</div>
+<!-- More cards can be added here -->
+<div class="group flex flex-col overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm hover:shadow-lg transition-shadow duration-300 border border-border-light dark:border-border-dark">
+<div class="overflow-hidden">
+<img class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Vietnamese spring rolls with dipping sauce" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHRWlAuJG0Sd80YoCvxTTnbOklpi7aUw85_nmwBN9Ah7MKx0JYFNfNasQkpjBdUyEalGT34YIBKKYUgfNddic4t3j_CD1aZ0oVWMQtK0Fh9NTaetZ7Mm8JspoQcD4n7cuIX0dcqiGuX29HtgK1jH39sXC0Z_ZDQ1v5h8xWNDL0z91HJdH6vms0nX2L8U_Px61VmLQrfaWEBvtjrZ-Yq7B0IoGGlTOPaeb3kTdPTRB3KXwpLgLEomwj-VRKPmzFn_lXJyUflCQXgA4"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">Den Long</h3>
+<div class="flex items-center gap-1 text-sm text-text-light-secondary dark:text-text-dark-secondary">
+<span>4.8</span>
+<span class="material-symbols-outlined !text-base text-amber-500">star</span>
+</div>
+</div>
+<p class="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-3 flex-grow">Cozy spot for home-style Vietnamese food in Da Nang.</p>
+<div class="flex items-center justify-between mt-auto pt-3 border-t border-border-light dark:border-border-dark">
+<div class="flex gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Vietnamese</span>
+</div>
+<p class="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary">$$</p>
+</div>
+</div>
+</div>
+<div class="group flex flex-col overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark shadow-sm hover:shadow-lg transition-shadow duration-300 border border-border-light dark:border-border-dark">
+<div class="overflow-hidden">
+<img class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Bun Cha, a grilled pork and noodle dish from Hanoi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuEh7Uop6SnxfyzluNpzYb9XyWz_rB1jBU7c9snQWp8pP--mZxuO8bNp5UADjf_Rtp8PR6nYOmDB7yt33WbrN1WpdfEKiauOymKsH1u3bFFvOJR-0VB2BHDgOkriKXkvOr5YO4QmgdfQb_Kut-tLGdEfyAkX3CDSW3-kwocwlVmiZn9Q8rI6pJVtNgr3kN9EPeb88NTjxJ5DjwuJZH-CGl97OKTprxnjLO2_OuTF2uHm_9kh1U3zgNDPxNqrASQQyZYO-O9_I66eQ"/>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">Bún Chả Hương Liên</h3>
+<div class="flex items-center gap-1 text-sm text-text-light-secondary dark:text-text-dark-secondary">
+<span>4.4</span>
+<span class="material-symbols-outlined !text-base text-amber-500">star</span>
+</div>
+</div>
+<p class="text-sm text-text-light-secondary dark:text-text-dark-secondary mb-3 flex-grow">The famous "Obama bún chả" spot in Hanoi.</p>
+<div class="flex items-center justify-between mt-auto pt-3 border-t border-border-light dark:border-border-dark">
+<div class="flex gap-2">
+<span class="text-xs font-medium bg-primary/20 text-primary px-2 py-1 rounded-full">Bún Chả</span>
+<span class="text-xs font-medium bg-gray-200 dark:bg-gray-700 text-text-light-secondary dark:text-text-dark-secondary px-2 py-1 rounded-full">Street Food</span>
+</div>
+<p class="text-sm font-semibold text-text-light-primary dark:text-text-dark-primary">$</p>
+</div>
+</div>
+</div>
+<!-- Empty State Example (can be uncommented to view) -->
+<!-- 
+            <div class="sm:col-span-2 lg:col-span-3 xl:col-span-4 flex flex-col items-center justify-center text-center p-12 rounded-lg bg-surface-light dark:bg-surface-dark border-2 border-dashed border-border-light dark:border-border-dark mt-8">
+                <span class="material-symbols-outlined text-6xl text-text-light-secondary dark:text-text-dark-secondary mb-4">search_off</span>
+                <h3 class="text-xl font-bold text-text-light-primary dark:text-text-dark-primary">No restaurants found</h3>
+                <p class="text-text-light-secondary dark:text-text-dark-secondary mt-1">Try adjusting your search or filter criteria.</p>
+            </div>
+            -->
+</div>
+<!-- Pagination -->
+<div class="flex justify-center pt-8">
+<button class="flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-secondary text-white font-bold hover:bg-secondary/90 transition-colors">
+                Load More
+            </button>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

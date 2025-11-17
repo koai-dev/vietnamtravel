@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Check-in Highlights</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#308ce8",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111921",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body class="font-display">
+<div class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center p-4 sm:p-6 md:p-8">
+<div class="layout-content-container flex flex-col w-full max-w-4xl flex-1">
+<!-- SectionHeader -->
+<h3 class="text-xl font-bold leading-tight tracking-tight text-[#333333] dark:text-gray-200 px-4 pb-3 pt-4">Check-in Highlights</h3>
+<!-- TextGrid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+<div class="flex flex-row items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 transition-all hover:shadow-md hover:-translate-y-1">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40">
+<span class="material-symbols-outlined text-blue-500 dark:text-blue-400">schedule</span>
+</div>
+<h2 class="text-sm font-bold leading-tight text-[#333333] dark:text-gray-300">Best Time: 8 AM - 11 AM</h2>
+</div>
+<div class="flex flex-row items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 transition-all hover:shadow-md hover:-translate-y-1">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/40">
+<span class="material-symbols-outlined text-green-500 dark:text-green-400">confirmation_number</span>
+</div>
+<h2 class="text-sm font-bold leading-tight text-[#333333] dark:text-gray-300">Entrance Fee: 50,000 VND</h2>
+</div>
+<div class="flex flex-row items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 transition-all hover:shadow-md hover:-translate-y-1">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-orange-100 dark:bg-orange-900/40">
+<span class="material-symbols-outlined text-orange-500 dark:text-orange-400">photo_camera</span>
+</div>
+<h2 class="text-sm font-bold leading-tight text-[#333333] dark:text-gray-300">Photo Hotspot</h2>
+</div>
+<div class="flex flex-row items-center gap-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 transition-all hover:shadow-md hover:-translate-y-1">
+<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900/40">
+<span class="material-symbols-outlined text-purple-500 dark:text-purple-400">wifi</span>
+</div>
+<h2 class="text-sm font-bold leading-tight text-[#333333] dark:text-gray-300">Free Wi-Fi Available</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vietnam Travel Guide</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#4FD1C5",
+              "background-light": "#FFFFFF",
+              "background-dark": "#1A202C", /* Adjusted for better contrast */
+              "text-primary-light": "#2D3748",
+              "text-primary-dark": "#E2E8F0",
+              "text-secondary-light": "#718096",
+              "text-secondary-dark": "#A0AEC0",
+              "card-light": "#F7FAFC",
+              "card-dark": "#2D3748",
+              "input-light": "#EDF2F7",
+              "input-dark": "#2D3748",
+            },
+            fontFamily: {
+              "display": ["Be Vietnam Pro", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-primary-light dark:text-text-primary-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center py-5 sm:px-10 lg:px-20 xl:px-40">
+<div class="layout-content-container flex flex-col w-full max-w-7xl flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700 px-4 sm:px-10 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-text-primary-light dark:text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em]">Vietnam Travel</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-text-primary-light dark:text-text-primary-dark text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">Destinations</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">Blog</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">About</a>
+</div>
+<div class="flex gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-card-light dark:bg-card-dark text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined text-xl">language</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-card-light dark:bg-card-dark text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined text-xl">account_circle</span>
+</button>
+</div>
+</div>
+<button class="md:hidden flex items-center justify-center rounded-full h-10 w-10 bg-card-light dark:bg-card-dark text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</header>
+<main class="flex flex-col gap-8 sm:gap-10 md:gap-12 p-4 sm:p-6 md:p-8">
+<div class="flex flex-wrap justify-center gap-4 text-center">
+<div class="flex w-full flex-col gap-4">
+<h1 class="text-text-primary-light dark:text-text-primary-dark text-4xl sm:text-5xl font-black leading-tight tracking-[-0.033em]">Welcome to Vietnam</h1>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-lg font-normal leading-normal">Discover your next adventure in this beautiful country.</p>
+</div>
+</div>
+<div class="px-4 py-3 max-w-2xl mx-auto w-full">
+<label class="flex flex-col min-w-40 h-14 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-full h-full shadow-sm">
+<div class="text-text-secondary-light dark:text-text-secondary-dark flex bg-input-light dark:bg-input-dark items-center justify-center pl-5 rounded-l-full border-r-0">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-full text-text-primary-light dark:text-text-primary-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-input-light dark:bg-input-dark h-full placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Tìm kiếm tỉnh thành, địa điểm..." value=""/>
+</div>
+</label>
+</div>
+<section class="flex flex-col gap-4">
+<h2 class="text-text-primary-light dark:text-text-primary-dark text-2xl font-bold leading-tight tracking-[-0.015em] px-4">Tỉnh nổi bật</h2>
+<div class="relative">
+<div class="flex overflow-x-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden px-4 py-2 -mx-4 gap-4 sm:gap-6">
+<div class="flex h-full flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md min-w-[240px] sm:min-w-[280px] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover flex flex-col" data-alt="Mountainous landscape of Ha Giang with a winding road" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDq0PgfokkYRcMrCzLafjV4QyqSH9bz4D8si8F6qQ9Z81iT8e-JMx79Pfq8hK4zGFDvJE-qOGm70M-CbETL0Z6mu7r1sf7Y77whuPaB5ED5Mp4ShoHdk7RCmHzMdfIzNCECepSAb6nQgnax2bIbIY8HVa_R7JVGt4KDUCRQGuGhTXXWuu8Q8Z3aD21lyB2L8H1LTF4TmA3uDFW1NTXGuyfEWQMsbEMmUExHw76npzaUWxDdK-YunGAX_N4t28KtJFSuyLGrq4bGpao");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-3">
+<div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-normal">Hà Giang</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">The Northern Loop</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/20">
+<span class="truncate">Explore</span>
+</button>
+</div>
+</div>
+<div class="flex h-full flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md min-w-[240px] sm:min-w-[280px] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover flex flex-col" data-alt="Dragon Bridge in Da Nang illuminated at night" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAG12G7cmh8Ivyr8b42cDOc-S8bZz8x_IpwgkEgP12LQMU4pZUmyBOPlnlfBihMU4DHrmkp5eHBPy1yIduOe6w9hv2_jh_3P0CH8dlMfTmvJNigx9s5W5j4-qs0cC_MihDBA9feI0O8R6yA_zTg_JWn7-o8WJe0UEieMfdSLAOOWnD5bU6y6swAiNRsO_KxWiS8NE36mhweLrH_4-VqyRbrEVJ_7tN9BUZkdjJOAKyXGtuTio8NCm3AyjDuqVCiRHA394j6uYLSud8");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-3">
+<div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-normal">Đà Nẵng</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">City of Bridges</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/20">
+<span class="truncate">Explore</span>
+</button>
+</div>
+</div>
+<div class="flex h-full flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md min-w-[240px] sm:min-w-[280px] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover flex flex-col" data-alt="Ancient town of Hoi An with yellow buildings and lanterns" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBjwrbEDOS0efOT2ArfFqXUItFMJA0M9QfqAkWSOsEi8qpSLaaCOfBeLuX4tMudJ1ZUeRPZQ6U1XObxYg8x9ReDIK-K4kbTXS2H3dMEEm-NMdzor3K5nEdLl6H8-REou1ICMpwjXegVNtjSs_1mc2E6dkzWeOqcF3N2mdCqXQPWiMBxLVtfB9CfxFlp4zBbg2OrFcjSomrSwuvr-kDiZFjBy1A4HPkG8HVXtEML4x7y1PKipYoR-9-M26ibxRZ4PhxHk4OGA8ahVqc");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-3">
+<div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-normal">Hội An</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Ancient Town</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/20">
+<span class="truncate">Explore</span>
+</button>
+</div>
+</div>
+<div class="flex h-full flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md min-w-[240px] sm:min-w-[280px] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover flex flex-col" data-alt="Emerald waters and limestone karsts of Ha Long Bay" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCMSrP_MvVGM3Yss62mXUd5RLwM4Ztyu54calpaBDIqp6yPoQFKZnmBTZ6hweOiDZn_uTe4HSxWwLqB1ijONnNGLI_jNcm1atdiVcQLoPnnyypcZRZsqkOx3U7Ohx3R9FzYsqcXz05wPbXBXuY2EyT6Ph3GD4HPJ-9fBRzF3W19mNMjePKlM9prW_Mzbu1MzAQF61P-s4QXyegvBPwRLCCWHshEbW99kEd7l39OjJpbgaERADxJEQaM3CizD7YN0kAgGIvEChYS_uk");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-3">
+<div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-normal">Hạ Long Bay</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">World Heritage Site</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/20">
+<span class="truncate">Explore</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="flex flex-col gap-4">
+<h2 class="text-text-primary-light dark:text-text-primary-dark text-2xl font-bold leading-tight tracking-[-0.015em] px-4">Địa điểm hot theo mùa</h2>
+<div class="relative">
+<div class="flex overflow-x-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden px-4 py-2 -mx-4 gap-4 sm:gap-6">
+<div class="flex h-full flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md min-w-[240px] sm:min-w-[280px] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover flex flex-col" data-alt="Golden rice terraces of Mu Cang Chai in autumn" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCXL4pujmk2LlpmOUWIETAhOqWchHt2vc6H3BZiObcoP1RfCeu8gZ2JFU-1dEKZJ6UXIOqw5_7KRKTp081UQ0Llxyx9KJS9fgDHo6v7XWSj2wO55fLu9zpRFa1UHyI6m3UYo6phmPn4DihBhQOFMUyLwMhwWCVJMg32vP0hDjqFmQNQyH16RrJkEnTECUpIakeHjVj34CsJpH0WatF5zQa4SDYU52W6xBpmdBy_gVNKZatk6ap-3AEgsYyTffEPhHiAyLqYYk2L-rU");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-3">
+<div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-normal">Mù Cang Chải</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Autumn's Golden Canvas</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/20">
+<span class="truncate">Explore</span>
+</button>
+</div>
+</div>
+<div class="flex h-full flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md min-w-[240px] sm:min-w-[280px] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover flex flex-col" data-alt="Pink cherry blossoms in Da Lat during spring" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCM1QCaWJ1elDke7xNs7MovhlEsbx3wtg8wZfzVxTjsuA8KM0soe5Ah6qzkO8rLjl8hg7TmuAjOPrXPmcu9lK780h1A7GR-vIS0TvSIJO7xDb4dlxAff9I8-6cmZGPpXNYmRWLAnqudOdYPs4YjXSJjgBcc9If653jHte7rNt4B4bczQdSu3IXogEKr-HtxVI5MkPNR-T7bS6nZYMbl0XeWOoFBbnXjJR4fmkNCXZ44F6dr8snJMUSLVPZo01pRVr-bce14_QC4uIc");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-3">
+<div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-normal">Đà Lạt</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Spring Blossoms</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/20">
+<span class="truncate">Explore</span>
+</button>
+</div>
+</div>
+<div class="flex h-full flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md min-w-[240px] sm:min-w-[280px] overflow-hidden transition-transform duration-300 hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover flex flex-col" data-alt="Pristine white sand beach in Phu Quoc" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBllhbxZ77mR1ci_7tC-XqsXN7aBEmpmuFQW53_ReJYyp-HKe1Z9JpC7x5mDJAllRHwuXiehxoWcI89vSEn7SZzMHDd8Q66366S-whxxsYF1yy08Zrs5mNA8_toi791rLtY83TTs1oQZtZdszJgXZwdiWFDWXd3AyQostnKZf2d-xNNRZK8ot09oyaPTQLLsmGASmJyBHBBJyjFQ2luLzVPxnbGfiDWjR_4bvxiYKg2xUUa6FeIKzzvvK7CsH6KlvtJ7r9NDvONzw8");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 gap-3">
+<div>
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold leading-normal">Phú Quốc</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal">Summer Paradise</p>
+</div>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 text-primary text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/20">
+<span class="truncate">Explore</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="flex flex-col gap-4">
+<h2 class="text-text-primary-light dark:text-text-primary-dark text-2xl font-bold leading-tight tracking-[-0.015em] px-4">Khám phá thêm</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+<div class="flex flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover" data-alt="View over the city of Hanoi with Turtle Tower in Hoan Kiem Lake" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBclKfV7NRQ5V3iHTcpMbXYYzFEO9IYSDVOKILsq9e9PdpIOlzKDy2xvkiJsa_IfugwCDaqAjcZATcuguVwvpzKqaxvmFOoAZatchGG3WS3vu5bU7nv96SXniYULwihQs_4v5HsFc_cnwba1RX-tMjt3s3zyboRyQuZCsMskTjzENNwLAmBAhV3TAsqbzb0acCWxX9H_8mySVE9Zpa1VZatrlelFpE3Wf08RwCtQ3VFrt9CvOhYbIDc3DcMpbdPIbH7eFWCiYoASKA");'></div>
+<div class="p-5">
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold">Hà Nội</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm mt-1">The heart of Vietnam with rich history and street food.</p>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover" data-alt="Boats on the Mekong Delta surrounded by lush greenery" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAshwWmhniuAhQkt98wR1YwWwN4HhRH0DlFFV_P-1uGxIF6ZTpxQcyIsNlVRxGQapAzteRdj83y24W9Ufdd6h4y8-Snu92g4wt5mn-W88sZd09cghORgLuEBrKzLxy3IMiGWV6UWwzXhMqTBMqKflYLCR7sgNd1pjnHNBB3eTaMiQUMzKgNkiJ3_WQOYuotGUWftgPgk8XiBxPuBQW2FurCsPXIJyN2e4uZ0jXNetahBllSRLMISWdy9G-A5gIwG2fJw50ithK8Ucg");'></div>
+<div class="p-5">
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold">Mekong Delta</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm mt-1">Explore the vibrant floating markets and river life.</p>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover" data-alt="Dramatic mountain scenery in Sapa with rice paddies" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBExwPxD8-oSgWX-TJhXc1N41GZ-cjyPhQw9oFq7UkyohL0JzSUc-ViugmgPrKYSpw95_uZe2bT90vD_HRcxasoy88HnHR0U3_WmIrhcfHhWBEXAuf3U4nOhXDLsFeoOKJ-uJpWKebjKACiV-ZatQCk5dWjzx8vTBZJ3NVPumP8PnmtfAGug7osYS8u1y9_N2rxxceHwQJ5lX45krzgQ_nfV3xZar7vUy4B2OC6cDrP4LFtMtigmIxetCZeB4LOW1J9-TgwGRK561I");'></div>
+<div class="p-5">
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold">Sapa</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm mt-1">Trekking through stunning rice terraces and ethnic villages.</p>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover" data-alt="Imperial City in Hue with ancient architecture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB0J8TuBoaWHmNxkQwxgaEUg5JIHgyMxblUzfMO754fhjiBBeMwyxVsyHFrxOJrIOiYleeL4eTZ1RyfbHOSxvT_-PMALuqJPM8lQii9eu5kL_UJ0TtIgIO2ZbvZzCmZ8O3M-rwmHJr94znpZP3OVmcYvvBzd2cKAkbYD5wYJB-40A_aH_og7q3yY74iJoXLShmRAonGbw5eVppYcqmNZQoyYMSdnRPDWoJLXBWI6h-PwC1Qe_6Cth_1AO7ozR_yu59kBcHjlwykk1w");'></div>
+<div class="p-5">
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold">Huế</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm mt-1">Discover the ancient capital and its imperial past.</p>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover" data-alt="Limestone cliffs and caves in Phong Nha-Ke Bang National Park" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBwmvZiGMm8QDbJCM3FajgipkOgF6128AsTml7oOqxQip22pujMcArRHTbQgJovyf9d7w18SdhpE08YYdkSKo607cl99As0s4ppXWlOXgVvvhjcba5pUdOLbEDDcpeO5DAkzE4FILd-B5aF_Xf1_0IHBN2MYAjrXb6Iv9YfPrQe3yNuWg5ZvbM9YMGWnIf4ODYzph6uOLR6HpL3xvRZZdHZayFBgwH4OX7-WrlyVkUSS4bZ2AlUtkLnDIV4nGmLka5NeBD8NeF8oGE");'></div>
+<div class="p-5">
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold">Phong Nha</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm mt-1">Home to the world's largest caves and stunning landscapes.</p>
+</div>
+</div>
+<div class="flex flex-col rounded-xl bg-card-light dark:bg-card-dark shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-[4/3] bg-cover" data-alt="Busy street scene in Ho Chi Minh City with motorbikes" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB9CIHFozTTjAb9n8SYqninttwt2hBh1Pn5RIWQ1_gzh3dPc8CnuCmehQQuoY4PdKymJx6pOfd9kv9fCGOAdLKozQv3oSumkZB7MV9wmd85RYkLzT16-KlVVJehFP5g2uarw1DeXelplHZsQT17WryFS6GfsZfnczEt2m25YF-pN1MdKZXPCta0fHboscxwJ9huQDhSR_WUt51a_SU3MVT4lGlFadfRzEef1b6wOjcLhEArIFrDWlmZFQLr9kB6YTdPQ_C0K8dRG8A");'></div>
+<div class="p-5">
+<p class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold">Ho Chi Minh City</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm mt-1">A dynamic city that blends modernity with history.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

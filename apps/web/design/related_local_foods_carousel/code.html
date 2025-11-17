@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vietnam Travel Guide - Local Food</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+        @layer base {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#308ce8",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111921",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex min-h-screen w-full flex-col group/design-root">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center py-10 sm:py-20 px-4 sm:px-6 lg:px-8">
+<div class="layout-content-container flex flex-col w-full max-w-6xl">
+<div class="flex justify-between items-center px-4 pb-4">
+<h2 class="text-slate-900 dark:text-white text-2xl sm:text-3xl font-bold leading-tight tracking-tight">A Taste of Vietnam</h2>
+<div class="hidden sm:flex items-center gap-2">
+<button class="group/button flex size-10 cursor-pointer items-center justify-center rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 shadow-md transition-all duration-200 hover:bg-primary/20 hover:text-primary dark:hover:bg-primary/30">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<button class="group/button flex size-10 cursor-pointer items-center justify-center rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 shadow-md transition-all duration-200 hover:bg-primary/20 hover:text-primary dark:hover:bg-primary/30">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="relative group">
+<div class="flex overflow-x-auto snap-x snap-mandatory [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden py-4 -mx-4">
+<div class="flex items-stretch gap-4 sm:gap-6 px-4 sm:px-6">
+<div class="flex w-[280px] sm:w-[300px] snap-start flex-shrink-0 flex-col rounded-xl bg-white dark:bg-slate-800/50 shadow-sm ring-1 ring-slate-200/50 dark:ring-slate-700/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="relative w-full aspect-video bg-cover bg-center rounded-t-xl" data-alt="A steaming bowl of Vietnamese Phở Bò, with fresh herbs and lime." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAcQyGUtpcwpAoHHthBHSS6hsNW6vRLCFUgIGuc5vQ4CjavwiJPrUeBUw0SRNGaLXPKgOE8nDgYhy9KQKkyD0XMFhODI1ryERQGz7xWFvUPYXlOJgv3rx_b-0HN7knaTHCPLVzSeVHxhfCjKcy_Juv9S4VEqmk7hiS9KTrkNelUzP5jJ26VPaSE7d9YQoJopY7vj8a-yL3H8SJ4zZ6KDlc4EpVRVe01t4DUA9imXmrf5YiQO1bEP_bCVbIxWm2GmqSiKeGC5mSM_qg");'>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center rounded-full bg-primary/20 dark:bg-primary/30 px-3 py-1 text-xs font-medium text-primary dark:text-sky-300">Noodle Soup</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4 sm:p-5">
+<p class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-normal">Phở Bò</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-1">Classic Vietnamese beef noodle soup</p>
+</div>
+</div>
+<div class="flex w-[280px] sm:w-[300px] snap-start flex-shrink-0 flex-col rounded-xl bg-white dark:bg-slate-800/50 shadow-sm ring-1 ring-slate-200/50 dark:ring-slate-700/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="relative w-full aspect-video bg-cover bg-center rounded-t-xl" data-alt="A crispy Vietnamese Bánh Mì sandwich filled with various ingredients." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDsw0D1ZzUR2O4CcZpmZpcAjN1-7pESxtAWDLARebHzOxsHFIysJvQx2w0UXsEPlp_s8He0kYzUz4yVvPYVyGOfskVg1sxTanH_j8MpnIQUJNaibHFqrSzZV0bIjTlPX8CF9pJwexnVw3aQS9wiPRD56VJCpiFhRT0Ep2W-Xh9papBP21_QpPxx_pfqfP34g2KZop3PW8Fccl3chBd6w9N6ZE19RNH9dU0jEy8BLe-2MciHRt5aGYef5mL_lY8O6Wkn-5X9e-HLpNQ");'>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center rounded-full bg-primary/20 dark:bg-primary/30 px-3 py-1 text-xs font-medium text-primary dark:text-sky-300">Sandwich</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4 sm:p-5">
+<p class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-normal">Bánh Mì</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-1">Iconic Vietnamese baguette sandwich</p>
+</div>
+</div>
+<div class="flex w-[280px] sm:w-[300px] snap-start flex-shrink-0 flex-col rounded-xl bg-white dark:bg-slate-800/50 shadow-sm ring-1 ring-slate-200/50 dark:ring-slate-700/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="relative w-full aspect-video bg-cover bg-center rounded-t-xl" data-alt="A plate of Vietnamese Bún Chả, with grilled pork, noodles, and herbs." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBsAkkQ0jYp7NYKDGkX8hJ4DkjjrkCtTf6jJ8P0UM7ZPEbiz0hXXz-JnyfbH5t5dfEFXMGm6QyRLJmwJBqlQeiRbLQ6suyvcOg9kSOO5Kc6GOCIUWliyVufIev-78UIbuJtOojYLo7kDue2i1zjtIboOYvzgLJfEu3n4UAIPqzm_ROieXUw_zNJo-zEctDXPuUN4xbAWv0UDaEVO9-kiqd5u_zoFTzZVaLuGpABs1x-A6EuKl9PB-5hnxdIOzwwdqaCth5KDrOa-jU");'>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center rounded-full bg-primary/20 dark:bg-primary/30 px-3 py-1 text-xs font-medium text-primary dark:text-sky-300">Noodles</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4 sm:p-5">
+<p class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-normal">Bún Chả</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-1">Grilled pork with rice vermicelli</p>
+</div>
+</div>
+<div class="flex w-[280px] sm:w-[300px] snap-start flex-shrink-0 flex-col rounded-xl bg-white dark:bg-slate-800/50 shadow-sm ring-1 ring-slate-200/50 dark:ring-slate-700/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="relative w-full aspect-video bg-cover bg-center rounded-t-xl" data-alt="A golden, crispy Bánh Xèo savory pancake folded over with fillings." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAW4MDgUgkd92xzWgdqHhy1glTZE__At0aTPkQLP7tl-6A-b7b35oQwTH2tD5A58HemuRJLOV42OC_C3UfonhZ7pz3TjKd-cDoCl2BK6sPUdeTice-Zw0XtupJuk4lW7A-rk2B8G10Oolf7eYoIAQ2ixJoOPRhQaXrDUEhckz9ipeYQ6dBOwfbGp1tMFyBQEAxU0Lz5nNp8alPvfyIqBOM-xA5QN5bC2G5KOla1DYSLXyDD8bEpES1l8wxRg31Lc_kiXr69UobOIe8");'>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center rounded-full bg-primary/20 dark:bg-primary/30 px-3 py-1 text-xs font-medium text-primary dark:text-sky-300">Street Food</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4 sm:p-5">
+<p class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-normal">Bánh Xèo</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-1">Crispy Vietnamese savory pancake</p>
+</div>
+</div>
+<div class="flex w-[280px] sm:w-[300px] snap-start flex-shrink-0 flex-col rounded-xl bg-white dark:bg-slate-800/50 shadow-sm ring-1 ring-slate-200/50 dark:ring-slate-700/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
+<div class="relative w-full aspect-video bg-cover bg-center rounded-t-xl" data-alt="Fresh Vietnamese Gỏi Cuốn spring rolls with dipping sauce." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDS8UVgUR53L0WjJCpqJGmNLTzfrDGLyOwvuVKaYu_557ridslSPSCepP7M-AM_AfRdGNpiCe-2rxpV8eqr_YllWhvhcnMP5nb12Q4JVDJxPfmLmNydhEeHacbUXDpnyNnMt_oMH5VsUZ_Fz0MzZMAn6FRz5e_blHNYrqHK4JBYKLIkPf8Cu1d4LXt8z3ltMSh6iUfXjNqtAvW8vJTk3zjvgifWGzh5e8IPNqt37hZhkr3zFc1z74JTlS6oGZTEBAbiI0_6KiPmWHI");'>
+<div class="absolute top-3 left-3">
+<span class="inline-flex items-center rounded-full bg-primary/20 dark:bg-primary/30 px-3 py-1 text-xs font-medium text-primary dark:text-sky-300">Appetizer</span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4 sm:p-5">
+<p class="text-slate-800 dark:text-slate-100 text-lg font-bold leading-normal">Gỏi Cuốn</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal mt-1">Fresh summer spring rolls</p>
+</div>
+</div>
+<div class="w-4 sm:w-6 flex-shrink-0"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

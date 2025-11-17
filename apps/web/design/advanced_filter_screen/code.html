@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Advanced Filters</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#00796B",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111921",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="group/design-root relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark">
+<!-- This container simulates the overall app layout. The filter panel is positioned within it. -->
+<div class="mx-auto flex w-full max-w-7xl flex-row">
+<!-- Main content area (placeholder) -->
+<div class="hidden flex-1 p-8 md:block">
+<div class="h-full w-full rounded-xl border border-dashed border-gray-300 dark:border-gray-700 bg-white dark:bg-background-dark/50 flex items-center justify-center">
+<p class="text-gray-500 dark:text-gray-400">Main App Content Goes Here</p>
+</div>
+</div>
+<!-- Filter Panel: Side panel on desktop, bottom sheet on mobile -->
+<div class="fixed inset-x-0 bottom-0 z-50 flex h-full w-full flex-col bg-white dark:bg-background-dark/80 backdrop-blur-sm md:static md:h-auto md:max-w-xs md:bg-transparent md:dark:bg-transparent md:backdrop-blur-none md:p-4">
+<div class="flex h-full w-full flex-col overflow-y-auto rounded-t-xl bg-white dark:bg-gray-900 shadow-2xl md:static md:h-auto md:max-h-[calc(100vh-2rem)] md:rounded-xl md:shadow-lg">
+<!-- Mobile Drag Handle -->
+<div class="flex justify-center pt-3 md:hidden">
+<div class="h-1.5 w-10 rounded-full bg-gray-300 dark:bg-gray-600"></div>
+</div>
+<!-- Header -->
+<div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 p-4">
+<h3 class="text-lg font-bold leading-tight tracking-[-0.015em] text-[#111418] dark:text-white">Bộ lọc nâng cao</h3>
+<button class="flex items-center justify-center rounded-full p-1 text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<!-- Filters Container -->
+<div class="flex-1 space-y-4 overflow-y-auto p-4">
+<!-- Price Range Section -->
+<div class="space-y-2">
+<h4 class="text-sm font-bold leading-normal tracking-[0.015em] text-[#637588] dark:text-gray-400 px-4">Khoảng giá</h4>
+<div class="relative flex w-full flex-col items-start gap-3 rounded-lg bg-gray-50 dark:bg-gray-800/50 p-4">
+<div class="flex h-[38px] w-full pt-1.5">
+<div class="flex h-1 w-full items-center rounded-sm bg-gray-300 dark:bg-gray-600">
+<div class="relative h-1 w-full bg-primary pl-[20%] pr-[40%]">
+<div class="absolute -left-2 -top-1.5 flex cursor-pointer flex-col items-center">
+<div class="size-4 rounded-full border-2 border-white dark:border-gray-900 bg-primary ring-2 ring-primary"></div>
+</div>
+<div class="absolute -right-2 -top-1.5 flex cursor-pointer flex-col items-center">
+<div class="size-4 rounded-full border-2 border-white dark:border-gray-900 bg-primary ring-2 ring-primary"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex w-full justify-between pt-2">
+<p class="text-sm font-medium leading-normal text-[#111418] dark:text-gray-300">500.000đ</p>
+<p class="text-sm font-medium leading-normal text-[#111418] dark:text-gray-300">5.000.000đ+</p>
+</div>
+</div>
+</div>
+<!-- Season Section -->
+<div class="space-y-2">
+<h4 class="text-sm font-bold leading-normal tracking-[0.015em] text-[#637588] dark:text-gray-400 px-4">Mùa</h4>
+<div class="flex flex-wrap gap-2 p-3">
+<div class="flex h-8 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-primary/10 pl-4 pr-4 text-primary dark:bg-primary/20">
+<p class="text-sm font-medium leading-normal">Mùa khô</p>
+</div>
+<div class="flex h-8 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-[#f0f2f4] dark:bg-gray-800 pl-4 pr-4">
+<p class="text-sm font-medium leading-normal text-[#111418] dark:text-gray-300">Mùa mưa</p>
+</div>
+<div class="flex h-8 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-[#f0f2f4] dark:bg-gray-800 pl-4 pr-4">
+<p class="text-sm font-medium leading-normal text-[#111418] dark:text-gray-300">Mùa chuyển tiếp</p>
+</div>
+</div>
+</div>
+<!-- Location Section -->
+<div class="space-y-2">
+<h4 class="text-sm font-bold leading-normal tracking-[0.015em] text-[#637588] dark:text-gray-400 px-4">Tỉnh/Thành phố</h4>
+<div class="relative p-1">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 py-2 pl-10 pr-4 text-sm text-gray-800 dark:text-gray-200 focus:border-primary focus:ring-primary" placeholder="Tìm kiếm tỉnh/thành phố..." type="text"/>
+</div>
+</div>
+<!-- Other Options Section -->
+<div class="space-y-3">
+<h4 class="text-sm font-bold leading-normal tracking-[0.015em] text-[#637588] dark:text-gray-400 px-4">Tùy chọn khác</h4>
+<div class="space-y-3 px-1">
+<label class="flex cursor-pointer items-center justify-between" for="toggle-popular">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">Phổ biến</span>
+<div class="relative inline-flex items-center">
+<input checked="" class="peer sr-only" id="toggle-popular" type="checkbox"/>
+<div class="h-6 w-11 rounded-full bg-gray-200 dark:bg-gray-700 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50"></div>
+</div>
+</label>
+<label class="flex cursor-pointer items-center justify-between" for="toggle-family">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">Phù hợp với gia đình</span>
+<div class="relative inline-flex items-center">
+<input class="peer sr-only" id="toggle-family" type="checkbox"/>
+<div class="h-6 w-11 rounded-full bg-gray-200 dark:bg-gray-700 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50"></div>
+</div>
+</label>
+<label class="flex cursor-pointer items-center justify-between" for="toggle-adventure">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">Mạo hiểm</span>
+<div class="relative inline-flex items-center">
+<input checked="" class="peer sr-only" id="toggle-adventure" type="checkbox"/>
+<div class="h-6 w-11 rounded-full bg-gray-200 dark:bg-gray-700 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50"></div>
+</div>
+</label>
+<label class="flex cursor-pointer items-center justify-between" for="toggle-cultural">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">Di tích văn hóa</span>
+<div class="relative inline-flex items-center">
+<input class="peer sr-only" id="toggle-cultural" type="checkbox"/>
+<div class="h-6 w-11 rounded-full bg-gray-200 dark:bg-gray-700 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50"></div>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="mt-auto flex gap-3 border-t border-gray-200 dark:border-gray-700 p-4">
+<button class="flex h-11 flex-1 items-center justify-center rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm font-bold text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">Đặt lại</button>
+<button class="flex h-11 flex-1 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white hover:bg-primary/90">Áp dụng</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

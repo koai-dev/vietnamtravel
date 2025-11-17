@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Search Results - Vietnam Travel Guide</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#519eec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111921",
+                        "text-light-primary": "#111418",
+                        "text-light-secondary": "#637588",
+                        "text-dark-primary": "#f6f7f8",
+                        "text-dark-secondary": "#a0aec0",
+                        "card-light": "#ffffff",
+                        "card-dark": "#1a2734",
+                        "border-light": "#f0f2f4",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="sticky top-0 z-50 flex justify-center border-b border-solid border-border-light dark:border-border-dark bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+<div class="flex items-center justify-between whitespace-nowrap w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-3">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-text-light-primary dark:text-text-dark-primary">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_319)">
+<path d="M8.57829 8.57829C5.52816 11.6284 3.451 15.5145 2.60947 19.7452C1.76794 23.9758 2.19984 28.361 3.85056 32.3462C5.50128 36.3314 8.29667 39.7376 11.8832 42.134C15.4698 44.5305 19.6865 45.8096 24 45.8096C28.3135 45.8096 32.5302 44.5305 36.1168 42.134C39.7033 39.7375 42.4987 36.3314 44.1494 32.3462C45.8002 28.361 46.2321 23.9758 45.3905 19.7452C44.549 15.5145 42.4718 11.6284 39.4217 8.57829L24 24L8.57829 8.57829Z" fill="currentColor"></path>
+</g>
+<defs>
+<clippath id="clip0_6_319"><rect fill="white" height="48" width="48"></rect></clippath>
+</defs>
+</svg>
+</div>
+<h2 class="text-text-light-primary dark:text-text-dark-primary text-lg font-bold leading-tight tracking-[-0.015em]">Vietnam Travel</h2>
+</div>
+<div class="hidden md:flex items-center gap-9">
+<a class="text-text-light-primary dark:text-text-dark-primary text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="#">Provinces</a>
+<a class="text-text-light-primary dark:text-text-dark-primary text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="#">Destinations</a>
+<a class="text-text-light-primary dark:text-text-dark-primary text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="#">Foods</a>
+<a class="text-text-light-primary dark:text-text-dark-primary text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="#">Tours</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4">
+<label class="flex flex-col w-full max-w-xs h-10">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-text-light-secondary dark:text-text-dark-secondary flex bg-background-light dark:bg-card-dark items-center justify-center pl-3 rounded-l-lg border border-r-0 border-border-light dark:border-border-dark">
+<span class="material-symbols-outlined !text-2xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light-primary dark:text-text-dark-primary focus:outline-0 focus:ring-2 focus:ring-primary/50 bg-background-light dark:bg-card-dark border border-l-0 border-border-light dark:border-border-dark h-full placeholder:text-text-light-secondary placeholder:dark:text-text-dark-secondary px-4 rounded-l-none pl-2 text-base font-normal leading-normal" placeholder="Search" value="Hanoi"/>
+</div>
+</label>
+<button class="hidden sm:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+<span class="truncate">Log In</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar image, abstract circular pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAS7UAvI6gVAcZwfn_iwnxf1wACG-fQ1ZHnlL7JROcptXvHSXaopTORjoOgdN6qkWYDfIYk2jxdHxKKiZrE8D4EuR9s6SdsS4KCFYkXDi335QoHQE78W2HyvaMUsucMiKofWb5XCbkZa7DPRIgX4MEQ73LLtWd9IcthuB2QKJQ5wt0EqNW4Ds0kT865Od56LaZ6VHinV3xVo3w9_DLlyz2x0FhLwz4cmtLJjKJZVWqsIy-xpigWVwVreFDlv0Khy2en6WRpB_UT3g4");'></div>
+</div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-5 sm:py-8 lg:py-10">
+<div class="flex flex-col w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+<div class="flex flex-wrap justify-between gap-4 py-4 mb-4">
+<div class="flex min-w-72 flex-col gap-2">
+<p class="text-text-light-primary dark:text-text-dark-primary text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Search Results for 'Hanoi'</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-base font-normal leading-normal">Discover provinces, destinations, and foods related to your search.</p>
+</div>
+</div>
+<section class="mb-8">
+<h2 class="text-text-light-primary dark:text-text-dark-primary text-[22px] font-bold leading-tight tracking-[-0.015em] px-0 pb-3 pt-5">Provinces</h2>
+<div class="flex overflow-x-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden -mx-4 sm:-mx-6 lg:-mx-8">
+<div class="flex items-stretch p-4 sm:p-6 lg:p-8 gap-4 sm:gap-6">
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="Lush green rice terraces of Ha Giang, Vietnam" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCC_9tHQ5ndTNC-bjs8w0q_0G9HQ1hIT7rwxlMVXBb5pM_2BtaE5b2S7RMNFniRamhp1huhVMPoN1jNQJIKdThH6IMXCBxyvmKSrzpHZPv1TcefKw2HkUSOOLFTr5nfYAszKmKLf6v7yv5Y9BgW5LANHWswXB7Vy9qjkbdKZU9Udi2t-VF-bVvdnGJZB-_DiYv_4yDXeBJOlRvo9Kl6PK-jfNlnvGq8Avu39-A6gh6ud0AB3A6hl2HpGQqSvaMH54NeNzufibPsZko");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Ha Giang</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Northern Highlands</p>
+</div>
+</div>
+</div>
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="Emerald waters and limestone karsts of Ha Long Bay in Quang Ninh" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBH96tTtndbTWM9gjTZUv8yoi8ys-S2_5kCpzjinCec4BnSWn3g9se46zojx1LpHuOODxHs1w7sG-SttmPWqwRXrTdDGE0XLIgkA3hVj-d2-sfub_sho3vvDmr0teWoR3jibd6OBuUCX0GRdlPSTS1lQnR-o0uGDDGxkKH0_1BJh4BJeKyn2xUO2QTiOyDCxVtqsze4iTwvEFvfWy6CrtqX4EVi0qsveJafJXP9zXxsOAKvZzRgwuFGJmv9Bse-IZZwaCre4i5UpFk");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Quang Ninh</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Northeastern Coast</p>
+</div>
+</div>
+</div>
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="River boat tour in Trang An, Ninh Binh, with limestone mountains" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB1qdnkaDxL-I4fkmIlDvSBBJ0o-Pf93Kj9Pf842y8ttKzsLFJ4csqgj89t2Qa-_N00l8asGyH3vs9h2lMPqPh9mJOdHhCfB_YWJX5ZgeEbv1MHgbWrTJMLpfqoJYI9sTK6IbsUx_XwGX-q7dYwf4WGAYto3BTO063GJIFepKUvySBWyhtegZnLGpyplvZHFXvgwUo3QXByePcpC3I2RxzkTAic9sEF3GxDdJdj97upSeXA7F-eYRYdOKqp2qAB3IcUBBXkcZuCcUc");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Ninh Binh</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Red River Delta</p>
+</div>
+</div>
+</div>
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="Sunny beach with blue water in Nha Trang, Khanh Hoa" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYYUYlnOkEUmefZLKVnpChf8fC8NIVKCaLwo1UUCaG_k6O-WFFRTJotNWXDC9JD7i5emdTOkVvSaBEoDaJms5LuNAph-0_byCqe_pIarJpozTv4ouN3nuy9eI8o2jGM8sYiP0e4Yh8Fq4gIpXh9EiKMHepUTX7WX2OGxMIYSK7SWxoj4xMPbsnCq1GveIvd-yeyBqQqPHGlpzHzEtDaNWSAuX6VKH4RUE5meZ25sVbpOb2-5b775LJteP74B8Lq9C79xNzwZs78OQ");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Khanh Hoa</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">South Central Coast</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-8">
+<h2 class="text-text-light-primary dark:text-text-dark-primary text-[22px] font-bold leading-tight tracking-[-0.015em] px-0 pb-3 pt-5">Destinations</h2>
+<div class="flex overflow-x-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden -mx-4 sm:-mx-6 lg:-mx-8">
+<div class="flex items-stretch p-4 sm:p-6 lg:p-8 gap-4 sm:gap-6">
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="The Temple of Literature in Hanoi, a historic landmark" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAVdSitXH4huZKzneOBsnr0FfsDV-oaK7YyZIO7ixWZZVdaHIfqigVPaqmCL4X7jJ4BVPnMRh6k8zp55tkt6zUcSzmQSs_3mSEl5Z30-zugZKopImBKTg6_OQy8qGq5zFVQxUUS_vk1qMN31Pzk1W2lqgU8g5zXY-iotWRoVNpRtYS7d8u9cnupdrQAoGXOchhpedapegrPn9waDFIk9SyAOe4blZXaKdql9NmV_DB4MnWfcGW9ok6_CSAJkRifMOdQHbO3c2N5U8Y");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Temple of Literature</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Historic Site, Hanoi</p>
+</div>
+</div>
+</div>
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="Hoan Kiem Lake with the red Huc Bridge in Hanoi" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDY2NmSGX0HY8t2pyr3TU4yeMikhZ5v3n3x0RSngUU0-fbKMAiLDcnF6Vl2xXcX5vtgbcnpFmGTsaYeU-9NyOASYwA8tPp5a8M34qI7en8y2SjfqYeIboe9-ubLz3TmxjCg0h09tUFKVd0fDEeOdjD7Pe0ThJihgkkkrsizW-nXtpv3nXBOa5p3Av6IouplJKATchaPvFCNY9L2vxmnYsHQgEoNXTJroTA35RN6LgI63-NYkWzt87Md4iZuSCIzvpycwpQbjY6_0lY");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Hoan Kiem Lake</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Landmark, Hanoi</p>
+</div>
+</div>
+</div>
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="Busy street scene in Hanoi's Old Quarter" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDLTKiQXaJS-KtOqKpslVUeNB7DyLKioVqPoR_1nPNUk9gaHcrk9FbV1PK_btWC97F3aJPSrBa-fMYR5GP1rwBb7Q-GsvPv1fQ9lsR8vXg0lA4FuNaJV59-i1vOPSmc2veWHXRu6urEvaslEe727WC2tGBJtmVydwc6-CvBQB6jwCGZNV_tH3nkvWu7gbbKXU9a9ixwTNe--AJ3znWa_ma0NJNLstZ88ibO54S0fbERD0ygk3ZRxfpFpFPyN0tt-r4yRtk_nht-ZSU");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Hanoi Old Quarter</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Historic Neighborhood, Hanoi</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-8">
+<h2 class="text-text-light-primary dark:text-text-dark-primary text-[22px] font-bold leading-tight tracking-[-0.015em] px-0 pb-3 pt-5">Foods</h2>
+<div class="flex overflow-x-auto [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden -mx-4 sm:-mx-6 lg:-mx-8">
+<div class="flex items-stretch p-4 sm:p-6 lg:p-8 gap-4 sm:gap-6">
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="A steaming bowl of Vietnamese Pho noodle soup" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuARUlx6K1Cb2wmqm48JfVBdB00vnVJH8jRcZZy-ZjHpesjWZsZZkin9bF0M8WtlbQO2YLCSaEYD59xjJmo_Q-MOWWGct6vpPndKftS9-YeoLzvo2e3lB8Whb2qAvrajWkyoVY0Fp9V3sqV-MkC3wC_vpDG4pjPvawQ9n4mnGPwbYM257HcYqfMfDkPUB4U5DfJzaY9EwZoB2HC1kY3GfI4JYzi2va_LQwE3eQPxFIsDB6pN7fqofWFdTO_xTE_rsXIIwZi6iB3FW7U");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Phở</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Iconic Noodle Soup</p>
+</div>
+</div>
+</div>
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="Grilled pork and noodles, a dish known as Bun Cha" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAg3VEMfR68_Ph3DVwYL2dz9F4MuddNH-uxFP0dukg0aKzNljQpNkgJDOxvJQ4HW6NVHwv9EQ49dhmaijmVydkmpOkL2C8g4XQ0wlZv-ukJDqWnC8W3hk-EkhrbQDcgz1SbR2f4gs0mROazZVJugYD7eRIOv0nBwgLPYbg6YJVTvig3c-xZEHM272CprU-IRWtartDDM78iEPq8_jwvLU4MJaAaJ64DwvZSBbwKeJvfK8uWwdybolgAhyYJVJ1AGLLP_wMWyL7Abj8");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Bún Chả</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Grilled Pork with Noodles</p>
+</div>
+</div>
+</div>
+<div class="flex h-full flex-1 flex-col gap-4 rounded-xl bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 min-w-64 sm:min-w-72">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-t-xl" data-alt="A cup of Vietnamese egg coffee with creamy foam on top" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA5MkwEHZ0tZZ77WP5wBgaXJJv77DU9lOHD10Hl_fwIYCOIRofO3wz646ZmsZXyRV0Y2Dt7uCZfActCAfSKfXfI88MnQBG0Gy6bEvwk_vzBVMYBK2fMQ4cIKKMQRFw8uIWVfmEJOu2grf4tJTquuvxd2mE1BmyFsKrY0wijOBj8q1sgRsXAJBmutnI1Y7S0PhOhXH_mHKWoBebOjM4Ohjgt62QWrpVabsIyg3b5J5yxNWkNdIzkUVQVTJ_4LW-QurXDArByvzxtTeY");'></div>
+<div class="flex flex-col flex-1 justify-between p-4 pt-0 gap-4">
+<div>
+<p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Cà Phê Trứng</p>
+<p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Egg Coffee</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</div>
+</body></html>
