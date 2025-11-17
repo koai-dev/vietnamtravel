@@ -8,7 +8,7 @@ import org.koin.ktor.ext.inject
 fun Route.hotelRoutes() {
     val hotelController by inject<HotelController>()
 
-    route("/hotels") {
+    route("/api/hotels") {
         get {
             hotelController.getAllHotels(context)
         }

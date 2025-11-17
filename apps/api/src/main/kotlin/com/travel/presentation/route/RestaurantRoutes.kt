@@ -12,7 +12,7 @@ import org.koin.ktor.ext.inject
 fun Route.restaurantRoutes() {
     val restaurantController by inject<RestaurantController>()
 
-    route("/restaurants") {
+    route("/api/restaurants") {
         post {
             val restaurantRequest = call.receive<RestaurantRequest>()
             val restaurant = restaurantController.createRestaurant(restaurantRequest)
