@@ -7,7 +7,7 @@ suspend fun <T> distributedLock(
     redis: RedisRepository,
     lockKey: String,
     expire: Int,
-    block: suspend () -> T
+    block: suspend () -> T,
 ): T {
     val lockValue = UUID.randomUUID().toString()
     val acquired = redis.setnx(lockKey, lockValue, expire.toLong())
@@ -25,7 +25,11 @@ suspend fun <T> distributedLock(
 
 class LockNotAcquiredException(message: String) : RuntimeException(message)
 
-fun RedisRepository.setnx(key: String, value: String, seconds: Long): Boolean {
+fun RedisRepository.setnx(
+    key: String,
+    value: String,
+    seconds: Long,
+): Boolean {
     // This is a simplified implementation. A real implementation would use a Lua script.
     val result = get(key)
     if (result == null) {

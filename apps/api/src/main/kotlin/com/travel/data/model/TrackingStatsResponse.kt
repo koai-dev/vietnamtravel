@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class TrackingStatsResponse(
     val totalRequests: Long,
     val requestsByPlatform: Map<String, Long>,
-    val requestsByEndpoint: Map<String, Long>
+    val requestsByEndpoint: Map<String, Long>,
 )

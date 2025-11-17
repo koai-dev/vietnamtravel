@@ -21,7 +21,7 @@ fun Destination.toDestinationResponse(lang: String): DestinationResponse {
         parentId = parentId,
         children = children,
         foods = foods,
-        restaurants = restaurants
+        restaurants = restaurants,
     )
 }
 

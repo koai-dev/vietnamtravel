@@ -13,26 +13,32 @@ object TokenService {
     private val audience = Config.env["JWT_AUDIENCE"] ?: "users"
     private val algorithm = Algorithm.HMAC256(secret)
 
-    val verifier = JWT.require(algorithm)
-        .withAudience(audience)
-        .withIssuer(issuer)
-        .build()
-
-    fun generateTokenPair(userId: Long, jti: String): TokenPair {
-        val accessToken = JWT.create()
+    val verifier =
+        JWT.require(algorithm)
             .withAudience(audience)
             .withIssuer(issuer)
-            .withClaim("userId", userId)
-            .withExpiresAt(Date(System.currentTimeMillis() + 15 * 60 * 1000)) // 15 minutes
-            .sign(algorithm)
+            .build()
 
-        val refreshToken = JWT.create()
-            .withAudience(audience)
-            .withIssuer(issuer)
-            .withClaim("userId", userId)
-            .withJWTId(jti)
-            .withExpiresAt(Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 7 days
-            .sign(algorithm)
+    fun generateTokenPair(
+        userId: Long,
+        jti: String,
+    ): TokenPair {
+        val accessToken =
+            JWT.create()
+                .withAudience(audience)
+                .withIssuer(issuer)
+                .withClaim("userId", userId)
+                .withExpiresAt(Date(System.currentTimeMillis() + 15 * 60 * 1000)) // 15 minutes
+                .sign(algorithm)
+
+        val refreshToken =
+            JWT.create()
+                .withAudience(audience)
+                .withIssuer(issuer)
+                .withClaim("userId", userId)
+                .withJWTId(jti)
+                .withExpiresAt(Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000)) // 7 days
+                .sign(algorithm)
 
         return TokenPair(accessToken, refreshToken)
     }

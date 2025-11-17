@@ -1,7 +1,7 @@
 package com.travel.presentation.controller
 
-import com.travel.data.model.TourResponse
 import com.travel.data.mapper.toTourResponse
+import com.travel.data.model.TourResponse
 import com.travel.domain.service.TourService
 
 class TourController(private val tourService: TourService) {
@@ -9,7 +9,10 @@ class TourController(private val tourService: TourService) {
         return tourService.getAll().map { it.toTourResponse(lang) }
     }
 
-    suspend fun getById(id: Long, lang: String): TourResponse? {
+    suspend fun getById(
+        id: Long,
+        lang: String,
+    ): TourResponse? {
         return tourService.getById(id)?.toTourResponse(lang)
     }
 

@@ -7,5 +7,5 @@ data class NewUsersResponse(
     val total: Int,
     val limit: Int,
     val offset: Int,
-    val items: List<UserResponse>
+    val items: List<UserResponse>,
 )

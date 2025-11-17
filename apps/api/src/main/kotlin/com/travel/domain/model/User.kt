@@ -9,5 +9,5 @@ data class User(
     val name: String?,
     val avatarUrl: String?,
     val phone: String?,
-    val role: UserRole
+    val role: UserRole,
 )

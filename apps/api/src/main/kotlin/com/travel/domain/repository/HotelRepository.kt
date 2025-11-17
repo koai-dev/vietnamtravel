@@ -26,14 +26,19 @@ interface HotelRepository {
         petPolicy: String?,
         tags: String?, // JSON
         externalBookingLinks: String?, // JSON
-        hostId: Long?
+        hostId: Long?,
     ): HotelResponse
 
     suspend fun getAllHotels(): List<HotelResponse>
+
     suspend fun getHotelById(id: Long): HotelResponse?
+
     suspend fun getHotelBySlug(slug: String): HotelResponse?
+
     suspend fun getHotelsByHostId(hostId: Long): List<HotelResponse>
+
     suspend fun getHotelsByCity(city: String): List<HotelResponse>
+
     suspend fun getHotelsByTags(tags: List<String>): List<HotelResponse>
 
     suspend fun updateHotel(
@@ -60,13 +65,25 @@ interface HotelRepository {
         petPolicy: String?,
         tags: String?,
         externalBookingLinks: String?,
-        hostId: Long?
+        hostId: Long?,
     ): HotelResponse?
 
     suspend fun deleteHotel(id: Long): Boolean
-    suspend fun updateRating(id: Long, rating: Float, reviewCount: Int): Boolean
+
+    suspend fun updateRating(
+        id: Long,
+        rating: Float,
+        reviewCount: Int,
+    ): Boolean
+
     suspend fun incrementViewsCount(id: Long): Boolean
+
     suspend fun incrementFavoritesCount(id: Long): Boolean
+
     suspend fun decrementFavoritesCount(id: Long): Boolean
-    suspend fun isSlugExist(slug: String, id: Long? = null): Boolean
+
+    suspend fun isSlugExist(
+        slug: String,
+        id: Long? = null,
+    ): Boolean
 }

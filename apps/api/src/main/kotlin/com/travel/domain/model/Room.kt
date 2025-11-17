@@ -9,5 +9,5 @@ data class Room(
     val pricePerNight: Double,
     val totalRooms: Int,
     val availableRooms: Int,
-    val amenities: List<String>
+    val amenities: List<String>,
 )

@@ -14,7 +14,7 @@ data class DestinationResponse(
     val parentId: Long?,
     val children: List<DestinationResponse> = emptyList(),
     val foods: List<LocalFoodResponse> = emptyList(),
-    val restaurants: List<RestaurantResponse> = emptyList()
+    val restaurants: List<RestaurantResponse> = emptyList(),
 )
 
 @Serializable
@@ -39,12 +39,12 @@ data class DestinationRequest(
     val externalLinks: List<String>,
     val addressLink: String?,
     val status: String,
-    val sortOrder: Int
+    val sortOrder: Int,
 )
 
 @Serializable
 data class RatingRequest(
-    val rating: Double
+    val rating: Double,
 )
 
 @Serializable
@@ -75,5 +75,5 @@ data class DestinationResponseDetail(
     val sortOrder: Int,
     val children: List<DestinationResponse> = emptyList(),
     val foods: List<LocalFoodResponse> = emptyList(),
-    val restaurants: List<RestaurantResponse> = emptyList()
+    val restaurants: List<RestaurantResponse> = emptyList(),
 )

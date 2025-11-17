@@ -9,17 +9,18 @@ import com.travel.domain.model.User
 import com.travel.domain.service.AuthService
 
 class AuthController(
-    private val authService: AuthService
+    private val authService: AuthService,
 ) {
     suspend fun register(request: RegisterRequest) {
-        val user = User(
-            email = request.email,
-            passwordHash = request.password,
-            name = request.name,
-            avatarUrl = null,
-            phone = null,
-            role = UserRole.user
-        )
+        val user =
+            User(
+                email = request.email,
+                passwordHash = request.password,
+                name = request.name,
+                avatarUrl = null,
+                phone = null,
+                role = UserRole.user,
+            )
         authService.register(user)
     }
 

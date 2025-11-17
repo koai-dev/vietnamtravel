@@ -8,7 +8,7 @@ data class CreateBookingRequest(
     val roomId: Long,
     val checkIn: String,
     val checkOut: String,
-    val totalPrice: Double
+    val totalPrice: Double,
 )
 
 @Serializable
@@ -20,5 +20,5 @@ data class BookingResponse(
     val checkIn: String,
     val checkOut: String,
     val totalPrice: Double,
-    val status: String
+    val status: String,
 )

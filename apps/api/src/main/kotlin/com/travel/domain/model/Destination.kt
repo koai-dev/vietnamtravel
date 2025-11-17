@@ -15,7 +15,7 @@ data class Destination(
     val parentId: Long?,
     val children: List<Destination> = emptyList(),
     val foods: List<LocalFood> = emptyList(),
-    val restaurants: List<Restaurant> = emptyList()
+    val restaurants: List<Restaurant> = emptyList(),
 )
 
 data class DestinationDetail(
