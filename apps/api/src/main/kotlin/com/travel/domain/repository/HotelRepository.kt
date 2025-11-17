@@ -1,6 +1,6 @@
 package com.travel.domain.repository
 
-import com.travel.presentation.response.HotelResponse
+import com.travel.data.model.HotelResponse
 
 interface HotelRepository {
     suspend fun createHotel(

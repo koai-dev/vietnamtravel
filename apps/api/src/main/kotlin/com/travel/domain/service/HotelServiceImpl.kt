@@ -2,9 +2,9 @@ package com.travel.domain.service
 
 import com.travel.domain.repository.HotelRepository
 import com.travel.helper.toSlug
-import com.travel.presentation.request.HotelRequest
-import com.travel.presentation.request.RatingUpdateRequest
-import com.travel.presentation.response.HotelResponse
+import com.travel.data.model.HotelRequest
+import com.travel.data.model.RatingUpdateRequest
+import com.travel.data.model.HotelResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 

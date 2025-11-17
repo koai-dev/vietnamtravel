@@ -1,7 +1,7 @@
 package com.travel.presentation.route
 
 import com.travel.presentation.controller.NotificationController
-import com.travel.presentation.model.CreateNotificationRequest
+import com.travel.data.model.CreateNotificationRequest
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*

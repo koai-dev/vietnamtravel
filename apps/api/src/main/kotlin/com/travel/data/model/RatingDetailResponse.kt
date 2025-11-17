@@ -1,4 +1,4 @@
-package com.travel.presentation.response
+package com.travel.data.model
 
 import kotlinx.serialization.Serializable
 

@@ -3,8 +3,8 @@ package com.travel.data.impl
 import com.travel.data.table.Hotels
 import com.travel.data.table.Users
 import com.travel.domain.repository.HotelRepository
-import com.travel.presentation.response.ContactInfoResponse
-import com.travel.presentation.response.HotelResponse
+import com.travel.data.model.ContactInfoResponse
+import com.travel.data.model.HotelResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*

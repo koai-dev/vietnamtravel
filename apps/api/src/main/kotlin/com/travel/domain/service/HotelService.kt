@@ -1,8 +1,8 @@
 package com.travel.domain.service
 
-import com.travel.presentation.request.HotelRequest
-import com.travel.presentation.request.RatingUpdateRequest
-import com.travel.presentation.response.HotelResponse
+import com.travel.data.model.HotelRequest
+import com.travel.data.model.RatingUpdateRequest
+import com.travel.data.model.HotelResponse
 
 interface HotelService {
     suspend fun createHotel(

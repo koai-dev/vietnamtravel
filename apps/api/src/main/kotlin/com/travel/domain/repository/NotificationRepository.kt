@@ -1,7 +1,7 @@
 package com.travel.domain.repository
 
 import com.travel.domain.model.Notification
-import com.travel.presentation.model.CreateNotificationRequest
+import com.travel.data.model.CreateNotificationRequest
 
 interface NotificationRepository {
     suspend fun create(

@@ -1,5 +1,6 @@
-package com.travel.presentation.response
+package com.travel.data.model
 
+import com.travel.data.model.RatingDetailResponse
 import kotlinx.serialization.Serializable
 
 @Serializable

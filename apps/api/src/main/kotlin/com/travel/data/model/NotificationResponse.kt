@@ -1,4 +1,4 @@
-package com.travel.presentation.model
+package com.travel.data.model
 
 import com.travel.domain.model.NotificationType
 import kotlinx.serialization.Serializable

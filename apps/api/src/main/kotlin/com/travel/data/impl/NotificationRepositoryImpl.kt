@@ -5,7 +5,7 @@ import com.travel.data.mapper.toNotification
 import com.travel.data.table.Notifications
 import com.travel.domain.model.Notification
 import com.travel.domain.repository.NotificationRepository
-import com.travel.presentation.model.CreateNotificationRequest
+import com.travel.data.model.CreateNotificationRequest
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
