@@ -6,15 +6,17 @@ import com.travel.domain.repository.LocalFoodRepository
 
 class LocalFoodService(
     private val localFoodRepository: LocalFoodRepository,
-    private val destinationRepository: DestinationRepository
+    private val destinationRepository: DestinationRepository,
 ) {
-
     suspend fun create(localFood: LocalFood): LocalFood {
         validateDestination(localFood.destinationId)
         return localFoodRepository.create(localFood)
     }
 
-    suspend fun update(id: Long, localFood: LocalFood): LocalFood? {
+    suspend fun update(
+        id: Long,
+        localFood: LocalFood,
+    ): LocalFood? {
         validateDestination(localFood.destinationId)
         return localFoodRepository.update(id, localFood)
     }

@@ -26,7 +26,7 @@ data class HotelRequest(
     val petPolicy: String?,
     val tags: List<String>?,
     val externalBookingLinks: List<String>?,
-    val hostId: Long?
+    val hostId: Long?,
 )
 
 @Serializable
@@ -36,10 +36,10 @@ data class ContactInfoRequest(
     val website: String?,
     val facebook: String?,
     val zalo: String?,
-    val whatsapp: String?
+    val whatsapp: String?,
 )
 
 @Serializable
 data class RatingUpdateRequest(
-    val rating: Float
+    val rating: Float,
 )

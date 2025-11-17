@@ -15,7 +15,11 @@ class RedisRepositoryImpl : RedisRepository {
         }
     }
 
-    override fun setex(key: String, seconds: Int, value: String) {
+    override fun setex(
+        key: String,
+        seconds: Int,
+        value: String,
+    ) {
         pool.resource.use { jedis ->
             jedis.setex(key, seconds.toLong(), value)
         }
@@ -33,13 +37,20 @@ class RedisRepositoryImpl : RedisRepository {
         }
     }
 
-    override fun expire(key: String, seconds: Int) {
+    override fun expire(
+        key: String,
+        seconds: Int,
+    ) {
         pool.resource.use { jedis ->
             jedis.expire(key, seconds.toLong())
         }
     }
 
-    override fun setnx(key: String, value: String, seconds: Long): Boolean {
+    override fun setnx(
+        key: String,
+        value: String,
+        seconds: Long,
+    ): Boolean {
         return pool.resource.use { jedis ->
             jedis.set(key, value, SetParams().nx().ex(seconds)) == "OK"
         }

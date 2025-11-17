@@ -36,5 +36,5 @@ data class HotelResponse(
     val externalBookingLinks: List<String> = emptyList(),
     val hostId: Long?,
     val hostName: String? = null,
-    val hostAvatar: String? = null
+    val hostAvatar: String? = null,
 )

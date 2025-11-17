@@ -12,6 +12,6 @@ fun LocalFood.toLocalFoodResponse(lang: String): LocalFoodResponse {
         nameEn = nameEn,
         descriptionVi = pickLang(lang, descriptionVi ?: "", descriptionEn ?: ""),
         descriptionEn = descriptionEn,
-        images = images
+        images = images,
     )
 }

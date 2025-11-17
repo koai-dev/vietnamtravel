@@ -13,5 +13,5 @@ data class HotelResponse(
     val longitude: Double?,
     val hostId: Long?,
     val rating: Float,
-    val reviewCount: Int
+    val reviewCount: Int,
 )

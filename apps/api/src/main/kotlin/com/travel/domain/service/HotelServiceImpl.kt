@@ -9,15 +9,17 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelService {
-
     private fun HotelResponse.toLocale(lang: String): HotelResponse {
         return this.copy(
             name = if (lang == "vi") this.nameVi else this.nameEn,
-            description = if (lang == "vi") this.descriptionVi else this.descriptionEn
+            description = if (lang == "vi") this.descriptionVi else this.descriptionEn,
         )
     }
 
-    override suspend fun createHotel(hotelRequest: HotelRequest, lang: String): HotelResponse {
+    override suspend fun createHotel(
+        hotelRequest: HotelRequest,
+        lang: String,
+    ): HotelResponse {
         // Auto-generate slug if it's not provided
         if (hotelRequest.slug.isBlank()) {
             hotelRequest.slug = (if (lang == "vi") hotelRequest.nameVi else hotelRequest.nameEn).toSlug()
@@ -27,31 +29,32 @@ class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelServ
             throw IllegalArgumentException("Slug '${hotelRequest.slug}' already exists.")
         }
 
-        val hotel = hotelRepository.createHotel(
-            nameVi = hotelRequest.nameVi,
-            nameEn = hotelRequest.nameEn,
-            slug = hotelRequest.slug,
-            descriptionVi = hotelRequest.descriptionVi,
-            descriptionEn = hotelRequest.descriptionEn,
-            address = hotelRequest.address,
-            city = hotelRequest.city,
-            latitude = hotelRequest.latitude,
-            longitude = hotelRequest.longitude,
-            addressLink = hotelRequest.addressLink,
-            contact = hotelRequest.contact?.let { Json.encodeToString(it) },
-            images = hotelRequest.images?.let { Json.encodeToString(it) },
-            minPrice = hotelRequest.minPrice,
-            maxPrice = hotelRequest.maxPrice,
-            amenities = hotelRequest.amenities?.let { Json.encodeToString(it) },
-            checkInTime = hotelRequest.checkInTime,
-            checkOutTime = hotelRequest.checkOutTime,
-            cancellationPolicy = hotelRequest.cancellationPolicy,
-            childPolicy = hotelRequest.childPolicy,
-            petPolicy = hotelRequest.petPolicy,
-            tags = hotelRequest.tags?.let { Json.encodeToString(it) },
-            externalBookingLinks = hotelRequest.externalBookingLinks?.let { Json.encodeToString(it) },
-            hostId = hotelRequest.hostId
-        )
+        val hotel =
+            hotelRepository.createHotel(
+                nameVi = hotelRequest.nameVi,
+                nameEn = hotelRequest.nameEn,
+                slug = hotelRequest.slug,
+                descriptionVi = hotelRequest.descriptionVi,
+                descriptionEn = hotelRequest.descriptionEn,
+                address = hotelRequest.address,
+                city = hotelRequest.city,
+                latitude = hotelRequest.latitude,
+                longitude = hotelRequest.longitude,
+                addressLink = hotelRequest.addressLink,
+                contact = hotelRequest.contact?.let { Json.encodeToString(it) },
+                images = hotelRequest.images?.let { Json.encodeToString(it) },
+                minPrice = hotelRequest.minPrice,
+                maxPrice = hotelRequest.maxPrice,
+                amenities = hotelRequest.amenities?.let { Json.encodeToString(it) },
+                checkInTime = hotelRequest.checkInTime,
+                checkOutTime = hotelRequest.checkOutTime,
+                cancellationPolicy = hotelRequest.cancellationPolicy,
+                childPolicy = hotelRequest.childPolicy,
+                petPolicy = hotelRequest.petPolicy,
+                tags = hotelRequest.tags?.let { Json.encodeToString(it) },
+                externalBookingLinks = hotelRequest.externalBookingLinks?.let { Json.encodeToString(it) },
+                hostId = hotelRequest.hostId,
+            )
         return hotel.toLocale(lang)
     }
 
@@ -59,18 +62,28 @@ class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelServ
         return hotelRepository.getAllHotels().map { it.toLocale(lang) }
     }
 
-    override suspend fun getHotelById(id: Long, lang: String): HotelResponse? {
+    override suspend fun getHotelById(
+        id: Long,
+        lang: String,
+    ): HotelResponse? {
         hotelRepository.incrementViewsCount(id)
         return hotelRepository.getHotelById(id)?.toLocale(lang)
     }
 
-    override suspend fun getHotelBySlug(slug: String, lang: String): HotelResponse? {
+    override suspend fun getHotelBySlug(
+        slug: String,
+        lang: String,
+    ): HotelResponse? {
         val hotel = hotelRepository.getHotelBySlug(slug)
         hotel?.let { hotelRepository.incrementViewsCount(it.id) }
         return hotel?.toLocale(lang)
     }
 
-    override suspend fun updateHotel(id: Long, hotelRequest: HotelRequest, lang: String): HotelResponse? {
+    override suspend fun updateHotel(
+        id: Long,
+        hotelRequest: HotelRequest,
+        lang: String,
+    ): HotelResponse? {
         if (hotelRequest.slug.isBlank()) {
             hotelRequest.slug = (if (lang == "vi") hotelRequest.nameVi else hotelRequest.nameEn).toSlug()
         }
@@ -78,32 +91,33 @@ class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelServ
             throw IllegalArgumentException("Slug '${hotelRequest.slug}' already exists.")
         }
 
-        val updatedHotel = hotelRepository.updateHotel(
-            id = id,
-            nameVi = hotelRequest.nameVi,
-            nameEn = hotelRequest.nameEn,
-            slug = hotelRequest.slug,
-            descriptionVi = hotelRequest.descriptionVi,
-            descriptionEn = hotelRequest.descriptionEn,
-            address = hotelRequest.address,
-            city = hotelRequest.city,
-            latitude = hotelRequest.latitude,
-            longitude = hotelRequest.longitude,
-            addressLink = hotelRequest.addressLink,
-            contact = hotelRequest.contact?.let { Json.encodeToString(it) },
-            images = hotelRequest.images?.let { Json.encodeToString(it) },
-            minPrice = hotelRequest.minPrice,
-            maxPrice = hotelRequest.maxPrice,
-            amenities = hotelRequest.amenities?.let { Json.encodeToString(it) },
-            checkInTime = hotelRequest.checkInTime,
-            checkOutTime = hotelRequest.checkOutTime,
-            cancellationPolicy = hotelRequest.cancellationPolicy,
-            childPolicy = hotelRequest.childPolicy,
-            petPolicy = hotelRequest.petPolicy,
-            tags = hotelRequest.tags?.let { Json.encodeToString(it) },
-            externalBookingLinks = hotelRequest.externalBookingLinks?.let { Json.encodeToString(it) },
-            hostId = hotelRequest.hostId
-        )
+        val updatedHotel =
+            hotelRepository.updateHotel(
+                id = id,
+                nameVi = hotelRequest.nameVi,
+                nameEn = hotelRequest.nameEn,
+                slug = hotelRequest.slug,
+                descriptionVi = hotelRequest.descriptionVi,
+                descriptionEn = hotelRequest.descriptionEn,
+                address = hotelRequest.address,
+                city = hotelRequest.city,
+                latitude = hotelRequest.latitude,
+                longitude = hotelRequest.longitude,
+                addressLink = hotelRequest.addressLink,
+                contact = hotelRequest.contact?.let { Json.encodeToString(it) },
+                images = hotelRequest.images?.let { Json.encodeToString(it) },
+                minPrice = hotelRequest.minPrice,
+                maxPrice = hotelRequest.maxPrice,
+                amenities = hotelRequest.amenities?.let { Json.encodeToString(it) },
+                checkInTime = hotelRequest.checkInTime,
+                checkOutTime = hotelRequest.checkOutTime,
+                cancellationPolicy = hotelRequest.cancellationPolicy,
+                childPolicy = hotelRequest.childPolicy,
+                petPolicy = hotelRequest.petPolicy,
+                tags = hotelRequest.tags?.let { Json.encodeToString(it) },
+                externalBookingLinks = hotelRequest.externalBookingLinks?.let { Json.encodeToString(it) },
+                hostId = hotelRequest.hostId,
+            )
         return updatedHotel?.toLocale(lang)
     }
 
@@ -115,7 +129,10 @@ class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelServ
         return hotelRepository.incrementViewsCount(id)
     }
 
-    override suspend fun updateRating(id: Long, ratingUpdateRequest: RatingUpdateRequest): Boolean {
+    override suspend fun updateRating(
+        id: Long,
+        ratingUpdateRequest: RatingUpdateRequest,
+    ): Boolean {
         val hotel = hotelRepository.getHotelById(id) ?: return false
         val currentRating = hotel.rating
         val currentReviewCount = hotel.reviewCount

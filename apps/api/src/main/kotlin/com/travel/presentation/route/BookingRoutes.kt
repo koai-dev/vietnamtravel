@@ -1,7 +1,7 @@
 package com.travel.presentation.route
 
-import com.travel.data.model.CreateBookingRequest
 import com.travel.core.RateLimitException
+import com.travel.data.model.CreateBookingRequest
 import com.travel.domain.repository.RedisRepository
 import com.travel.presentation.controller.BookingController
 import io.ktor.server.application.*

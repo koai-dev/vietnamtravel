@@ -3,7 +3,6 @@ package com.travel.data.mapper
 import com.travel.data.model.RestaurantResponse
 import com.travel.data.table.Restaurants
 import com.travel.domain.model.Restaurant
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.ResultRow
 
@@ -16,7 +15,7 @@ fun ResultRow.toRestaurant(): Restaurant {
         address = this[Restaurants.address],
         latitude = this[Restaurants.latitude],
         longitude = this[Restaurants.longitude],
-        destinationId = this[Restaurants.destinationId]
+        destinationId = this[Restaurants.destinationId],
     )
 }
 
@@ -30,6 +29,6 @@ fun Restaurant.toRestaurantResponse(): RestaurantResponse {
         latitude = latitude,
         longitude = longitude,
         destinationId = destinationId,
-        localFoods = localFoods
+        localFoods = localFoods,
     )
 }

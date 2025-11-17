@@ -9,13 +9,14 @@ import com.travel.domain.repository.RoomRepository
 class BookingService(
     private val bookingRepository: BookingRepository,
     private val roomRepository: RoomRepository,
-    private val redisRepository: RedisRepository
+    private val redisRepository: RedisRepository,
 ) {
     suspend fun createBooking(booking: Booking): Booking {
         val lockKey = "lock:booking:${booking.roomId}"
         return distributedLock(redisRepository, lockKey, 10) {
-            val room = roomRepository.findById(booking.roomId)
-                ?: throw Exception("Room not found")
+            val room =
+                roomRepository.findById(booking.roomId)
+                    ?: throw Exception("Room not found")
 
             if (room.availableRooms <= 0) {
                 throw Exception("No available rooms")

@@ -10,7 +10,6 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 
 class HotelController(private val hotelService: HotelService) {
-
     suspend fun createHotel(call: ApplicationCall) {
         val hotelRequest = call.receive<HotelRequest>()
         val lang = call.lang()

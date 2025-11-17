@@ -6,30 +6,34 @@ import com.travel.domain.model.LocalFood
 import com.travel.domain.service.LocalFoodService
 
 class LocalFoodController(private val localFoodService: LocalFoodService) {
-
     suspend fun create(request: LocalFoodRequest): LocalFoodResponse {
-        val localFood = LocalFood(
-            id = 0,
-            destinationId = request.destinationId,
-            nameVi = request.nameVi,
-            nameEn = request.nameEn,
-            descriptionVi = request.descriptionVi,
-            descriptionEn = request.descriptionEn,
-            images = request.images
-        )
+        val localFood =
+            LocalFood(
+                id = 0,
+                destinationId = request.destinationId,
+                nameVi = request.nameVi,
+                nameEn = request.nameEn,
+                descriptionVi = request.descriptionVi,
+                descriptionEn = request.descriptionEn,
+                images = request.images,
+            )
         return localFoodService.create(localFood).toResponse()
     }
 
-    suspend fun update(id: Long, request: LocalFoodRequest): LocalFoodResponse? {
-        val localFood = LocalFood(
-            id = id,
-            destinationId = request.destinationId,
-            nameVi = request.nameVi,
-            nameEn = request.nameEn,
-            descriptionVi = request.descriptionVi,
-            descriptionEn = request.descriptionEn,
-            images = request.images
-        )
+    suspend fun update(
+        id: Long,
+        request: LocalFoodRequest,
+    ): LocalFoodResponse? {
+        val localFood =
+            LocalFood(
+                id = id,
+                destinationId = request.destinationId,
+                nameVi = request.nameVi,
+                nameEn = request.nameEn,
+                descriptionVi = request.descriptionVi,
+                descriptionEn = request.descriptionEn,
+                images = request.images,
+            )
         return localFoodService.update(id, localFood)?.toResponse()
     }
 
@@ -53,7 +57,7 @@ class LocalFoodController(private val localFoodService: LocalFoodService) {
             nameEn = nameEn,
             descriptionVi = descriptionVi,
             descriptionEn = descriptionEn,
-            images = images
+            images = images,
         )
     }
 }

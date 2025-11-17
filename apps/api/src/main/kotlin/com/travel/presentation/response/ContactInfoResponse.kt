@@ -9,5 +9,5 @@ data class ContactInfoResponse(
     val website: String?,
     val facebook: String?,
     val zalo: String?,
-    val whatsapp: String?
+    val whatsapp: String?,
 )

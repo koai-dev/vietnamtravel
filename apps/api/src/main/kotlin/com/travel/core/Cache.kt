@@ -9,7 +9,7 @@ suspend inline fun <reified T> cache(
     key: String,
     expire: Int,
     force: Boolean = false,
-    block: suspend () -> T
+    block: suspend () -> T,
 ): T {
     if (!force) {
         val cached = redis.get(key)
