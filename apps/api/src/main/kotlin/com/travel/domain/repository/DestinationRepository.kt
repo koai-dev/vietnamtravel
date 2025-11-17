@@ -7,6 +7,8 @@ interface DestinationRepository {
 
     suspend fun findById(id: Long): Destination?
 
+    suspend fun findByIdDetail(id: Long): DestinationDetail?
+
     suspend fun findChildren(id: Long): List<Destination>
 
     suspend fun findTree(id: Long): Destination?
