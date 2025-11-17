@@ -12,6 +12,7 @@ plugins {
     kotlin("jvm") version "1.9.23"
     id("io.ktor.plugin") version "2.3.10"
     kotlin("plugin.serialization") version "1.9.23"
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
 group = "com.example"
@@ -79,3 +80,15 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
+ktlint {
+    version.set("1.2.1") // hoặc bất kỳ bản mới nhất
+    debug.set(false)
+    verbose.set(false)
+    android.set(false) // bạn đang làm Ktor server -> để false
+    ignoreFailures.set(false)
+}
+
+tasks.named("check") {
+    dependsOn("ktlintCheck")
+}
+
