@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="caee4c1f-c5e6-43e6-848c-09e967c410a2" name="Changes" comment="feat(cms): Refactor user creation form and add new UI components&#10;&#10;- Adds new reusable `Card` and `Select` components from `shadcn/ui`.&#10;- Refactors the `/dashboard/users/new` page to use the new `Card` and `Select` components, improving the form's layout and user experience.&#10;- Replaces the native `&lt;select&gt;` element with the new custom `Select` component for role selection.&#10;- Updates dependencies to include `@radix-ui/react-select`." />
+    <list default="true" id="caee4c1f-c5e6-43e6-848c-09e967c410a2" name="Changes" comment="add design">
+      <change afterPath="$PROJECT_DIR$/apps/web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/next-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/postcss.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,25 +48,99 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/vsf/StudioProjects/vietnamtravel&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/vsf/StudioProjects/vietnamtravel/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "develop",
+    "javascript.nodejs.core.library.configured.version": "24.11.1",
+    "javascript.nodejs.core.library.typings.version": "24.10.1",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/vsf/StudioProjects/vietnamtravel",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.dev.executor": "Run",
+    "npm.dev:api.executor": "Run",
+    "npm.dev:web.executor": "Run",
+    "npm.web > dev.executor": "Run",
+    "npm.web > start.executor": "Run",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "/Users/vsf/StudioProjects/vietnamtravel/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/apps/web/design" />
+    </key>
+  </component>
+  <component name="RunManager" selected="npm.web &gt; start">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev:api" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev:api" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="web &gt; dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/apps/web/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="web &gt; start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/apps/web/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.web &gt; start" />
+        <item itemvalue="npm.web &gt; dev" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev:api" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -95,6 +176,7 @@
       <workItem from="1763290536907" duration="2822000" />
       <workItem from="1763302307202" duration="598000" />
       <workItem from="1763314309314" duration="4295000" />
+      <workItem from="1763398437845" duration="4014000" />
     </task>
     <task id="LOCAL-00003" summary="feat(cms): Refactor user creation form and add new UI components&#10;&#10;- Adds new reusable `Card` and `Select` components from `shadcn/ui`.&#10;- Refactors the `/dashboard/users/new` page to use the new `Card` and `Select` components, improving the form's layout and user experience.&#10;- Replaces the native `&lt;select&gt;` element with the new custom `Select` component for role selection.&#10;- Updates dependencies to include `@radix-ui/react-select`.">
       <option name="closed" value="true" />
@@ -104,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763315561991</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add design">
+      <option name="closed" value="true" />
+      <created>1763403132579</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1763403132579</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,6 +227,7 @@
     <MESSAGE value="feat(api): Add date filtering to tracking stats endpoint&#10;&#10;- Modifies the `GET /tracking/stats` endpoint to accept `period`, `startDate`, and `endDate` query parameters.&#10;- Implements the logic in `TrackingServiceImpl` to filter tracking data by a predefined period (day, week, month, year) or a custom date range.&#10;- Updates the `TrackingService` interface and `TrackingController` to handle the new filtering parameters." />
     <MESSAGE value="feat(cms): Prefix sidebar navigation links with /dashboard&#10;&#10;Updates all navigation links in the CMS sidebar to be prefixed with `/dashboard`. This aligns the navigation with the new routing structure where all CMS pages are grouped under the `/dashboard` route." />
     <MESSAGE value="feat(cms): Refactor user creation form and add new UI components&#10;&#10;- Adds new reusable `Card` and `Select` components from `shadcn/ui`.&#10;- Refactors the `/dashboard/users/new` page to use the new `Card` and `Select` components, improving the form's layout and user experience.&#10;- Replaces the native `&lt;select&gt;` element with the new custom `Select` component for role selection.&#10;- Updates dependencies to include `@radix-ui/react-select`." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(cms): Refactor user creation form and add new UI components&#10;&#10;- Adds new reusable `Card` and `Select` components from `shadcn/ui`.&#10;- Refactors the `/dashboard/users/new` page to use the new `Card` and `Select` components, improving the form's layout and user experience.&#10;- Replaces the native `&lt;select&gt;` element with the new custom `Select` component for role selection.&#10;- Updates dependencies to include `@radix-ui/react-select`." />
+    <MESSAGE value="add design" />
+    <option name="LAST_COMMIT_MESSAGE" value="add design" />
   </component>
 </project>
