@@ -1,87 +1,85 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-
 interface Step1Props {
   onNext: () => void;
   onSkip: () => void;
 }
 
-const features = [
-  {
-    icon: "place",
-    title: "Gợi ý địa điểm",
-    description: "Tìm kiếm những địa điểm hấp dẫn và phù hợp với sở thích của bạn.",
-    iconBgColor: "bg-blue-100 dark:bg-blue-900/30",
-    iconTextColor: "text-blue-600 dark:text-blue-300",
-  },
-  {
-    icon: "restaurant",
-    title: "Đặc sản",
-    description: "Khám phá ẩm thực địa phương và những món ăn không thể bỏ lỡ.",
-    iconBgColor: "bg-orange-100 dark:bg-orange-900/30",
-    iconTextColor: "text-orange-600 dark:text-orange-300",
-  },
-  {
-    icon: "route",
-    title: "Lộ trình nhanh",
-    description: "Lên kế hoạch cho chuyến đi một cách nhanh chóng và hiệu quả.",
-    iconBgColor: "bg-blue-100 dark:bg-blue-900/30",
-    iconTextColor: "text-blue-600 dark:text-blue-300",
-  },
-];
-
 export default function Step1({ onNext, onSkip }: Step1Props) {
   return (
-    <main className="flex h-full flex-1 flex-col items-center justify-center p-6">
-      <div className="absolute top-5 right-5 z-10 md:right-10">
-        <Button variant="link" onClick={onSkip} className="text-gray-500 dark:text-gray-400">
-          Bỏ qua
-        </Button>
-      </div>
-      <div className="flex w-full max-w-5xl flex-1 flex-col justify-center">
-        <div className="mb-8 text-center md:mb-12">
-          <h1 className="pb-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-4xl">
-            Những gì bạn có thể làm
-          </h1>
-          <p className="mx-auto max-w-md text-base text-gray-600 dark:text-gray-300">
-            Tận hưởng chuyến đi của bạn với những tính năng độc đáo được thiết
-            kế riêng.
-          </p>
-        </div>
-        <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => (
-            <Card
-              key={index}
-              className="flex flex-col items-center border-gray-200 bg-white p-6 text-center shadow-sm dark:border-gray-700 dark:bg-gray-800/50 md:col-span-1 lg:col-span-1"
+    <div className="layout-container flex h-full grow flex-col">
+      <main className="flex flex-1 flex-col justify-center items-center py-5">
+        <div className="layout-content-container flex flex-col w-full max-w-5xl flex-1 p-6">
+          <div className="absolute top-5 right-5 md:right-10 z-10">
+            <p
+              onClick={onSkip}
+              className="text-gray-500 dark:text-gray-400 text-sm font-medium leading-normal underline cursor-pointer"
             >
-              <CardContent className="flex flex-col items-center p-0">
-                <div
-                  className={`mb-4 flex h-16 w-16 items-center justify-center rounded-full ${feature.iconBgColor}`}
-                >
-                  <span
-                    className={`material-symbols-outlined text-3xl ${feature.iconTextColor}`}
-                  >
-                    {feature.icon}
+              Bỏ qua
+            </p>
+          </div>
+          <div className="flex flex-1 flex-col justify-center">
+            <div className="text-center mb-8 md:mb-12">
+              <h1 className="text-gray-900 dark:text-white tracking-tight text-[32px] font-bold leading-tight pb-3">
+                Những gì bạn có thể làm
+              </h1>
+              <p className="text-gray-600 dark:text-gray-300 text-base font-normal leading-normal max-w-md mx-auto">
+                Tận hưởng chuyến đi của bạn với những tính năng độc đáo được thiết
+                kế riêng.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              <div className="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-full bg-accent-blue dark:bg-accent-blue-dark/20 flex items-center justify-center mb-4">
+                  <span className="material-symbols-outlined text-3xl text-primary dark:text-blue-300">
+                    place
                   </span>
                 </div>
-                <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">
-                  {feature.title}
+                <h3 className="text-gray-900 dark:text-white font-bold text-lg mb-2">
+                  Gợi ý địa điểm
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300">
-                  {feature.description}
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  Tìm kiếm những địa điểm hấp dẫn và phù hợp với sở thích của bạn.
                 </p>
-              </CardContent>
-            </Card>
-          ))}
+              </div>
+              <div className="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-full bg-accent-orange dark:bg-accent-orange-dark/20 flex items-center justify-center mb-4">
+                  <span className="material-symbols-outlined text-3xl text-accent-orange-dark dark:text-orange-300">
+                    restaurant
+                  </span>
+                </div>
+                <h3 className="text-gray-900 dark:text-white font-bold text-lg mb-2">
+                  Đặc sản
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  Khám phá ẩm thực địa phương và những món ăn không thể bỏ lỡ.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-800/50 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col items-center text-center md:col-span-2 lg:col-span-1 md:max-w-sm md:mx-auto lg:max-w-none">
+                <div className="w-16 h-16 rounded-full bg-accent-blue dark:bg-accent-blue-dark/20 flex items-center justify-center mb-4">
+                  <span className="material-symbols-outlined text-3xl text-primary dark:text-blue-300">
+                    route
+                  </span>
+                </div>
+                <h3 className="text-gray-900 dark:text-white font-bold text-lg mb-2">
+                  Lộ trình nhanh
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm">
+                  Lên kế hoạch cho chuyến đi một cách nhanh chóng và hiệu quả.
+                </p>
+              </div>
+            </div>
+            <div className="flex px-4 py-3 justify-center">
+              <button
+                onClick={onNext}
+                className="flex w-full min-w-[84px] max-w-sm cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:ring-4 focus:ring-primary/30 dark:focus:ring-primary/40"
+              >
+                <span className="truncate">Tiếp tục</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flex justify-center px-4 py-3">
-          <Button onClick={onNext} size="lg" className="w-full max-w-sm">
-            Tiếp tục
-          </Button>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
