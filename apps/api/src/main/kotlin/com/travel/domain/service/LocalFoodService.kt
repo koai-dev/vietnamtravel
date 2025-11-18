@@ -7,18 +7,31 @@ import com.travel.domain.repository.LocalFoodRepository
 class LocalFoodService(
     private val localFoodRepository: LocalFoodRepository,
     private val destinationRepository: DestinationRepository,
+    private val imageMappingService: ImageMappingService,
 ) {
-    suspend fun create(localFood: LocalFood): LocalFood {
+    suspend fun create(
+        localFood: LocalFood
+    ): LocalFood {
         validateDestination(localFood.destinationId)
-        return localFoodRepository.create(localFood)
+        val resolvedImages = imageMappingService.resolveImages(
+            Gson().toJson(localFood.images),
+            localFood.tempUrlMap ?: emptyMap()
+        )
+        val localFoodWithResolvedImages = localFood.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
+        return localFoodRepository.create(localFoodWithResolvedImages)
     }
 
     suspend fun update(
         id: Long,
-        localFood: LocalFood,
+        localFood: LocalFood
     ): LocalFood? {
         validateDestination(localFood.destinationId)
-        return localFoodRepository.update(id, localFood)
+        val resolvedImages = imageMappingService.resolveImages(
+            Gson().toJson(localFood.images),
+            localFood.tempUrlMap ?: emptyMap()
+        )
+        val localFoodWithResolvedImages = localFood.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
+        return localFoodRepository.update(id, localFoodWithResolvedImages)
     }
 
     suspend fun delete(id: Long) {

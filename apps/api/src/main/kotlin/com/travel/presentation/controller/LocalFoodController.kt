@@ -18,6 +18,7 @@ class LocalFoodController(private val localFoodService: LocalFoodService) : Base
                 descriptionVi = request.descriptionVi,
                 descriptionEn = request.descriptionEn,
                 images = request.images,
+                tempUrlMap = request.tempUrlMap,
             )
         val createdLocalFood = localFoodService.create(localFood).toResponse()
         respondWith(call, createdLocalFood)
@@ -37,6 +38,7 @@ class LocalFoodController(private val localFoodService: LocalFoodService) : Base
                 descriptionVi = request.descriptionVi,
                 descriptionEn = request.descriptionEn,
                 images = request.images,
+                tempUrlMap = request.tempUrlMap,
             )
         val updatedLocalFood = localFoodService.update(id, localFood)?.toResponse()
         if (updatedLocalFood != null) {

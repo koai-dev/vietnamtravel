@@ -9,6 +9,7 @@ data class RestaurantRequest(
     val name: String,
     val description: String,
     val images: List<String>,
+    val tempUrlMap: Map<String, String>? = null,
     val address: String,
     val latitude: Double,
     val longitude: Double,

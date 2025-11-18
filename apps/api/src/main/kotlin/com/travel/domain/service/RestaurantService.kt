@@ -11,16 +11,24 @@ class RestaurantService(
     private val restaurantRepository: RestaurantRepository,
     private val destinationRepository: DestinationRepository,
     private val localFoodRepository: LocalFoodRepository,
+    private val imageMappingService: ImageMappingService,
 ) {
-    suspend fun createRestaurant(restaurantRequest: RestaurantRequest): RestaurantResponse {
+    suspend fun createRestaurant(
+        restaurantRequest: RestaurantRequest
+    ): RestaurantResponse {
         destinationRepository.findById(restaurantRequest.destinationId)
             ?: throw Exception("Destination with id ${restaurantRequest.destinationId} not found")
 
         restaurantRequest.localFoodIds.forEach {
             localFoodRepository.getById(it) ?: throw Exception("LocalFood with id $it not found")
         }
+        val resolvedImages = imageMappingService.resolveImages(
+            Gson().toJson(restaurantRequest.images),
+            restaurantRequest.tempUrlMap ?: emptyMap()
+        )
+        val requestWithResolvedImages = restaurantRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
 
-        val restaurant = restaurantRepository.createRestaurant(restaurantRequest)
+        val restaurant = restaurantRepository.createRestaurant(requestWithResolvedImages)
         val localFoods = restaurantRepository.getLocalFoodsForRestaurant(restaurant.id)
 
         return restaurant.copy(localFoods = localFoods).toRestaurantResponse()
@@ -34,7 +42,7 @@ class RestaurantService(
 
     suspend fun updateRestaurant(
         id: Long,
-        restaurantRequest: RestaurantRequest,
+        restaurantRequest: RestaurantRequest
     ) {
         restaurantRepository.getRestaurantById(id)
             ?: throw Exception("Restaurant with id $id not found")
@@ -46,7 +54,13 @@ class RestaurantService(
             localFoodRepository.getById(it) ?: throw Exception("LocalFood with id $it not found")
         }
 
-        restaurantRepository.updateRestaurant(id, restaurantRequest)
+        val resolvedImages = imageMappingService.resolveImages(
+            Gson().toJson(restaurantRequest.images),
+            restaurantRequest.tempUrlMap ?: emptyMap()
+        )
+        val requestWithResolvedImages = restaurantRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
+
+        restaurantRepository.updateRestaurant(id, requestWithResolvedImages)
     }
 
     suspend fun deleteRestaurant(id: Long) {

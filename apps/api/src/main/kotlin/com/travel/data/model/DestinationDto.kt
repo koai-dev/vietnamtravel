@@ -30,6 +30,7 @@ data class DestinationRequest(
     val type: String,
     val images: List<String>,
     val parentId: Long?,
+    val tempUrlMap: Map<String, String>? = null,
     val slug: String,
     val address: String?,
     val city: String?,

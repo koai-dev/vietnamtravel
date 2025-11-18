@@ -30,7 +30,7 @@ object DevDataSeeder {
                                 null
                             }
 
-                        val images = (1..Random.nextInt(3, 6)).map { j -> "https://example.com/hotel$i/image$j.jpg" }
+                        val images = (1..5).map { j -> "http://localhost:8080/uploads/dummy/img$j.jpg" }
                         val amenities = listOf("Pool", "WiFi", "Breakfast", "Gym", "Parking").shuffled().take(Random.nextInt(2, 5))
                         val tags =
                             listOf(
