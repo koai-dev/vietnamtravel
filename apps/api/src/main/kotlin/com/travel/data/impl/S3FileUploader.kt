@@ -8,19 +8,23 @@ import aws.smithy.kotlin.runtime.content.ByteStream
 import com.travel.core.UploadConfig
 import com.travel.domain.service.FileUploader
 import java.time.LocalDate
-import java.util.*
+import java.util.UUID
 
 class S3FileUploader(private val uploadConfig: UploadConfig) : FileUploader {
-
-    private val s3Client = S3Client {
-        region = uploadConfig.awsS3Region
-        credentialsProvider = StaticCredentialsProvider {
-            accessKeyId = uploadConfig.awsS3AccessKey
-            secretAccessKey = uploadConfig.awsS3SecretKey
+    private val s3Client =
+        S3Client {
+            region = uploadConfig.awsS3Region
+            credentialsProvider =
+                StaticCredentialsProvider {
+                    accessKeyId = uploadConfig.awsS3AccessKey
+                    secretAccessKey = uploadConfig.awsS3SecretKey
+                }
         }
-    }
 
-    override suspend fun upload(fileBytes: ByteArray, fileName: String): String {
+    override suspend fun upload(
+        fileBytes: ByteArray,
+        fileName: String,
+    ): String {
         val fileExtension = fileName.substringAfterLast('.', "")
         val newFileName = "${UUID.randomUUID()}.$fileExtension"
 

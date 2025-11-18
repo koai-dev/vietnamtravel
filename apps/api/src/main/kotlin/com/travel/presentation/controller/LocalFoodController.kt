@@ -8,7 +8,10 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 
 class LocalFoodController(private val localFoodService: LocalFoodService) : BaseController() {
-    suspend fun create(call: ApplicationCall, request: LocalFoodRequest) {
+    suspend fun create(
+        call: ApplicationCall,
+        request: LocalFoodRequest,
+    ) {
         val localFood =
             LocalFood(
                 id = 0,
@@ -48,12 +51,18 @@ class LocalFoodController(private val localFoodService: LocalFoodService) : Base
         }
     }
 
-    suspend fun delete(call: ApplicationCall, id: Long) {
+    suspend fun delete(
+        call: ApplicationCall,
+        id: Long,
+    ) {
         localFoodService.delete(id)
         respondWith(call, true, "Local Food deleted successfully")
     }
 
-    suspend fun getById(call: ApplicationCall, id: Long) {
+    suspend fun getById(
+        call: ApplicationCall,
+        id: Long,
+    ) {
         val localFood = localFoodService.getById(id)?.toResponse()
         if (localFood != null) {
             respondWith(call, localFood)
@@ -62,7 +71,10 @@ class LocalFoodController(private val localFoodService: LocalFoodService) : Base
         }
     }
 
-    suspend fun listByDestinationId(call: ApplicationCall, destinationId: Long) {
+    suspend fun listByDestinationId(
+        call: ApplicationCall,
+        destinationId: Long,
+    ) {
         val localFoods = localFoodService.listByDestinationId(destinationId).map { it.toResponse() }
         respondWith(call, localFoods)
     }

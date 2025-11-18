@@ -13,7 +13,10 @@ import io.ktor.server.application.ApplicationCall
 class AuthController(
     private val authService: AuthService,
 ) : BaseController() {
-    suspend fun register(call: ApplicationCall, request: RegisterRequest) {
+    suspend fun register(
+        call: ApplicationCall,
+        request: RegisterRequest,
+    ) {
         val user =
             User(
                 email = request.email,
@@ -27,7 +30,10 @@ class AuthController(
         respondWith(call, "User registered successfully")
     }
 
-    suspend fun login(call: ApplicationCall, request: LoginRequest) {
+    suspend fun login(
+        call: ApplicationCall,
+        request: LoginRequest,
+    ) {
         val tokenPair = authService.login(request.email, request.password)
         if (tokenPair != null) {
             respondWith(call, TokenResponse(tokenPair.accessToken, tokenPair.refreshToken))
@@ -36,7 +42,10 @@ class AuthController(
         }
     }
 
-    suspend fun refreshToken(call: ApplicationCall, request: RefreshTokenRequest) {
+    suspend fun refreshToken(
+        call: ApplicationCall,
+        request: RefreshTokenRequest,
+    ) {
         val tokenPair = authService.refreshToken(request.refreshToken)
         if (tokenPair != null) {
             respondWith(call, TokenResponse(tokenPair.accessToken, tokenPair.refreshToken))
@@ -45,7 +54,10 @@ class AuthController(
         }
     }
 
-    suspend fun logout(call: ApplicationCall, request: RefreshTokenRequest) {
+    suspend fun logout(
+        call: ApplicationCall,
+        request: RefreshTokenRequest,
+    ) {
         authService.logout(request.refreshToken)
         respondWith(call, "Logged out successfully")
     }

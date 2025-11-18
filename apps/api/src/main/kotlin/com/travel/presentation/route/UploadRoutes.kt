@@ -1,7 +1,9 @@
 package com.travel.presentation.route
 
 import com.travel.presentation.controller.UploadController
-import io.ktor.server.routing.*
+import io.ktor.server.routing.Route
+import io.ktor.server.routing.post
+import io.ktor.server.routing.route
 import org.koin.ktor.ext.inject
 
 fun Route.uploadRoutes() {

@@ -1,5 +1,6 @@
 package com.travel.domain.repository
 
+import com.travel.data.model.DestinationRequest
 import com.travel.domain.model.Destination
 import com.travel.domain.model.DestinationDetail
 
@@ -15,4 +16,6 @@ interface DestinationRepository {
     suspend fun findTree(id: Long): Destination?
 
     suspend fun listRoot(): List<Destination>
+    suspend fun create(request: DestinationRequest): Long
+    suspend fun update(id: Long, request: DestinationRequest): Int
 }

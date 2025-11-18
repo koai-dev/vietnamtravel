@@ -4,11 +4,13 @@ import com.travel.core.UploadConfig
 import com.travel.domain.service.FileUploader
 import java.io.File
 import java.time.LocalDate
-import java.util.*
+import java.util.UUID
 
 class LocalFileUploader(private val uploadConfig: UploadConfig) : FileUploader {
-
-    override suspend fun upload(fileBytes: ByteArray, fileName: String): String {
+    override suspend fun upload(
+        fileBytes: ByteArray,
+        fileName: String,
+    ): String {
         val fileExtension = fileName.substringAfterLast('.', "")
         val newFileName = "${UUID.randomUUID()}.$fileExtension"
 

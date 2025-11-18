@@ -6,6 +6,7 @@ import com.travel.data.model.UpdateUserRequest
 import com.travel.domain.repository.RedisRepository
 import com.travel.presentation.controller.UserController
 import io.ktor.server.application.call
+import io.ktor.server.application.install
 import io.ktor.server.auth.authenticate
 import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.principal

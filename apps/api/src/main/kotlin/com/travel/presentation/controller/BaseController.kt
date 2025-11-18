@@ -6,10 +6,10 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.response.respond
 
 open class BaseController {
-    suspend fun <T: Any> respondWith(
+    suspend fun <T : Any> respondWith(
         call: ApplicationCall,
         result: T,
-        message: String = "Success"
+        message: String = "Success",
     ) {
         call.respond(HttpStatusCode.OK, ApiResult.Success(result, message))
     }
@@ -17,7 +17,7 @@ open class BaseController {
     suspend fun respondWithError(
         call: ApplicationCall,
         message: String,
-        code: HttpStatusCode = HttpStatusCode.BadRequest
+        code: HttpStatusCode = HttpStatusCode.BadRequest,
     ) {
         call.respond(code, ApiResult.Error(message, code))
     }

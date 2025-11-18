@@ -8,7 +8,10 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 
 class HotelController(private val hotelService: HotelService) : BaseController() {
-    suspend fun createHotel(call: ApplicationCall, hotelRequest: HotelRequest) {
+    suspend fun createHotel(
+        call: ApplicationCall,
+        hotelRequest: HotelRequest,
+    ) {
         val lang = call.lang()
         val hotelResponse = hotelService.createHotel(hotelRequest, lang)
         respondWith(call, hotelResponse)
@@ -20,7 +23,10 @@ class HotelController(private val hotelService: HotelService) : BaseController()
         respondWith(call, hotels)
     }
 
-    suspend fun getHotelById(call: ApplicationCall, id: Long) {
+    suspend fun getHotelById(
+        call: ApplicationCall,
+        id: Long,
+    ) {
         val lang = call.lang()
         val hotel = hotelService.getHotelById(id, lang)
         if (hotel != null) {
@@ -30,7 +36,10 @@ class HotelController(private val hotelService: HotelService) : BaseController()
         }
     }
 
-    suspend fun getHotelBySlug(call: ApplicationCall, slug: String) {
+    suspend fun getHotelBySlug(
+        call: ApplicationCall,
+        slug: String,
+    ) {
         val lang = call.lang()
         val hotel = hotelService.getHotelBySlug(slug, lang)
         if (hotel != null) {
@@ -40,7 +49,11 @@ class HotelController(private val hotelService: HotelService) : BaseController()
         }
     }
 
-    suspend fun updateHotel(call: ApplicationCall, id: Long, hotelRequest: HotelRequest) {
+    suspend fun updateHotel(
+        call: ApplicationCall,
+        id: Long,
+        hotelRequest: HotelRequest,
+    ) {
         val lang = call.lang()
         val updatedHotel = hotelService.updateHotel(id, hotelRequest, lang)
         if (updatedHotel != null) {
@@ -50,7 +63,10 @@ class HotelController(private val hotelService: HotelService) : BaseController()
         }
     }
 
-    suspend fun deleteHotel(call: ApplicationCall, id: Long) {
+    suspend fun deleteHotel(
+        call: ApplicationCall,
+        id: Long,
+    ) {
         val deleted = hotelService.deleteHotel(id)
         if (deleted) {
             respondWith(call, true, "Hotel deleted successfully")
@@ -59,7 +75,10 @@ class HotelController(private val hotelService: HotelService) : BaseController()
         }
     }
 
-    suspend fun incrementViewCount(call: ApplicationCall, id: Long) {
+    suspend fun incrementViewCount(
+        call: ApplicationCall,
+        id: Long,
+    ) {
         val success = hotelService.incrementViews(id)
         if (success) {
             respondWith(call, true, "View count incremented")
@@ -68,7 +87,11 @@ class HotelController(private val hotelService: HotelService) : BaseController()
         }
     }
 
-    suspend fun updateRating(call: ApplicationCall, id: Long, ratingUpdateRequest: RatingUpdateRequest) {
+    suspend fun updateRating(
+        call: ApplicationCall,
+        id: Long,
+        ratingUpdateRequest: RatingUpdateRequest,
+    ) {
         val success = hotelService.updateRating(id, ratingUpdateRequest)
         if (success) {
             respondWith(call, true, "Rating updated successfully")

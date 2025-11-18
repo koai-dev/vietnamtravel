@@ -1,5 +1,6 @@
 package com.travel.domain.service
 
+import com.google.gson.Gson
 import com.travel.data.model.DestinationRequest
 import com.travel.domain.model.Destination
 import com.travel.domain.model.DestinationDetail
@@ -65,19 +66,24 @@ class DestinationService(
     }
 
     suspend fun create(destinationRequest: DestinationRequest): Long {
-        val resolvedImages = imageMappingService.resolveImages(
-            Gson().toJson(destinationRequest.images),
-            destinationRequest.tempUrlMap ?: emptyMap()
-        )
+        val resolvedImages =
+            imageMappingService.resolveImages(
+                Gson().toJson(destinationRequest.images),
+                destinationRequest.tempUrlMap ?: emptyMap(),
+            )
         val requestWithResolvedImages = destinationRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
         return destinationRepository.create(requestWithResolvedImages)
     }
 
-    suspend fun update(id: Long, destinationRequest: DestinationRequest) {
-        val resolvedImages = imageMappingService.resolveImages(
-            Gson().toJson(destinationRequest.images),
-            destinationRequest.tempUrlMap ?: emptyMap()
-        )
+    suspend fun update(
+        id: Long,
+        destinationRequest: DestinationRequest,
+    ) {
+        val resolvedImages =
+            imageMappingService.resolveImages(
+                Gson().toJson(destinationRequest.images),
+                destinationRequest.tempUrlMap ?: emptyMap(),
+            )
         val requestWithResolvedImages = destinationRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
         destinationRepository.update(id, requestWithResolvedImages)
     }

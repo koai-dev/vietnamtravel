@@ -5,7 +5,6 @@ import com.google.gson.reflect.TypeToken
 import com.travel.helper.upload.ImageUrlResolver
 
 class ImageMappingService {
-
     private val gson = Gson()
     private val listType = object : TypeToken<List<String>>() {}.type
 
@@ -16,14 +15,20 @@ class ImageMappingService {
      *
      * For this implementation, we will simulate this by requiring a pre-filled map.
      */
-    fun resolveImages(imageJson: String?, tempUrlMap: Map<String, String>): String {
-       return ImageUrlResolver.resolveImages(imageJson, tempUrlMap)
+    fun resolveImages(
+        imageJson: String?,
+        tempUrlMap: Map<String, String>,
+    ): String {
+        return ImageUrlResolver.resolveImages(imageJson, tempUrlMap)
     }
 
     /**
      * Resolves a single image URL.
      */
-     fun resolveImage(imageUrl: String?, tempUrlMap: Map<String, String>): String? {
+    fun resolveImage(
+        imageUrl: String?,
+        tempUrlMap: Map<String, String>,
+    ): String? {
         return ImageUrlResolver.resolveImage(imageUrl, tempUrlMap)
     }
 }

@@ -5,10 +5,13 @@ import com.travel.data.model.DestinationRequest
 import com.travel.domain.service.DestinationService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
-import io.ktor.server.request.*
+import io.ktor.server.request.receive
 
 class DestinationController(private val destinationService: DestinationService) : BaseController() {
-    suspend fun getAll(call: ApplicationCall, lang: String) {
+    suspend fun getAll(
+        call: ApplicationCall,
+        lang: String,
+    ) {
         val destinations = destinationService.getAll(lang).map { it.toDestinationResponse(lang) }
         respondWith(call, destinations)
     }
@@ -52,7 +55,10 @@ class DestinationController(private val destinationService: DestinationService) 
         }
     }
 
-    suspend fun getRootDestinations(call: ApplicationCall, lang: String) {
+    suspend fun getRootDestinations(
+        call: ApplicationCall,
+        lang: String,
+    ) {
         val destinations = destinationService.getRootDestinations().map { it.toDestinationResponse(lang) }
         respondWith(call, destinations)
     }
@@ -60,10 +66,13 @@ class DestinationController(private val destinationService: DestinationService) 
     suspend fun create(call: ApplicationCall) {
         val request = call.receive<DestinationRequest>()
         val newId = destinationService.create(request)
-        respondWith(call, mapOf("id" to newId), HttpStatusCode.Created)
+        respondWith(call, mapOf("id" to newId))
     }
 
-    suspend fun update(call: ApplicationCall, id: Long) {
+    suspend fun update(
+        call: ApplicationCall,
+        id: Long,
+    ) {
         val request = call.receive<DestinationRequest>()
         destinationService.update(id, request)
         respondWith(call, mapOf("success" to true))

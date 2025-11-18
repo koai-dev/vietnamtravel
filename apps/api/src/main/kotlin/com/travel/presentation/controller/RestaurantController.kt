@@ -6,12 +6,18 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 
 class RestaurantController(private val restaurantService: RestaurantService) : BaseController() {
-    suspend fun createRestaurant(call: ApplicationCall, restaurantRequest: RestaurantRequest) {
+    suspend fun createRestaurant(
+        call: ApplicationCall,
+        restaurantRequest: RestaurantRequest,
+    ) {
         val restaurant = restaurantService.createRestaurant(restaurantRequest)
         respondWith(call, restaurant)
     }
 
-    suspend fun getRestaurantById(call: ApplicationCall, id: Long) {
+    suspend fun getRestaurantById(
+        call: ApplicationCall,
+        id: Long,
+    ) {
         val restaurant = restaurantService.getRestaurantById(id)
         if (restaurant != null) {
             respondWith(call, restaurant)
@@ -33,12 +39,18 @@ class RestaurantController(private val restaurantService: RestaurantService) : B
         }
     }
 
-    suspend fun deleteRestaurant(call: ApplicationCall, id: Long) {
+    suspend fun deleteRestaurant(
+        call: ApplicationCall,
+        id: Long,
+    ) {
         restaurantService.deleteRestaurant(id)
         respondWith(call, true, "Restaurant deleted successfully")
     }
 
-    suspend fun getRestaurantsByDestinationId(call: ApplicationCall, destinationId: Long) {
+    suspend fun getRestaurantsByDestinationId(
+        call: ApplicationCall,
+        destinationId: Long,
+    ) {
         val restaurants = restaurantService.getRestaurantsByDestinationId(destinationId)
         respondWith(call, restaurants)
     }

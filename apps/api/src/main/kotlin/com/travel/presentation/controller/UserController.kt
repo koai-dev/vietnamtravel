@@ -22,7 +22,10 @@ class UserController(
         respondWith(call, users)
     }
 
-    suspend fun getMe(call: ApplicationCall, principal: JWTPrincipal) {
+    suspend fun getMe(
+        call: ApplicationCall,
+        principal: JWTPrincipal,
+    ) {
         val userId = principal.payload.getClaim("userId").asLong()
         val user = userService.getUser(userId)?.toUserResponse()
         if (user != null) {
@@ -32,7 +35,10 @@ class UserController(
         }
     }
 
-    suspend fun createUser(call: ApplicationCall, request: CreateUserRequest) {
+    suspend fun createUser(
+        call: ApplicationCall,
+        request: CreateUserRequest,
+    ) {
         val user =
             User(
                 email = request.email,
@@ -60,7 +66,10 @@ class UserController(
         }
     }
 
-    suspend fun deleteUser(call: ApplicationCall, id: Long) {
+    suspend fun deleteUser(
+        call: ApplicationCall,
+        id: Long,
+    ) {
         userService.deleteUser(id)
         respondWith(call, true, "User deleted successfully")
     }

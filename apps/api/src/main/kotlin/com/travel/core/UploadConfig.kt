@@ -10,7 +10,7 @@ data class UploadConfig(
     val awsS3Region: String,
     val awsS3AccessKey: String,
     val awsS3SecretKey: String,
-    val awsCloudfrontDomain: String
+    val awsCloudfrontDomain: String,
 )
 
 fun loadUploadConfig(dotenv: Dotenv): UploadConfig {
@@ -22,6 +22,6 @@ fun loadUploadConfig(dotenv: Dotenv): UploadConfig {
         awsS3Region = dotenv["AWS_S3_REGION"] ?: "",
         awsS3AccessKey = dotenv["AWS_S3_ACCESS_KEY"] ?: "",
         awsS3SecretKey = dotenv["AWS_S3_SECRET_KEY"] ?: "",
-        awsCloudfrontDomain = dotenv["AWS_CLOUDFRONT_DOMAIN"] ?: ""
+        awsCloudfrontDomain = dotenv["AWS_CLOUDFRONT_DOMAIN"] ?: "",
     )
 }

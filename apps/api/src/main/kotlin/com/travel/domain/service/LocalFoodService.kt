@@ -1,5 +1,6 @@
 package com.travel.domain.service
 
+import com.google.gson.Gson
 import com.travel.domain.model.LocalFood
 import com.travel.domain.repository.DestinationRepository
 import com.travel.domain.repository.LocalFoodRepository
@@ -9,27 +10,27 @@ class LocalFoodService(
     private val destinationRepository: DestinationRepository,
     private val imageMappingService: ImageMappingService,
 ) {
-    suspend fun create(
-        localFood: LocalFood
-    ): LocalFood {
+    suspend fun create(localFood: LocalFood): LocalFood {
         validateDestination(localFood.destinationId)
-        val resolvedImages = imageMappingService.resolveImages(
-            Gson().toJson(localFood.images),
-            localFood.tempUrlMap ?: emptyMap()
-        )
+        val resolvedImages =
+            imageMappingService.resolveImages(
+                Gson().toJson(localFood.images),
+                localFood.tempUrlMap ?: emptyMap(),
+            )
         val localFoodWithResolvedImages = localFood.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
         return localFoodRepository.create(localFoodWithResolvedImages)
     }
 
     suspend fun update(
         id: Long,
-        localFood: LocalFood
+        localFood: LocalFood,
     ): LocalFood? {
         validateDestination(localFood.destinationId)
-        val resolvedImages = imageMappingService.resolveImages(
-            Gson().toJson(localFood.images),
-            localFood.tempUrlMap ?: emptyMap()
-        )
+        val resolvedImages =
+            imageMappingService.resolveImages(
+                Gson().toJson(localFood.images),
+                localFood.tempUrlMap ?: emptyMap(),
+            )
         val localFoodWithResolvedImages = localFood.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
         return localFoodRepository.update(id, localFoodWithResolvedImages)
     }

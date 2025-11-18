@@ -1,13 +1,17 @@
 package com.travel.data.impl
 
+import com.travel.data.model.DestinationRequest
+import com.travel.data.table.DestinationStatus
+import com.travel.data.table.DestinationType
 import com.travel.data.table.Destinations
 import com.travel.domain.model.Destination
 import com.travel.domain.model.DestinationDetail
 import com.travel.domain.repository.DestinationRepository
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import java.time.LocalDateTime
 
 class DestinationRepositoryImpl : DestinationRepository {
     override suspend fun getAll(): List<Destination> =
@@ -38,6 +42,117 @@ class DestinationRepositoryImpl : DestinationRepository {
         newSuspendedTransaction {
             Destinations.selectAll().where { Destinations.parentId.isNull<Long?>() }.map { it.toDestination() }
         }
+
+    override suspend fun create(request: DestinationRequest): Long = newSuspendedTransaction {
+        Destinations.insert { row ->
+
+            row[nameVi] = request.nameVi
+            row[nameEn] = request.nameEn
+            row[descriptionVi] = request.descriptionVi
+            row[descriptionEn] = request.descriptionEn
+
+            row[latitude] = request.latitude
+            row[longitude] = request.longitude
+
+            row[type] = DestinationType.valueOf(request.type)
+
+            // JSON encode
+            row[images] = Json.encodeToString(request.images)
+            row[tags] = Json.encodeToString(request.tags)
+            row[externalLinks] = Json.encodeToString(request.externalLinks)
+
+            row[parentId] = request.parentId
+
+            row[slug] = request.slug
+            row[address] = request.address
+            row[city] = request.city
+
+            row[bestTimeToVisit] = request.bestTimeToVisit
+            row[openingHours] = request.openingHours
+
+            row[priceFrom] = request.priceFrom?.toBigDecimal()
+            row[priceTo] = request.priceTo?.toBigDecimal()
+
+            row[addressLink] = request.addressLink
+
+            row[status] = DestinationStatus.valueOf(request.status)
+            row[sortOrder] = request.sortOrder
+
+            row[createdAt] = LocalDateTime.now()
+            row[updatedAt] = LocalDateTime.now()
+        } get Destinations.id
+    }
+
+    override suspend fun update(id: Long, request: DestinationRequest) = newSuspendedTransaction {
+
+        Destinations.update({ Destinations.id eq id }) { row ->
+
+            fun updateIfNotBlank(field: Column<String?>, value: String?) {
+                if (!value.isNullOrBlank()) row[field] = value
+            }
+
+            fun updateIfNotNull(field: Column<Double?>, value: Double?) {
+                if (value != null) row[field] = value
+            }
+
+            fun updateIfNotNullInt(field: Column<Int>, value: Int?) {
+                if (value != null) row[field] = value
+            }
+
+            fun updateIfNotNullLong(field: Column<Long?>, value: Long?) {
+                if (value != null) row[field] = value
+            }
+
+            fun updateIfListNotEmpty(field: Column<String?>, list: List<String>?) {
+                if (!list.isNullOrEmpty()) {
+                    row[field] = Json.encodeToString(list)
+                }
+            }
+
+            // Strings
+            updateIfNotBlank(Destinations.nameVi, request.nameVi)
+            updateIfNotBlank(Destinations.nameEn, request.nameEn)
+            updateIfNotBlank(Destinations.descriptionVi, request.descriptionVi)
+            updateIfNotBlank(Destinations.descriptionEn, request.descriptionEn)
+            updateIfNotBlank(Destinations.slug, request.slug)
+            updateIfNotBlank(Destinations.address, request.address)
+            updateIfNotBlank(Destinations.city, request.city)
+            updateIfNotBlank(Destinations.bestTimeToVisit, request.bestTimeToVisit)
+            updateIfNotBlank(Destinations.openingHours, request.openingHours)
+            updateIfNotBlank(Destinations.addressLink, request.addressLink)
+
+            // Numbers
+            updateIfNotNull(Destinations.latitude, request.latitude)
+            updateIfNotNull(Destinations.longitude, request.longitude)
+
+            // Prices
+            if (request.priceFrom != null) row[Destinations.priceFrom] = request.priceFrom.toBigDecimal()
+            if (request.priceTo != null) row[Destinations.priceTo] = request.priceTo.toBigDecimal()
+
+            // Enums
+            if (request.type.isNotBlank()) {
+                row[Destinations.type] = DestinationType.valueOf(request.type)
+            }
+            if (request.status.isNotBlank()) {
+                row[Destinations.status] = DestinationStatus.valueOf(request.status)
+            }
+
+            // ParentId
+            updateIfNotNullLong(Destinations.parentId, request.parentId)
+
+            // JSON Lists
+            updateIfListNotEmpty(Destinations.images, request.images)
+            updateIfListNotEmpty(Destinations.tags, request.tags)
+            updateIfListNotEmpty(Destinations.externalLinks, request.externalLinks)
+
+            // Sort Order
+            updateIfNotNullInt(Destinations.sortOrder, request.sortOrder)
+
+            // Update timestamp
+            row[Destinations.updatedAt] = LocalDateTime.now()
+        }
+    }
+
 
     private suspend fun buildTree(node: Destination): Destination {
         val children = findChildren(node.id).map { buildTree(it) }

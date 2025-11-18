@@ -6,7 +6,10 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 
 class TourController(private val tourService: TourService) : BaseController() {
-    suspend fun getAll(call: ApplicationCall, lang: String) {
+    suspend fun getAll(
+        call: ApplicationCall,
+        lang: String,
+    ) {
         val tours = tourService.getAll().map { it.toTourResponse(lang) }
         respondWith(call, tours)
     }
@@ -24,7 +27,10 @@ class TourController(private val tourService: TourService) : BaseController() {
         }
     }
 
-    suspend fun getPopular(call: ApplicationCall, lang: String) {
+    suspend fun getPopular(
+        call: ApplicationCall,
+        lang: String,
+    ) {
         val tours = tourService.getPopular(lang).map { it.toTourResponse(lang) }
         respondWith(call, tours)
     }

@@ -5,12 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="caee4c1f-c5e6-43e6-848c-09e967c410a2" name="Changes" comment="add design">
-      <change afterPath="$PROJECT_DIR$/apps/web/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/UploadController.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src.main.kotlin.com.travel.presentation.controller.UploadController.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/core/UploadConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/core/UploadConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/data/impl/LocalFileUploader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/data/impl/LocalFileUploader.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/data/impl/S3FileUploader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/data/impl/S3FileUploader.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/DestinationService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/DestinationService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/FileUploader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/FileUploader.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/ImageMappingService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/ImageMappingService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/LocalFoodService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/LocalFoodService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/RestaurantService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/RestaurantService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/UploadService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/domain/service/UploadService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/helper/upload/FileValidator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/helper/upload/FileValidator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/helper/upload/ImageUrlResolver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/helper/upload/ImageUrlResolver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/plugins/Validation.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/plugins/Validation.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/AuthController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/AuthController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/BaseController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/BaseController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/DestinationController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/DestinationController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/HotelController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/HotelController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/LocalFoodController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/LocalFoodController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/RestaurantController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/RestaurantController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/TourController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/TourController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/UserController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/controller/UserController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/route/UploadRoutes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/api/src/main/kotlin/com/travel/presentation/route/UploadRoutes.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web/next-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/next-env.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/postcss.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,33 +77,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "develop",
-    "javascript.nodejs.core.library.configured.version": "24.11.1",
-    "javascript.nodejs.core.library.typings.version": "24.10.1",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/vsf/StudioProjects/vietnamtravel",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.dev:api.executor": "Run",
-    "npm.dev:web.executor": "Run",
-    "npm.web > dev.executor": "Run",
-    "npm.web > start.executor": "Run",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "/Users/vsf/StudioProjects/vietnamtravel/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;24.11.1&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;24.10.1&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/vsf/StudioProjects/vietnamtravel&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev:api.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev:web.executor&quot;: &quot;Run&quot;,
+    &quot;npm.web &gt; dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.web &gt; start.executor&quot;: &quot;Run&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/vsf/StudioProjects/vietnamtravel/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/apps/web/design" />
@@ -176,7 +205,9 @@
       <workItem from="1763290536907" duration="2822000" />
       <workItem from="1763302307202" duration="598000" />
       <workItem from="1763314309314" duration="4295000" />
-      <workItem from="1763398437845" duration="4014000" />
+      <workItem from="1763398437845" duration="8031000" />
+      <workItem from="1763434253627" duration="2000" />
+      <workItem from="1763437166321" duration="4590000" />
     </task>
     <task id="LOCAL-00003" summary="feat(cms): Refactor user creation form and add new UI components&#10;&#10;- Adds new reusable `Card` and `Select` components from `shadcn/ui`.&#10;- Refactors the `/dashboard/users/new` page to use the new `Card` and `Select` components, improving the form's layout and user experience.&#10;- Replaces the native `&lt;select&gt;` element with the new custom `Select` component for role selection.&#10;- Updates dependencies to include `@radix-ui/react-select`.">
       <option name="closed" value="true" />
@@ -194,7 +225,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763403132579</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add design">
+      <option name="closed" value="true" />
+      <created>1763405887609</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1763405887609</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

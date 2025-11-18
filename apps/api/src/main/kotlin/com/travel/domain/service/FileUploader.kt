@@ -8,5 +8,8 @@ interface FileUploader {
      * @param fileName The original name of the file, used to determine the extension.
      * @return The publicly accessible URL of the uploaded file.
      */
-    suspend fun upload(fileBytes: ByteArray, fileName: String): String
+    suspend fun upload(
+        fileBytes: ByteArray,
+        fileName: String,
+    ): String
 }

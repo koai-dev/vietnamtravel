@@ -1,7 +1,8 @@
 package com.travel.helper.upload
 
-import io.ktor.http.content.*
-import java.util.*
+import io.ktor.http.content.PartData
+import io.ktor.http.content.streamProvider
+import java.util.Locale
 
 object FileValidator {
     private val ALLOWED_EXTENSIONS = setOf("jpg", "jpeg", "png", "webp")
@@ -26,5 +27,6 @@ object FileValidator {
 
 sealed class ValidationResult {
     data class Valid(val bytes: ByteArray, val originalName: String, val extension: String) : ValidationResult()
+
     data class Invalid(val message: String) : ValidationResult()
 }
