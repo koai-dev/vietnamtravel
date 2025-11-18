@@ -1,17 +1,39 @@
 
-> cms@0.1.0 dev
-> next dev --port 3011 --hostname 0.0.0.0
+> dev
+> concurrently "npm:dev:web" "npm:dev:api" --workspace=web
 
- ⨯ Failed to start server
-Error: listen EADDRINUSE: address already in use 0.0.0.0:3011
-    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
-    at listenInCluster (node:net:1997:12)
-    at node:net:2206:7
-    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
-  code: 'EADDRINUSE',
-  errno: -98,
-  syscall: 'listen',
-  address: '0.0.0.0',
-  port: 3011
-}
-[?25h
+[dev:web]
+[dev:web] > dev:web
+[dev:web] > npm run dev --workspace=apps/web
+[dev:web]
+[dev:api]
+[dev:api] > dev:api
+[dev:api] > npm run dev --workspace=apps/api
+[dev:api]
+[dev:api] npm error No workspaces found:
+[dev:api] npm error   --workspace=apps/api
+[dev:api] npm error A complete log of this run can be found in: /home/jules/.npm/_logs/2025-11-18T04_37_26_579Z-debug-0.log
+[dev:web]
+[dev:web] > web@1.0.0 dev
+[dev:web] > next dev
+[dev:web]
+[dev:api] npm run dev:api exited with code 1
+[dev:web]   ▲ Next.js 14.2.33
+[dev:web]   - Local:        http://localhost:3000
+[dev:web]
+[dev:web]  ✓ Starting...
+[dev:web] Attention: Next.js now collects completely anonymous telemetry regarding usage.
+[dev:web] This information is used to shape Next.js' roadmap and prioritize features.
+[dev:web] You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+[dev:web] https://nextjs.org/telemetry
+[dev:web]
+[dev:web] It looks like you're trying to use TypeScript but do not have the required package(s) installed.
+[dev:web] Installing dependencies
+[dev:web]
+[dev:web] If you are not trying to use TypeScript, please remove the tsconfig.json file from your package root (and any TypeScript files in your pages directory).
+[dev:web]
+[dev:web]
+[dev:web] Installing devDependencies (npm):
+[dev:web] - @types/react
+[dev:web] - @types/node
+[dev:web]
