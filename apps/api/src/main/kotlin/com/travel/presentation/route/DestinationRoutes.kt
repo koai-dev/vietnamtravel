@@ -56,5 +56,18 @@ fun Route.destinationRoutes() {
                 call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
             }
         }
+
+        post {
+            destinationController.create(call)
+        }
+
+        put("/{id}") {
+            val id = call.parameters["id"]?.toLongOrNull()
+            if (id != null) {
+                destinationController.update(call, id)
+            } else {
+                call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
+            }
+        }
     }
 }

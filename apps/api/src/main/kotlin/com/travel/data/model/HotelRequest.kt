@@ -17,6 +17,7 @@ data class HotelRequest(
     val addressLink: String?,
     val contact: ContactInfoRequest?,
     val images: List<String>?,
+    val tempUrlMap: Map<String, String>? = null,
     val minPrice: Double?,
     val maxPrice: Double?,
     val amenities: List<String>?,

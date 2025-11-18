@@ -11,4 +11,5 @@ data class LocalFood(
     val descriptionVi: String?,
     val descriptionEn: String?,
     val images: List<String>,
+    val tempUrlMap: Map<String, String>? = null,
 )

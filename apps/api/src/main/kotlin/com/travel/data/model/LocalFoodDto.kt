@@ -11,6 +11,7 @@ data class LocalFoodRequest(
     val descriptionVi: String?,
     val descriptionEn: String?,
     val images: List<String>,
+    val tempUrlMap: Map<String, String>? = null,
 )
 
 fun LocalFoodRequest.validate(): ValidationResult {

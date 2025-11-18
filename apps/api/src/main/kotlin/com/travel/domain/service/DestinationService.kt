@@ -1,5 +1,6 @@
 package com.travel.domain.service
 
+import com.travel.data.model.DestinationRequest
 import com.travel.domain.model.Destination
 import com.travel.domain.model.DestinationDetail
 import com.travel.domain.repository.DestinationRepository
@@ -12,6 +13,7 @@ class DestinationService(
     private val redisRepository: RedisRepository,
     private val localFoodRepository: LocalFoodRepository,
     private val restaurantRepository: RestaurantRepository,
+    private val imageMappingService: ImageMappingService,
 ) {
     suspend fun getAll(lang: String): List<Destination> {
         val key = "destinations:all:$lang"
@@ -60,5 +62,23 @@ class DestinationService(
             val restaurants = restaurantRepository.getRestaurantsByDestinationId(destination.id)
             destination.copy(foods = foods, restaurants = restaurants)
         }
+    }
+
+    suspend fun create(destinationRequest: DestinationRequest): Long {
+        val resolvedImages = imageMappingService.resolveImages(
+            Gson().toJson(destinationRequest.images),
+            destinationRequest.tempUrlMap ?: emptyMap()
+        )
+        val requestWithResolvedImages = destinationRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
+        return destinationRepository.create(requestWithResolvedImages)
+    }
+
+    suspend fun update(id: Long, destinationRequest: DestinationRequest) {
+        val resolvedImages = imageMappingService.resolveImages(
+            Gson().toJson(destinationRequest.images),
+            destinationRequest.tempUrlMap ?: emptyMap()
+        )
+        val requestWithResolvedImages = destinationRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
+        destinationRepository.update(id, requestWithResolvedImages)
     }
 }

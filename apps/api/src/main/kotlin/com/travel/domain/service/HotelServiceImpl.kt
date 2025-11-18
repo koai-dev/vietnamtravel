@@ -8,7 +8,10 @@ import com.travel.helper.toSlug
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelService {
+class HotelServiceImpl(
+    private val hotelRepository: HotelRepository,
+    private val imageMappingService: ImageMappingService,
+) : HotelService {
     private fun HotelResponse.toLocale(lang: String): HotelResponse {
         return this.copy(
             name = if (lang == "vi") this.nameVi else this.nameEn,
@@ -29,6 +32,12 @@ class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelServ
             throw IllegalArgumentException("Slug '${hotelRequest.slug}' already exists.")
         }
 
+        val resolvedImages =
+            imageMappingService.resolveImages(
+                hotelRequest.images?.let { Json.encodeToString(it) },
+                hotelRequest.tempUrlMap ?: emptyMap(),
+            )
+
         val hotel =
             hotelRepository.createHotel(
                 nameVi = hotelRequest.nameVi,
@@ -42,7 +51,7 @@ class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelServ
                 longitude = hotelRequest.longitude,
                 addressLink = hotelRequest.addressLink,
                 contact = hotelRequest.contact?.let { Json.encodeToString(it) },
-                images = hotelRequest.images?.let { Json.encodeToString(it) },
+                images = resolvedImages,
                 minPrice = hotelRequest.minPrice,
                 maxPrice = hotelRequest.maxPrice,
                 amenities = hotelRequest.amenities?.let { Json.encodeToString(it) },
@@ -91,6 +100,12 @@ class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelServ
             throw IllegalArgumentException("Slug '${hotelRequest.slug}' already exists.")
         }
 
+        val resolvedImages =
+            imageMappingService.resolveImages(
+                hotelRequest.images?.let { Json.encodeToString(it) },
+                hotelRequest.tempUrlMap ?: emptyMap(),
+            )
+
         val updatedHotel =
             hotelRepository.updateHotel(
                 id = id,
@@ -105,7 +120,7 @@ class HotelServiceImpl(private val hotelRepository: HotelRepository) : HotelServ
                 longitude = hotelRequest.longitude,
                 addressLink = hotelRequest.addressLink,
                 contact = hotelRequest.contact?.let { Json.encodeToString(it) },
-                images = hotelRequest.images?.let { Json.encodeToString(it) },
+                images = resolvedImages,
                 minPrice = hotelRequest.minPrice,
                 maxPrice = hotelRequest.maxPrice,
                 amenities = hotelRequest.amenities?.let { Json.encodeToString(it) },
