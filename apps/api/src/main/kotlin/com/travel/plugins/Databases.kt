@@ -55,6 +55,6 @@ fun Application.configureDatabase() {
         }
     } else {
         logger.info("Skipping Flyway migration for H2 database, seeding data.")
-        devSeeder.seedNotifications()
+//        devSeeder.seedNotifications()
     }
 }
