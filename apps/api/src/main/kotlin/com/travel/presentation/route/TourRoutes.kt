@@ -5,6 +5,7 @@ import com.travel.core.lang
 import com.travel.domain.repository.RedisRepository
 import com.travel.presentation.controller.TourController
 import io.ktor.server.application.call
+import io.ktor.server.application.install
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.get
 import io.ktor.server.routing.route

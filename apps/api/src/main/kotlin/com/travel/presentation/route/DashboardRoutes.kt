@@ -22,7 +22,7 @@ fun Route.dashboardRoutes() {
         get("/users/new") {
             val limit = call.request.queryParameters["limit"]?.toIntOrNull() ?: 20
             val offset = call.request.queryParameters["offset"]?.toIntOrNull() ?: 0
-            val users = userController.getNewUsers(limit, offset)
+            val users = userController.getNewUsers(call,limit, offset)
             call.respond(users)
         }
     }

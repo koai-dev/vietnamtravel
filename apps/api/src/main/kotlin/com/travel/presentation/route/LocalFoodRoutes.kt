@@ -5,6 +5,7 @@ import com.travel.data.model.LocalFoodRequest
 import com.travel.domain.repository.RedisRepository
 import com.travel.presentation.controller.LocalFoodController
 import io.ktor.server.application.call
+import io.ktor.server.application.install
 import io.ktor.server.request.receive
 import io.ktor.server.routing.Route
 import io.ktor.server.routing.delete
