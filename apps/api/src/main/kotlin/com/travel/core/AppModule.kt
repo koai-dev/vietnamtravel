@@ -65,5 +65,4 @@ val appModule =
         single { RestaurantController(get()) }
         single { NotificationController(get()) }
         single { UploadController(get()) }
-        single { com.travel.seeder.DevSeeder(get()) }
     }

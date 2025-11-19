@@ -36,6 +36,7 @@ fun Application.module() {
     if (environment.developmentMode) {
         kotlinx.coroutines.runBlocking {
             com.travel.core.DevDataSeeder.seedHotelsIfEmpty()
+            com.travel.seeder.DevSeeder.seedAdminUser()
         }
     }
     configureValidation()
