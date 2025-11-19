@@ -15,7 +15,7 @@ object Config {
     val dbH2User = "sa"
     val dbH2Password = ""
 
-    val redisHost = env["REDIS_HOST"] ?: "localhost"
+    val redisHost = env["REDIS_HOST"] ?: "127.0.0.1"
     val redisPort = env["REDIS_PORT"]?.toInt() ?: 6379
     val s3Endpoint = env["S3_ENDPOINT"] ?: "http://localhost:9000"
     val s3Bucket = env["S3_BUCKET"] ?: "travel-images"
