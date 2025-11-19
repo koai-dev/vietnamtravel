@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import * as api from './api';
 
 interface User {
   id: number;
@@ -21,33 +22,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    // Check if user is logged in from localStorage
-    const storedUser = localStorage.getItem('cms_user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
+    const initAuth = async () => {
+      const token = localStorage.getItem('access_token');
+      if (token) {
+        try {
+          const userData = await api.getMe();
+          setUser(userData.data);
+        } catch (error) {
+          console.error('Failed to fetch user data', error);
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
+        }
+      }
+    };
+    initAuth();
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {
-    // Mock login - in production, this would call the real API
-    if (email && password) {
-      const mockUser: User = {
-        id: 1,
-        email: email,
-        name: 'Admin User',
-        role: 'admin',
-        avatarUrl: 'https://ui-avatars.com/api/?name=Admin+User&background=3b82f6&color=fff'
-      };
-      setUser(mockUser);
-      localStorage.setItem('cms_user', JSON.stringify(mockUser));
+    try {
+      const response = await api.login(email, password);
+      localStorage.setItem('access_token', response.data.accessToken);
+      localStorage.setItem('refresh_token', response.data.refreshToken);
+      const userData = await api.getMe();
+      setUser(userData.data);
       return true;
+    } catch (error) {
+      console.error('Login failed', error);
+      return false;
     }
-    return false;
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('cms_user');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
   };
 
   return (
