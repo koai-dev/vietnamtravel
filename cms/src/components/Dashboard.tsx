@@ -1,5 +1,6 @@
+// @ts-ignore
 import React, { useEffect, useState } from 'react';
-import { mockApi } from '../services/mockApi';
+import { getDashboardStats } from '../services/api';
 import { MapPin, Hotel, Calendar, Users, DollarSign, Clock } from 'lucide-react';
 
 export const Dashboard: React.FC = () => {
@@ -13,7 +14,7 @@ export const Dashboard: React.FC = () => {
   const loadStats = async () => {
     setLoading(true);
     try {
-      const data = await mockApi.getDashboardStats();
+      const data = await getDashboardStats();
       setStats(data);
     } catch (error) {
       console.error('Error loading stats:', error);
@@ -100,19 +101,18 @@ export const Dashboard: React.FC = () => {
               stats.recentBookings.map((booking: any) => (
                 <div key={booking.id} className="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
                   <div className="flex-1">
-                    <div className="text-sm text-gray-900">{booking.hotelName}</div>
-                    <div className="text-xs text-gray-500">{booking.userName}</div>
+                    <div className="text-sm text-gray-900">{booking.hotelName || 'Unknown Hotel'}</div>
+                    <div className="text-xs text-gray-500">{booking.userName || 'Unknown User'}</div>
                   </div>
                   <div className="text-right">
-                    <div className={`text-xs px-2 py-1 rounded-full inline-block ${
-                      booking.status === 'confirmed' ? 'bg-green-100 text-green-700' :
-                      booking.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-                      booking.status === 'cancelled' ? 'bg-red-100 text-red-700' :
-                      'bg-blue-100 text-blue-700'
-                    }`}>
+                    <div className={`text-xs px-2 py-1 rounded-full inline-block ${booking.status === 'confirmed' ? 'bg-green-100 text-green-700' :
+                        booking.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
+                          booking.status === 'cancelled' ? 'bg-red-100 text-red-700' :
+                            'bg-blue-100 text-blue-700'
+                      }`}>
                       {booking.status === 'confirmed' ? 'Đã xác nhận' :
-                       booking.status === 'pending' ? 'Chờ xác nhận' :
-                       booking.status === 'cancelled' ? 'Đã hủy' : 'Hoàn thành'}
+                        booking.status === 'pending' ? 'Chờ xác nhận' :
+                          booking.status === 'cancelled' ? 'Đã hủy' : 'Hoàn thành'}
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
                       {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(booking.totalPrice || 0)}

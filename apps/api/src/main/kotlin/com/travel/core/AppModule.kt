@@ -28,6 +28,7 @@ val appModule =
         single<LocalFoodRepository> { LocalFoodRepositoryImpl() }
         single<RestaurantRepository> { RestaurantRepositoryImpl() }
         single<NotificationRepository> { NotificationRepositoryImpl() }
+        single<ReviewRepository> { ReviewRepositoryImpl() }
 
         // File Uploader
         single<FileUploader> {
@@ -65,4 +66,5 @@ val appModule =
         single { RestaurantController(get()) }
         single { NotificationController(get()) }
         single { UploadController(get()) }
+        single { DashboardController(get(), get(), get(), get(), get()) }
     }

@@ -58,7 +58,7 @@ fun Application.configureDatabase() {
         }
     } else {
         val driverClassName = "org.h2.Driver"
-        val jdbcURL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MySQL;DATABASE_TO_UPPER=false"
+        val jdbcURL = "jdbc:h2:mem:travel_db;DB_CLOSE_DELAY=-1"
 
         val database = Database.connect(
             url = jdbcURL,

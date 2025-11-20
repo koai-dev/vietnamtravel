@@ -7,13 +7,18 @@ import com.travel.data.table.Destinations
 import com.travel.domain.model.Destination
 import com.travel.domain.model.DestinationDetail
 import com.travel.domain.repository.DestinationRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import java.time.LocalDateTime
 
 class DestinationRepositoryImpl : DestinationRepository {
+    override suspend fun count(): Long = newSuspendedTransaction(Dispatchers.IO) {
+        Destinations.selectAll().count()
+    }
     override suspend fun getAll(): List<Destination> =
         newSuspendedTransaction {
             Destinations.selectAll().map { it.toDestination() }
@@ -23,6 +28,10 @@ class DestinationRepositoryImpl : DestinationRepository {
         newSuspendedTransaction {
             Destinations.selectAll().where { Destinations.id eq id }.map { it.toDestination() }.singleOrNull()
         }
+
+    override suspend fun deleteDestination(id: Long): Boolean = newSuspendedTransaction(Dispatchers.IO) {
+        Destinations.deleteWhere { Destinations.id eq id } > 0
+    }
 
     override suspend fun findByIdDetail(id: Long): DestinationDetail? =
         newSuspendedTransaction {

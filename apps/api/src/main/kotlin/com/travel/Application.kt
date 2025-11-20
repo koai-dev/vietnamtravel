@@ -29,6 +29,10 @@ fun Application.module() {
     if (Config.appEnv == "development") {
         kotlinx.coroutines.runBlocking {
             com.travel.core.DevDataSeeder.seedHotelsIfEmpty()
+            com.travel.core.DevDataSeeder.seedDestinationsIfEmpty()
+            com.travel.core.DevDataSeeder.seedUsersIfEmpty()
+//            com.travel.core.DevDataSeeder.seedBookingsIfEmpty()
+            com.travel.core.DevDataSeeder.seedReviewsIfEmpty()
             com.travel.seeder.DevSeeder.seedAdminUser()
         }
     }

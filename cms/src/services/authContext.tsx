@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import * as api from './api';
 
@@ -35,7 +36,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
       }
     };
-    initAuth();
+    initAuth().then(r => {});
   }, []);
 
   const login = async (email: string, password: string): Promise<boolean> => {

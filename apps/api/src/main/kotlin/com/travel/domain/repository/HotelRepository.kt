@@ -86,4 +86,6 @@ interface HotelRepository {
         slug: String,
         id: Long? = null,
     ): Boolean
+
+    suspend fun count(): Long
 }

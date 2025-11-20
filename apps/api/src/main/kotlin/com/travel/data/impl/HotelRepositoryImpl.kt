@@ -7,14 +7,8 @@ import com.travel.data.table.Users
 import com.travel.domain.repository.HotelRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
-import org.jetbrains.exposed.sql.Op
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.SqlExpressionBuilder
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.and
-import org.jetbrains.exposed.sql.andWhere
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.javatime.CurrentDateTime
 import org.jetbrains.exposed.sql.leftJoin
 import org.jetbrains.exposed.sql.selectAll
@@ -261,4 +255,8 @@ class HotelRepositoryImpl : HotelRepository {
             id?.let { query.andWhere { Hotels.id neq it } }
             query.count() > 0
         }
+
+    override suspend fun count(): Long  = newSuspendedTransaction(Dispatchers.IO) {
+        Hotels.selectAll().count()
+    }
 }
