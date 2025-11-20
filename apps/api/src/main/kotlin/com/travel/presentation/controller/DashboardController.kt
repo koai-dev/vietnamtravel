@@ -10,8 +10,8 @@ class DashboardController(
     private val bookingRepository: BookingRepository,
     private val userRepository: UserRepository,
     private val reviewRepository: ReviewRepository
-) {
-    suspend fun getDashboardStats(): DashboardStatsResponse {
+) : BaseController() {
+    suspend fun getDashboardStats(call: ApplicationCall) {
         val totalDestinations = destinationRepository.count()
         val totalHotels = hotelRepository.count()
         val totalBookings = bookingRepository.count()
@@ -21,15 +21,17 @@ class DashboardController(
         val recentBookings = bookingRepository.getRecentBookings(5)
         val recentReviews = reviewRepository.getRecentReviews(5)
 
-        return DashboardStatsResponse(
-            totalDestinations = totalDestinations,
-            totalHotels = totalHotels,
-            totalBookings = totalBookings,
-            totalUsers = totalUsers.toLong(),
-            totalRevenue = totalRevenue,
-            pendingBookings = pendingBookings,
-            recentBookings = recentBookings,
-            recentReviews = recentReviews
+        respondWith(
+            call, DashboardStatsResponse(
+                totalDestinations = totalDestinations,
+                totalHotels = totalHotels,
+                totalBookings = totalBookings,
+                totalUsers = totalUsers.toLong(),
+                totalRevenue = totalRevenue,
+                pendingBookings = pendingBookings,
+                recentBookings = recentBookings,
+                recentReviews = recentReviews
+            )
         )
     }
 }

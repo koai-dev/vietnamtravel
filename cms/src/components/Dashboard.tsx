@@ -15,7 +15,7 @@ export const Dashboard: React.FC = () => {
     setLoading(true);
     try {
       const data = await getDashboardStats();
-      setStats(data);
+      setStats(data.data);
     } catch (error) {
       console.error('Error loading stats:', error);
     } finally {
