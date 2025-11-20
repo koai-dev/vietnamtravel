@@ -6,7 +6,7 @@ import io.ktor.server.application.ApplicationCall
 import io.ktor.server.response.respond
 
 open class BaseController {
-    suspend fun <T : Any> respondWith(
+    suspend inline fun <reified T : Any> respondWith(
         call: ApplicationCall,
         result: T,
         message: String = "Success",
