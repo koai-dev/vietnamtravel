@@ -1,5 +1,6 @@
+// @ts-ignore
 import React, { useEffect, useState } from 'react';
-import { mockApi, Destination } from '../../services/mockApi';
+import { destinationApi, Destination, DestinationDetail } from '../../services/destinationApi';
 import { Plus, Edit, Trash2, Search, MapPin } from 'lucide-react';
 import { DestinationForm } from './DestinationForm';
 
@@ -9,16 +10,16 @@ export const DestinationsList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [showForm, setShowForm] = useState(false);
-  const [editingDestination, setEditingDestination] = useState<Destination | null>(null);
+  const [editingDestination, setEditingDestination] = useState<DestinationDetail | null>(null);
 
   useEffect(() => {
-    loadDestinations();
+    loadDestinations().then(r => {});
   }, []);
 
   useEffect(() => {
     if (searchTerm) {
       setFilteredDestinations(
-        destinations.filter(d => 
+        destinations.filter(d =>
           d.nameVi.toLowerCase().includes(searchTerm.toLowerCase()) ||
           d.nameEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
           d.city?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -32,7 +33,7 @@ export const DestinationsList: React.FC = () => {
   const loadDestinations = async () => {
     setLoading(true);
     try {
-      const data = await mockApi.getDestinations();
+      const data = await destinationApi.getDestinations();
       setDestinations(data);
       setFilteredDestinations(data);
     } catch (error) {
@@ -44,14 +45,20 @@ export const DestinationsList: React.FC = () => {
 
   const handleDelete = async (id: number) => {
     if (confirm('Bạn có chắc chắn muốn xóa điểm đến này?')) {
-      await mockApi.deleteDestination(id);
-      loadDestinations();
+      await destinationApi.deleteDestination(id);
+      await loadDestinations();
     }
   };
 
-  const handleEdit = (destination: Destination) => {
-    setEditingDestination(destination);
-    setShowForm(true);
+  const handleEdit = async (destination: Destination) => {
+    try {
+      const detail = await destinationApi.getDestinationDetail(destination.id);
+      setEditingDestination(detail);
+      setShowForm(true);
+    } catch (error) {
+      console.error('Error loading destination detail:', error);
+      alert('Không thể tải thông tin chi tiết điểm đến');
+    }
   };
 
   const handleCloseForm = () => {

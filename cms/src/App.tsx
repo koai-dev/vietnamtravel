@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useState } from 'react';
 import { AuthProvider, useAuth } from './services/authContext';
 import { LoginPage } from './components/auth/LoginPage';

@@ -17,6 +17,11 @@ data class Destination(
     val children: List<Destination> = emptyList(),
     val foods: List<LocalFood> = emptyList(),
     val restaurants: List<Restaurant> = emptyList(),
+    val city: String?,
+    val avgRating: Double,
+    val reviewCount: Int,
+    val viewsCount: Long,
+    val status: String?,
 )
 
 data class DestinationDetail(

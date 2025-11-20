@@ -1,9 +1,10 @@
+// @ts-ignore
 import React, { useState } from 'react';
-import { mockApi, Destination } from '../../services/mockApi';
+import { destinationApi, DestinationDetail } from '../../services/destinationApi';
 import { X, Save } from 'lucide-react';
 
 interface DestinationFormProps {
-  destination: Destination | null;
+  destination: DestinationDetail | null;
   onClose: () => void;
 }
 
@@ -67,11 +68,11 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
       };
 
       if (destination) {
-        await mockApi.updateDestination(destination.id, data);
+        await destinationApi.updateDestination(destination.id, data);
       } else {
-        await mockApi.createDestination(data);
+        await destinationApi.createDestination(data);
       }
-      
+
       onClose();
     } catch (error) {
       console.error('Error saving destination:', error);

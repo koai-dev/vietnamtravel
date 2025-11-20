@@ -181,6 +181,11 @@ private fun ResultRow.toDestination(): Destination =
         type = this[Destinations.type],
         images = this[Destinations.images]?.let { Json.decodeFromString<List<String>>(it) } ?: emptyList(),
         parentId = this[Destinations.parentId],
+        city = this[Destinations.city],
+        avgRating = this[Destinations.avgRating],
+        reviewCount = this[Destinations.reviewCount],
+        status = this[Destinations.status].name,
+        viewsCount = this[Destinations.viewsCount],
     )
 
 private fun ResultRow.toDestinationDetail(): DestinationDetail =
