@@ -11,7 +11,7 @@ fun Route.uploadRoutes() {
 
     route("/api/uploads") {
         post {
-            uploadController.upload(context)
+            uploadController.upload(call)
         }
     }
 }

@@ -7,12 +7,8 @@ import com.travel.data.model.RefreshTokenRequest
 import com.travel.data.model.RegisterRequest
 import com.travel.domain.repository.RedisRepository
 import com.travel.presentation.controller.AuthController
-import io.ktor.server.application.call
-import io.ktor.server.application.install
-import io.ktor.server.request.receive
-import io.ktor.server.routing.Route
-import io.ktor.server.routing.post
-import io.ktor.server.routing.route
+import io.ktor.server.request.*
+import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 
 fun Route.authRoutes() {

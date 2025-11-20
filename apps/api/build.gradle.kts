@@ -1,3 +1,5 @@
+import io.ktor.plugin.OpenApiPreview
+
 val ktorVersion: String by project
 val kotlinVersion: String by project
 val logbackVersion: String by project
@@ -9,10 +11,10 @@ val bcryptVersion: String by project
 val redisVersion: String by project
 
 plugins {
-    kotlin("jvm") version "1.9.23"
-    id("io.ktor.plugin") version "2.3.10"
-    kotlin("plugin.serialization") version "1.9.23"
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
+    kotlin("jvm") version "2.2.0"
+    id("io.ktor.plugin") version "3.3.2"
+    kotlin("plugin.serialization") version "2.2.0"
+    id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
 }
 
 group = "com.example"
@@ -74,8 +76,8 @@ dependencies {
     implementation("aws.sdk.kotlin:s3:1.2.1")
 
     // Testing
-    testImplementation("io.ktor:ktor-server-tests-jvm")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
+    testImplementation("io.ktor:ktor-server-test-host")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
 }
 ktlint {
     version.set("1.2.1") // hoặc bất kỳ bản mới nhất
@@ -87,4 +89,19 @@ ktlint {
 
 tasks.named("check") {
     dependsOn("ktlintCheck")
+}
+ktor {
+    @OptIn(OpenApiPreview::class)
+    openApi {
+        title = "OpenAPI example"
+        version = "2.1"
+        summary = "This is a sample API"
+        description = "This is a longer description"
+        termsOfService = "https://example.com/terms/"
+        contact = "contact@example.com"
+        license = "Apache/1.0"
+
+        // Location of the generated specification (defaults to openapi/generated.json)
+        target = project.layout.buildDirectory.file("open-api.json")
+    }
 }

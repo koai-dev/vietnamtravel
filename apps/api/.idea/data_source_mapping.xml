@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/946e4c6b-a386-4a55-9051-fc351df20ead/console.sql" value="946e4c6b-a386-4a55-9051-fc351df20ead" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V1__create_initial_tables.sql" value="981a1abf-0ebc-43ba-89bd-4d66be7eaf43" />
+  </component>
+</project>
