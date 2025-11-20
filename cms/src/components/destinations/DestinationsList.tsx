@@ -34,8 +34,8 @@ export const DestinationsList: React.FC = () => {
     setLoading(true);
     try {
       const data = await destinationApi.getDestinations();
-      setDestinations(data);
-      setFilteredDestinations(data);
+      setDestinations(data.data);
+      setFilteredDestinations(data.data);
     } catch (error) {
       console.error('Error loading destinations:', error);
     } finally {
@@ -181,7 +181,7 @@ export const DestinationsList: React.FC = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                      {destination.viewsCount.toLocaleString()}
+                      {(destination.viewsCount??0).toLocaleString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {getStatusBadge(destination.status)}
