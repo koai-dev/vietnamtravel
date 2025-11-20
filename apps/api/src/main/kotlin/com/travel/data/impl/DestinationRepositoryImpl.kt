@@ -167,6 +167,17 @@ class DestinationRepositoryImpl : DestinationRepository {
         val children = findChildren(node.id).map { buildTree(it) }
         return node.copy(children = children)
     }
+
+    override suspend fun search(query: String, types: List<DestinationType>): List<Destination> =
+        newSuspendedTransaction {
+            Destinations.selectAll()
+                .where {
+                    (Destinations.nameVi like "%$query%" or (Destinations.nameEn like "%$query%")) and
+                            (Destinations.type inList types)
+                }
+                .limit(20)
+                .map { it.toDestination() }
+        }
 }
 
 private fun ResultRow.toDestination(): Destination =

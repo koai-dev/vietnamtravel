@@ -87,4 +87,8 @@ class DestinationService(
         val requestWithResolvedImages = destinationRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
         destinationRepository.update(id, requestWithResolvedImages)
     }
+
+    suspend fun search(query: String, types: List<com.travel.data.table.DestinationType>): List<Destination> {
+        return destinationRepository.search(query, types)
+    }
 }

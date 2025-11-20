@@ -22,6 +22,13 @@ fun Route.destinationRoutes() {
             destinationController.getAll(call, lang)
         }
 
+        get("/search") {
+            val query = call.request.queryParameters["q"] ?: ""
+            val types = call.request.queryParameters["types"] ?: ""
+            val lang = call.lang()
+            destinationController.search(call, query, types, lang)
+        }
+
         get("/roots") {
             val lang = call.lang()
             destinationController.getRootDestinations(call, lang)

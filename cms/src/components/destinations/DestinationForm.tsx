@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { destinationApi, DestinationDetail } from '../../services/destinationApi';
 import { X, Save } from 'lucide-react';
+import { ParentDestinationAutocomplete } from './ParentDestinationAutocomplete';
 
 interface DestinationFormProps {
   destination: DestinationDetail | null;
@@ -28,9 +29,25 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
     status: destination?.status || 'ACTIVE' as 'ACTIVE' | 'INACTIVE' | 'DRAFT',
     sortOrder: destination?.sortOrder || 0,
     images: destination?.images?.join('\n') || '',
+    parentId: destination?.parentId || null,
   });
 
   const [loading, setLoading] = useState(false);
+  const [initialParent, setInitialParent] = useState<any>(null);
+
+  React.useEffect(() => {
+    const fetchParent = async () => {
+      if (destination?.parentId) {
+        try {
+          const parent = await destinationApi.getDestination(destination.parentId);
+          setInitialParent(parent);
+        } catch (error) {
+          console.error('Error loading parent destination:', error);
+        }
+      }
+    };
+    fetchParent().then(r => {});
+  }, [destination]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -65,6 +82,7 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
         reviewCount: destination?.reviewCount || 0,
         viewsCount: destination?.viewsCount || 0,
         favoritesCount: destination?.favoritesCount || 0,
+        parentId: formData.parentId || undefined,
       };
 
       if (destination) {
@@ -161,6 +179,15 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
               <option value="attraction">Điểm tham quan</option>
               <option value="spot">Địa điểm</option>
             </select>
+          </div>
+
+          <div>
+            <ParentDestinationAutocomplete
+              currentType={formData.type}
+              value={formData.parentId}
+              onChange={(id) => setFormData(prev => ({ ...prev, parentId: id }))}
+              initialParent={initialParent}
+            />
           </div>
 
           <div>

@@ -13,6 +13,7 @@ export interface Destination {
     reviewCount: number;
     viewsCount: number;
     status: 'ACTIVE' | 'INACTIVE' | 'DRAFT';
+    parentId?: number | null;
 }
 
 export interface DestinationDetail extends Destination {
@@ -42,6 +43,12 @@ export const destinationApi = {
 
     getDestinationDetail: async (id: number, lang: string = 'vi') => {
         const response = await api.get(`/api/destinations/${id}/detail?lang=${lang}`);
+        return response.data;
+    },
+
+    searchDestinations: async (query: string, types?: string[], lang: string = 'vi') => {
+        const typesParam = types ? `&types=${types.join(',')}` : '';
+        const response = await api.get(`/api/destinations/search?q=${query}${typesParam}&lang=${lang}`);
         return response.data;
     },
 

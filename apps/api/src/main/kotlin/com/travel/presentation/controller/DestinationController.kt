@@ -77,4 +77,21 @@ class DestinationController(private val destinationService: DestinationService) 
         destinationService.update(id, request)
         respondWith(call, mapOf("success" to true))
     }
+
+    suspend fun search(
+        call: ApplicationCall,
+        query: String,
+        types: String,
+        lang: String,
+    ) {
+        val typeList = types.split(",").mapNotNull {
+            try {
+                com.travel.data.table.DestinationType.valueOf(it)
+            } catch (e: Exception) {
+                null
+            }
+        }
+        val destinations = destinationService.search(query, typeList).map { it.toDestinationResponse(lang) }
+        respondWith(call, destinations)
+    }
 }
