@@ -68,7 +68,7 @@ export const ParentDestinationAutocomplete: React.FC<ParentDestinationAutocomple
             if (types.length === 0) return;
 
             const results = await destinationApi.searchDestinations(searchQuery, types);
-            setSuggestions(results);
+            setSuggestions(results.data || []);
             setIsOpen(true);
         } catch (error) {
             console.error('Error searching destinations:', error);
