@@ -3,7 +3,7 @@ package com.travel.data.table
 import org.jetbrains.exposed.sql.ReferenceOption
 import org.jetbrains.exposed.sql.Table
 
-object Restaurants : Table() {
+object Restaurants : Table("restaurants") {
     val id = long("id").autoIncrement()
     val name = varchar("name", 255)
     val description = text("description")

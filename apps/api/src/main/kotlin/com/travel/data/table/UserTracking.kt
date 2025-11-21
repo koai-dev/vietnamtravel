@@ -3,7 +3,7 @@ package com.travel.data.table
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.javatime.timestamp
 
-object UserTracking : Table() {
+object UserTracking : Table("user_tracking") {
     val id = long("id").autoIncrement()
     val userId = long("user_id").nullable()
     val device = varchar("device", 255).nullable()
