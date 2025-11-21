@@ -53,7 +53,7 @@ export const DestinationsList: React.FC = () => {
   const handleEdit = async (destination: Destination) => {
     try {
       const detail = await destinationApi.getDestinationDetail(destination.id);
-      setEditingDestination(detail);
+      setEditingDestination(detail.data);
       setShowForm(true);
     } catch (error) {
       console.error('Error loading destination detail:', error);
