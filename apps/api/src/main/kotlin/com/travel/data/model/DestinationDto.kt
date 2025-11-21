@@ -61,7 +61,11 @@ data class RatingRequest(
 data class DestinationResponseDetail(
     val id: Long,
     val name: String = "",
+    val nameVi: String? = null,
+    val nameEn: String? = null,
     val description: String = "",
+    val descriptionVi: String? = null,
+    val descriptionEn: String? = null,
     val latitude: Double? = null,
     val longitude: Double? = null,
     val type: String? = null,

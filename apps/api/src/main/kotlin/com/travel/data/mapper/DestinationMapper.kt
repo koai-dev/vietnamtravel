@@ -39,7 +39,11 @@ fun DestinationDetail.toDestinationResponse(lang: String): DestinationResponseDe
     return DestinationResponseDetail(
         id = id,
         name = pickLang(lang, nameVi, nameEn),
+        nameVi = nameVi,
+        nameEn = nameEn,
         description = pickLang(lang, descriptionVi, descriptionEn),
+        descriptionVi = descriptionVi,
+        descriptionEn = descriptionEn,
         latitude = latitude,
         longitude = longitude,
         type = type?.name,
