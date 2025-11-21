@@ -1,57 +1,45 @@
-GET http://localhost:8080/api/users?q=rEIrdgHP&page=55&pageSize=98
+POST http://localhost:8080/api/destinations
+Content-Type: application/json
+Content-Length: 2312
 User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.4
 Accept-Encoding: br, deflate, gzip, x-gzip
 Accept: */*
 
-###
-
-GET http://localhost:8080/api/tours
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-###
-
-GET http://localhost:8080/api/destinations/roots
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-###
-
-GET http://localhost:8080/api/destinations
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-###
-
-GET http://localhost:8080/api/dashboard/tracking/summary?range=b8BWrlRI&date=2VeqiYuy
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-###
-
-GET http://localhost:8080/api/dashboard/tracking/summary?range=ZjbTvpbK&date=bjOHeOvK
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-###
-
-GET http://localhost:8080/api/dashboard/tracking/summary?range=oG0c9Mey&date=lERMiv1l
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-###
-
-POST http://localhost:8080/api/auth/login
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2025.2.4
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-content-length: 0
-
-###
+{
+  "nameVi": "Miền Bắc",
+  "nameEn": "Northern Vietnam",
+  "descriptionVi": "Vùng Miền Bắc Việt Nam là nơi hội tụ nhiều cảnh đẹp thiên nhiên như ruộng bậc thang Sapa, vịnh Hạ Long, thung lũng Ninh Bình và núi non hùng vĩ.",
+  "descriptionEn": "Northern Vietnam is a region of stunning natural landscapes, including terraced rice fields in Sapa, the limestone islets of Ha Long Bay, the karst valleys of Ninh Binh, and majestic mountains.",
+  "latitude": 21.0,
+  "longitude": 105.8,
+  "type": "region",
+  "images": [
+    "https://images.pexels.com/photos/33498246/pexels-photo-33498246.jpeg",
+    "https://images.pexels.com/photos/32105574/pexels-photo-32105574.jpeg",
+    "https://images.pexels.com/photos/28787093/pexels-photo-28787093.jpeg",
+    "https://images.pexels.com/photos/29862182/pexels-photo-29862182.jpeg",
+    "https://images.pexels.com/photos/32105569/pexels-photo-32105569.jpeg",
+    "https://images.pexels.com/photos/29862214/pexels-photo-29862214.jpeg",
+    "https://pixabay.com/get/g1bf3f3f7d2dfd5da1d518002c9357372bc3b2a9dc7f9e329b9e3c8c9da263fd44212d1717b6d880cc360ae28b70e96153417dbd4313f42de8dd1c3627d8f5bf2_1280.jpg",
+    "https://pixabay.com/get/g6c6278d4d71943575f064fbcfe9243888f3d553632675e2a06c4bb32f4df212774a050559221b385e9c3881e1b2cdeb8a2a510316ed352732e9e3f862896a9a7_1280.jpg",
+    "https://pixabay.com/get/g7b4d3ab2d1ce86962da5c243eb11774f0e8a2a447a50e4b4bf92c0ddb4d8e888049c681198d3455d0cb9bd6d7bdf3675f079928fb5b9ad4270b1a0f3a681b8a2_1280.jpg",
+    "https://pixabay.com/get/gf1e374fd0f0401e64af77a1b7b380c1da275e1df94bbee7475899aa6a01f646e8de4f9d4e7f21061f60de6df11e49b2ee76cea46fc961ce3b080ad172ab8090d_1280.jpg"
+  ],
+  "parentId": null,
+  "tempUrlMap": "https://maps.google.com/?q=Mi%C3%AAn+B%E1%BA%AFc,+Vi%E1%BB%87t+Nam",
+  "slug": "mien-bac",
+  "address": "Việt Nam",
+  "city": "Hà Nội",
+  "tags": ["miền bắc", "vùng miền", "thiên nhiên", "văn hóa"],
+  "bestTimeToVisit": "Tháng 9 đến tháng 11, hoặc tháng 3 đến tháng 5",
+  "openingHours": "00:00 - 23:59",
+  "priceFrom": 0,
+  "priceTo": 0,
+  "externalLinks": [
+    "https://sapatoursfromhanoi.com/charming-beauty-northern-vietnam-pictures/"
+  ],
+  "addressLink": "https://maps.google.com/?q=Northern+Vietnam",
+  "status": "active",
+  "sortOrder": 1
+}
 

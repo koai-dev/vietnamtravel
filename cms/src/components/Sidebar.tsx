@@ -1,16 +1,18 @@
+// @ts-ignore
 import React from 'react';
-import { 
-  Home, 
-  MapPin, 
-  Hotel, 
-  Calendar, 
-  Map, 
-  UtensilsCrossed, 
-  Star, 
-  Users, 
+import {
+  Home,
+  MapPin,
+  Hotel,
+  Calendar,
+  Map,
+  UtensilsCrossed,
+  Star,
+  Users,
   Bell,
   DoorOpen,
-  ChevronDown
+  ChevronDown,
+  Send
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -31,9 +33,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
   const menuItems: MenuItem[] = [
     { id: 'dashboard', label: 'Tổng quan', icon: <Home className="w-5 h-5" /> },
     { id: 'destinations', label: 'Điểm đến', icon: <MapPin className="w-5 h-5" /> },
-    { 
-      id: 'hotels', 
-      label: 'Khách sạn', 
+    {
+      id: 'hotels',
+      label: 'Khách sạn',
       icon: <Hotel className="w-5 h-5" />,
       children: [
         { id: 'hotels', label: 'Danh sách khách sạn' },
@@ -42,9 +44,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     },
     { id: 'bookings', label: 'Đặt phòng', icon: <Calendar className="w-5 h-5" /> },
     { id: 'tours', label: 'Tours', icon: <Map className="w-5 h-5" /> },
-    { 
-      id: 'food', 
-      label: 'Ẩm thực', 
+    {
+      id: 'food',
+      label: 'Ẩm thực',
       icon: <UtensilsCrossed className="w-5 h-5" />,
       children: [
         { id: 'restaurants', label: 'Nhà hàng' },
@@ -54,11 +56,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
     { id: 'reviews', label: 'Đánh giá', icon: <Star className="w-5 h-5" /> },
     { id: 'users', label: 'Người dùng', icon: <Users className="w-5 h-5" /> },
     { id: 'notifications', label: 'Thông báo', icon: <Bell className="w-5 h-5" /> },
+    { id: 'postman', label: 'API Tester', icon: <Send className="w-5 h-5" /> },
   ];
 
   const toggleMenu = (menuId: string) => {
-    setExpandedMenus(prev => 
-      prev.includes(menuId) 
+    setExpandedMenus(prev =>
+      prev.includes(menuId)
         ? prev.filter(id => id !== menuId)
         : [...prev, menuId]
     );
@@ -87,11 +90,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
                 <button
                   key={child.id}
                   onClick={() => onTabChange(child.id)}
-                  className={`w-full text-left pl-14 pr-4 py-2.5 text-sm transition-colors ${
-                    activeTab === child.id
-                      ? 'bg-blue-100 text-blue-600'
-                      : 'text-gray-600 hover:bg-blue-50'
-                  }`}
+                  className={`w-full text-left pl-14 pr-4 py-2.5 text-sm transition-colors ${activeTab === child.id
+                    ? 'bg-blue-100 text-blue-600'
+                    : 'text-gray-600 hover:bg-blue-50'
+                    }`}
                 >
                   {child.label}
                 </button>
@@ -106,11 +108,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
       <button
         key={item.id}
         onClick={() => onTabChange(item.id)}
-        className={`w-full flex items-center gap-3 px-4 py-3 transition-colors ${
-          activeTab === item.id
-            ? 'bg-blue-100 text-blue-600 border-r-4 border-blue-600'
-            : 'text-gray-700 hover:bg-blue-50'
-        }`}
+        className={`w-full flex items-center gap-3 px-4 py-3 transition-colors ${activeTab === item.id
+          ? 'bg-blue-100 text-blue-600 border-r-4 border-blue-600'
+          : 'text-gray-700 hover:bg-blue-50'
+          }`}
       >
         {item.icon}
         <span>{item.label}</span>
@@ -129,7 +130,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange }) => {
           </div>
         </div>
       </div>
-      
+
       <nav className="flex-1 overflow-y-auto">
         {menuItems.map(item => renderMenuItem(item))}
       </nav>

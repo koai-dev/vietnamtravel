@@ -15,6 +15,7 @@ import { LocalFoodsList } from './components/localFoods/LocalFoodsList';
 import { ReviewsList } from './components/reviews/ReviewsList';
 import { UsersList } from './components/users/UsersList';
 import { NotificationsList } from './components/notifications/NotificationsList';
+import { PostmanTool } from './components/tools/PostmanTool';
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
@@ -48,6 +49,8 @@ function AppContent() {
         return <UsersList />;
       case 'notifications':
         return <NotificationsList />;
+      case 'postman':
+        return <PostmanTool />;
       default:
         return <Dashboard />;
     }
