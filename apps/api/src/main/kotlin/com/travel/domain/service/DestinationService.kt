@@ -72,7 +72,10 @@ class DestinationService(
                 destinationRequest.tempUrlMap ?: emptyMap(),
             )
         val requestWithResolvedImages = destinationRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
-        return destinationRepository.create(requestWithResolvedImages)
+        return destinationRepository.create(requestWithResolvedImages).apply {
+            redisRepository.del("destinations:all:vi")
+            redisRepository.del("destinations:all:en")
+        }
     }
 
     suspend fun update(
@@ -96,8 +99,9 @@ class DestinationService(
     }
 
     suspend fun delete(id: Long): Boolean {
-        redisRepository.del("destinations:all:vi")
-        redisRepository.del("destinations:all:en")
-        return destinationRepository.deleteDestination(id)
+        return destinationRepository.deleteDestination(id).apply {
+            redisRepository.del("destinations:all:vi")
+            redisRepository.del("destinations:all:en")
+        }
     }
 }
