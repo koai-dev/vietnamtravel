@@ -66,13 +66,13 @@ class DestinationService(
     }
 
     suspend fun create(destinationRequest: DestinationRequest): Long {
-        val resolvedImages =
-            imageMappingService.resolveImages(
-                Gson().toJson(destinationRequest.images),
-                destinationRequest.tempUrlMap ?: emptyMap(),
-            )
-        val requestWithResolvedImages = destinationRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
-        return destinationRepository.create(requestWithResolvedImages).apply {
+//        val resolvedImages =
+//            imageMappingService.resolveImages(
+//                Gson().toJson(destinationRequest.images),
+//                destinationRequest.tempUrlMap ?: emptyMap(),
+//            )
+//        val requestWithResolvedImages = destinationRequest.copy(images = Gson().fromJson(resolvedImages, List::class.java) as List<String>)
+        return destinationRepository.create(destinationRequest).apply {
             redisRepository.del("destinations:all:vi")
             redisRepository.del("destinations:all:en")
         }

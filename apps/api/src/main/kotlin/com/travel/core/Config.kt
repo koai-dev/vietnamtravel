@@ -7,13 +7,9 @@ object Config {
     val appEnv = env["APP_ENV"] ?: "development"
 
     val jwtSecret = env["JWT_SECRET"] ?: "your-super-secret-jwt-secret"
-    val dbUrl = env["DB_URL"] ?: "jdbc:mysql://localhost:3306/travel_db"
-    val dbUser = env["DB_USER"] ?: "user"
-    val dbPassword = env["DB_PASSWORD"] ?: "password"
-
-    val dbH2Url = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;"
-    val dbH2User = "sa"
-    val dbH2Password = ""
+    val dbUrl = env["DB_URL"] ?: "jdbc:mysql://localhost:3306"
+    val dbUser = env["DB_USER"] ?: "root"
+    val dbPassword = env["DB_PASSWORD"] ?: "123456"
 
     val redisHost = env["REDIS_HOST"] ?: "127.0.0.1"
     val redisPort = env["REDIS_PORT"]?.toInt() ?: 6379
