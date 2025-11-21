@@ -19,6 +19,6 @@ open class BaseController {
         message: String,
         code: HttpStatusCode = HttpStatusCode.BadRequest,
     ) {
-        call.respond(code, ApiResult.Error(message, code))
+        call.respond(code, ApiResult.Error(message, code.value))
     }
 }

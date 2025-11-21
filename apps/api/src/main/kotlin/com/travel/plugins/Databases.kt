@@ -15,7 +15,6 @@ import com.travel.data.table.Rooms
 import com.travel.data.table.Tours
 import com.travel.data.table.UserTracking
 import com.travel.data.table.Users
-import com.travel.domain.model.Booking
 import com.travel.seeder.DevSeeder
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -60,12 +59,13 @@ fun Application.configureDatabase() {
         val driverClassName = "org.h2.Driver"
         val jdbcURL = "jdbc:h2:mem:travel_db;DB_CLOSE_DELAY=-1"
 
-        val database = Database.connect(
-            url = jdbcURL,
-            driver = driverClassName,
-            user = "sa",
-            password = ""
-        )
+        val database =
+            Database.connect(
+                url = jdbcURL,
+                driver = driverClassName,
+                user = "sa",
+                password = "",
+            )
 
         transaction(database) {
             SchemaUtils.create(Users)
@@ -83,6 +83,5 @@ fun Application.configureDatabase() {
             SchemaUtils.create(Tours)
             SchemaUtils.create(UserTracking)
         }
-
     }
 }

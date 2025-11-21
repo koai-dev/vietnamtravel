@@ -76,5 +76,9 @@ fun Route.destinationRoutes() {
                 call.respondText("Invalid ID", status = HttpStatusCode.BadRequest)
             }
         }
+        delete("/{id}") {
+            val id = call.parameters["id"]?.toLongOrNull()
+            destinationController.delete(call, id)
+        }
     }
 }

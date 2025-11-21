@@ -11,5 +11,5 @@ data class ReviewResponse(
     val comment: String?,
     val createdAt: String,
     val userName: String?,
-    val hotelName: String?
+    val hotelName: String?,
 )

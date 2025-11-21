@@ -88,7 +88,16 @@ class DestinationService(
         destinationRepository.update(id, requestWithResolvedImages)
     }
 
-    suspend fun search(query: String, types: List<com.travel.data.table.DestinationType>): List<Destination> {
+    suspend fun search(
+        query: String,
+        types: List<com.travel.data.table.DestinationType>,
+    ): List<Destination> {
         return destinationRepository.search(query, types)
+    }
+
+    suspend fun delete(id: Long): Boolean {
+        redisRepository.del("destinations:all:vi")
+        redisRepository.del("destinations:all:en")
+        return destinationRepository.deleteDestination(id)
     }
 }

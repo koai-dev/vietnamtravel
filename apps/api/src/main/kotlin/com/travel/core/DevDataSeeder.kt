@@ -116,106 +116,91 @@ object DevDataSeeder {
             }
         }
 
-    suspend fun seedDestinationsIfEmpty() = newSuspendedTransaction(Dispatchers.IO) {
-        if (Destinations.selectAll().count() == 0L) {
-            val destinations = listOf(
-                "Hanoi", "Ho Chi Minh City", "Da Nang", "Hoi An", "Nha Trang", "Phu Quoc", "Sapa", "Ha Long Bay"
-            )
-            
-            Destinations.batchInsert(destinations) { name ->
-                this[Destinations.nameEn] = name
-                this[Destinations.nameVi] = name
-                this[Destinations.slug] = name.lowercase().replace(" ", "-")
-                this[Destinations.descriptionEn] = "Description for $name"
-                this[Destinations.descriptionVi] = "Mô tả cho $name"
-                this[Destinations.type] = DestinationType.city
-                this[Destinations.latitude] = 0.0
-                this[Destinations.longitude] = 0.0
-                this[Destinations.images] = "[]"
-                this[Destinations.createdAt] = LocalDateTime.now()
-                this[Destinations.updatedAt] = LocalDateTime.now()
-            }
-        }
-    }
+    suspend fun seedUsersIfEmpty() =
+        newSuspendedTransaction(Dispatchers.IO) {
+            if (Users.selectAll().count() <= 1L) { // Assuming admin is already seeded
+                val users =
+                    (1..10).map { i ->
+                        Triple("User $i", "user$i@example.com", "password")
+                    }
 
-    suspend fun seedUsersIfEmpty() = newSuspendedTransaction(Dispatchers.IO) {
-        if (Users.selectAll().count() <= 1L) { // Assuming admin is already seeded
-            val users = (1..10).map { i ->
-                Triple("User $i", "user$i@example.com", "password")
-            }
-            
-            Users.batchInsert(users) { (name, email, password) ->
-                this[Users.name] = name
-                this[Users.email] = email
-                this[Users.passwordHash] = "\$2a\$12\$123456" // Dummy hash
-                this[Users.role] = UserRole.user
-                this[Users.createdAt] = LocalDateTime.now()
-                this[Users.updatedAt] = LocalDateTime.now()
-            }
-        }
-    }
-
-    suspend fun seedBookingsIfEmpty() = newSuspendedTransaction(Dispatchers.IO) {
-        if (Bookings.selectAll().count() == 0L) {
-            val hotelIds = Hotels.selectAll().map { it[Hotels.id] }
-            val userIds = Users.selectAll().map { it[Users.id] }
-            
-            if (hotelIds.isNotEmpty() && userIds.isNotEmpty()) {
-                val bookings = (1..20).map {
-                    val checkIn = LocalDate.now().minusDays(Random.nextLong(0, 30))
-                    val checkOut = checkIn.plusDays(Random.nextLong(1, 5))
-                    BookingData(
-                        userId = userIds.random(),
-                        hotelId = hotelIds.random(),
-                        roomId = 1, // Assuming room 1 exists or FK is not strict/seeded later
-                        checkIn = checkIn,
-                        checkOut = checkOut,
-                        totalPrice = BigDecimal.valueOf(Random.nextDouble(100.0, 1000.0)),
-                        status = BookingStatus.values().random()
-                    )
-                }
-
-                Bookings.batchInsert(bookings) { booking ->
-                    this[Bookings.userId] = booking.userId
-                    this[Bookings.hotelId] = booking.hotelId
-                    this[Bookings.roomId] = booking.roomId // Note: This might fail if Rooms are not seeded. Assuming Rooms are not strictly checked or seeded.
-                    this[Bookings.checkIn] = booking.checkIn
-                    this[Bookings.checkOut] = booking.checkOut
-                    this[Bookings.totalPrice] = booking.totalPrice
-                    this[Bookings.status] = booking.status
-                    this[Bookings.createdAt] = LocalDateTime.now()
-                    this[Bookings.updatedAt] = LocalDateTime.now()
+                Users.batchInsert(users) { (name, email, password) ->
+                    this[Users.name] = name
+                    this[Users.email] = email
+                    this[Users.passwordHash] = "\$2a\$12\$123456" // Dummy hash
+                    this[Users.role] = UserRole.user
+                    this[Users.createdAt] = LocalDateTime.now()
+                    this[Users.updatedAt] = LocalDateTime.now()
                 }
             }
         }
-    }
 
-    suspend fun seedReviewsIfEmpty() = newSuspendedTransaction(Dispatchers.IO) {
-        if (Reviews.selectAll().count() == 0L) {
-            val hotelIds = Hotels.selectAll().map { it[Hotels.id] }
-            val userIds = Users.selectAll().map { it[Users.id] }
+    suspend fun seedBookingsIfEmpty() =
+        newSuspendedTransaction(Dispatchers.IO) {
+            if (Bookings.selectAll().count() == 0L) {
+                val hotelIds = Hotels.selectAll().map { it[Hotels.id] }
+                val userIds = Users.selectAll().map { it[Users.id] }
 
-            if (hotelIds.isNotEmpty() && userIds.isNotEmpty()) {
-                val reviews = (1..20).map {
-                    ReviewData(
-                        userId = userIds.random(),
-                        hotelId = hotelIds.random(),
-                        rating = Random.nextInt(1, 6),
-                        comment = "Great experience! " + Random.nextInt()
-                    )
-                }
+                if (hotelIds.isNotEmpty() && userIds.isNotEmpty()) {
+                    val bookings =
+                        (1..20).map {
+                            val checkIn = LocalDate.now().minusDays(Random.nextLong(0, 30))
+                            val checkOut = checkIn.plusDays(Random.nextLong(1, 5))
+                            BookingData(
+                                userId = userIds.random(),
+                                hotelId = hotelIds.random(),
+                                roomId = 1, // Assuming room 1 exists or FK is not strict/seeded later
+                                checkIn = checkIn,
+                                checkOut = checkOut,
+                                totalPrice = BigDecimal.valueOf(Random.nextDouble(100.0, 1000.0)),
+                                status = BookingStatus.values().random(),
+                            )
+                        }
 
-                Reviews.batchInsert(reviews) { review ->
-                    this[Reviews.userId] = review.userId
-                    this[Reviews.hotelId] = review.hotelId
-                    this[Reviews.rating] = review.rating
-                    this[Reviews.comment] = review.comment
-                    this[Reviews.createdAt] = LocalDateTime.now()
+                    Bookings.batchInsert(bookings) { booking ->
+                        this[Bookings.userId] = booking.userId
+                        this[Bookings.hotelId] = booking.hotelId
+                        this[Bookings.roomId] = booking.roomId // Note: This might fail if Rooms are not seeded. Assuming Rooms are not strictly checked or seeded.
+                        this[Bookings.checkIn] = booking.checkIn
+                        this[Bookings.checkOut] = booking.checkOut
+                        this[Bookings.totalPrice] = booking.totalPrice
+                        this[Bookings.status] = booking.status
+                        this[Bookings.createdAt] = LocalDateTime.now()
+                        this[Bookings.updatedAt] = LocalDateTime.now()
+                    }
                 }
             }
         }
-    }
+
+    suspend fun seedReviewsIfEmpty() =
+        newSuspendedTransaction(Dispatchers.IO) {
+            if (Reviews.selectAll().count() == 0L) {
+                val hotelIds = Hotels.selectAll().map { it[Hotels.id] }
+                val userIds = Users.selectAll().map { it[Users.id] }
+
+                if (hotelIds.isNotEmpty() && userIds.isNotEmpty()) {
+                    val reviews =
+                        (1..20).map {
+                            ReviewData(
+                                userId = userIds.random(),
+                                hotelId = hotelIds.random(),
+                                rating = Random.nextInt(1, 6),
+                                comment = "Great experience! " + Random.nextInt(),
+                            )
+                        }
+
+                    Reviews.batchInsert(reviews) { review ->
+                        this[Reviews.userId] = review.userId
+                        this[Reviews.hotelId] = review.hotelId
+                        this[Reviews.rating] = review.rating
+                        this[Reviews.comment] = review.comment
+                        this[Reviews.createdAt] = LocalDateTime.now()
+                    }
+                }
+            }
+        }
 
     data class BookingData(val userId: Long, val hotelId: Long, val roomId: Long, val checkIn: LocalDate, val checkOut: LocalDate, val totalPrice: BigDecimal, val status: BookingStatus)
+
     data class ReviewData(val userId: Long, val hotelId: Long, val rating: Int, val comment: String)
 }

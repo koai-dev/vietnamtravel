@@ -16,9 +16,11 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 import java.time.LocalDateTime
 
 class DestinationRepositoryImpl : DestinationRepository {
-    override suspend fun count(): Long = newSuspendedTransaction(Dispatchers.IO) {
-        Destinations.selectAll().count()
-    }
+    override suspend fun count(): Long =
+        newSuspendedTransaction(Dispatchers.IO) {
+            Destinations.selectAll().count()
+        }
+
     override suspend fun getAll(): List<Destination> =
         newSuspendedTransaction {
             Destinations.selectAll().map { it.toDestination() }
@@ -29,9 +31,10 @@ class DestinationRepositoryImpl : DestinationRepository {
             Destinations.selectAll().where { Destinations.id eq id }.map { it.toDestination() }.singleOrNull()
         }
 
-    override suspend fun deleteDestination(id: Long): Boolean = newSuspendedTransaction(Dispatchers.IO) {
-        Destinations.deleteWhere { Destinations.id eq id } > 0
-    }
+    override suspend fun deleteDestination(id: Long): Boolean =
+        newSuspendedTransaction(Dispatchers.IO) {
+            Destinations.deleteWhere { Destinations.id eq id } > 0
+        }
 
     override suspend fun findByIdDetail(id: Long): DestinationDetail? =
         newSuspendedTransaction {
@@ -52,67 +55,85 @@ class DestinationRepositoryImpl : DestinationRepository {
             Destinations.selectAll().where { Destinations.parentId.isNull<Long?>() }.map { it.toDestination() }
         }
 
-    override suspend fun create(request: DestinationRequest): Long = newSuspendedTransaction {
-        Destinations.insert { row ->
+    override suspend fun create(request: DestinationRequest): Long =
+        newSuspendedTransaction {
+            Destinations.insert { row ->
 
-            row[nameVi] = request.nameVi
-            row[nameEn] = request.nameEn
-            row[descriptionVi] = request.descriptionVi
-            row[descriptionEn] = request.descriptionEn
+                row[nameVi] = request.nameVi
+                row[nameEn] = request.nameEn
+                row[descriptionVi] = request.descriptionVi
+                row[descriptionEn] = request.descriptionEn
 
-            row[latitude] = request.latitude
-            row[longitude] = request.longitude
+                row[latitude] = request.latitude
+                row[longitude] = request.longitude
 
-            row[type] = DestinationType.valueOf(request.type)
+                row[type] = DestinationType.valueOf(request.type)
 
-            // JSON encode
-            row[images] = Json.encodeToString(request.images)
-            row[tags] = Json.encodeToString(request.tags)
-            row[externalLinks] = Json.encodeToString(request.externalLinks)
+                // JSON encode
+                row[images] = Json.encodeToString(request.images)
+                row[tags] = Json.encodeToString(request.tags)
+                row[externalLinks] = Json.encodeToString(request.externalLinks)
 
-            row[parentId] = request.parentId
+                row[parentId] = request.parentId
 
-            row[slug] = request.slug
-            row[address] = request.address
-            row[city] = request.city
+                row[slug] = request.slug
+                row[address] = request.address
+                row[city] = request.city
 
-            row[bestTimeToVisit] = request.bestTimeToVisit
-            row[openingHours] = request.openingHours
+                row[bestTimeToVisit] = request.bestTimeToVisit
+                row[openingHours] = request.openingHours
 
-            row[priceFrom] = request.priceFrom?.toBigDecimal()
-            row[priceTo] = request.priceTo?.toBigDecimal()
+                row[priceFrom] = request.priceFrom?.toBigDecimal()
+                row[priceTo] = request.priceTo?.toBigDecimal()
 
-            row[addressLink] = request.addressLink
+                row[addressLink] = request.addressLink
 
-            row[status] = DestinationStatus.valueOf(request.status)
-            row[sortOrder] = request.sortOrder
+                row[status] = DestinationStatus.valueOf(request.status)
+                row[sortOrder] = request.sortOrder
 
-            row[createdAt] = LocalDateTime.now()
-            row[updatedAt] = LocalDateTime.now()
-        } get Destinations.id
-    }
+                row[createdAt] = LocalDateTime.now()
+                row[updatedAt] = LocalDateTime.now()
+            } get Destinations.id
+        }
 
-    override suspend fun update(id: Long, request: DestinationRequest) = newSuspendedTransaction {
-
+    override suspend fun update(
+        id: Long,
+        request: DestinationRequest,
+    ) = newSuspendedTransaction {
         Destinations.update({ Destinations.id eq id }) { row ->
 
-            fun updateIfNotBlank(field: Column<String?>, value: String?) {
+            fun updateIfNotBlank(
+                field: Column<String?>,
+                value: String?,
+            ) {
                 if (!value.isNullOrBlank()) row[field] = value
             }
 
-            fun updateIfNotNull(field: Column<Double?>, value: Double?) {
+            fun updateIfNotNull(
+                field: Column<Double?>,
+                value: Double?,
+            ) {
                 if (value != null) row[field] = value
             }
 
-            fun updateIfNotNullInt(field: Column<Int>, value: Int?) {
+            fun updateIfNotNullInt(
+                field: Column<Int>,
+                value: Int?,
+            ) {
                 if (value != null) row[field] = value
             }
 
-            fun updateIfNotNullLong(field: Column<Long?>, value: Long?) {
+            fun updateIfNotNullLong(
+                field: Column<Long?>,
+                value: Long?,
+            ) {
                 if (value != null) row[field] = value
             }
 
-            fun updateIfListNotEmpty(field: Column<String?>, list: List<String>?) {
+            fun updateIfListNotEmpty(
+                field: Column<String?>,
+                list: List<String>?,
+            ) {
                 if (!list.isNullOrEmpty()) {
                     row[field] = Json.encodeToString(list)
                 }
@@ -162,18 +183,20 @@ class DestinationRepositoryImpl : DestinationRepository {
         }
     }
 
-
     private suspend fun buildTree(node: Destination): Destination {
         val children = findChildren(node.id).map { buildTree(it) }
         return node.copy(children = children)
     }
 
-    override suspend fun search(query: String, types: List<DestinationType>): List<Destination> =
+    override suspend fun search(
+        query: String,
+        types: List<DestinationType>,
+    ): List<Destination> =
         newSuspendedTransaction {
             Destinations.selectAll()
                 .where {
                     (Destinations.nameVi like "%$query%" or (Destinations.nameEn like "%$query%")) and
-                            (Destinations.type inList types)
+                        (Destinations.type inList types)
                 }
                 .limit(20)
                 .map { it.toDestination() }

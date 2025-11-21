@@ -30,7 +30,29 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
     sortOrder: destination?.sortOrder || 0,
     images: destination?.images?.join('\n') || '',
     parentId: destination?.parentId || null,
+    addressLink: destination?.addressLink || '',
+    externalLinks: destination?.externalLinks?.join('\n') || '',
   });
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const generateSlug = (str: string) => {
+    return str
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[đĐ]/g, 'd')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  };
+
+  React.useEffect(() => {
+    if (!destination && formData.nameVi) {
+      setFormData(prev => ({ ...prev, slug: generateSlug(prev.nameVi) }));
+    }
+  }, [formData.nameVi, destination]);
 
   const [loading, setLoading] = useState(false);
   const [initialParent, setInitialParent] = useState<any>(null);
@@ -46,16 +68,36 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
         }
       }
     };
-    fetchParent().then(r => {});
+    fetchParent().then(r => { });
   }, [destination]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate
+    const newErrors: Record<string, string> = {};
+    if (!formData.nameVi.trim()) newErrors.nameVi = 'Vui lòng nhập tên Tiếng Việt';
+    if (!formData.nameEn.trim()) newErrors.nameEn = 'Vui lòng nhập tên Tiếng Anh';
+    if (!formData.type) newErrors.type = 'Vui lòng chọn loại';
+    if (!formData.status) newErrors.status = 'Vui lòng chọn trạng thái';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -69,7 +111,7 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
         address: formData.address || undefined,
         latitude: formData.latitude || undefined,
         longitude: formData.longitude || undefined,
-        slug: formData.slug || undefined,
+        slug: formData.slug || generateSlug(formData.nameVi),
         tags: formData.tags ? formData.tags.split(',').map(t => t.trim()) : undefined,
         bestTimeToVisit: formData.bestTimeToVisit || undefined,
         openingHours: formData.openingHours || undefined,
@@ -83,6 +125,8 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
         viewsCount: destination?.viewsCount || 0,
         favoritesCount: destination?.favoritesCount || 0,
         parentId: formData.parentId || undefined,
+        addressLink: formData.addressLink || undefined,
+        externalLinks: formData.externalLinks ? formData.externalLinks.split('\n').filter(l => l.trim()) : undefined,
       };
 
       if (destination) {
@@ -126,9 +170,10 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
               name="nameVi"
               value={formData.nameVi}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.nameVi ? 'border-red-500' : 'border-gray-300'}`}
               required
             />
+            {errors.nameVi && <p className="text-red-500 text-xs mt-1">{errors.nameVi}</p>}
           </div>
 
           <div>
@@ -138,9 +183,10 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
               name="nameEn"
               value={formData.nameEn}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.nameEn ? 'border-red-500' : 'border-gray-300'}`}
               required
             />
+            {errors.nameEn && <p className="text-red-500 text-xs mt-1">{errors.nameEn}</p>}
           </div>
 
           <div className="md:col-span-2">
@@ -171,7 +217,7 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
               name="type"
               value={formData.type}
               onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.type ? 'border-red-500' : 'border-gray-300'}`}
               required
             >
               <option value="region">Vùng miền</option>
@@ -208,6 +254,18 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
               name="address"
               value={formData.address}
               onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm text-gray-700 mb-2">Link Google Maps</label>
+            <input
+              type="text"
+              name="addressLink"
+              value={formData.addressLink}
+              onChange={handleChange}
+              placeholder="https://goo.gl/maps/..."
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -338,6 +396,18 @@ export const DestinationForm: React.FC<DestinationFormProps> = ({ destination, o
               onChange={handleChange}
               rows={4}
               placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <label className="block text-sm text-gray-700 mb-2">Liên kết ngoài (mỗi URL trên 1 dòng)</label>
+            <textarea
+              name="externalLinks"
+              value={formData.externalLinks}
+              onChange={handleChange}
+              rows={3}
+              placeholder="https://wikipedia.org/...&#10;https://tripadvisor.com/..."
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>

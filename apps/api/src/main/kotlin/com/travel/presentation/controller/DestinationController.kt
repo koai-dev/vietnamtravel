@@ -3,9 +3,9 @@ package com.travel.presentation.controller
 import com.travel.data.mapper.toDestinationResponse
 import com.travel.data.model.DestinationRequest
 import com.travel.domain.service.DestinationService
-import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.ApplicationCall
-import io.ktor.server.request.receive
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.request.*
 
 class DestinationController(private val destinationService: DestinationService) : BaseController() {
     suspend fun getAll(
@@ -84,14 +84,31 @@ class DestinationController(private val destinationService: DestinationService) 
         types: String,
         lang: String,
     ) {
-        val typeList = types.split(",").mapNotNull {
-            try {
-                com.travel.data.table.DestinationType.valueOf(it)
-            } catch (e: Exception) {
-                null
+        val typeList =
+            types.split(",").mapNotNull {
+                try {
+                    com.travel.data.table.DestinationType.valueOf(it)
+                } catch (e: Exception) {
+                    null
+                }
             }
-        }
         val destinations = destinationService.search(query, typeList).map { it.toDestinationResponse(lang) }
         respondWith(call, destinations)
+    }
+
+    suspend fun delete(
+        call: ApplicationCall,
+        id: Long? = null,
+    ) {
+        val response = id?.let { destinationService.delete(it) } ?: false
+        if (response) {
+            respondWith(call, true)
+        } else {
+            respondWithError(
+                call,
+                "Destination not found",
+                HttpStatusCode.NotFound,
+            )
+        }
     }
 }

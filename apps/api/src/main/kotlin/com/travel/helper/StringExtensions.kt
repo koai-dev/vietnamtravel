@@ -1,7 +1,6 @@
 package com.travel.helper
 
 import java.text.Normalizer
-import java.util.Locale
 import java.util.Locale.getDefault
 import java.util.regex.Pattern
 

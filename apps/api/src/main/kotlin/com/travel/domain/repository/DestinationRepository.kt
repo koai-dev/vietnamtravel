@@ -20,8 +20,16 @@ interface DestinationRepository {
     suspend fun findTree(id: Long): Destination?
 
     suspend fun listRoot(): List<Destination>
-    suspend fun create(request: DestinationRequest): Long
-    suspend fun update(id: Long, request: DestinationRequest): Int
 
-    suspend fun search(query: String, types: List<com.travel.data.table.DestinationType>): List<Destination>
+    suspend fun create(request: DestinationRequest): Long
+
+    suspend fun update(
+        id: Long,
+        request: DestinationRequest,
+    ): Int
+
+    suspend fun search(
+        query: String,
+        types: List<com.travel.data.table.DestinationType>,
+    ): List<Destination>
 }

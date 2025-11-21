@@ -256,7 +256,8 @@ class HotelRepositoryImpl : HotelRepository {
             query.count() > 0
         }
 
-    override suspend fun count(): Long  = newSuspendedTransaction(Dispatchers.IO) {
-        Hotels.selectAll().count()
-    }
+    override suspend fun count(): Long =
+        newSuspendedTransaction(Dispatchers.IO) {
+            Hotels.selectAll().count()
+        }
 }

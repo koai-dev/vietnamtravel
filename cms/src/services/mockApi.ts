@@ -163,58 +163,6 @@ export interface Notification {
 }
 
 // Mock data storage
-let mockDestinations: Destination[] = [
-  {
-    id: 1,
-    nameVi: 'Hà Nội',
-    nameEn: 'Hanoi',
-    descriptionVi: 'Thủ đô nghìn năm văn hiến',
-    descriptionEn: 'The thousand-year-old capital',
-    latitude: 21.0285,
-    longitude: 105.8542,
-    type: 'city',
-    images: ['https://images.unsplash.com/photo-1555891169-4e4a2d0b29e1?w=800'],
-    slug: 'ha-noi',
-    city: 'Hà Nội',
-    tags: ['văn hóa', 'lịch sử', 'ẩm thực'],
-    avgRating: 4.5,
-    reviewCount: 245,
-    viewsCount: 15230,
-    favoritesCount: 892,
-    status: 'ACTIVE',
-    sortOrder: 1,
-    createdAt: '2024-01-01T00:00:00',
-    updatedAt: '2024-01-01T00:00:00',
-  },
-  {
-    id: 2,
-    nameVi: 'Hồ Hoàn Kiếm',
-    nameEn: 'Hoan Kiem Lake',
-    descriptionVi: 'Biểu tượng của Hà Nội',
-    descriptionEn: 'Symbol of Hanoi',
-    latitude: 21.0285,
-    longitude: 105.8522,
-    type: 'attraction',
-    parentId: 1,
-    images: ['https://images.unsplash.com/photo-1569074187119-c87815b476da?w=800'],
-    slug: 'ho-hoan-kiem',
-    address: 'Quận Hoàn Kiếm, Hà Nội',
-    city: 'Hà Nội',
-    tags: ['hồ', 'công viên', 'miễn phí'],
-    bestTimeToVisit: 'Quanh năm',
-    openingHours: '24/7',
-    priceFrom: 0,
-    priceTo: 0,
-    avgRating: 4.7,
-    reviewCount: 523,
-    viewsCount: 32450,
-    favoritesCount: 1205,
-    status: 'ACTIVE',
-    sortOrder: 1,
-    createdAt: '2024-01-01T00:00:00',
-    updatedAt: '2024-01-01T00:00:00',
-  },
-];
 
 let mockHotels: Hotel[] = [
   {
@@ -417,66 +365,6 @@ const generateId = (arr: any[]) => {
 
 // API functions
 export const mockApi = {
-  // Destinations
-  getDestinations: async (): Promise<Destination[]> => {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve([...mockDestinations]), 300);
-    });
-  },
-
-  getDestination: async (id: number): Promise<Destination | undefined> => {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(mockDestinations.find(d => d.id === id)), 300);
-    });
-  },
-
-  createDestination: async (data: Omit<Destination, 'id' | 'createdAt' | 'updatedAt'>): Promise<Destination> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const newDestination: Destination = {
-          ...data,
-          id: generateId(mockDestinations),
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        };
-        mockDestinations.push(newDestination);
-        resolve(newDestination);
-      }, 300);
-    });
-  },
-
-  updateDestination: async (id: number, data: Partial<Destination>): Promise<Destination | undefined> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const index = mockDestinations.findIndex(d => d.id === id);
-        if (index !== -1) {
-          mockDestinations[index] = {
-            ...mockDestinations[index],
-            ...data,
-            updatedAt: new Date().toISOString(),
-          };
-          resolve(mockDestinations[index]);
-        } else {
-          resolve(undefined);
-        }
-      }, 300);
-    });
-  },
-
-  deleteDestination: async (id: number): Promise<boolean> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const index = mockDestinations.findIndex(d => d.id === id);
-        if (index !== -1) {
-          mockDestinations.splice(index, 1);
-          resolve(true);
-        } else {
-          resolve(false);
-        }
-      }, 300);
-    });
-  },
-
   // Hotels
   getHotels: async (): Promise<Hotel[]> => {
     return new Promise((resolve) => {
@@ -852,24 +740,6 @@ export const mockApi = {
         };
         mockNotifications.push(newNotification);
         resolve(newNotification);
-      }, 300);
-    });
-  },
-
-  // Dashboard stats
-  getDashboardStats: async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({
-          totalDestinations: mockDestinations.length,
-          totalHotels: mockHotels.length,
-          totalBookings: mockBookings.length,
-          totalUsers: mockUsers.length,
-          totalRevenue: mockBookings.reduce((sum, b) => sum + (b.totalPrice || 0), 0),
-          pendingBookings: mockBookings.filter(b => b.status === 'pending').length,
-          recentBookings: mockBookings.slice(0, 5),
-          recentReviews: mockReviews.slice(0, 5),
-        });
       }, 300);
     });
   },

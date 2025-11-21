@@ -28,6 +28,8 @@ export interface DestinationDetail extends Destination {
     priceTo?: number;
     sortOrder: number;
     favoritesCount: number;
+    externalLinks?: string[];
+    addressLink?: string;
 }
 
 export const destinationApi = {
