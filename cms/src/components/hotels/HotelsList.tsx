@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useEffect, useState } from 'react';
 import { hotelApi, Hotel } from '../../services/hotelApi';
 import { Plus, Edit, Trash2, Search, Hotel as HotelIcon } from 'lucide-react';
@@ -13,9 +14,6 @@ export const HotelsList: React.FC = () => {
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
 
-  useEffect(() => {
-    loadHotels(1, true);
-  }, []);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {

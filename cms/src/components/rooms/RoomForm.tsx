@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useState } from 'react';
 import { mockApi, Room, Hotel } from '../../services/mockApi';
 import { X, Save } from 'lucide-react';

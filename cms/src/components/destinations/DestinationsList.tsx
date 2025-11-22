@@ -15,10 +15,6 @@ export const DestinationsList: React.FC = () => {
   const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
-    loadDestinations(1, true);
-  }, []);
-
-  useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       loadDestinations(1, true);
     }, 500);
