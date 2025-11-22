@@ -18,7 +18,7 @@ object Users : Table("users") {
 }
 
 enum class UserRole {
-    user,
-    host,
-    admin,
+    USER,
+    HOST,
+    ADMIN,
 }
