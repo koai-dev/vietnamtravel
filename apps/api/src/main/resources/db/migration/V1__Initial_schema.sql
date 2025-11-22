@@ -8,7 +8,7 @@ CREATE TABLE users (
     name VARCHAR(255),
     avatar_url TEXT,
     phone VARCHAR(20),
-    role ENUM('USER', 'HOST', 'ADMIN') NOT NULL DEFAULT 'USER',
+    role ENUM('user', 'host', 'admin') NOT NULL DEFAULT 'user',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -22,7 +22,7 @@ CREATE TABLE destinations (
     description_en TEXT,
     latitude DOUBLE,
     longitude DOUBLE,
-    type ENUM('REGION', 'CITY', 'ATTRACTION', 'SPOT'),
+    type ENUM('region', 'city', 'attraction', 'spot'),
     images TEXT, -- JSON list
     parent_id BIGINT,
     slug VARCHAR(255) UNIQUE,
@@ -104,7 +104,7 @@ CREATE TABLE bookings (
     check_in DATE NOT NULL,
     check_out DATE NOT NULL,
     total_price DECIMAL(10, 2),
-    status ENUM('PENDING', 'CONFIRMED', 'CANCELLED', 'COMPLETED') NOT NULL DEFAULT 'PENDING',
+    status ENUM('pending', 'confirmed', 'cancelled', 'completed') NOT NULL DEFAULT 'pending',
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT,

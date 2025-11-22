@@ -6,6 +6,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.application.*
 import org.flywaydb.core.Flyway
+import org.flywaydb.core.api.exception.FlywayValidateException
 import org.jetbrains.exposed.sql.Database
 import org.koin.ktor.ext.inject
 import org.slf4j.LoggerFactory
@@ -33,6 +34,15 @@ fun Application.configureDatabase() {
     try {
         flyway.migrate()
         logger.info("Flyway migration successful")
+    } catch (e: FlywayValidateException) {
+        if (isDevelopment) {
+            logger.warn("Flyway validation failed, attempting repair", e)
+            flyway.repair()
+            flyway.migrate()
+            logger.info("Flyway migration successful after repair")
+        } else {
+            throw e
+        }
     } catch (e: Exception) {
         logger.error("Flyway migration failed", e)
         throw e
