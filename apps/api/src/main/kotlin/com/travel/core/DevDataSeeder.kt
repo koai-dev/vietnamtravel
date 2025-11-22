@@ -128,7 +128,7 @@ object DevDataSeeder {
                     this[Users.name] = name
                     this[Users.email] = email
                     this[Users.passwordHash] = "\$2a\$12\$123456" // Dummy hash
-                    this[Users.role] = UserRole.user
+                    this[Users.role] = UserRole.USER
                     this[Users.createdAt] = LocalDateTime.now()
                     this[Users.updatedAt] = LocalDateTime.now()
                 }

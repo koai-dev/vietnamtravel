@@ -24,7 +24,7 @@ class AuthController(
                 name = request.name,
                 avatarUrl = null,
                 phone = null,
-                role = UserRole.user,
+                role = UserRole.USER,
             )
         authService.register(user)
         respondWith(call, "User registered successfully")

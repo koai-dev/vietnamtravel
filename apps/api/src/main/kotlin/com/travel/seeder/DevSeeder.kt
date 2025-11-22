@@ -22,7 +22,7 @@ object DevSeeder : KoinComponent {
                         name = "Admin User",
                         avatarUrl = null,
                         phone = null,
-                        role = UserRole.admin,
+                        role = UserRole.ADMIN,
                     )
                 authRepository.saveUser(adminUser)
                 println("Admin user created")
