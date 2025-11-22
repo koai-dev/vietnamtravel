@@ -23,7 +23,7 @@ class BookingRepositoryImpl : BookingRepository {
                     it[checkIn] = booking.checkIn
                     it[checkOut] = booking.checkOut
                     it[totalPrice] = BigDecimal.valueOf(booking.totalPrice)
-                    it[status] = BookingStatus.valueOf(booking.status)
+                    it[status] = BookingStatus.valueOf(booking.status.uppercase())
                     it[createdAt] = java.time.LocalDateTime.now()
                     it[updatedAt] = java.time.LocalDateTime.now()
                 } get Bookings.id
@@ -38,12 +38,12 @@ class BookingRepositoryImpl : BookingRepository {
 
     override suspend fun countByStatus(status: String): Long =
         newSuspendedTransaction(Dispatchers.IO) {
-            Bookings.select { Bookings.status eq BookingStatus.valueOf(status) }.count()
+            Bookings.selectAll().where { Bookings.status eq BookingStatus.valueOf(status.uppercase()) }.count()
         }
 
     override suspend fun sumTotalPrice(): Double =
         newSuspendedTransaction(Dispatchers.IO) {
-            Bookings.slice(Bookings.totalPrice.sum()).selectAll().firstOrNull()?.get(Bookings.totalPrice.sum())?.toDouble() ?: 0.0
+            Bookings.select(Bookings.totalPrice.sum()).firstOrNull()?.get(Bookings.totalPrice.sum())?.toDouble() ?: 0.0
         }
 
     override suspend fun getRecentBookings(limit: Int): List<BookingDashboardResponse> =
