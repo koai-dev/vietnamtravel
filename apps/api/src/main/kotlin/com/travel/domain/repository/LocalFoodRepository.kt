@@ -20,5 +20,8 @@ interface LocalFoodRepository {
         pageSize: Int = 20,
     ): Pair<List<LocalFood>, Long>
 
-    suspend fun getAll(page: Int = 1, pageSize: Int = 20): Pair<List<LocalFood>, Long>
+    suspend fun getAll(
+        page: Int = 1,
+        pageSize: Int = 20,
+    ): Pair<List<LocalFood>, Long>
 }

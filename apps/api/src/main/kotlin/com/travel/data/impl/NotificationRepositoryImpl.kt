@@ -43,10 +43,11 @@ class NotificationRepositoryImpl : NotificationRepository {
         newSuspendedTransaction {
             val query = Notifications.selectAll().where { Notifications.userId eq userId }
             val total = query.count()
-            val items = query
-                .orderBy(Notifications.createdAt, SortOrder.DESC)
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map { it.toNotification() }
+            val items =
+                query
+                    .orderBy(Notifications.createdAt, SortOrder.DESC)
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map { it.toNotification() }
             Pair(items, total)
         }
 

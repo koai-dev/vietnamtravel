@@ -9,7 +9,7 @@ fun Route.reviewRoutes() {
     val reviewController by inject<ReviewController>()
 
     route("/api/reviews") {
-        get{
+        get {
             reviewController.getAll(call)
         }
 

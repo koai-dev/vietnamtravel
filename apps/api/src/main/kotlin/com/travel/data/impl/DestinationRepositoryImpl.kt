@@ -22,12 +22,16 @@ class DestinationRepositoryImpl : DestinationRepository {
             Destinations.selectAll().count()
         }
 
-    override suspend fun getAll(page: Int, pageSize: Int): Pair<List<Destination>, Long> =
+    override suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Destination>, Long> =
         newSuspendedTransaction {
             val total = Destinations.selectAll().count()
-            val items = Destinations.selectAll()
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map { it.toDestination() }
+            val items =
+                Destinations.selectAll()
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map { it.toDestination() }
             Pair(items, total)
         }
 
@@ -200,14 +204,16 @@ class DestinationRepositoryImpl : DestinationRepository {
         pageSize: Int,
     ): Pair<List<Destination>, Long> =
         newSuspendedTransaction {
-            val queryCondition = (Destinations.nameVi like "%$query%" or (Destinations.nameEn like "%$query%")) and
-                (if (types.isNotEmpty()) Destinations.type inList types else Op.TRUE)
+            val queryCondition =
+                (Destinations.nameVi like "%$query%" or (Destinations.nameEn like "%$query%")) and
+                    (if (types.isNotEmpty()) Destinations.type inList types else Op.TRUE)
 
             val total = Destinations.selectAll().where { queryCondition }.count()
-            val items = Destinations.selectAll()
-                .where { queryCondition }
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map { it.toDestination() }
+            val items =
+                Destinations.selectAll()
+                    .where { queryCondition }
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map { it.toDestination() }
             Pair(items, total)
         }
 }

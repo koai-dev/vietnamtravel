@@ -24,20 +24,21 @@ class NotificationController(private val notificationService: NotificationServic
         val (page, pageSize) = getPaginationParams(call)
         val (notifications, total) = notificationService.getByUser(userId, page, pageSize)
         val response = notifications.map { it.toNotificationResponse() }
-        
+
         val totalPages = (total + pageSize - 1) / pageSize
-        
+
         respondWith(
             call,
             com.travel.presentation.model.PaginatedResponse(
                 data = response,
-                pagination = com.travel.presentation.model.Pagination(
-                    page = page,
-                    pageSize = pageSize,
-                    total = total,
-                    totalPages = totalPages.toInt()
-                )
-            )
+                pagination =
+                    com.travel.presentation.model.Pagination(
+                        page = page,
+                        pageSize = pageSize,
+                        total = total,
+                        totalPages = totalPages.toInt(),
+                    ),
+            ),
         )
     }
 

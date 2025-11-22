@@ -8,12 +8,16 @@ import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
 class TourRepositoryImpl : TourRepository {
-    override suspend fun getAll(page: Int, pageSize: Int): Pair<List<Tour>, Long> =
+    override suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Tour>, Long> =
         newSuspendedTransaction {
             val total = Tours.selectAll().count()
-            val items = Tours.selectAll()
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map { it.toTour() }
+            val items =
+                Tours.selectAll()
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map { it.toTour() }
             Pair(items, total)
         }
 

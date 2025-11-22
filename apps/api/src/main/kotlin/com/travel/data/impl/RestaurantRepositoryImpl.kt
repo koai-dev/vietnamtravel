@@ -81,18 +81,23 @@ class RestaurantRepositoryImpl : RestaurantRepository {
         newSuspendedTransaction {
             val query = Restaurants.select { Restaurants.destinationId eq destinationId }
             val total = query.count()
-            val items = query
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map { it.toRestaurant() }
+            val items =
+                query
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map { it.toRestaurant() }
             Pair(items, total)
         }
 
-    override suspend fun getAll(page: Int, pageSize: Int): Pair<List<Restaurant>, Long> =
+    override suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Restaurant>, Long> =
         newSuspendedTransaction {
             val total = Restaurants.selectAll().count()
-            val items = Restaurants.selectAll()
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map { it.toRestaurant() }
+            val items =
+                Restaurants.selectAll()
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map { it.toRestaurant() }
             Pair(items, total)
         }
 

@@ -67,7 +67,11 @@ class HotelServiceImpl(
         return hotel.toLocale(lang)
     }
 
-    override suspend fun getAllHotels(lang: String, page: Int, pageSize: Int): Pair<List<HotelResponse>, Long> {
+    override suspend fun getAllHotels(
+        lang: String,
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<HotelResponse>, Long> {
         val (hotels, total) = hotelRepository.getAllHotels(page, pageSize)
         return Pair(hotels.map { it.toLocale(lang) }, total)
     }

@@ -9,7 +9,7 @@ fun Route.roomRoutes() {
     val roomController by inject<RoomController>()
 
     route("/api/rooms") {
-        get{
+        get {
             roomController.getAll(call)
         }
 

@@ -21,20 +21,21 @@ class HotelController(private val hotelService: HotelService) : BaseController()
         val lang = call.lang()
         val (page, pageSize) = getPaginationParams(call)
         val (hotels, total) = hotelService.getAllHotels(lang, page, pageSize)
-        
+
         val totalPages = (total + pageSize - 1) / pageSize
-        
+
         respondWith(
             call,
             com.travel.presentation.model.PaginatedResponse(
                 data = hotels,
-                pagination = com.travel.presentation.model.Pagination(
-                    page = page,
-                    pageSize = pageSize,
-                    total = total,
-                    totalPages = totalPages.toInt()
-                )
-            )
+                pagination =
+                    com.travel.presentation.model.Pagination(
+                        page = page,
+                        pageSize = pageSize,
+                        total = total,
+                        totalPages = totalPages.toInt(),
+                    ),
+            ),
         )
     }
 

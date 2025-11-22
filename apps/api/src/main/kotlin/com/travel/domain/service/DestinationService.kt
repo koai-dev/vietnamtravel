@@ -16,17 +16,22 @@ class DestinationService(
     private val restaurantRepository: RestaurantRepository,
     private val imageMappingService: ImageMappingService,
 ) {
-    suspend fun getAll(lang: String, page: Int, pageSize: Int): Pair<List<Destination>, Long> {
+    suspend fun getAll(
+        lang: String,
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Destination>, Long> {
         val key = "destinations:all:$lang:$page:$pageSize"
         val (destinations, total) =
             com.travel.core.cache(redisRepository, key, 30 * 60) {
                 destinationRepository.getAll(page, pageSize)
             }
-        val enrichedDestinations = destinations.map { destination ->
-            val foods = localFoodRepository.listByDestinationId(destination.id )
-            val restaurants = restaurantRepository.getRestaurantsByDestinationId(destination.id)
-            destination.copy(foods = foods.first, restaurants = restaurants.first)
-        }
+        val enrichedDestinations =
+            destinations.map { destination ->
+                val foods = localFoodRepository.listByDestinationId(destination.id)
+                val restaurants = restaurantRepository.getRestaurantsByDestinationId(destination.id)
+                destination.copy(foods = foods.first, restaurants = restaurants.first)
+            }
         return Pair(enrichedDestinations, total)
     }
 

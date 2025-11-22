@@ -53,40 +53,42 @@ class RestaurantController(private val restaurantService: RestaurantService) : B
     ) {
         val (page, pageSize) = getPaginationParams(call)
         val (restaurants, total) = restaurantService.getRestaurantsByDestinationId(destinationId, page, pageSize)
-        
+
         val totalPages = (total + pageSize - 1) / pageSize
-        
+
         respondWith(
             call,
             com.travel.presentation.model.PaginatedResponse(
                 data = restaurants,
-                pagination = com.travel.presentation.model.Pagination(
-                    page = page,
-                    pageSize = pageSize,
-                    total = total,
-                    totalPages = totalPages.toInt()
-                )
-            )
+                pagination =
+                    com.travel.presentation.model.Pagination(
+                        page = page,
+                        pageSize = pageSize,
+                        total = total,
+                        totalPages = totalPages.toInt(),
+                    ),
+            ),
         )
     }
 
     suspend fun getAll(call: ApplicationCall) {
         val (page, pageSize) = getPaginationParams(call)
         val (restaurants, total) = restaurantService.getAll(page, pageSize)
-        
+
         val totalPages = (total + pageSize - 1) / pageSize
-        
+
         respondWith(
             call,
             com.travel.presentation.model.PaginatedResponse(
                 data = restaurants,
-                pagination = com.travel.presentation.model.Pagination(
-                    page = page,
-                    pageSize = pageSize,
-                    total = total,
-                    totalPages = totalPages.toInt()
-                )
-            )
+                pagination =
+                    com.travel.presentation.model.Pagination(
+                        page = page,
+                        pageSize = pageSize,
+                        total = total,
+                        totalPages = totalPages.toInt(),
+                    ),
+            ),
         )
     }
 }

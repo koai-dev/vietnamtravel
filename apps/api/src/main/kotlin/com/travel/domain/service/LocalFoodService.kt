@@ -51,7 +51,10 @@ class LocalFoodService(
         return localFoodRepository.listByDestinationId(destinationId, page, pageSize)
     }
 
-    suspend fun getAll(page: Int, pageSize: Int): Pair<List<LocalFood>, Long> {
+    suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<LocalFood>, Long> {
         return localFoodRepository.getAll(page, pageSize)
     }
 

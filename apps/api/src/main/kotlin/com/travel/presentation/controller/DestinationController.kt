@@ -15,20 +15,21 @@ class DestinationController(private val destinationService: DestinationService) 
         val (page, pageSize) = getPaginationParams(call)
         val (destinations, total) = destinationService.getAll(lang, page, pageSize)
         val response = destinations.map { it.toDestinationResponse(lang) }
-        
+
         val totalPages = (total + pageSize - 1) / pageSize
-        
+
         respondWith(
-            call, 
+            call,
             com.travel.presentation.model.PaginatedResponse(
                 data = response,
-                pagination = com.travel.presentation.model.Pagination(
-                    page = page,
-                    pageSize = pageSize,
-                    total = total,
-                    totalPages = totalPages.toInt()
-                )
-            )
+                pagination =
+                    com.travel.presentation.model.Pagination(
+                        page = page,
+                        pageSize = pageSize,
+                        total = total,
+                        totalPages = totalPages.toInt(),
+                    ),
+            ),
         )
     }
 
@@ -111,20 +112,21 @@ class DestinationController(private val destinationService: DestinationService) 
             }
         val (destinations, total) = destinationService.search(query, typeList, page, pageSize)
         val response = destinations.map { it.toDestinationResponse(lang) }
-        
+
         val totalPages = (total + pageSize - 1) / pageSize
 
         respondWith(
             call,
             com.travel.presentation.model.PaginatedResponse(
                 data = response,
-                pagination = com.travel.presentation.model.Pagination(
-                    page = page,
-                    pageSize = pageSize,
-                    total = total,
-                    totalPages = totalPages.toInt()
-                )
-            )
+                pagination =
+                    com.travel.presentation.model.Pagination(
+                        page = page,
+                        pageSize = pageSize,
+                        total = total,
+                        totalPages = totalPages.toInt(),
+                    ),
+            ),
         )
     }
 

@@ -27,7 +27,10 @@ class BookingService(
         }
     }
 
-    suspend fun getAll(page: Int, pageSize: Int): Pair<List<com.travel.data.model.BookingDashboardResponse>, Long> {
+    suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<com.travel.data.model.BookingDashboardResponse>, Long> {
         return bookingRepository.getAll(page, pageSize)
     }
 }

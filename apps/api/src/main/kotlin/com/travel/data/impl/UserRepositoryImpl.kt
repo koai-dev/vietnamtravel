@@ -31,8 +31,9 @@ class UserRepositoryImpl : UserRepository {
                 }
             }
             val total = queryBuilder.count()
-            val items = queryBuilder.limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map { it.toUser() }
+            val items =
+                queryBuilder.limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map { it.toUser() }
             Pair(items, total)
         }
 

@@ -14,5 +14,8 @@ interface BookingRepository {
 
     suspend fun getRecentBookings(limit: Int): List<BookingDashboardResponse>
 
-    suspend fun getAll(page: Int, pageSize: Int): Pair<List<BookingDashboardResponse>, Long>
+    suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<BookingDashboardResponse>, Long>
 }

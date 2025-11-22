@@ -8,7 +8,10 @@ class TourService(
     private val tourRepository: TourRepository,
     private val redisRepository: RedisRepository,
 ) {
-    suspend fun getAll(page: Int, pageSize: Int): Pair<List<Tour>, Long> = tourRepository.getAll(page, pageSize)
+    suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Tour>, Long> = tourRepository.getAll(page, pageSize)
 
     suspend fun getById(id: Long): Tour? = tourRepository.findById(id)
 

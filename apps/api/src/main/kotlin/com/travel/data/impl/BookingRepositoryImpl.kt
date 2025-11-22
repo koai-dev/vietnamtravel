@@ -70,29 +70,33 @@ class BookingRepositoryImpl : BookingRepository {
                 }
         }
 
-    override suspend fun getAll(page: Int, pageSize: Int): Pair<List<BookingDashboardResponse>, Long> =
+    override suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<BookingDashboardResponse>, Long> =
         newSuspendedTransaction(Dispatchers.IO) {
             val total = Bookings.selectAll().count()
-            val items = Bookings
-                .join(Users, JoinType.LEFT, Bookings.userId, Users.id)
-                .join(Hotels, JoinType.INNER, Bookings.hotelId, Hotels.id)
-                .selectAll()
-                .orderBy(Bookings.createdAt, SortOrder.DESC)
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map {
-                    BookingDashboardResponse(
-                        id = it[Bookings.id],
-                        userId = it[Bookings.userId],
-                        hotelId = it[Bookings.hotelId],
-                        roomId = it[Bookings.roomId],
-                        checkIn = it[Bookings.checkIn].toString(),
-                        checkOut = it[Bookings.checkOut].toString(),
-                        totalPrice = it[Bookings.totalPrice]?.toDouble() ?: 0.0,
-                        status = it[Bookings.status].name,
-                        hotelName = it[Hotels.nameVi],
-                        userName = it[Users.name],
-                    )
-                }
+            val items =
+                Bookings
+                    .join(Users, JoinType.LEFT, Bookings.userId, Users.id)
+                    .join(Hotels, JoinType.INNER, Bookings.hotelId, Hotels.id)
+                    .selectAll()
+                    .orderBy(Bookings.createdAt, SortOrder.DESC)
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map {
+                        BookingDashboardResponse(
+                            id = it[Bookings.id],
+                            userId = it[Bookings.userId],
+                            hotelId = it[Bookings.hotelId],
+                            roomId = it[Bookings.roomId],
+                            checkIn = it[Bookings.checkIn].toString(),
+                            checkOut = it[Bookings.checkOut].toString(),
+                            totalPrice = it[Bookings.totalPrice]?.toDouble() ?: 0.0,
+                            status = it[Bookings.status].name,
+                            hotelName = it[Hotels.nameVi],
+                            userName = it[Users.name],
+                        )
+                    }
             Pair(items, total)
         }
 }

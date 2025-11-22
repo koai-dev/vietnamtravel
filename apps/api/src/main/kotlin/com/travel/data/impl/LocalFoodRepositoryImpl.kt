@@ -71,18 +71,23 @@ class LocalFoodRepositoryImpl : LocalFoodRepository {
         newSuspendedTransaction {
             val query = LocalFoods.selectAll().where { LocalFoods.destinationId eq destinationId }
             val total = query.count()
-            val items = query
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map { it.toLocalFood() }
+            val items =
+                query
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map { it.toLocalFood() }
             Pair(items, total)
         }
 
-    override suspend fun getAll(page: Int, pageSize: Int): Pair<List<LocalFood>, Long> =
+    override suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<LocalFood>, Long> =
         newSuspendedTransaction {
             val total = LocalFoods.selectAll().count()
-            val items = LocalFoods.selectAll()
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map { it.toLocalFood() }
+            val items =
+                LocalFoods.selectAll()
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map { it.toLocalFood() }
             Pair(items, total)
         }
 }

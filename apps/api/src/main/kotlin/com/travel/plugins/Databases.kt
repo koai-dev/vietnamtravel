@@ -21,7 +21,7 @@ fun Application.configureDatabase() {
             driverClassName = "com.mysql.cj.jdbc.Driver"
             jdbcUrl = if (!isDevelopment) Config.dbUrl else "jdbc:mysql://localhost:3306/travel_db"
             username = if (!isDevelopment) Config.dbUser else "root"
-            password =  if (!isDevelopment) Config.dbPassword else ""
+            password = if (!isDevelopment) Config.dbPassword else ""
             maximumPoolSize = 10
             isAutoCommit = false
             transactionIsolation = "TRANSACTION_REPEATABLE_READ"
@@ -47,5 +47,4 @@ fun Application.configureDatabase() {
         logger.error("Flyway migration failed", e)
         throw e
     }
-
 }

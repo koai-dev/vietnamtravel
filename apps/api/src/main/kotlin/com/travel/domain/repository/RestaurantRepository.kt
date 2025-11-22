@@ -22,7 +22,10 @@ interface RestaurantRepository {
         pageSize: Int = 20,
     ): Pair<List<Restaurant>, Long>
 
-    suspend fun getAll(page: Int = 1, pageSize: Int = 20): Pair<List<Restaurant>, Long>
+    suspend fun getAll(
+        page: Int = 1,
+        pageSize: Int = 20,
+    ): Pair<List<Restaurant>, Long>
 
     suspend fun getLocalFoodsForRestaurant(restaurantId: Long): List<LocalFood>
 }

@@ -111,12 +111,16 @@ class HotelRepositoryImpl : HotelRepository {
             getHotelById(id)!!
         }
 
-    override suspend fun getAllHotels(page: Int, pageSize: Int): Pair<List<HotelResponse>, Long> =
+    override suspend fun getAllHotels(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<HotelResponse>, Long> =
         newSuspendedTransaction(Dispatchers.IO) {
             val total = selectQuery.count()
-            val items = selectQuery
-                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
-                .map(::toHotelResponse)
+            val items =
+                selectQuery
+                    .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                    .map(::toHotelResponse)
             Pair(items, total)
         }
 

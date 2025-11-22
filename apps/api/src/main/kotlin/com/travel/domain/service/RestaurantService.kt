@@ -76,19 +76,24 @@ class RestaurantService(
         pageSize: Int,
     ): Pair<List<RestaurantResponse>, Long> {
         val (restaurants, total) = restaurantRepository.getRestaurantsByDestinationId(destinationId, page, pageSize)
-        val response = restaurants.map { restaurant ->
-            val localFoods = restaurantRepository.getLocalFoodsForRestaurant(restaurant.id)
-            restaurant.copy(localFoods = localFoods).toRestaurantResponse()
-        }
+        val response =
+            restaurants.map { restaurant ->
+                val localFoods = restaurantRepository.getLocalFoodsForRestaurant(restaurant.id)
+                restaurant.copy(localFoods = localFoods).toRestaurantResponse()
+            }
         return Pair(response, total)
     }
 
-    suspend fun getAll(page: Int, pageSize: Int): Pair<List<RestaurantResponse>, Long> {
+    suspend fun getAll(
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<RestaurantResponse>, Long> {
         val (restaurants, total) = restaurantRepository.getAll(page, pageSize)
-        val response = restaurants.map { restaurant ->
-            val localFoods = restaurantRepository.getLocalFoodsForRestaurant(restaurant.id)
-            restaurant.copy(localFoods = localFoods).toRestaurantResponse()
-        }
+        val response =
+            restaurants.map { restaurant ->
+                val localFoods = restaurantRepository.getLocalFoodsForRestaurant(restaurant.id)
+                restaurant.copy(localFoods = localFoods).toRestaurantResponse()
+            }
         return Pair(response, total)
     }
 }
