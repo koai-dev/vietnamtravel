@@ -1,5 +1,7 @@
 package com.travel.presentation.controller
 
+import com.travel.data.model.CreateRoomRequest
+import com.travel.data.model.UpdateRoomRequest
 import com.travel.domain.model.Room
 import com.travel.domain.repository.RoomRepository
 import com.travel.presentation.model.PaginatedResponse
@@ -8,29 +10,6 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.receive
 import kotlinx.serialization.Serializable
-
-@Serializable
-data class CreateRoomRequest(
-    val hotelId: Long,
-    val roomTypeVi: String?,
-    val roomTypeEn: String?,
-    val maxGuest: Int?,
-    val pricePerNight: Double?,
-    val totalRooms: Int?,
-    val availableRooms: Int?,
-    val amenities: List<String>?,
-)
-
-@Serializable
-data class UpdateRoomRequest(
-    val roomTypeVi: String?,
-    val roomTypeEn: String?,
-    val maxGuest: Int?,
-    val pricePerNight: Double?,
-    val totalRooms: Int?,
-    val availableRooms: Int?,
-    val amenities: List<String>?,
-)
 
 class RoomController(
     private val roomRepository: RoomRepository,

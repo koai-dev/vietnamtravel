@@ -1,26 +1,13 @@
 package com.travel.presentation.controller
 
+import com.travel.data.model.CreateReviewRequest
+import com.travel.data.model.UpdateReviewRequest
 import com.travel.domain.repository.ReviewRepository
 import com.travel.presentation.model.PaginatedResponse
 import com.travel.presentation.model.Pagination
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.request.receive
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class CreateReviewRequest(
-    val userId: Long?,
-    val hotelId: Long,
-    val rating: Int?,
-    val comment: String?,
-)
-
-@Serializable
-data class UpdateReviewRequest(
-    val rating: Int?,
-    val comment: String?,
-)
+import io.ktor.server.request.*
 
 class ReviewController(
     private val reviewRepository: ReviewRepository,
