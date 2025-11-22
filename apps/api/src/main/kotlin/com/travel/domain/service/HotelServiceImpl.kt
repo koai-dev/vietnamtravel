@@ -32,11 +32,11 @@ class HotelServiceImpl(
             throw IllegalArgumentException("Slug '${hotelRequest.slug}' already exists.")
         }
 
-        val resolvedImages =
-            imageMappingService.resolveImages(
-                hotelRequest.images?.let { Json.encodeToString(it) },
-                hotelRequest.tempUrlMap ?: emptyMap(),
-            )
+//        val resolvedImages =
+//            imageMappingService.resolveImages(
+//                hotelRequest.images?.let { Json.encodeToString(it) },
+//                hotelRequest.tempUrlMap ?: emptyMap(),
+//            )
 
         val hotel =
             hotelRepository.createHotel(
@@ -51,7 +51,7 @@ class HotelServiceImpl(
                 longitude = hotelRequest.longitude,
                 addressLink = hotelRequest.addressLink,
                 contact = hotelRequest.contact?.let { Json.encodeToString(it) },
-                images = resolvedImages,
+                images = hotelRequest.images?.let { Json.encodeToString(it) },
                 minPrice = hotelRequest.minPrice,
                 maxPrice = hotelRequest.maxPrice,
                 amenities = hotelRequest.amenities?.let { Json.encodeToString(it) },

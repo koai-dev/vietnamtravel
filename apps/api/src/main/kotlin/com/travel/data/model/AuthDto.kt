@@ -53,6 +53,6 @@ fun RefreshTokenRequest.validate(): ValidationResult {
 
 @Serializable
 data class TokenResponse(
-    val accessToken: String,
-    val refreshToken: String,
+    val accessToken: String = "",
+    val refreshToken: String = "",
 )

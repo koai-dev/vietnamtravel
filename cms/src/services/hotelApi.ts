@@ -36,7 +36,7 @@ export interface Hotel {
 export const hotelApi = {
     getHotels: async (page: number = 1, pageSize: number = 20, lang: string = 'vi') => {
         const response = await api.get(`/api/hotels?page=${page}&pageSize=${pageSize}&lang=${lang}`);
-        return response.data;
+        return response.data.data;
     },
 
     getHotel: async (id: number, lang: string = 'vi') => {
