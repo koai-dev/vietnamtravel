@@ -8,7 +8,6 @@ import com.travel.domain.model.Destination
 import com.travel.domain.model.DestinationDetail
 import com.travel.domain.repository.DestinationRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
@@ -67,7 +66,7 @@ class DestinationRepositoryImpl : DestinationRepository {
                 row[latitude] = request.latitude
                 row[longitude] = request.longitude
 
-                row[type] = DestinationType.valueOf(request.type)
+                row[type] = DestinationType.valueOf(request.type.uppercase())
 
                 // JSON encode
                 row[images] = Json.encodeToString(request.images)
@@ -88,7 +87,7 @@ class DestinationRepositoryImpl : DestinationRepository {
 
                 row[addressLink] = request.addressLink
 
-                row[status] = DestinationStatus.valueOf(request.status)
+                row[status] = DestinationStatus.valueOf(request.status.uppercase())
                 row[sortOrder] = request.sortOrder
 
                 row[createdAt] = LocalDateTime.now()
@@ -161,7 +160,7 @@ class DestinationRepositoryImpl : DestinationRepository {
 
             // Enums
             if (request.type.isNotBlank()) {
-                row[Destinations.type] = DestinationType.valueOf(request.type)
+                row[Destinations.type] = DestinationType.valueOf(request.type.uppercase())
             }
             if (request.status.isNotBlank()) {
                 row[Destinations.status] = DestinationStatus.valueOf(request.status)

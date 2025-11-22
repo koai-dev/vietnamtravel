@@ -38,10 +38,10 @@ object Destinations : Table("destinations") {
 }
 
 enum class DestinationType {
-    region,
-    city,
-    attraction,
-    spot,
+    REGION,
+    CITY,
+    ATTRACTION,
+    SPOT,
 }
 
 enum class DestinationStatus {
