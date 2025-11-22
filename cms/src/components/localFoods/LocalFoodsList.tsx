@@ -1,29 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import { mockApi, LocalFood } from '../../services/mockApi';
+import { localFoodApi, LocalFood } from '../../services/localFoodApi';
 import { Plus, Edit, Trash2, Coffee } from 'lucide-react';
 
 export const LocalFoodsList: React.FC = () => {
   const [localFoods, setLocalFoods] = useState<LocalFood[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
-    loadLocalFoods();
+    loadLocalFoods(1, true);
   }, []);
 
-  const loadLocalFoods = async () => {
-    setLoading(true);
+  const loadLocalFoods = async (pageNum: number, reset: boolean = false) => {
+    if (reset) {
+      setLoading(true);
+      setPage(1);
+    } else {
+      setLoadingMore(true);
+    }
+
     try {
-      const data = await mockApi.getLocalFoods();
-      setLocalFoods(data);
+      const response = await localFoodApi.getLocalFoods(pageNum, 20);
+
+      let newData: LocalFood[] = [];
+      let totalPages = 1;
+
+      if ('data' in response && 'pagination' in response) {
+        newData = response.data;
+        totalPages = response.pagination.totalPages;
+      } else if (Array.isArray(response)) {
+        newData = response;
+        totalPages = 1;
+      }
+
+      if (reset) {
+        setLocalFoods(newData);
+      } else {
+        setLocalFoods(prev => [...prev, ...newData]);
+      }
+
+      setHasMore(pageNum < totalPages);
+      setPage(pageNum);
+    } catch (error) {
+      console.error('Error loading local foods:', error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      loadLocalFoods(page + 1);
     }
   };
 
   const handleDelete = async (id: number) => {
     if (confirm('Bạn có chắc chắn muốn xóa món ăn này?')) {
-      await mockApi.deleteLocalFood(id);
-      loadLocalFoods();
+      await localFoodApi.deleteLocalFood(id);
+      loadLocalFoods(1, true);
     }
   };
 
@@ -81,6 +118,17 @@ export const LocalFoodsList: React.FC = () => {
         )}
         {!loading && localFoods.length === 0 && (
           <div className="text-center py-12 text-gray-500">Chưa có món ăn nào</div>
+        )}
+        {hasMore && localFoods.length > 0 && (
+          <div className="flex justify-center p-4 border-t border-gray-200">
+            <button
+              onClick={handleLoadMore}
+              disabled={loadingMore}
+              className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-50"
+            >
+              {loadingMore ? 'Đang tải...' : 'Xem thêm'}
+            </button>
+          </div>
         )}
       </div>
     </div>

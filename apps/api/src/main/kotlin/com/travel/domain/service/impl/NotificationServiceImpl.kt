@@ -19,10 +19,14 @@ class NotificationServiceImpl(
         return notificationRepository.create(userId, request)
     }
 
-    override suspend fun getByUser(userId: Long): List<Notification> {
+    override suspend fun getByUser(
+        userId: Long,
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Notification>, Long> {
         // Validate userId exists
         userRepository.findById(userId) ?: throw Exception("User with id $userId not found")
-        return notificationRepository.getByUser(userId)
+        return notificationRepository.getByUser(userId, page, pageSize)
     }
 
     override suspend fun markAsRead(notificationId: Long): Boolean {

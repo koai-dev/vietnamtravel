@@ -5,7 +5,7 @@ import com.travel.domain.model.Destination
 import com.travel.domain.model.DestinationDetail
 
 interface DestinationRepository {
-    suspend fun getAll(): List<Destination>
+    suspend fun getAll(page: Int, pageSize: Int): Pair<List<Destination>, Long>
 
     suspend fun findById(id: Long): Destination?
 
@@ -31,5 +31,7 @@ interface DestinationRepository {
     suspend fun search(
         query: String,
         types: List<com.travel.data.table.DestinationType>,
-    ): List<Destination>
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Destination>, Long>
 }

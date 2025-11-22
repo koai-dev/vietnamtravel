@@ -10,7 +10,7 @@ class UserService(private val userRepository: UserRepository) {
         query: String?,
         page: Int,
         pageSize: Int,
-    ): List<User> = userRepository.getUsers(query, page, pageSize)
+    ): Pair<List<User>, Long> = userRepository.getUsers(query, page, pageSize)
 
     suspend fun getUser(id: Long): User? = userRepository.findById(id)
 

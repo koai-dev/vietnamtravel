@@ -51,7 +51,42 @@ class RestaurantController(private val restaurantService: RestaurantService) : B
         call: ApplicationCall,
         destinationId: Long,
     ) {
-        val restaurants = restaurantService.getRestaurantsByDestinationId(destinationId)
-        respondWith(call, restaurants)
+        val (page, pageSize) = getPaginationParams(call)
+        val (restaurants, total) = restaurantService.getRestaurantsByDestinationId(destinationId, page, pageSize)
+        
+        val totalPages = (total + pageSize - 1) / pageSize
+        
+        respondWith(
+            call,
+            com.travel.presentation.model.PaginatedResponse(
+                data = restaurants,
+                pagination = com.travel.presentation.model.Pagination(
+                    page = page,
+                    pageSize = pageSize,
+                    total = total,
+                    totalPages = totalPages.toInt()
+                )
+            )
+        )
+    }
+
+    suspend fun getAll(call: ApplicationCall) {
+        val (page, pageSize) = getPaginationParams(call)
+        val (restaurants, total) = restaurantService.getAll(page, pageSize)
+        
+        val totalPages = (total + pageSize - 1) / pageSize
+        
+        respondWith(
+            call,
+            com.travel.presentation.model.PaginatedResponse(
+                data = restaurants,
+                pagination = com.travel.presentation.model.Pagination(
+                    page = page,
+                    pageSize = pageSize,
+                    total = total,
+                    totalPages = totalPages.toInt()
+                )
+            )
+        )
     }
 }

@@ -9,7 +9,11 @@ interface NotificationRepository {
         request: CreateNotificationRequest,
     ): Notification
 
-    suspend fun getByUser(userId: Long): List<Notification>
+    suspend fun getByUser(
+        userId: Long,
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Notification>, Long>
 
     suspend fun markAsRead(notificationId: Long): Boolean
 

@@ -33,9 +33,9 @@ export interface DestinationDetail extends Destination {
 }
 
 export const destinationApi = {
-    getDestinations: async (lang: string = 'vi') => {
-        const response = await api.get(`/api/destinations?lang=${lang}`);
-        return response.data;
+    getDestinations: async (page: number = 1, pageSize: number = 20, lang: string = 'vi') => {
+        const response = await api.get(`/api/destinations?page=${page}&pageSize=${pageSize}&lang=${lang}`);
+        return response.data.data;
     },
 
     getDestination: async (id: number, lang: string = 'vi') => {
@@ -48,9 +48,9 @@ export const destinationApi = {
         return response.data;
     },
 
-    searchDestinations: async (query: string, types?: string[], lang: string = 'vi') => {
+    searchDestinations: async (query: string, types?: string[], page: number = 1, pageSize: number = 20, lang: string = 'vi') => {
         const typesParam = types ? `&types=${types.join(',')}` : '';
-        const response = await api.get(`/api/destinations/search?q=${query}${typesParam}&lang=${lang}`);
+        const response = await api.get(`/api/destinations/search?q=${query}${typesParam}&page=${page}&pageSize=${pageSize}&lang=${lang}`);
         return response.data;
     },
 

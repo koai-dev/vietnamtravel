@@ -3,7 +3,6 @@ package com.travel.data.impl
 import com.travel.data.table.LocalFoods
 import com.travel.domain.model.LocalFood
 import com.travel.domain.repository.LocalFoodRepository
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
@@ -64,9 +63,26 @@ class LocalFoodRepositoryImpl : LocalFoodRepository {
                 .singleOrNull()
         }
 
-    override suspend fun listByDestinationId(destinationId: Long): List<LocalFood> =
+    override suspend fun listByDestinationId(
+        destinationId: Long,
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<LocalFood>, Long> =
         newSuspendedTransaction {
-            LocalFoods.select { LocalFoods.destinationId eq destinationId }
+            val query = LocalFoods.selectAll().where { LocalFoods.destinationId eq destinationId }
+            val total = query.count()
+            val items = query
+                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
                 .map { it.toLocalFood() }
+            Pair(items, total)
+        }
+
+    override suspend fun getAll(page: Int, pageSize: Int): Pair<List<LocalFood>, Long> =
+        newSuspendedTransaction {
+            val total = LocalFoods.selectAll().count()
+            val items = LocalFoods.selectAll()
+                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                .map { it.toLocalFood() }
+            Pair(items, total)
         }
 }

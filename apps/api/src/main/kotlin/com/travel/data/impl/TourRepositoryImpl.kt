@@ -8,9 +8,13 @@ import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
 class TourRepositoryImpl : TourRepository {
-    override suspend fun getAll(): List<Tour> =
+    override suspend fun getAll(page: Int, pageSize: Int): Pair<List<Tour>, Long> =
         newSuspendedTransaction {
-            Tours.selectAll().map { it.toTour() }
+            val total = Tours.selectAll().count()
+            val items = Tours.selectAll()
+                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                .map { it.toTour() }
+            Pair(items, total)
         }
 
     override suspend fun findById(id: Long): Tour? =

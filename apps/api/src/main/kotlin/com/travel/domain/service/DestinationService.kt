@@ -16,17 +16,18 @@ class DestinationService(
     private val restaurantRepository: RestaurantRepository,
     private val imageMappingService: ImageMappingService,
 ) {
-    suspend fun getAll(lang: String): List<Destination> {
-        val key = "destinations:all:$lang"
-        val destinations =
+    suspend fun getAll(lang: String, page: Int, pageSize: Int): Pair<List<Destination>, Long> {
+        val key = "destinations:all:$lang:$page:$pageSize"
+        val (destinations, total) =
             com.travel.core.cache(redisRepository, key, 30 * 60) {
-                destinationRepository.getAll()
+                destinationRepository.getAll(page, pageSize)
             }
-        return destinations.map { destination ->
-            val foods = localFoodRepository.listByDestinationId(destination.id)
+        val enrichedDestinations = destinations.map { destination ->
+            val foods = localFoodRepository.listByDestinationId(destination.id )
             val restaurants = restaurantRepository.getRestaurantsByDestinationId(destination.id)
-            destination.copy(foods = foods, restaurants = restaurants)
+            destination.copy(foods = foods.first, restaurants = restaurants.first)
         }
+        return Pair(enrichedDestinations, total)
     }
 
     suspend fun getById(id: Long): Destination? {
@@ -34,7 +35,7 @@ class DestinationService(
         return destination?.let {
             val foods = localFoodRepository.listByDestinationId(it.id)
             val restaurants = restaurantRepository.getRestaurantsByDestinationId(it.id)
-            it.copy(foods = foods, restaurants = restaurants)
+            it.copy(foods = foods.first, restaurants = restaurants.first)
         }
     }
 
@@ -43,7 +44,7 @@ class DestinationService(
         return destination?.let {
             val foods = localFoodRepository.listByDestinationId(it.id)
             val restaurants = restaurantRepository.getRestaurantsByDestinationId(it.id)
-            it.copy(foods = foods, restaurants = restaurants)
+            it.copy(foods = foods.first, restaurants = restaurants.first)
         }
     }
 
@@ -52,7 +53,7 @@ class DestinationService(
         return destination?.let {
             val foods = localFoodRepository.listByDestinationId(it.id)
             val restaurants = restaurantRepository.getRestaurantsByDestinationId(it.id)
-            it.copy(foods = foods, restaurants = restaurants)
+            it.copy(foods = foods.first, restaurants = restaurants.first)
         }
     }
 
@@ -61,7 +62,7 @@ class DestinationService(
         return destinations.map { destination ->
             val foods = localFoodRepository.listByDestinationId(destination.id)
             val restaurants = restaurantRepository.getRestaurantsByDestinationId(destination.id)
-            destination.copy(foods = foods, restaurants = restaurants)
+            destination.copy(foods = foods.first, restaurants = restaurants.first)
         }
     }
 
@@ -94,8 +95,10 @@ class DestinationService(
     suspend fun search(
         query: String,
         types: List<com.travel.data.table.DestinationType>,
-    ): List<Destination> {
-        return destinationRepository.search(query, types)
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Destination>, Long> {
+        return destinationRepository.search(query, types, page, pageSize)
     }
 
     suspend fun delete(id: Long): Boolean {

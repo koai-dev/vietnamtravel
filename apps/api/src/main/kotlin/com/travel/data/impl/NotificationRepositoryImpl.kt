@@ -35,11 +35,19 @@ class NotificationRepositoryImpl : NotificationRepository {
         return getById(notificationId)!!
     }
 
-    override suspend fun getByUser(userId: Long): List<Notification> =
+    override suspend fun getByUser(
+        userId: Long,
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Notification>, Long> =
         newSuspendedTransaction {
-            Notifications.selectAll().where { Notifications.userId eq userId }
+            val query = Notifications.selectAll().where { Notifications.userId eq userId }
+            val total = query.count()
+            val items = query
                 .orderBy(Notifications.createdAt, SortOrder.DESC)
+                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
                 .map { it.toNotification() }
+            Pair(items, total)
         }
 
     override suspend fun markAsRead(notificationId: Long): Boolean {

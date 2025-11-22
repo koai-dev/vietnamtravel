@@ -29,7 +29,7 @@ interface HotelRepository {
         hostId: Long?,
     ): HotelResponse
 
-    suspend fun getAllHotels(): List<HotelResponse>
+    suspend fun getAllHotels(page: Int, pageSize: Int): Pair<List<HotelResponse>, Long>
 
     suspend fun getHotelById(id: Long): HotelResponse?
 

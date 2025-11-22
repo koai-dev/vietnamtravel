@@ -6,47 +6,78 @@ import { DestinationForm } from './DestinationForm';
 
 export const DestinationsList: React.FC = () => {
   const [destinations, setDestinations] = useState<Destination[]>([]);
-  const [filteredDestinations, setFilteredDestinations] = useState<Destination[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [editingDestination, setEditingDestination] = useState<DestinationDetail | null>(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
-    loadDestinations().then(r => {});
+    loadDestinations(1, true);
   }, []);
 
   useEffect(() => {
-    if (searchTerm) {
-      setFilteredDestinations(
-        destinations.filter(d =>
-          d.nameVi.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          d.nameEn.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          d.city?.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      );
-    } else {
-      setFilteredDestinations(destinations);
-    }
-  }, [searchTerm, destinations]);
+    const delayDebounceFn = setTimeout(() => {
+      loadDestinations(1, true);
+    }, 500);
 
-  const loadDestinations = async () => {
-    setLoading(true);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
+
+  const loadDestinations = async (pageNum: number, reset: boolean = false) => {
+    if (reset) {
+      setLoading(true);
+      setPage(1);
+    } else {
+      setLoadingMore(true);
+    }
+
     try {
-      const data = await destinationApi.getDestinations();
-      setDestinations(data.data);
-      setFilteredDestinations(data.data);
+      const response = searchTerm
+        ? await destinationApi.searchDestinations(searchTerm, undefined, pageNum, 20)
+        : await destinationApi.getDestinations(pageNum, 20);
+
+      // Check if response has data and pagination property (PaginatedResponse)
+      // or if it's just an array (backward compatibility if API not fully updated or mock)
+      let newData: Destination[] = [];
+      let totalPages = 1;
+
+      if ('data' in response && 'pagination' in response) {
+        newData = response.data;
+        totalPages = response.pagination.totalPages;
+      } else if (Array.isArray(response)) {
+        newData = response;
+        totalPages = 1;
+      }
+
+      if (reset) {
+        setDestinations(newData);
+      } else {
+        setDestinations(prev => [...prev, ...newData]);
+      }
+
+      setHasMore(pageNum < totalPages);
+      setPage(pageNum);
     } catch (error) {
       console.error('Error loading destinations:', error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      loadDestinations(page + 1);
     }
   };
 
   const handleDelete = async (id: number) => {
     if (confirm('Bạn có chắc chắn muốn xóa điểm đến này?')) {
       await destinationApi.deleteDestination(id);
-      await loadDestinations();
+      await loadDestinations(1, true);
     }
   };
 
@@ -64,7 +95,7 @@ export const DestinationsList: React.FC = () => {
   const handleCloseForm = () => {
     setShowForm(false);
     setEditingDestination(null);
-    loadDestinations();
+    loadDestinations(1, true);
   };
 
   const getTypeLabel = (type: string) => {
@@ -149,7 +180,7 @@ export const DestinationsList: React.FC = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {filteredDestinations.map((destination) => (
+                {destinations.map((destination) => (
                   <tr key={destination.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{destination.id}</td>
                     <td className="px-6 py-4">
@@ -181,7 +212,7 @@ export const DestinationsList: React.FC = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                      {(destination.viewsCount??0).toLocaleString()}
+                      {(destination.viewsCount ?? 0).toLocaleString()}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       {getStatusBadge(destination.status)}
@@ -206,9 +237,20 @@ export const DestinationsList: React.FC = () => {
                 ))}
               </tbody>
             </table>
-            {filteredDestinations.length === 0 && (
+            {destinations.length === 0 && (
               <div className="text-center py-12 text-gray-500">
                 {searchTerm ? 'Không tìm thấy kết quả' : 'Chưa có điểm đến nào'}
+              </div>
+            )}
+            {hasMore && destinations.length > 0 && (
+              <div className="flex justify-center p-4 border-t border-gray-200">
+                <button
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                  className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-50"
+                >
+                  {loadingMore ? 'Đang tải...' : 'Xem thêm'}
+                </button>
               </div>
             )}
           </div>

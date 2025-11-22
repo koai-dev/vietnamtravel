@@ -20,7 +20,7 @@ class UserRepositoryImpl : UserRepository {
         query: String?,
         page: Int,
         pageSize: Int,
-    ): List<User> =
+    ): Pair<List<User>, Long> =
         newSuspendedTransaction {
             val queryBuilder = Users.selectAll()
             query?.let {
@@ -30,8 +30,10 @@ class UserRepositoryImpl : UserRepository {
                         (Users.phone like "%$it%")
                 }
             }
-            queryBuilder.limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+            val total = queryBuilder.count()
+            val items = queryBuilder.limit(pageSize, offset = ((page - 1) * pageSize).toLong())
                 .map { it.toUser() }
+            Pair(items, total)
         }
 
     override suspend fun findById(id: Long): User? =
@@ -104,4 +106,5 @@ private fun ResultRow.toUser(): User =
         avatarUrl = this[Users.avatarUrl],
         phone = this[Users.phone],
         role = this[Users.role],
+        createdAt = this[Users.createdAt].toString(),
     )

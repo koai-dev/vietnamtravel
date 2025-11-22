@@ -10,8 +10,24 @@ class TourController(private val tourService: TourService) : BaseController() {
         call: ApplicationCall,
         lang: String,
     ) {
-        val tours = tourService.getAll().map { it.toTourResponse(lang) }
-        respondWith(call, tours)
+        val (page, pageSize) = getPaginationParams(call)
+        val (tours, total) = tourService.getAll(page, pageSize)
+        val response = tours.map { it.toTourResponse(lang) }
+        
+        val totalPages = (total + pageSize - 1) / pageSize
+        
+        respondWith(
+            call,
+            com.travel.presentation.model.PaginatedResponse(
+                data = response,
+                pagination = com.travel.presentation.model.Pagination(
+                    page = page,
+                    pageSize = pageSize,
+                    total = total,
+                    totalPages = totalPages.toInt()
+                )
+            )
+        )
     }
 
     suspend fun getById(

@@ -7,7 +7,7 @@ interface UserRepository {
         query: String?,
         page: Int,
         pageSize: Int,
-    ): List<User>
+    ): Pair<List<User>, Long>
 
     suspend fun findById(id: Long): User?
 

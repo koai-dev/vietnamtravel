@@ -1,22 +1,59 @@
 import React, { useEffect, useState } from 'react';
-import { mockApi, Notification } from '../../services/mockApi';
+import { notificationApi, Notification } from '../../services/notificationApi';
 import { Plus, Bell } from 'lucide-react';
 
 export const NotificationsList: React.FC = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
-    loadNotifications();
+    loadNotifications(1, true);
   }, []);
 
-  const loadNotifications = async () => {
-    setLoading(true);
+  const loadNotifications = async (pageNum: number, reset: boolean = false) => {
+    if (reset) {
+      setLoading(true);
+      setPage(1);
+    } else {
+      setLoadingMore(true);
+    }
+
     try {
-      const data = await mockApi.getNotifications();
-      setNotifications(data);
+      const response = await notificationApi.getNotifications(pageNum, 20);
+
+      let newData: Notification[] = [];
+      let totalPages = 1;
+
+      if ('data' in response && 'pagination' in response) {
+        newData = response.data;
+        totalPages = response.pagination.totalPages;
+      } else if (Array.isArray(response)) {
+        newData = response;
+        totalPages = 1;
+      }
+
+      if (reset) {
+        setNotifications(newData);
+      } else {
+        setNotifications(prev => [...prev, ...newData]);
+      }
+
+      setHasMore(pageNum < totalPages);
+      setPage(pageNum);
+    } catch (error) {
+      console.error('Error loading notifications:', error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      loadNotifications(page + 1);
     }
   };
 
@@ -92,6 +129,17 @@ export const NotificationsList: React.FC = () => {
         )}
         {!loading && notifications.length === 0 && (
           <div className="text-center py-12 text-gray-500">Chưa có thông báo nào</div>
+        )}
+        {hasMore && notifications.length > 0 && (
+          <div className="flex justify-center p-4 border-t border-gray-200">
+            <button
+              onClick={handleLoadMore}
+              disabled={loadingMore}
+              className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-50"
+            >
+              {loadingMore ? 'Đang tải...' : 'Xem thêm'}
+            </button>
+          </div>
         )}
       </div>
     </div>

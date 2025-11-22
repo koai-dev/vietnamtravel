@@ -13,4 +13,6 @@ interface BookingRepository {
     suspend fun sumTotalPrice(): Double
 
     suspend fun getRecentBookings(limit: Int): List<BookingDashboardResponse>
+
+    suspend fun getAll(page: Int, pageSize: Int): Pair<List<BookingDashboardResponse>, Long>
 }

@@ -1,29 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import { mockApi, Restaurant } from '../../services/mockApi';
+import { restaurantApi, Restaurant } from '../../services/restaurantApi';
 import { Plus, Edit, Trash2, UtensilsCrossed } from 'lucide-react';
 
 export const RestaurantsList: React.FC = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
-    loadRestaurants();
+    loadRestaurants(1, true);
   }, []);
 
-  const loadRestaurants = async () => {
-    setLoading(true);
+  const loadRestaurants = async (pageNum: number, reset: boolean = false) => {
+    if (reset) {
+      setLoading(true);
+      setPage(1);
+    } else {
+      setLoadingMore(true);
+    }
+
     try {
-      const data = await mockApi.getRestaurants();
-      setRestaurants(data);
+      const response = await restaurantApi.getRestaurants(pageNum, 20);
+
+      let newData: Restaurant[] = [];
+      let totalPages = 1;
+
+      if ('data' in response && 'pagination' in response) {
+        newData = response.data;
+        totalPages = response.pagination.totalPages;
+      } else if (Array.isArray(response)) {
+        newData = response;
+        totalPages = 1;
+      }
+
+      if (reset) {
+        setRestaurants(newData);
+      } else {
+        setRestaurants(prev => [...prev, ...newData]);
+      }
+
+      setHasMore(pageNum < totalPages);
+      setPage(pageNum);
+    } catch (error) {
+      console.error('Error loading restaurants:', error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      loadRestaurants(page + 1);
     }
   };
 
   const handleDelete = async (id: number) => {
     if (confirm('Bạn có chắc chắn muốn xóa nhà hàng này?')) {
-      await mockApi.deleteRestaurant(id);
-      loadRestaurants();
+      await restaurantApi.deleteRestaurant(id);
+      loadRestaurants(1, true);
     }
   };
 
@@ -97,6 +134,17 @@ export const RestaurantsList: React.FC = () => {
             </table>
             {restaurants.length === 0 && (
               <div className="text-center py-12 text-gray-500">Chưa có nhà hàng nào</div>
+            )}
+            {hasMore && restaurants.length > 0 && (
+              <div className="flex justify-center p-4 border-t border-gray-200">
+                <button
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                  className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-50"
+                >
+                  {loadingMore ? 'Đang tải...' : 'Xem thêm'}
+                </button>
+              </div>
             )}
           </div>
         )}

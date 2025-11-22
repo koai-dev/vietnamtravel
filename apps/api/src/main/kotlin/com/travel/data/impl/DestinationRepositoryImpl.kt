@@ -11,6 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.inList
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.like
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import java.time.LocalDateTime
 
@@ -20,9 +22,13 @@ class DestinationRepositoryImpl : DestinationRepository {
             Destinations.selectAll().count()
         }
 
-    override suspend fun getAll(): List<Destination> =
+    override suspend fun getAll(page: Int, pageSize: Int): Pair<List<Destination>, Long> =
         newSuspendedTransaction {
-            Destinations.selectAll().map { it.toDestination() }
+            val total = Destinations.selectAll().count()
+            val items = Destinations.selectAll()
+                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
+                .map { it.toDestination() }
+            Pair(items, total)
         }
 
     override suspend fun findById(id: Long): Destination? =
@@ -190,15 +196,19 @@ class DestinationRepositoryImpl : DestinationRepository {
     override suspend fun search(
         query: String,
         types: List<DestinationType>,
-    ): List<Destination> =
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<Destination>, Long> =
         newSuspendedTransaction {
-            Destinations.selectAll()
-                .where {
-                    (Destinations.nameVi like "%$query%" or (Destinations.nameEn like "%$query%")) and
-                        (Destinations.type inList types)
-                }
-                .limit(20)
+            val queryCondition = (Destinations.nameVi like "%$query%" or (Destinations.nameEn like "%$query%")) and
+                (if (types.isNotEmpty()) Destinations.type inList types else Op.TRUE)
+
+            val total = Destinations.selectAll().where { queryCondition }.count()
+            val items = Destinations.selectAll()
+                .where { queryCondition }
+                .limit(pageSize, offset = ((page - 1) * pageSize).toLong())
                 .map { it.toDestination() }
+            Pair(items, total)
         }
 }
 

@@ -21,4 +21,10 @@ open class BaseController {
     ) {
         call.respond(code, ApiResult.Error(message, code.value))
     }
+
+    fun getPaginationParams(call: ApplicationCall): Pair<Int, Int> {
+        val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+        val pageSize = call.request.queryParameters["pageSize"]?.toIntOrNull() ?: 20
+        return Pair(page, pageSize)
+    }
 }

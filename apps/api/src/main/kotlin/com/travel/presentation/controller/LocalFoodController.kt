@@ -75,8 +75,45 @@ class LocalFoodController(private val localFoodService: LocalFoodService) : Base
         call: ApplicationCall,
         destinationId: Long,
     ) {
-        val localFoods = localFoodService.listByDestinationId(destinationId).map { it.toResponse() }
-        respondWith(call, localFoods)
+        val (page, pageSize) = getPaginationParams(call)
+        val (localFoods, total) = localFoodService.listByDestinationId(destinationId, page, pageSize)
+        val response = localFoods.map { it.toResponse() }
+        
+        val totalPages = (total + pageSize - 1) / pageSize
+        
+        respondWith(
+            call,
+            com.travel.presentation.model.PaginatedResponse(
+                data = response,
+                pagination = com.travel.presentation.model.Pagination(
+                    page = page,
+                    pageSize = pageSize,
+                    total = total,
+                    totalPages = totalPages.toInt()
+                )
+            )
+        )
+    }
+
+    suspend fun getAll(call: ApplicationCall) {
+        val (page, pageSize) = getPaginationParams(call)
+        val (localFoods, total) = localFoodService.getAll(page, pageSize)
+        val response = localFoods.map { it.toResponse() }
+        
+        val totalPages = (total + pageSize - 1) / pageSize
+        
+        respondWith(
+            call,
+            com.travel.presentation.model.PaginatedResponse(
+                data = response,
+                pagination = com.travel.presentation.model.Pagination(
+                    page = page,
+                    pageSize = pageSize,
+                    total = total,
+                    totalPages = totalPages.toInt()
+                )
+            )
+        )
     }
 
     private fun LocalFood.toResponse(): LocalFoodResponse {

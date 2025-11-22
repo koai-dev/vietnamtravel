@@ -1,30 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import { mockApi, Booking } from '../../services/mockApi';
+import { bookingApi, Booking } from '../../services/bookingApi';
 import { Calendar, Check, X as XIcon, Clock } from 'lucide-react';
 
 export const BookingsList: React.FC = () => {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
-    loadBookings();
+    loadBookings(1, true);
   }, []);
 
-  const loadBookings = async () => {
-    setLoading(true);
+  const loadBookings = async (pageNum: number, reset: boolean = false) => {
+    if (reset) {
+      setLoading(true);
+      setPage(1);
+    } else {
+      setLoadingMore(true);
+    }
+
     try {
-      const data = await mockApi.getBookings();
-      setBookings(data);
+      const response = await bookingApi.getBookings(pageNum, 20);
+
+      let newData: Booking[] = [];
+      let totalPages = 1;
+
+      if ('data' in response && 'pagination' in response) {
+        newData = response.data;
+        totalPages = response.pagination.totalPages;
+      } else if (Array.isArray(response)) {
+        newData = response;
+        totalPages = 1;
+      }
+
+      if (reset) {
+        setBookings(newData);
+      } else {
+        setBookings(prev => [...prev, ...newData]);
+      }
+
+      setHasMore(pageNum < totalPages);
+      setPage(pageNum);
     } catch (error) {
       console.error('Error loading bookings:', error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      loadBookings(page + 1);
     }
   };
 
   const handleUpdateStatus = async (id: number, status: 'pending' | 'confirmed' | 'cancelled' | 'completed') => {
-    await mockApi.updateBooking(id, { status });
-    loadBookings();
+    await bookingApi.updateBooking(id, { status });
+    loadBookings(1, true);
   };
 
   const getStatusBadge = (status: string) => {
@@ -132,6 +167,17 @@ export const BookingsList: React.FC = () => {
             </table>
             {bookings.length === 0 && (
               <div className="text-center py-12 text-gray-500">Chưa có đặt phòng nào</div>
+            )}
+            {hasMore && bookings.length > 0 && (
+              <div className="flex justify-center p-4 border-t border-gray-200">
+                <button
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                  className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-50"
+                >
+                  {loadingMore ? 'Đang tải...' : 'Xem thêm'}
+                </button>
+              </div>
             )}
           </div>
         )}

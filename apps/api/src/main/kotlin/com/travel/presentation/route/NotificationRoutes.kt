@@ -23,8 +23,7 @@ fun Route.notificationRoutes() {
             get("/{userId}") {
                 val userId = call.parameters["userId"]?.toLongOrNull()
                 if (userId != null) {
-                    val notifications = notificationController.getNotificationsByUser(userId)
-                    call.respond(notifications)
+                    notificationController.getNotificationsByUser(call, userId)
                 } else {
                     call.respond(HttpStatusCode.BadRequest, "Invalid user ID")
                 }
@@ -34,8 +33,7 @@ fun Route.notificationRoutes() {
                 val userId = call.parameters["userId"]?.toLongOrNull()
                 if (userId != null) {
                     val request = call.receive<CreateNotificationRequest>()
-                    val notification = notificationController.createNotification(userId, request)
-                    call.respond(HttpStatusCode.Created, notification)
+                    notificationController.createNotification(call, userId, request)
                 } else {
                     call.respond(HttpStatusCode.BadRequest, "Invalid user ID")
                 }
@@ -44,12 +42,7 @@ fun Route.notificationRoutes() {
             patch("/{notificationId}/read") {
                 val notificationId = call.parameters["notificationId"]?.toLongOrNull()
                 if (notificationId != null) {
-                    val result = notificationController.markAsRead(notificationId)
-                    if (result) {
-                        call.respond(HttpStatusCode.OK)
-                    } else {
-                        call.respond(HttpStatusCode.NotFound)
-                    }
+                    notificationController.markAsRead(call, notificationId)
                 } else {
                     call.respond(HttpStatusCode.BadRequest, "Invalid notification ID")
                 }
@@ -58,12 +51,7 @@ fun Route.notificationRoutes() {
             delete("/{notificationId}") {
                 val notificationId = call.parameters["notificationId"]?.toLongOrNull()
                 if (notificationId != null) {
-                    val result = notificationController.deleteNotification(notificationId)
-                    if (result) {
-                        call.respond(HttpStatusCode.NoContent)
-                    } else {
-                        call.respond(HttpStatusCode.NotFound)
-                    }
+                    notificationController.deleteNotification(call, notificationId)
                 } else {
                     call.respond(HttpStatusCode.BadRequest, "Invalid notification ID")
                 }

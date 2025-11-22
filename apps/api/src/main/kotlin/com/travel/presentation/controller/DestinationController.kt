@@ -12,8 +12,24 @@ class DestinationController(private val destinationService: DestinationService) 
         call: ApplicationCall,
         lang: String,
     ) {
-        val destinations = destinationService.getAll(lang).map { it.toDestinationResponse(lang) }
-        respondWith(call, destinations)
+        val (page, pageSize) = getPaginationParams(call)
+        val (destinations, total) = destinationService.getAll(lang, page, pageSize)
+        val response = destinations.map { it.toDestinationResponse(lang) }
+        
+        val totalPages = (total + pageSize - 1) / pageSize
+        
+        respondWith(
+            call, 
+            com.travel.presentation.model.PaginatedResponse(
+                data = response,
+                pagination = com.travel.presentation.model.Pagination(
+                    page = page,
+                    pageSize = pageSize,
+                    total = total,
+                    totalPages = totalPages.toInt()
+                )
+            )
+        )
     }
 
     suspend fun getById(
@@ -84,6 +100,7 @@ class DestinationController(private val destinationService: DestinationService) 
         types: String,
         lang: String,
     ) {
+        val (page, pageSize) = getPaginationParams(call)
         val typeList =
             types.split(",").mapNotNull {
                 try {
@@ -92,8 +109,23 @@ class DestinationController(private val destinationService: DestinationService) 
                     null
                 }
             }
-        val destinations = destinationService.search(query, typeList).map { it.toDestinationResponse(lang) }
-        respondWith(call, destinations)
+        val (destinations, total) = destinationService.search(query, typeList, page, pageSize)
+        val response = destinations.map { it.toDestinationResponse(lang) }
+        
+        val totalPages = (total + pageSize - 1) / pageSize
+
+        respondWith(
+            call,
+            com.travel.presentation.model.PaginatedResponse(
+                data = response,
+                pagination = com.travel.presentation.model.Pagination(
+                    page = page,
+                    pageSize = pageSize,
+                    total = total,
+                    totalPages = totalPages.toInt()
+                )
+            )
+        )
     }
 
     suspend fun delete(

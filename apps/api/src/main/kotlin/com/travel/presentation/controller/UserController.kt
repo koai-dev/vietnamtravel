@@ -18,8 +18,23 @@ class UserController(
         page: Int,
         pageSize: Int,
     ) {
-        val users = userService.getUsers(query, page, pageSize).map { it.toUserResponse() }
-        respondWith(call, users)
+        val (users, total) = userService.getUsers(query, page, pageSize)
+        val response = users.map { it.toUserResponse() }
+        
+        val totalPages = (total + pageSize - 1) / pageSize
+        
+        respondWith(
+            call,
+            com.travel.presentation.model.PaginatedResponse(
+                data = response,
+                pagination = com.travel.presentation.model.Pagination(
+                    page = page,
+                    pageSize = pageSize,
+                    total = total,
+                    totalPages = totalPages.toInt()
+                )
+            )
+        )
     }
 
     suspend fun getMe(

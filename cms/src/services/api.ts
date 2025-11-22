@@ -32,4 +32,16 @@ export const getDashboardStats = async () => {
   return response.data;
 };
 
+export interface Pagination {
+  page: number;
+  pageSize: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: Pagination;
+}
+
 export default api;

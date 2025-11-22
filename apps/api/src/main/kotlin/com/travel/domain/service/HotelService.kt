@@ -10,7 +10,7 @@ interface HotelService {
         lang: String,
     ): HotelResponse
 
-    suspend fun getAllHotels(lang: String): List<HotelResponse>
+    suspend fun getAllHotels(lang: String, page: Int, pageSize: Int): Pair<List<HotelResponse>, Long>
 
     suspend fun getHotelById(
         id: Long,

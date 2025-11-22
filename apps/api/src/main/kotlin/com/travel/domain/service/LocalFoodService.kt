@@ -43,8 +43,16 @@ class LocalFoodService(
         return localFoodRepository.getById(id)
     }
 
-    suspend fun listByDestinationId(destinationId: Long): List<LocalFood> {
-        return localFoodRepository.listByDestinationId(destinationId)
+    suspend fun listByDestinationId(
+        destinationId: Long,
+        page: Int,
+        pageSize: Int,
+    ): Pair<List<LocalFood>, Long> {
+        return localFoodRepository.listByDestinationId(destinationId, page, pageSize)
+    }
+
+    suspend fun getAll(page: Int, pageSize: Int): Pair<List<LocalFood>, Long> {
+        return localFoodRepository.getAll(page, pageSize)
     }
 
     private suspend fun validateDestination(destinationId: Long) {

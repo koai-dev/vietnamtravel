@@ -26,4 +26,24 @@ class BookingController(private val bookingService: BookingService) : BaseContro
         val createdBooking = bookingService.createBooking(booking).toBookingResponse()
         respondWith(call, createdBooking)
     }
+
+    suspend fun getAll(call: ApplicationCall) {
+        val (page, pageSize) = getPaginationParams(call)
+        val (bookings, total) = bookingService.getAll(page, pageSize)
+        
+        val totalPages = (total + pageSize - 1) / pageSize
+        
+        respondWith(
+            call,
+            com.travel.presentation.model.PaginatedResponse(
+                data = bookings,
+                pagination = com.travel.presentation.model.Pagination(
+                    page = page,
+                    pageSize = pageSize,
+                    total = total,
+                    totalPages = totalPages.toInt()
+                )
+            )
+        )
+    }
 }

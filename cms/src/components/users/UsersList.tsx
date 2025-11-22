@@ -1,29 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import { mockApi, User } from '../../services/mockApi';
+import { userApi, User } from '../../services/userApi';
 import { Plus, Edit, Trash2, User as UserIcon } from 'lucide-react';
 
 export const UsersList: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
-    loadUsers();
+    loadUsers(1, true);
   }, []);
 
-  const loadUsers = async () => {
-    setLoading(true);
+  const loadUsers = async (pageNum: number, reset: boolean = false) => {
+    if (reset) {
+      setLoading(true);
+      setPage(1);
+    } else {
+      setLoadingMore(true);
+    }
+
     try {
-      const data = await mockApi.getUsers();
-      setUsers(data);
+      const response = await userApi.getUsers(pageNum, 20);
+
+      let newData: User[] = [];
+      let totalPages = 1;
+
+      if ('data' in response && 'pagination' in response) {
+        newData = response.data;
+        totalPages = response.pagination.totalPages;
+      } else if (Array.isArray(response)) {
+        newData = response;
+        totalPages = 1;
+      }
+
+      if (reset) {
+        setUsers(newData);
+      } else {
+        setUsers(prev => [...prev, ...newData]);
+      }
+
+      setHasMore(pageNum < totalPages);
+      setPage(pageNum);
+    } catch (error) {
+      console.error('Error loading users:', error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      loadUsers(page + 1);
     }
   };
 
   const handleDelete = async (id: number) => {
     if (confirm('Bạn có chắc chắn muốn xóa người dùng này?')) {
-      await mockApi.deleteUser(id);
-      loadUsers();
+      await userApi.deleteUser(id);
+      loadUsers(1, true);
     }
   };
 
@@ -120,6 +157,17 @@ export const UsersList: React.FC = () => {
             </table>
             {users.length === 0 && (
               <div className="text-center py-12 text-gray-500">Chưa có người dùng nào</div>
+            )}
+            {hasMore && users.length > 0 && (
+              <div className="flex justify-center p-4 border-t border-gray-200">
+                <button
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                  className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-50"
+                >
+                  {loadingMore ? 'Đang tải...' : 'Xem thêm'}
+                </button>
+              </div>
             )}
           </div>
         )}
