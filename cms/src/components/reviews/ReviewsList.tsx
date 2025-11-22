@@ -1,29 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import { mockApi, Review } from '../../services/mockApi';
+import { reviewApi, Review } from '../../services/reviewApi';
 import { Trash2, Star } from 'lucide-react';
 
 export const ReviewsList: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
-    loadReviews();
+    loadReviews(1, true);
   }, []);
 
-  const loadReviews = async () => {
-    setLoading(true);
+  const loadReviews = async (pageNum: number, reset: boolean = false) => {
+    if (reset) {
+      setLoading(true);
+      setPage(1);
+    } else {
+      setLoadingMore(true);
+    }
+
     try {
-      const data = await mockApi.getReviews();
-      setReviews(data);
+      const response = await reviewApi.getReviews(pageNum, 20);
+
+      let newData: Review[] = [];
+      let totalPages = 1;
+
+      if ('data' in response && 'pagination' in response) {
+        newData = response.data;
+        totalPages = response.pagination.totalPages;
+      } else if (Array.isArray(response)) {
+        newData = response;
+        totalPages = 1;
+      }
+
+      if (reset) {
+        setReviews(newData);
+      } else {
+        setReviews(prev => [...prev, ...newData]);
+      }
+
+      setHasMore(pageNum < totalPages);
+      setPage(pageNum);
+    } catch (error) {
+      console.error('Error loading reviews:', error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      loadReviews(page + 1);
     }
   };
 
   const handleDelete = async (id: number) => {
     if (confirm('Bạn có chắc chắn muốn xóa đánh giá này?')) {
-      await mockApi.deleteReview(id);
-      loadReviews();
+      await reviewApi.deleteReview(id);
+      loadReviews(1, true);
     }
   };
 
@@ -90,6 +127,17 @@ export const ReviewsList: React.FC = () => {
             </table>
             {reviews.length === 0 && (
               <div className="text-center py-12 text-gray-500">Chưa có đánh giá nào</div>
+            )}
+            {hasMore && reviews.length > 0 && (
+              <div className="flex justify-center p-4 border-t border-gray-200">
+                <button
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                  className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-50"
+                >
+                  {loadingMore ? 'Đang tải...' : 'Xem thêm'}
+                </button>
+              </div>
             )}
           </div>
         )}

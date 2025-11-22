@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { mockApi, Hotel } from '../../services/mockApi';
+import { hotelApi, Hotel } from '../../services/hotelApi';
 import { X, Save } from 'lucide-react';
 
 interface HotelFormProps {
@@ -63,11 +63,11 @@ export const HotelForm: React.FC<HotelFormProps> = ({ hotel, onClose }) => {
       };
 
       if (hotel) {
-        await mockApi.updateHotel(hotel.id, data);
+        await hotelApi.updateHotel(hotel.id, data);
       } else {
-        await mockApi.createHotel(data);
+        await hotelApi.createHotel(data);
       }
-      
+
       onClose();
     } catch (error) {
       console.error('Error saving hotel:', error);

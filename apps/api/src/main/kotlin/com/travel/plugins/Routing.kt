@@ -24,6 +24,8 @@ fun Application.configureRouting() {
         dashboardRoutes()
         localFoodRoutes()
         restaurantRoutes()
+        reviewRoutes()
+        roomRoutes()
         notificationRoutes()
         uploadRoutes()
     }

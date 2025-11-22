@@ -1,6 +1,7 @@
 // @ts-ignore
 import React, { useEffect, useState } from 'react';
-import { mockApi, Room, Hotel } from '../../services/mockApi';
+import { roomApi, Room } from '../../services/roomApi';
+import { hotelApi, Hotel } from '../../services/hotelApi';
 import { Plus, Edit, Trash2, DoorOpen } from 'lucide-react';
 import { RoomForm } from './RoomForm';
 
@@ -10,31 +11,71 @@ export const RoomsList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [editingRoom, setEditingRoom] = useState<Room | null>(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   useEffect(() => {
     loadData();
   }, []);
 
-  const loadData = async () => {
-    setLoading(true);
+  const loadData = async (pageNum: number = 1, reset: boolean = true) => {
+    if (reset) {
+      setLoading(true);
+      setPage(1);
+    } else {
+      setLoadingMore(true);
+    }
+
     try {
-      const [roomsData, hotelsData] = await Promise.all([
-        mockApi.getRooms(),
-        mockApi.getHotels()
+      const [roomsResponse, hotelsResponse] = await Promise.all([
+        roomApi.getRooms(pageNum, 20),
+        hotelApi.getHotels(1, 100)
       ]);
-      setRooms(roomsData);
-      setHotels(hotelsData);
+
+      let newRooms: Room[] = [];
+      let totalPages = 1;
+
+      if ('data' in roomsResponse && 'pagination' in roomsResponse) {
+        newRooms = roomsResponse.data;
+        totalPages = roomsResponse.pagination.totalPages;
+      } else if (Array.isArray(roomsResponse)) {
+        newRooms = roomsResponse;
+      }
+
+      let newHotels: Hotel[] = [];
+      if ('data' in hotelsResponse && 'pagination' in hotelsResponse) {
+        newHotels = hotelsResponse.data;
+      } else if (Array.isArray(hotelsResponse)) {
+        newHotels = hotelsResponse;
+      }
+
+      if (reset) {
+        setRooms(newRooms);
+      } else {
+        setRooms(prev => [...prev, ...newRooms]);
+      }
+      setHotels(newHotels);
+      setHasMore(pageNum < totalPages);
+      setPage(pageNum);
     } catch (error) {
       console.error('Error loading data:', error);
     } finally {
       setLoading(false);
+      setLoadingMore(false);
     }
   };
 
   const handleDelete = async (id: number) => {
     if (confirm('Bạn có chắc chắn muốn xóa phòng này?')) {
-      await mockApi.deleteRoom(id);
-      loadData();
+      await roomApi.deleteRoom(id);
+      loadData(1, true);
+    }
+  };
+
+  const handleLoadMore = () => {
+    if (!loadingMore && hasMore) {
+      loadData(page + 1, false);
     }
   };
 
@@ -46,7 +87,7 @@ export const RoomsList: React.FC = () => {
   const handleCloseForm = () => {
     setShowForm(false);
     setEditingRoom(null);
-    loadData();
+    loadData(1, true);
   };
 
   const getHotelName = (hotelId: number) => {
@@ -117,9 +158,8 @@ export const RoomsList: React.FC = () => {
                       {room.totalRooms || '-'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <span className={`px-2 py-1 rounded-full ${
-                        (room.availableRooms || 0) > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                      }`}>
+                      <span className={`px-2 py-1 rounded-full ${(room.availableRooms || 0) > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                        }`}>
                         {room.availableRooms || 0}
                       </span>
                     </td>
@@ -145,6 +185,17 @@ export const RoomsList: React.FC = () => {
             </table>
             {rooms.length === 0 && (
               <div className="text-center py-12 text-gray-500">Chưa có phòng nào</div>
+            )}
+            {hasMore && rooms.length > 0 && (
+              <div className="flex justify-center p-4 border-t border-gray-200">
+                <button
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                  className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-50"
+                >
+                  {loadingMore ? 'Đang tải...' : 'Xem thêm'}
+                </button>
+              </div>
             )}
           </div>
         )}

@@ -1,6 +1,7 @@
 // @ts-ignore
 import React, { useState } from 'react';
-import { mockApi, Room, Hotel } from '../../services/mockApi';
+import { roomApi, Room } from '../../services/roomApi';
+import { Hotel } from '../../services/hotelApi';
 import { X, Save } from 'lucide-react';
 
 interface RoomFormProps {
@@ -45,11 +46,11 @@ export const RoomForm: React.FC<RoomFormProps> = ({ room, hotels, onClose }) => 
       };
 
       if (room) {
-        await mockApi.updateRoom(room.id, data);
+        await roomApi.updateRoom(room.id, data);
       } else {
-        await mockApi.createRoom(data);
+        await roomApi.createRoom(data);
       }
-      
+
       onClose();
     } catch (error) {
       console.error('Error saving room:', error);

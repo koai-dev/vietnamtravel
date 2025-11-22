@@ -1,5 +1,6 @@
 package com.travel.core
 
+import RoomRepositoryImpl
 import com.travel.data.impl.*
 import com.travel.domain.repository.*
 import com.travel.domain.service.*
@@ -64,6 +65,8 @@ val appModule =
         single { TrackingController(get()) }
         single { LocalFoodController(get()) }
         single { RestaurantController(get()) }
+        single { ReviewController(get()) }
+        single { RoomController(get()) }
         single { NotificationController(get()) }
         single { UploadController(get()) }
         single { DashboardController(get(), get(), get(), get(), get()) }
