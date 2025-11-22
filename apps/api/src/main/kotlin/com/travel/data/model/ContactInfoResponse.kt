@@ -4,10 +4,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ContactInfoResponse(
-    val phone: String?,
-    val email: String?,
-    val website: String?,
-    val facebook: String?,
-    val zalo: String?,
-    val whatsapp: String?,
+    val phone: String? = null,
+    val email: String? = null,
+    val website: String? = null,
+    val facebook: String? = null,
+    val zalo: String? = null,
+    val whatsapp: String? = null,
 )
