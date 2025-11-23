@@ -11,7 +11,7 @@ data class UserResponse(
     val name: String? = null,
     val avatarUrl: String? = null,
     val phone: String? = null,
-    val role: UserRole = UserRole.USER,
+    val role: String = UserRole.USER.name,
 )
 
 @Serializable
@@ -19,7 +19,7 @@ data class CreateUserRequest(
     val email: String,
     val name: String,
     val phone: String? = null,
-    val role: UserRole = UserRole.USER,
+    val role: String,
 )
 
 fun CreateUserRequest.validate(): ValidationResult {

@@ -18,6 +18,11 @@ export const userApi = {
         return response.data;
     },
 
+    createUser: async (data: { email: string; name?: string; phone?: string; role: 'admin' | 'user' }) => {
+        const response = await api.post('/api/users', data);
+        return response.data;
+    },
+
     updateUser: async (id: number, data: Partial<User>) => {
         const response = await api.put(`/api/users/${id}`, data);
         return response.data;
@@ -28,3 +33,4 @@ export const userApi = {
         return response.data;
     },
 };
+

@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useEffect, useState } from 'react';
 import { localFoodApi, LocalFood } from '../../services/localFoodApi';
 import { Plus, Edit, Trash2, Coffee } from 'lucide-react';
@@ -31,7 +32,7 @@ export const LocalFoodsList: React.FC = () => {
       let totalPages = 1;
 
       if ('data' in response && 'pagination' in response) {
-        newData = response.data;
+        newData = response.data.data;
         totalPages = response.pagination.totalPages;
       } else if (Array.isArray(response)) {
         newData = response;

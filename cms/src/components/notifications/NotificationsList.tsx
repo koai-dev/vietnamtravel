@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { notificationApi, Notification } from '../../services/notificationApi';
 import { Plus, Bell } from 'lucide-react';
+import { NotificationForm } from './NotificationForm';
 
 export const NotificationsList: React.FC = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -8,6 +9,7 @@ export const NotificationsList: React.FC = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     loadNotifications(1, true);
@@ -57,6 +59,15 @@ export const NotificationsList: React.FC = () => {
     }
   };
 
+  const handleCloseForm = () => {
+    setShowForm(false);
+    loadNotifications(1, true);
+  };
+
+  if (showForm) {
+    return <NotificationForm onClose={handleCloseForm} />;
+  }
+
   const getTypeBadge = (type: string) => {
     const styles: Record<string, string> = {
       booking: 'bg-blue-100 text-blue-700',
@@ -84,7 +95,10 @@ export const NotificationsList: React.FC = () => {
           <div className="text-gray-900 text-2xl mb-2">Quản lý thông báo</div>
           <p className="text-gray-600">Quản lý thông báo gửi đến người dùng</p>
         </div>
-        <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+        <button
+          onClick={() => setShowForm(true)}
+          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
           <Plus className="w-5 h-5" />
           <span>Tạo thông báo</span>
         </button>

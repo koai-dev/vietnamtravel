@@ -10,5 +10,5 @@ fun User.toUserResponse() =
         name = name,
         avatarUrl = avatarUrl,
         phone = phone,
-        role = role,
+        role = role.name,
     )

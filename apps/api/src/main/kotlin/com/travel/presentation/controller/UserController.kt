@@ -3,6 +3,7 @@ package com.travel.presentation.controller
 import com.travel.data.mapper.toUserResponse
 import com.travel.data.model.CreateUserRequest
 import com.travel.data.model.UpdateUserRequest
+import com.travel.data.table.UserRole
 import com.travel.domain.model.User
 import com.travel.domain.service.UserService
 import io.ktor.http.HttpStatusCode
@@ -62,7 +63,7 @@ class UserController(
                 name = request.name,
                 avatarUrl = null,
                 phone = request.phone,
-                role = request.role,
+                role = UserRole.valueOf(request.role.uppercase()),
             )
         val createdUser = userService.createUser(user).toUserResponse()
         respondWith(call, createdUser)

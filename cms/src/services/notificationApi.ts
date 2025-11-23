@@ -16,6 +16,11 @@ export const notificationApi = {
         return response.data;
     },
 
+    createNotification: async (userId: number, data: { title: string; content: string; type: 'booking' | 'system' | 'promotion' }) => {
+        const response = await api.post(`/api/users/${userId}/notifications`, data);
+        return response.data;
+    },
+
     markAsRead: async (id: number) => {
         const response = await api.put(`/api/notifications/${id}/read`);
         return response.data;
@@ -26,3 +31,4 @@ export const notificationApi = {
         return response.data;
     },
 };
+

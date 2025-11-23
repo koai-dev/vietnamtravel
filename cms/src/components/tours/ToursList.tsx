@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useEffect, useState } from 'react';
 import { tourApi, Tour } from '../../services/tourApi';
 import { Plus, Edit, Trash2, Map } from 'lucide-react';

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { userApi, User } from '../../services/userApi';
 import { Plus, Edit, Trash2, User as UserIcon } from 'lucide-react';
+import { UserForm } from './UserForm';
 
 export const UsersList: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -8,6 +9,7 @@ export const UsersList: React.FC = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     loadUsers(1, true);
@@ -28,7 +30,7 @@ export const UsersList: React.FC = () => {
       let totalPages = 1;
 
       if ('data' in response && 'pagination' in response) {
-        newData = response.data;
+        newData = response.data.data;
         totalPages = response.pagination.totalPages;
       } else if (Array.isArray(response)) {
         newData = response;
@@ -64,6 +66,15 @@ export const UsersList: React.FC = () => {
     }
   };
 
+  const handleCloseForm = () => {
+    setShowForm(false);
+    loadUsers(1, true);
+  };
+
+  if (showForm) {
+    return <UserForm onClose={handleCloseForm} />;
+  }
+
   const getRoleBadge = (role: string) => {
     const styles: Record<string, string> = {
       admin: 'bg-purple-100 text-purple-700',
@@ -89,7 +100,10 @@ export const UsersList: React.FC = () => {
           <div className="text-gray-900 text-2xl mb-2">Quản lý người dùng</div>
           <p className="text-gray-600">Quản lý tài khoản người dùng hệ thống</p>
         </div>
-        <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+        <button
+          onClick={() => setShowForm(true)}
+          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
           <Plus className="w-5 h-5" />
           <span>Thêm người dùng</span>
         </button>

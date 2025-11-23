@@ -23,6 +23,10 @@ fun Route.localFoodRoutes() {
     route("/api/local-foods") {
         install(rateLimiter.limit("/local-foods", 100, 60))
 
+        get {
+            localFoodController.getAll(call)
+        }
+
         post {
             val request = call.receive<LocalFoodRequest>()
             localFoodController.create(call, request)
