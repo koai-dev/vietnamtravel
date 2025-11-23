@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { restaurantApi, Restaurant } from '../../services/restaurantApi';
 import { destinationApi } from '../../services/destinationApi';
 import { X, Save } from 'lucide-react';
+import { ImageInput } from '../common/ImageInput';
 
 interface Destination {
     id: number;
@@ -23,7 +24,7 @@ export const RestaurantForm: React.FC<RestaurantFormProps> = ({ restaurant, onCl
         latitude: restaurant?.latitude || 0,
         longitude: restaurant?.longitude || 0,
         destinationId: restaurant?.destinationId || 0,
-        images: restaurant?.images?.join('\n') || '',
+        images: restaurant?.images || [],
     });
 
     const [loading, setLoading] = useState(false);
@@ -72,7 +73,7 @@ export const RestaurantForm: React.FC<RestaurantFormProps> = ({ restaurant, onCl
                 latitude: formData.latitude,
                 longitude: formData.longitude,
                 destinationId: formData.destinationId,
-                images: formData.images ? formData.images.split('\n').filter(i => i.trim()) : [],
+                images: formData.images.length > 0 ? formData.images : [],
             };
 
             if (restaurant) {
@@ -185,14 +186,11 @@ export const RestaurantForm: React.FC<RestaurantFormProps> = ({ restaurant, onCl
                     </div>
 
                     <div className="md:col-span-2">
-                        <label className="block text-sm text-gray-700 mb-2">Hình ảnh (mỗi URL trên 1 dòng)</label>
-                        <textarea
-                            name="images"
+                        <ImageInput
                             value={formData.images}
-                            onChange={handleChange}
-                            rows={4}
+                            onChange={(urls) => setFormData(prev => ({ ...prev, images: urls }))}
+                            label="Hình ảnh"
                             placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                 </div>

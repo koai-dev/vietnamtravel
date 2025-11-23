@@ -1,8 +1,9 @@
 // @ts-ignore
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { roomApi, Room } from '../../services/roomApi';
-import { Hotel } from '../../services/hotelApi';
+import { hotelApi, Hotel } from '../../services/hotelApi';
 import { X, Save } from 'lucide-react';
+import { ImageInput } from '../common/ImageInput';
 
 interface RoomFormProps {
   room: Room | null;
@@ -20,6 +21,7 @@ export const RoomForm: React.FC<RoomFormProps> = ({ room, hotels, onClose }) => 
     totalRooms: room?.totalRooms || 1,
     availableRooms: room?.availableRooms || 1,
     amenities: room?.amenities?.join(', ') || '',
+    images: room?.images || [],
   });
 
   const [loading, setLoading] = useState(false);
@@ -43,6 +45,7 @@ export const RoomForm: React.FC<RoomFormProps> = ({ room, hotels, onClose }) => 
         totalRooms: formData.totalRooms || undefined,
         availableRooms: formData.availableRooms || undefined,
         amenities: formData.amenities ? formData.amenities.split(',').map(a => a.trim()) : undefined,
+        images: formData.images.length > 0 ? formData.images : [],
       };
 
       if (room) {

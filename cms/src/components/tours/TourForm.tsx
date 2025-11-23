@@ -1,7 +1,9 @@
+// @ts-ignore
 import React, { useState, useEffect } from 'react';
 import { tourApi, Tour } from '../../services/tourApi';
 import { destinationApi } from '../../services/destinationApi';
 import { X, Save } from 'lucide-react';
+import { ImageInput } from '../common/ImageInput';
 
 interface Destination {
     id: number;
@@ -23,7 +25,7 @@ export const TourForm: React.FC<TourFormProps> = ({ tour, onClose }) => {
         price: tour?.price || 0,
         durationHours: tour?.durationHours || 1,
         destinationId: tour?.destinationId || 0,
-        images: tour?.images?.join('\n') || '',
+        images: tour?.images || [],
     });
 
     const [loading, setLoading] = useState(false);
@@ -73,7 +75,7 @@ export const TourForm: React.FC<TourFormProps> = ({ tour, onClose }) => {
                 price: formData.price,
                 durationHours: formData.durationHours,
                 destinationId: formData.destinationId,
-                images: formData.images ? formData.images.split('\n').filter(i => i.trim()) : [],
+                images: formData.images.length > 0 ? formData.images : [],
             };
 
             if (tour) {
@@ -197,14 +199,11 @@ export const TourForm: React.FC<TourFormProps> = ({ tour, onClose }) => {
                     </div>
 
                     <div className="md:col-span-2">
-                        <label className="block text-sm text-gray-700 mb-2">Hình ảnh (mỗi URL trên 1 dòng)</label>
-                        <textarea
-                            name="images"
+                        <ImageInput
                             value={formData.images}
-                            onChange={handleChange}
-                            rows={4}
+                            onChange={(urls) => setFormData(prev => ({ ...prev, images: urls }))}
+                            label="Hình ảnh"
                             placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
                 </div>

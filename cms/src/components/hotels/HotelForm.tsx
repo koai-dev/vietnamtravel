@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { hotelApi, Hotel } from '../../services/hotelApi';
+import { destinationApi } from '../../services/destinationApi';
 import { X, Save } from 'lucide-react';
+import { ImageInput } from '../common/ImageInput';
 
 interface HotelFormProps {
   hotel: Hotel | null;
@@ -24,7 +26,7 @@ export const HotelForm: React.FC<HotelFormProps> = ({ hotel, onClose }) => {
     maxPrice: hotel?.maxPrice || 0,
     amenities: hotel?.amenities?.join(', ') || '',
     tags: hotel?.tags?.join(', ') || '',
-    images: hotel?.images?.join('\n') || '',
+    images: hotel?.images || [],
   });
 
   const [loading, setLoading] = useState(false);
@@ -55,7 +57,7 @@ export const HotelForm: React.FC<HotelFormProps> = ({ hotel, onClose }) => {
         maxPrice: formData.maxPrice || undefined,
         amenities: formData.amenities ? formData.amenities.split(',').map(a => a.trim()) : undefined,
         tags: formData.tags ? formData.tags.split(',').map(t => t.trim()) : undefined,
-        images: formData.images ? formData.images.split('\n').filter(i => i.trim()) : undefined,
+        images: formData.images.length > 0 ? formData.images : undefined,
         rating: hotel?.rating || 0,
         reviewCount: hotel?.reviewCount || 0,
         viewsCount: hotel?.viewsCount || 0,
@@ -269,14 +271,11 @@ export const HotelForm: React.FC<HotelFormProps> = ({ hotel, onClose }) => {
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-sm text-gray-700 mb-2">Hình ảnh (mỗi URL trên 1 dòng)</label>
-            <textarea
-              name="images"
+            <ImageInput
               value={formData.images}
-              onChange={handleChange}
-              rows={4}
+              onChange={(urls) => setFormData(prev => ({ ...prev, images: urls }))}
+              label="Hình ảnh"
               placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>

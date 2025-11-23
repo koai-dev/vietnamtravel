@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useEffect, useState } from 'react';
 import { userApi, User } from '../../services/userApi';
 import { Plus, Edit, Trash2, User as UserIcon } from 'lucide-react';
