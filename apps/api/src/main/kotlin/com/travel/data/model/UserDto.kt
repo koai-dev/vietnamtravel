@@ -8,18 +8,18 @@ import kotlinx.serialization.Serializable
 data class UserResponse(
     val id: Long,
     val email: String,
-    val name: String?,
-    val avatarUrl: String?,
-    val phone: String?,
-    val role: UserRole,
+    val name: String? = null,
+    val avatarUrl: String? = null,
+    val phone: String? = null,
+    val role: UserRole = UserRole.USER,
 )
 
 @Serializable
 data class CreateUserRequest(
     val email: String,
     val name: String,
-    val phone: String?,
-    val role: UserRole,
+    val phone: String? = null,
+    val role: UserRole = UserRole.USER,
 )
 
 fun CreateUserRequest.validate(): ValidationResult {
