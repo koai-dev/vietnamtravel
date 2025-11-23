@@ -30,9 +30,9 @@ export const UsersList: React.FC = () => {
       let newData: User[] = [];
       let totalPages = 1;
 
-      if ('data' in response && 'pagination' in response) {
+      if ('data' in response && 'pagination' in response.data) {
         newData = response.data.data;
-        totalPages = response.pagination.totalPages;
+        totalPages = response.data.pagination.totalPages;
       } else if (Array.isArray(response)) {
         newData = response;
         totalPages = 1;
