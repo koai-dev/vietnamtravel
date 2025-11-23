@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { localFoodApi, LocalFood } from '../../services/localFoodApi';
 import { Plus, Edit, Trash2, Coffee } from 'lucide-react';
+import { LocalFoodForm } from './LocalFoodForm';
 
 export const LocalFoodsList: React.FC = () => {
   const [localFoods, setLocalFoods] = useState<LocalFood[]>([]);
@@ -8,6 +9,8 @@ export const LocalFoodsList: React.FC = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [editingLocalFood, setEditingLocalFood] = useState<LocalFood | null>(null);
 
   useEffect(() => {
     loadLocalFoods(1, true);
@@ -64,6 +67,21 @@ export const LocalFoodsList: React.FC = () => {
     }
   };
 
+  const handleEdit = (localFood: LocalFood) => {
+    setEditingLocalFood(localFood);
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setEditingLocalFood(null);
+    loadLocalFoods(1, true);
+  };
+
+  if (showForm) {
+    return <LocalFoodForm localFood={editingLocalFood} onClose={handleCloseForm} />;
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -71,7 +89,10 @@ export const LocalFoodsList: React.FC = () => {
           <div className="text-gray-900 text-2xl mb-2">Quản lý món ăn địa phương</div>
           <p className="text-gray-600">Quản lý các món ăn đặc sản địa phương</p>
         </div>
-        <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+        <button
+          onClick={() => setShowForm(true)}
+          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
           <Plus className="w-5 h-5" />
           <span>Thêm món ăn</span>
         </button>
@@ -99,7 +120,10 @@ export const LocalFoodsList: React.FC = () => {
                   <div className="text-xs text-gray-600 mb-3 line-clamp-2">{food.descriptionVi}</div>
                   <div className="text-xs text-blue-600 mb-4">{food.destinationName}</div>
                   <div className="flex items-center gap-2">
-                    <button className="flex-1 px-3 py-1.5 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm">
+                    <button
+                      onClick={() => handleEdit(food)}
+                      className="flex-1 px-3 py-1.5 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors text-sm"
+                    >
                       <Edit className="w-3.5 h-3.5 inline mr-1" />
                       Sửa
                     </button>

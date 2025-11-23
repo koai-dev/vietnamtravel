@@ -1,6 +1,8 @@
 package com.travel.core
 
 import RoomRepositoryImpl
+import TourController
+import TourRepositoryImpl
 import com.travel.data.impl.*
 import com.travel.domain.repository.*
 import com.travel.domain.service.*

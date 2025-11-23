@@ -1,6 +1,8 @@
+// @ts-ignore
 import React, { useEffect, useState } from 'react';
 import { restaurantApi, Restaurant } from '../../services/restaurantApi';
 import { Plus, Edit, Trash2, UtensilsCrossed } from 'lucide-react';
+import { RestaurantForm } from './RestaurantForm';
 
 export const RestaurantsList: React.FC = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
@@ -8,6 +10,8 @@ export const RestaurantsList: React.FC = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [showForm, setShowForm] = useState(false);
+  const [editingRestaurant, setEditingRestaurant] = useState<Restaurant | null>(null);
 
   useEffect(() => {
     loadRestaurants(1, true);
@@ -28,7 +32,7 @@ export const RestaurantsList: React.FC = () => {
       let totalPages = 1;
 
       if ('data' in response && 'pagination' in response) {
-        newData = response.data;
+        newData = response.data.data;
         totalPages = response.pagination.totalPages;
       } else if (Array.isArray(response)) {
         newData = response;
@@ -64,6 +68,21 @@ export const RestaurantsList: React.FC = () => {
     }
   };
 
+  const handleEdit = (restaurant: Restaurant) => {
+    setEditingRestaurant(restaurant);
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setEditingRestaurant(null);
+    loadRestaurants(1, true);
+  };
+
+  if (showForm) {
+    return <RestaurantForm restaurant={editingRestaurant} onClose={handleCloseForm} />;
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -71,7 +90,10 @@ export const RestaurantsList: React.FC = () => {
           <div className="text-gray-900 text-2xl mb-2">Quản lý nhà hàng</div>
           <p className="text-gray-600">Quản lý thông tin nhà hàng và quán ăn</p>
         </div>
-        <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+        <button
+          onClick={() => setShowForm(true)}
+          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        >
           <Plus className="w-5 h-5" />
           <span>Thêm nhà hàng</span>
         </button>
@@ -117,7 +139,10 @@ export const RestaurantsList: React.FC = () => {
                     <td className="px-6 py-4 text-sm text-gray-600">{restaurant.destinationName || '-'}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center gap-2">
-                        <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                        <button
+                          onClick={() => handleEdit(restaurant)}
+                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        >
                           <Edit className="w-4 h-4" />
                         </button>
                         <button

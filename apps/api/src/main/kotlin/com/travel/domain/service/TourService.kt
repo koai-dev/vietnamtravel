@@ -21,4 +21,13 @@ class TourService(
             tourRepository.getPopular()
         }
     }
+
+    suspend fun create(tour: Tour): Tour = tourRepository.create(tour)
+
+    suspend fun update(
+        id: Long,
+        tour: Tour,
+    ): Tour? = tourRepository.update(id, tour)
+
+    suspend fun delete(id: Long): Boolean = tourRepository.delete(id)
 }

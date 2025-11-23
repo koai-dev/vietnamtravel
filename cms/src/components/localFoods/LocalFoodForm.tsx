@@ -1,0 +1,202 @@
+import React, { useState, useEffect } from 'react';
+import { localFoodApi, LocalFood } from '../../services/localFoodApi';
+import { destinationApi } from '../../services/destinationApi';
+import { X, Save } from 'lucide-react';
+
+interface Destination {
+    id: number;
+    nameVi: string;
+}
+
+interface LocalFoodFormProps {
+    localFood: LocalFood | null;
+    onClose: () => void;
+}
+
+export const LocalFoodForm: React.FC<LocalFoodFormProps> = ({ localFood, onClose }) => {
+    const [destinations, setDestinations] = useState<Destination[]>([]);
+    const [formData, setFormData] = useState({
+        nameVi: localFood?.nameVi || '',
+        nameEn: localFood?.nameEn || '',
+        descriptionVi: localFood?.descriptionVi || '',
+        descriptionEn: localFood?.descriptionEn || '',
+        destinationId: localFood?.destinationId || 0,
+        images: localFood?.images?.join('\n') || '',
+    });
+
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        loadDestinations();
+    }, []);
+
+    const loadDestinations = async () => {
+        try {
+            const response = await destinationApi.getDestinations(1, 100);
+            let data: Destination[] = [];
+            if ('data' in response && 'pagination' in response) {
+                data = response.data;
+            } else if (Array.isArray(response)) {
+                data = response;
+            }
+            setDestinations(data);
+            if (!localFood && data.length > 0) {
+                setFormData(prev => ({ ...prev, destinationId: data[0].id }));
+            }
+        } catch (error) {
+            console.error('Error loading destinations:', error);
+        }
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: name.includes('Id') ? Number(value) : value
+        }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+
+        try {
+            const data = {
+                nameVi: formData.nameVi,
+                nameEn: formData.nameEn,
+                descriptionVi: formData.descriptionVi,
+                descriptionEn: formData.descriptionEn,
+                destinationId: formData.destinationId,
+                images: formData.images ? formData.images.split('\n').filter(i => i.trim()) : [],
+            };
+
+            if (localFood) {
+                await localFoodApi.updateLocalFood(localFood.id, data);
+            } else {
+                await localFoodApi.createLocalFood(data);
+            }
+
+            onClose();
+        } catch (error) {
+            console.error('Error saving local food:', error);
+            alert('Có lỗi xảy ra khi lưu món ăn địa phương');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="space-y-6">
+            <div className="flex items-center justify-between">
+                <div>
+                    <div className="text-gray-900 text-2xl mb-2">
+                        {localFood ? 'Chỉnh sửa món ăn địa phương' : 'Thêm món ăn địa phương mới'}
+                    </div>
+                    <p className="text-gray-600">Điền thông tin chi tiết về món ăn</p>
+                </div>
+                <button
+                    onClick={onClose}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                    <X className="w-6 h-6 text-gray-600" />
+                </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label className="block text-sm text-gray-700 mb-2">Tên món (Tiếng Việt) *</label>
+                        <input
+                            type="text"
+                            name="nameVi"
+                            value={formData.nameVi}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm text-gray-700 mb-2">Tên món (Tiếng Anh) *</label>
+                        <input
+                            type="text"
+                            name="nameEn"
+                            value={formData.nameEn}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        />
+                    </div>
+
+                    <div className="md:col-span-2">
+                        <label className="block text-sm text-gray-700 mb-2">Mô tả (Tiếng Việt)</label>
+                        <textarea
+                            name="descriptionVi"
+                            value={formData.descriptionVi}
+                            onChange={handleChange}
+                            rows={3}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+
+                    <div className="md:col-span-2">
+                        <label className="block text-sm text-gray-700 mb-2">Mô tả (Tiếng Anh)</label>
+                        <textarea
+                            name="descriptionEn"
+                            value={formData.descriptionEn}
+                            onChange={handleChange}
+                            rows={3}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+
+                    <div className="md:col-span-2">
+                        <label className="block text-sm text-gray-700 mb-2">Điểm đến *</label>
+                        <select
+                            name="destinationId"
+                            value={formData.destinationId}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        >
+                            <option value="">Chọn điểm đến</option>
+                            {destinations.map(dest => (
+                                <option key={dest.id} value={dest.id}>{dest.nameVi}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div className="md:col-span-2">
+                        <label className="block text-sm text-gray-700 mb-2">Hình ảnh (mỗi URL trên 1 dòng)</label>
+                        <textarea
+                            name="images"
+                            value={formData.images}
+                            onChange={handleChange}
+                            rows={4}
+                            placeholder="https://example.com/image1.jpg&#10;https://example.com/image2.jpg"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-3 mt-6 pt-6 border-t border-gray-200">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+                    >
+                        <Save className="w-5 h-5" />
+                        <span>{loading ? 'Đang lưu...' : 'Lưu món ăn'}</span>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={onClose}
+                        className="px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                        Hủy
+                    </button>
+                </div>
+            </form>
+        </div>
+    );
+};

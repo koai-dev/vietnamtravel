@@ -41,5 +41,9 @@ fun Route.restaurantRoutes() {
             val destinationId = call.parameters["destinationId"]?.toLongOrNull() ?: throw IllegalArgumentException("Invalid ID")
             restaurantController.getRestaurantsByDestinationId(call, destinationId)
         }
+
+        get {
+            restaurantController.getAll(call)
+        }
     }
 }

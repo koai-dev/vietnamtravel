@@ -1,14 +1,7 @@
-package com.travel.presentation.route
-
 import com.travel.core.RateLimiter
 import com.travel.core.lang
 import com.travel.domain.repository.RedisRepository
-import com.travel.presentation.controller.TourController
-import io.ktor.server.application.call
-import io.ktor.server.application.install
-import io.ktor.server.routing.Route
-import io.ktor.server.routing.get
-import io.ktor.server.routing.route
+import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 
 fun Route.tourRoutes() {
@@ -32,6 +25,18 @@ fun Route.tourRoutes() {
             val id = call.parameters["id"]?.toLongOrNull() ?: throw IllegalArgumentException("Invalid ID")
             val lang = call.lang()
             tourController.getById(call, id, lang)
+        }
+
+        post {
+            tourController.create(call)
+        }
+
+        put("/{id}") {
+            tourController.update(call)
+        }
+
+        delete("/{id}") {
+            tourController.delete(call)
         }
     }
 }
